@@ -556,12 +556,9 @@ with tab2:
             """, unsafe_allow_html=True)
             
             if pr_alerts:
-                st.warning("
-".join(pr_alerts))
+                st.warning("\n".join(pr_alerts))
             if unlocked_achs:
-                st.success("🎖️ **UNLOCKED ACHIEVEMENTS:**
-" + "
-".join(unlocked_achs))
+                st.success("🎖️ **UNLOCKED ACHIEVEMENTS:**\n" + "\n".join(unlocked_achs))
 
 # ==============================================================================
 # TAB 3: VISUAL ANALYTICS
@@ -584,8 +581,7 @@ with tab3:
         ax5 = fig.add_subplot(gs[2, :])
         
         # 1. Tonnage Graph
-        dates = [f"{h.get('day','')}
-{h.get('date','').split()[0]}" for h in history]
+        dates = [f"{h.get('day','')}\n{h.get('date','').split()[0]}" for h in history]
         tonnages = [h.get("tonnage", 0) for h in history]
         ax1.plot(dates, tonnages, marker='o', color='#2b8a3e', linewidth=2)
         ax1.set_title("📈 Εξέλιξη Συνολικού Όγκου (Tonnage kg)")
@@ -597,8 +593,7 @@ with tab3:
         for h in history:
             exs = h.get("exercises", {})
             if selected_ex in exs:
-                ex_dates.append(f"{h.get('day','')}
-{h.get('date','').split()[0]}")
+                ex_dates.append(f"{h.get('day','')}\n{h.get('date','').split()[0]}")
                 ex_data = exs[selected_ex]
                 if ex_data.get("type") == "weight":
                     ex_vals.append(ex_data.get("max_weight", 0))
@@ -610,8 +605,7 @@ with tab3:
             ax2.set_title(f"📊 Πρόοδος: {selected_ex}")
             ax2.grid(True, linestyle='--', alpha=0.5)
         else:
-            ax2.text(0.5, 0.5, f"Δεν υπάρχουν ακόμα δεδομένα για:
-{selected_ex}", ha='center', va='center')
+            ax2.text(0.5, 0.5, f"Δεν υπάρχουν ακόμα δεδομένα για:\n{selected_ex}", ha='center', va='center')
             
         # 3. Muscle Volume Bar Chart
         muscle_volume = {"Quads": 0.0, "Hamstrings": 0.0, "Chest": 0.0, "Lats": 0.0, "Upper Back": 0.0, "Front Delts": 0.0, "Side Delts": 0.0, "Biceps": 0.0, "Triceps": 0.0, "Abs": 0.0}
