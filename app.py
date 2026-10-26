@@ -32,25 +32,35 @@ st.markdown("""
 DATA_FILE = "gym_data.json"
 
 # ------------------------------------------------------------------------------
-# 2. DEFAULT DATA & TRIVIA BANK
+# 2. DEFAULT DATA & FOOD DATABASE
 # ------------------------------------------------------------------------------
-default_trivia_quiz = {
-    "quiz_questions": [
-        {"q": "Ποιος είναι ο μεγαλύτερος μυς στο ανθρώπινο σώμα;", "options": ["Μείζων Γλουτιαίος (Gluteus Maximus)", "Τετρακέφαλος", "Πλατύς Ραχιαίος", "Μείζων Θωρακικός"], "answer": "Μείζων Γλουτιαίος (Gluteus Maximus)"},
-        {"q": "Ποιος μυς βρίσκεται κάτω από τον δικέφαλο βραχιόνιο;", "options": ["Βραχιόνιος (Brachialis)", "Τρικέφαλος", "Πρόσθιος Δελτοειδής", "Προπρηνιστής"], "answer": "Βραχιόνιος (Brachialis)"},
-        {"q": "Ποιο ποσοστό της μυϊκής μάζας του βραχίονα είναι οι τρικέφαλοι;", "options": ["Περίπου 60%", "Περίπου 40%", "Περίπου 25%", "Περίπου 80%"], "answer": "Περίπου 60%"},
-        {"q": "Ποιος είναι ο μεγαλύτερος σε επιφάνεια μυς του άνω σώματος;", "options": ["Πλατύς Ραχιαίος (Latissimus Dorsi)", "Μείζων Θωρακικός", "Τραπεζοειδής", "Ορθός Κοιλιακός"], "answer": "Πλατύς Ραχιαίος (Latissimus Dorsi)"},
-        {"q": "Πότε κορυφώνεται η μυϊκή πρωτεϊνοσύνθεση (MPS) μετά την προπόνηση;", "options": ["24-36 ώρες", "2-4 ώρες", "72 ώρες", "12 ώρες"], "answer": "24-36 ώρες"},
-        {"q": "Τι σημαίνει ο όρος RIR στη σύγχρονη προπονητική;", "options": ["Reps in Reserve (Επαναλήψεις στο Ντεπόζιτο)", "Rate of Increased Recovery", "Rest Interval Ratio", "Repetition Intensity Rate"], "answer": "Reps in Reserve (Επαναλήψεις στο Ντεπόζιτο)"},
-        {"q": "Ποια είναι η ιδανική ζώνη RIR για μέγιστη υπερτροφία;", "options": ["RIR 1-2", "RIR 5-6", "RIR 0 (Πάντα Failure)", "RIR 8-10"], "answer": "RIR 1-2"},
-        {"q": "Ποιο συμπλήρωμα έχει τις περισσότερες μελέτες αποτελεσματικότητας;", "options": ["Μονοϋδρική Κρεατίνη (Creatine Monohydrate)", "L-Καρνιτίνη", "Βήτα-Αλανίνη", "BCAA"], "answer": "Μονοϋδρική Κρεατίνη (Creatine Monohydrate)"}
-    ],
-    "fitness_trivia": [
-        "💡 <b>Anatomy Fact:</b> Ο μεγαλύτερος και ισχυρότερος μυς στο σώμα είναι ο μείζων γλουτιαίος!",
-        "💡 <b>Hypertrophy Science:</b> Η μυϊκή πρωτεϊνοσύνθεση κορυφώνεται 24-36 ώρες μετά την προπόνηση.",
-        "💡 <b>RIR Rule:</b> Τα σετ με RIR 1-2 δίνουν 95% των οφελών του Failure με τη μισή κόπωση!",
-        "💡 <b>Hydration Impact:</b> 2% αφυδάτωση μειώνει τη μέγιστη δύναμη έως και 10%!"
-    ]
+default_food_db = {
+    # 🍗 ΚΡΕΑΤΑ & ΨΑΡΙΑ (ανά 100g ή ανά τεμάχιο)
+    "🍗 Κοτόπουλο Στήθος (ψητό/μαγειρεμένο)": {"unit": "100g", "cal": 165, "p": 31.0, "c": 0.0, "f": 3.6},
+    "🍗 Κοτόπουλο Μπούτι (χωρίς δέρμα)": {"unit": "100g", "cal": 180, "p": 24.0, "c": 0.0, "f": 9.0},
+    "🍗 Κοτόπουλο Φτερούγες (με δέρμα)": {"unit": "100g", "cal": 203, "p": 18.0, "c": 0.0, "f": 14.0},
+    "🐟 Κονσέρβα Τόνου σε νερό (drained)": {"unit": "100g", "cal": 110, "p": 25.0, "c": 0.0, "f": 0.6},
+    "🦐 King Prawns (Γαρίδες Tesco)": {"unit": "100g", "cal": 85, "p": 18.5, "c": 0.5, "f": 0.9},
+    "🥩 Tesco Basted Pork": {"unit": "100g", "cal": 145, "p": 21.0, "c": 1.0, "f": 6.0},
+    "🌭 Tesco Finest Irish Pork & Apple Sausage": {"unit": "piece", "cal": 137, "p": 8.0, "c": 3.4, "f": 9.7},
+    "🌯 Burrito (Μοσχαρίσιος κιμάς, φασόλια, ρύζι)": {"unit": "100g", "cal": 170, "p": 8.5, "c": 20.0, "f": 6.0},
+    
+    # 🥛 ΠΡΩΤΕΙΝΙΚΑ & ΓΑΛΑΚΤΟΚΟΜΙΚΑ
+    "🥤 Myprotein Impact Whey Protein (1 scoop 30g)": {"unit": "piece", "cal": 114, "p": 23.0, "c": 1.8, "f": 1.9},
+    "🥚 Αυγό Ολόκληρο (1 μέτριο/μεγάλο)": {"unit": "piece", "cal": 72, "p": 6.0, "c": 0.4, "f": 4.8},
+    "🥛 GetPRO / GoPRO Protein Yoghurt (160g)": {"unit": "piece", "cal": 104, "p": 15.0, "c": 7.2, "f": 0.3},
+    "🥣 Tesco Plain Skyr / Quark": {"unit": "100g", "cal": 65, "p": 11.0, "c": 4.0, "f": 0.2},
+    "🍨 Ελληνικό Γιαούρτι 2%": {"unit": "100g", "cal": 73, "p": 10.0, "c": 3.8, "f": 2.0},
+    "🍫 Nature Valley Extra Protein Bar": {"unit": "piece", "cal": 198, "p": 10.0, "c": 15.0, "f": 11.0},
+    
+    # 🥔 ΣΥΝΟΔΕΥΤΙΚΑ, ΦΡΟΥΤΑ & ΛΙΠΗ
+    "🥔 Tesco Country Potatoes (κατεψυγμένες)": {"unit": "100g", "cal": 135, "p": 2.5, "c": 22.0, "f": 3.8},
+    "🍌 Μπανάνα (1 μέτρια ~120g)": {"unit": "piece", "cal": 105, "p": 1.3, "c": 27.0, "f": 0.3},
+    "🍎 Μήλο (1 μέτριο ~150g)": {"unit": "piece", "cal": 78, "p": 0.5, "c": 21.0, "f": 0.3},
+    "🥜 Φυστικοβούτυρο 100%": {"unit": "100g", "cal": 590, "p": 25.0, "c": 12.0, "f": 49.0},
+    "🍚 Ρύζι βρασμένο": {"unit": "100g", "cal": 130, "p": 2.7, "c": 28.0, "f": 0.3},
+    "🍝 Μακαρόνια βρασμένα": {"unit": "100g", "cal": 158, "p": 5.8, "c": 31.0, "f": 0.9},
+    "🍲 Φακές βρασμένες / Σούπα": {"unit": "100g", "cal": 116, "p": 9.0, "c": 20.0, "f": 0.4},
 }
 
 TONNAGE_QUIPS = [
@@ -69,9 +79,9 @@ TONNAGE_QUIPS = [
 default_data = {
     "profile": {
         "gender": "Άνδρας",
-        "age": 25,
-        "weight_kg": 80.0,
-        "height_cm": 180.0,
+        "age": 28,
+        "weight_kg": 72.0,
+        "height_cm": 177.0,
         "activity_level": 1.55,
         "goal": "Bulking",
         "training_age": "Αρχάριος (0-1 έτος)",
@@ -79,6 +89,8 @@ default_data = {
         "level": 1,
         "quizzes_solved": 0
     },
+    "food_db": default_food_db,
+    "daily_logs": [],
     "weight_log": [],
     "exercise_database": {
         "Stationary Bike (Ποδήλατο)": {"muscle": "Cardio", "type": "cardio", "primary": "Cardio", "secondary": None},
@@ -165,6 +177,12 @@ def load_user_data():
         today_str = datetime.now().strftime("%d/%m/%Y")
         st.session_state["user_data"]["weight_log"] = [{"date": today_str, "weight": st.session_state["user_data"]["profile"]["weight_kg"]}]
 
+    # Ensure food_db & daily_logs exist
+    if "food_db" not in st.session_state["user_data"]:
+        st.session_state["user_data"]["food_db"] = default_food_db.copy()
+    if "daily_logs" not in st.session_state["user_data"]:
+        st.session_state["user_data"]["daily_logs"] = []
+
 def save_user_data():
     if "user_data" in st.session_state:
         try:
@@ -204,7 +222,7 @@ def calc_macros(prof):
     bmr = (10 * p_wt) + (6.25 * p_ht) - (5 * p_age) + 5 if prof["gender"] == "Άνδρας" else (10 * p_wt) + (6.25 * p_ht) - (5 * p_age) - 161
     tdee = bmr * prof["activity_level"]
     target_cal = tdee + 350 if prof["goal"] == "Bulking" else (tdee - 450 if prof["goal"] == "Cutting" else tdee)
-    prot_g = p_wt * (2.2 if prof["goal"] == "Cutting" else 2.0)
+    prot_g = p_wt * (2.2 if prof["goal"] == "Cutting" else 2.0) # 2.0g/kg για Bulking/Maintenance
     fat_g = (target_cal * 0.25) / 9
     carb_g = (target_cal - (prot_g * 4 + fat_g * 9)) / 4
     return round(bmr), round(tdee), round(target_cal), round(prot_g), round(carb_g), round(fat_g)
@@ -308,9 +326,14 @@ def check_and_unlock_achievements(total_tonnage):
 # 4. APP NAVIGATION & UI
 # ------------------------------------------------------------------------------
 st.title("🏋️ GYM COACHING OS")
-st.caption("Interactive Fitness & Body Composition Tracker")
+st.caption("Interactive Fitness, Nutrition & Body Composition Tracker")
 
-tab1, tab2, tab3 = st.tabs(["🎮 Dashboard & Βάρος", "🏋️ Fitness Tracker (MWF)", "📊 Visual Analytics"])
+tab1, tab_tracker, tab2, tab3 = st.tabs([
+    "🎮 Dashboard & Βάρος", 
+    "🥗 Daily Nutrition Tracker", 
+    "🏋️ Fitness Tracker (MWF)", 
+    "📊 Visual Analytics"
+])
 
 # ==============================================================================
 # TAB 1: DASHBOARD & BODY WEIGHT
@@ -395,11 +418,153 @@ with tab1:
     m1, m2, m3, m4 = st.columns(4)
     m1.metric("BMR", f"{bmr} kcal")
     m2.metric("TDEE", f"{tdee} kcal")
-    m3.metric("Στόχος Calories", f"{target_cal} kcal", f"{goal}")
+    m3.metric("Στόχος Calories", f"{target_cal} kcal", f"{prof.get('goal')}")
     m4.metric("Macros (P/C/F)", f"{prot_g}g / {carb_g}g / {fat_g}g")
 
 # ==============================================================================
-# TAB 2: WORKOUT TRACKER (MWF)
+# TAB 2: 🥗 DAILY NUTRITION TRACKER (Δυναμικά Συνδεδεμένο)
+# ==============================================================================
+with tab_tracker:
+    st.title("🥗 Daily Nutrition & Protein Tracker")
+    st.caption("Δυναμικά Συνδεδεμένο με τους Στόχους του Προφίλ σου")
+
+    # Υπολογισμός Δυναμικών Στόχων από το Προφίλ
+    bmr, tdee, target_cal, prot_g, carb_g, fat_g = calc_macros(user_data["profile"])
+
+    # Υπολογισμός Συνόλων Ημέρας από τα daily_logs
+    totals = {"cal": 0.0, "p": 0.0, "c": 0.0, "f": 0.0}
+    for log in user_data["daily_logs"]:
+        totals["cal"] += log["cal"]
+        totals["p"] += log["p"]
+        totals["c"] += log["c"]
+        totals["f"] += log["f"]
+
+    # KPIs DASHBOARD
+    col1, col2, col3, col4 = st.columns(4)
+
+    with col1:
+        p_rem = max(0.0, prot_g - totals["p"])
+        st.metric(f"Πρωτεΐνη (Στόχος: {prot_g}g)", f"{totals['p']:.1f}g", f"Λείπουν {p_rem:.1f}g", delta_color="inverse" if p_rem > 0 else "normal")
+        st.progress(min(1.0, totals["p"] / prot_g if prot_g > 0 else 0.0))
+
+    with col2:
+        cal_rem = max(0.0, target_cal - totals["cal"])
+        st.metric(f"Θερμίδες (Στόχος: {target_cal}kcal)", f"{int(totals['cal'])} kcal", f"Λείπουν {int(cal_rem)} kcal")
+        st.progress(min(1.0, totals["cal"] / target_cal if target_cal > 0 else 0.0))
+
+    with col3:
+        c_rem = max(0.0, carb_g - totals["c"])
+        st.metric(f"Υδατάνθρακες (Στόχος: {carb_g}g)", f"{totals['c']:.1f}g", f"Λείπουν {c_rem:.1f}g")
+        st.progress(min(1.0, totals["c"] / carb_g if carb_g > 0 else 0.0))
+
+    with col4:
+        f_rem = max(0.0, fat_g - totals["f"])
+        st.metric(f"Λιπαρά (Στόχος: {fat_g}g)", f"{totals['f']:.1f}g", f"Λείπουν {f_rem:.1f}g")
+        st.progress(min(1.0, totals["f"] / fat_g if fat_g > 0 else 0.0))
+
+    if totals["p"] >= prot_g:
+        st.success(f"🎉 Συγχαρητήρια! Κάλυψες τον ημερήσιο στόχο πρωτεΐνης ({prot_g}g)!")
+
+    st.markdown("---")
+
+    # ΚΑΤΑΓΡΑΦΗ ΓΕΥΜΑΤΟΣ
+    st.subheader("➕ Καταγραφή Γεύματος")
+
+    c_select, c_qty, c_btn = st.columns([3, 1.5, 1])
+
+    food_db = user_data["food_db"]
+
+    with c_select:
+        selected_name = st.selectbox("Επίλεξε Τρόφιμο:", list(food_db.keys()))
+        food_info = food_db[selected_name]
+
+    with c_qty:
+        if food_info["unit"] == "100g":
+            qty = st.number_input("Γραμμάρια (g):", min_value=10, max_value=1000, value=150, step=10, key="qty_g")
+            factor = qty / 100.0
+            unit_str = f"{qty}g"
+        else:
+            qty = st.number_input("Τεμάχια / Μερίδες:", min_value=0.5, max_value=10.0, value=1.0, step=0.5, key="qty_p")
+            factor = qty
+            unit_str = f"{qty} τεμάχιο/α"
+
+    with c_btn:
+        st.write("")
+        st.write("")
+        if st.button("Προσθήκη ➕", key="btn_add_food"):
+            calc_item = {
+                "name": selected_name,
+                "portion": unit_str,
+                "cal": food_info["cal"] * factor,
+                "p": food_info["p"] * factor,
+                "c": food_info["c"] * factor,
+                "f": food_info["f"] * factor,
+            }
+            user_data["daily_logs"].append(calc_item)
+            save_user_data()
+            st.rerun()
+
+    # ΠΡΟΣΘΗΚΗ ΝΕΟΥ CUSTOM ΤΡΟΦΙΜΟΥ ΣΤΗ ΒΑΣΗ
+    with st.expander("✨ Πρόσθεσε Νέο Τρόφιμο στη Βάση Δεδομένων (Custom Food Creator)"):
+        st.write("Αν αγοράσεις κάποιο νέο προϊόν, πρόσθεσέ το εδώ για να αποθηκευτεί στη λιστα σου!")
+        c_n, c_u = st.columns([3, 1])
+        new_name = c_n.text_input("Όνομα Προϊόντος (π.χ. Tesco High Protein Pudding):")
+        new_unit = c_u.selectbox("Μονάδα μέτρησης:", ["100g", "piece"])
+        
+        col_c1, col_c2, col_c3, col_c4 = st.columns(4)
+        new_cal = col_c1.number_input("Θερμίδες (kcal):", min_value=0.0, value=100.0)
+        new_p = col_c2.number_input("Πρωτεΐνη (g):", min_value=0.0, value=10.0)
+        new_c = col_c3.number_input("Υδατάνθρακες (g):", min_value=0.0, value=10.0)
+        new_f = col_c4.number_input("Λιπαρά (g):", min_value=0.0, value=2.0)
+        
+        if st.button("💾 Αποθήκευση στη Βάση", key="btn_save_custom"):
+            if new_name.strip():
+                user_data["food_db"][new_name.strip()] = {
+                    "unit": new_unit,
+                    "cal": new_cal,
+                    "p": new_p,
+                    "c": new_c,
+                    "f": new_f
+                }
+                save_user_data()
+                st.success(f"Το '{new_name}' προστέθηκε επιτυχώς στη βάση δεδομένων!")
+                st.rerun()
+            else:
+                st.warning("Παρακαλώ δώσε ένα όνομα στο νέο προϊόν.")
+
+    # ΙΣΤΟΡΙΚΟ ΗΜΕΡΑΣ & DELETE/RESET
+    st.markdown("---")
+    st.subheader("📋 Τι κατέγραψες σήμερα:")
+
+    if user_data["daily_logs"]:
+        rows_to_del_food = []
+        for idx, item in enumerate(user_data["daily_logs"]):
+            c_desc, c_del = st.columns([5, 1])
+            with c_desc:
+                st.write(
+                    f"• **{item['name']}** ({item['portion']}) $\rightarrow$ "
+                    f"**{item['p']:.1f}g P** | {int(item['cal'])} kcal | {item['c']:.1f}g C | {item['f']:.1f}g F"
+                )
+            with c_del:
+                if st.button("🗑️", key=f"del_food_{idx}"):
+                    rows_to_del_food.append(idx)
+        
+        if rows_to_del_food:
+            for i in sorted(rows_to_del_food, reverse=True):
+                user_data["daily_logs"].pop(i)
+            save_user_data()
+            st.rerun()
+    else:
+        st.info("Δεν έχεις καταγράψει ακόμα κάποιο γεύμα σήμερα.")
+
+    st.write("")
+    if st.button("🔄 Επαναφορά (Μηδενισμός Νέας Ημέρας)", key="btn_reset_day"):
+        user_data["daily_logs"] = []
+        save_user_data()
+        st.rerun()
+
+# ==============================================================================
+# TAB 3: WORKOUT TRACKER (MWF)
 # ==============================================================================
 with tab2:
     st.subheader("🏋️ Καταγραφή Προπόνησης ανά Ημέρα")
@@ -561,7 +726,7 @@ with tab2:
                 st.success("🎖️ **UNLOCKED ACHIEVEMENTS:**\n" + "\n".join(unlocked_achs))
 
 # ==============================================================================
-# TAB 3: VISUAL ANALYTICS
+# TAB 4: VISUAL ANALYTICS
 # ==============================================================================
 with tab3:
     st.subheader("📊 Visual Analytics & Body Composition")
@@ -569,7 +734,7 @@ with tab3:
     history = user_data.get("history", [])
     
     if not history:
-        st.info("💡 Καταγράψτε την πρώτη σας προπόνηση στο Tab 2 για να εμφανιστούν τα αναλυτικά διαγράμματα!")
+        st.info("💡 Καταγράψτε την πρώτη σας προπόνηση στο Tab 3 για να εμφανιστούν τα αναλυτικά διαγράμματα!")
     else:
         fig = plt.figure(figsize=(12, 12))
         gs = fig.add_gridspec(3, 2)
