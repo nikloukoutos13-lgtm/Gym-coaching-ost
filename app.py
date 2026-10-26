@@ -386,7 +386,7 @@ with tab1:
     # Badges
     achs = user_data.get("achievements", [])
     if achs:
-        badge_html = "".join([f"<span class='badge-card'>{a}</span>" for a i: 12, "rir": 2},
+        badge_html = "".join([f"<span class='badge-card'>{a}</span>" for a in achs])
             {"ex": "Overhead Cable Triceps Extension", "s": 3, "w": 15.0, "r": 12, "rir": 2},
             {"ex": "Crunches", "s": 2, "w": 0.0, "r": 20, "rir": 1}
         ]
