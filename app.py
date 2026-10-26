@@ -2,6 +2,8 @@ import os
 import json
 import math
 import random
+import requests
+import base64
 from datetime import datetime
 import streamlit as st
 import matplotlib.pyplot as plt
@@ -148,6 +150,243 @@ default_data = {
             {"ex": "Lateral Raises (Αλτήρες)", "s": 3, "w": 5.0, "r": 12, "rir": 2},
             {"ex": "Cable Bicep Curls", "s": 3, "w": 12.5, "r": 12, "rir": 2},
             {"ex": "Overhead Cable Triceps Extension", "s": 3, "w": 15.0, "r": 12, "rir": 2},
+            {"ex": "Crunches", "s": 2, "w": 0.0, "r": 20, "rir": 1}
+        ]
+    },
+    "prs": {},
+    "achievements": [],
+    "history": []
+}
+
+# Load / Save Helpers
+def load_user_data():
+    if "user_data" not in st.session_state:
+        if os.path.exists(DATA_FILE):
+            try:
+                with open(DATA_FILE, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                    for k in default_data:
+                        if k not in data:
+                            data[k] = default_data[k]
+                    st.session_state["user_data"] = data
+            except Exception:
+                st.session_state["user_data"] = json.loads(json.dumps(default_data))
+        else:
+            st.session_state["user_data"] = json.loads(json.dumps(default_data))
+            
+    # Ensure weight log has initial entry
+    if not st.session_state["user_data"].get("weight_log"):
+        today_str = datetime.now().strftime("%d/%m/%Y")
+        st.session_state["user_data"]["weight_log"] = [{"date": today_str, "weight": st.session_state["user_data"]["profile"]["weight_kg"]}]
+
+    # Ensure food_db & daily_logs exist
+    if "food_db" not in st.session_state["user_data"]:
+        st.session_state["user_data"]["food_db"] = default_food_db.copy()
+    if "daily_logs" not in st.session_state["user_data"]:
+        st.session_state["user_data"]["daily_logs"] = []
+
+def save_user_data():
+    if "user_data" in st.session_state:
+        # 1. Τοπική αποθήκευση στο session / τοπικό αρχείο
+        try:
+            with open(DATA_FILE, "w", encoding="utf-8") as f:
+                json.dump(st.session_state["user_data"], f, ensure_ascii=False, indent=2)
+        except Exception:
+            pass
+            
+        # 2. Αυτόματο Sync στο GitHub (αν έχουν οριστεί τα Secrets)
+        if "GITHUB_TOKEN" in st.secrets and "GITHUB_REPO" in st.secrets:
+            try:
+                token = st.secrets["GITHUB_TOKEN"]
+                repo = st.secrets["GITHUB_REPO"]
+                url = f"https://api.github.com/repos/{repo}/contents/{DATA_FILE}"
+                headers = {
+                    "Authorization": f"token {token}",
+                    "Accept": "application/vnd.github.v3+json"
+                }
+                
+                # Λήψη SHA του υπάρχοντος αρχείου στο GitHub
+                get_res = requests.get(url, headers=headers)
+                sha = get_res.json().get("sha", "") if get_res.status_code == 200 else ""
+                
+                # Προετοιμασία περιεχομένου σε base64
+                content_json = json.dumps(st.session_state["user_data"], ensure_ascii=False, indent=2)
+                content_b64 = base64.b64encode(content_json.encode("utf-8")).decode("utf-8")
+                
+                payload = {
+                    "message": "🤖 Auto-save user gym data",
+                    "content": content_b64,
+                    "sha": sha
+                }
+                
+                # Push στο GitHub
+                requests.put(url, headers=headers, json=payload)
+            except Exception:
+                pass
+
+load_user_data()
+user_data = st.session_state["user_data"]
+
+# ------------------------------------------------------------------------------
+# 3. HELPER FUNCTIONS
+# ------------------------------------------------------------------------------
+def get_level_title(lvl):
+    titles = {
+        1: "Gym Novice (Πρωτάρης)",
+        2: "Iron Enthusiast (Σιδερένιος)",
+        3: "Hypertrophy Apprentice (Μαθητευόμενος)",
+        4: "Bench Press Specialist (Παγκίτης)",
+        5: "Iron Warrior (Πολεμιστής)",
+        6: "Volume Monster (Τέρας Όγκου)",
+        7: "Local Gym Legend (Θρύλος του Gym)",
+        8: "Hypertrophy Master (Master Υπερτροφίας)",
+        9: "Iron God (Θεός του Σιδήρου)",
+        10: "Titan of Muscle (Τιτάνας)"
+    }
+    return titles.get(lvl, f"Overlord Level {lvl}")
+
+def get_tonnage_quips(tonnage_kg):
+    for limit, text in TONNAGE_QUIPS:
+        if tonnage_kg <= limit: return text
+    return TONNAGE_QUIPS[-1][1]
+
+def calc_macros(prof):
+    p_wt, p_ht, p_age = prof["weight_kg"], prof["height_cm"], prof["age"]
+    bmr = (10 * p_wt) + (6.25 * p_ht) - (5 * p_age) + 5 if prof["gender"] == "Άνδρας" else (10 * p_wt) + (6.25 * p_ht) - (5 * p_age) - 161
+    tdee = bmr * prof["activity_level"]
+    target_cal = tdee + 350 if prof["goal"] == "Bulking" else (tdee - 450 if prof["goal"] == "Cutting" else tdee)
+    prot_g = p_wt * (2.2 if prof["goal"] == "Cutting" else 2.0) # 2.0g/kg για Bulking/Maintenance
+    fat_g = (target_cal * 0.25) / 9
+    carb_g = (target_cal - (prot_g * 4 + fat_g * 9)) / 4
+    return round(bmr), round(tdee), round(target_cal), round(prot_g), round(carb_g), round(fat_g)
+
+def calc_1rm(w, r):
+    if r <= 1: return w
+    elif r <= 10: return round(w * (1 + r / 30.0), 1)
+    else: return round((100 * w) / (48.8 + 53.8 * math.exp(-0.075 * r)), 1)
+
+def calc_cardio_calories(speed_kmh, duration_mins, weight_kg):
+    met = 1.0 + (0.875 * speed_kmh)
+    return round(met * weight_kg * (duration_mins / 60.0), 1)
+
+def calc_projected_vs_real_weight(profile, weight_log):
+    logs = []
+    for entry in weight_log:
+        try:
+            d = datetime.strptime(entry["date"], "%d/%m/%Y")
+            logs.append({"date_obj": d, "date_str": entry["date"], "weight": float(entry["weight"])})
+        except Exception:
+            pass
+            
+    logs.sort(key=lambda x: x["date_obj"])
+    if not logs:
+        return [], [], [], "Δεν υπάρχουν ακόμα καταγραφές βάρους."
+        
+    start_date = logs[0]["date_obj"]
+    start_weight = logs[0]["weight"]
+    
+    real_dates = []
+    moving_avgs = []
+    
+    for i, entry in enumerate(logs):
+        real_dates.append(entry["date_str"])
+        window = [logs[j]["weight"] for j in range(max(0, i-6), i+1)]
+        moving_avgs.append(round(sum(window) / len(window), 2))
+        
+    goal = profile.get("goal", "Bulking")
+    training_age = profile.get("training_age", "Αρχάριος (0-1 έτος)")
+    
+    if goal == "Bulking":
+        weekly_rate = 0.0030 if "Αρχάριος" in training_age else (0.0018 if "Ενδιάμεσος" in training_age else 0.0009)
+    elif goal == "Cutting":
+        weekly_rate = -0.0075
+    else:
+        weekly_rate = 0.0
+        
+    projected_weights = []
+    for entry in logs:
+        days_diff = (entry["date_obj"] - start_date).days
+        weeks_diff = days_diff / 7.0
+        proj_w = start_weight * ((1 + weekly_rate) ** weeks_diff)
+        projected_weights.append(round(proj_w, 2))
+        
+    status_msg = ""
+    if len(logs) >= 2:
+        actual_gain_kg = moving_avgs[-1] - start_weight
+        projected_gain_kg = projected_weights[-1] - start_weight
+        
+        if goal == "Bulking":
+            if actual_gain_kg <= 0:
+                status_msg = "⚠️ <b>Υποσιτισμός / Στασιμότητα:</b> Το βάρος δεν αυξάνεται. Προτείνεται αύξηση +200 kcal/ημέρα!"
+            elif actual_gain_kg > (projected_gain_kg * 1.8 + 0.5):
+                status_msg = "🚨 <b>Πολύ γρήγορη αύξηση:</b> Κίνδυνος αυξημένου λίπους. Μειώστε τις θερμίδες κατά -150 kcal/ημέρα."
+            else:
+                status_msg = "🟢 <b>Ιδανικός Ρυθμός Καθαρής Υπερτροφίας:</b> Το βάρος αυξάνεται σύμφωνα με το επιστημονικό μοντέλο!"
+        elif goal == "Cutting":
+            if actual_gain_kg >= 0:
+                status_msg = "⚠️ <b>Στασιμότητα:</b> Δεν παρατηρείται απώλεια. Μειώστε τις θερμίδες κατά -200 kcal/ημέρα."
+            else:
+                status_msg = "🟢 <b>Αποτελεσματική Λιποδιάλυση:</b> Το βάρος μειώνεται σύμφωνα με τον στόχο!"
+        else:
+            status_msg = "🟢 <b>Σταθερή Συντήρηση:</b> Το σωματικό βάρος διατηρείται σταθερό."
+            
+    return real_dates, moving_avgs, projected_weights, status_msg
+
+def check_and_unlock_achievements(total_tonnage):
+    unlocked = []
+    current_achs = user_data.get("achievements", [])
+    
+    if user_data.get("prs") and "🏆 First Blood (Πρώτο PR)" not in current_achs:
+        unlocked.append("🏆 First Blood (Έσπασες το πρώτο σου ατομικό ρεκόρ!)")
+        current_achs.append("🏆 First Blood (Πρώτο PR)")
+        
+    if total_tonnage >= 10000 and "🏋️ 10 Ton Club" not in current_achs:
+        unlocked.append("🏋️ 10 Ton Club (Σήκωσες πάνω από 10.000 kg σε μία συνεδρία!)")
+        current_achs.append("🏋️ 10 Ton Club")
+
+    if total_tonnage >= 25000 and "🐘 25 Ton Titan" not in current_achs:
+        unlocked.append("🐘 25 Ton Titan (Ξεπέρασες τα 25.000 kg σε μία προπόνηση!)")
+        current_achs.append("🐘 25 Ton Titan")
+
+    if len(user_data.get("weight_log", [])) >= 7 and "⚖️ Scale Master" not in current_achs:
+        unlocked.append("⚖️ Scale Master (Κατέγραψες το βάρος σου για 7+ ημέρες!)")
+        current_achs.append("⚖️ Scale Master")
+
+    user_data["achievements"] = current_achs
+    return unlocked
+
+# ------------------------------------------------------------------------------
+# 4. APP NAVIGATION & UI
+# ------------------------------------------------------------------------------
+st.title("🏋️ GYM COACHING OS")
+st.caption("Interactive Fitness, Nutrition & Body Composition Tracker")
+
+tab1, tab_tracker, tab2, tab3 = st.tabs([
+    "🎮 Dashboard & Βάρος", 
+    "🥗 Daily Nutrition Tracker", 
+    "🏋️ Fitness Tracker (MWF)", 
+    "📊 Visual Analytics"
+])
+
+# ==============================================================================
+# TAB 1: DASHBOARD & BODY WEIGHT
+# ==============================================================================
+with tab1:
+    prof = user_data["profile"]
+    lvl = prof["level"]
+    title = get_level_title(lvl)
+    req_xp = lvl * 200
+    curr_xp = prof["xp"]
+    
+    # Header Gamification Banner
+    st.markdown(f"### 🎮 Level {lvl} — {title}")
+    st.progress(min(1.0, curr_xp / req_xp))
+    st.caption(f"Progress: {curr_xp} / {req_xp} XP")
+    
+    # Badges
+    achs = user_data.get("achievements", [])
+    if achs:
+        badge_html = {"ex": "Overhead Cable Triceps Extension", "s": 3, "w": 15.0, "r": 12, "rir": 2},
             {"ex": "Crunches", "s": 2, "w": 0.0, "r": 20, "rir": 1}
         ]
     },
