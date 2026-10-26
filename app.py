@@ -2,6 +2,8 @@ import os
 import json
 import math
 import random
+import requests
+import base64
 from datetime import datetime
 import streamlit as st
 import matplotlib.pyplot as plt
@@ -185,11 +187,42 @@ def load_user_data():
 
 def save_user_data():
     if "user_data" in st.session_state:
+        # 1. Τοπική αποθήκευση στο session
         try:
             with open(DATA_FILE, "w", encoding="utf-8") as f:
                 json.dump(st.session_state["user_data"], f, ensure_ascii=False, indent=2)
         except Exception:
             pass
+            
+        # 2. Αυτόματο Sync στο GitHub (αν έχουν οριστεί Secrets)
+        if "GITHUB_TOKEN" in st.secrets and "GITHUB_REPO" in st.secrets:
+            try:
+                token = st.secrets["GITHUB_TOKEN"]
+                repo = st.secrets["GITHUB_REPO"]
+                url = f"https://api.github.com/repos/{repo}/contents/{DATA_FILE}"
+                headers = {
+                    "Authorization": f"token {token}",
+                    "Accept": "application/vnd.github.v3+json"
+                }
+                
+                # Λήψη SHA του υπάρχοντος αρχείου στο GitHub
+                get_res = requests.get(url, headers=headers)
+                sha = get_res.json().get("sha", "") if get_res.status_code == 200 else ""
+                
+                # Προετοιμασία περιεχομένου σε base64
+                content_json = json.dumps(st.session_state["user_data"], ensure_ascii=False, indent=2)
+                content_b64 = base64.b64encode(content_json.encode("utf-8")).decode("utf-8")
+                
+                payload = {
+                    "message": "🤖 Auto-save user gym data",
+                    "content": content_b64,
+                    "sha": sha
+                }
+                
+                # Push στο GitHub
+                requests.put(url, headers=headers, json=payload)
+            except Exception:
+                pass
 
 load_user_data()
 user_data = st.session_state["user_data"]
@@ -460,7 +493,7 @@ with tab_tracker:
     with col4:
         f_rem = max(0.0, fat_g - totals["f"])
         st.metric(f"Λιπαρά (Στόχος: {fat_g}g)", f"{totals['f']:.1f}g", f"Λείπουν {f_rem:.1f}g")
-        st.progress(min(1.0, totals["f"] / fat_g if fat_g > 0 else 0.0))
+        st.progress(min(1.0, totals["fat"] / fat_g if fat_g > 0 else 0.0))
 
     if totals["p"] >= prot_g:
         st.success(f"🎉 Συγχαρητήρια! Κάλυψες τον ημερήσιο στόχο πρωτεΐνης ({prot_g}g)!")
