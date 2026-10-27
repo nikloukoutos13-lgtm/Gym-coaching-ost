@@ -1,0 +1,519 @@
+{
+  "profile": {
+    "gender": "Άνδρας",
+    "age": 28,
+    "weight_kg": 72.8,
+    "height_cm": 177.0,
+    "activity_level": 1.55,
+    "goal": "Bulking",
+    "training_age": "Αρχάριος (0-1 έτος)",
+    "xp": 0,
+    "level": 1,
+    "quizzes_solved": 0
+  },
+  "food_db": {
+    "🍗 Κοτόπουλο Στήθος (ψητό/μαγειρεμένο)": {
+      "unit": "100g",
+      "cal": 165,
+      "p": 31.0,
+      "c": 0.0,
+      "f": 3.6
+    },
+    "🍗 Κοτόπουλο Μπούτι (χωρίς δέρμα)": {
+      "unit": "100g",
+      "cal": 180,
+      "p": 24.0,
+      "c": 0.0,
+      "f": 9.0
+    },
+    "🍗 Κοτόπουλο Φτερούγες (με δέρμα)": {
+      "unit": "100g",
+      "cal": 203,
+      "p": 18.0,
+      "c": 0.0,
+      "f": 14.0
+    },
+    "🐟 Κονσέρβα Τόνου σε νερό (drained)": {
+      "unit": "100g",
+      "cal": 110,
+      "p": 25.0,
+      "c": 0.0,
+      "f": 0.6
+    },
+    "🦐 King Prawns (Γαρίδες Tesco)": {
+      "unit": "100g",
+      "cal": 85,
+      "p": 18.5,
+      "c": 0.5,
+      "f": 0.9
+    },
+    "🥩 Tesco Basted Pork": {
+      "unit": "100g",
+      "cal": 145,
+      "p": 21.0,
+      "c": 1.0,
+      "f": 6.0
+    },
+    "🌭 Tesco Finest Irish Pork & Apple Sausage": {
+      "unit": "piece",
+      "cal": 137,
+      "p": 8.0,
+      "c": 3.4,
+      "f": 9.7
+    },
+    "🌯 Burrito (Μοσχαρίσιος κιμάς, φασόλια, ρύζι)": {
+      "unit": "100g",
+      "cal": 170,
+      "p": 8.5,
+      "c": 20.0,
+      "f": 6.0
+    },
+    "🥤 Myprotein Impact Whey Protein (1 scoop 30g)": {
+      "unit": "piece",
+      "cal": 114,
+      "p": 23.0,
+      "c": 1.8,
+      "f": 1.9
+    },
+    "🥚 Αυγό Ολόκληρο (1 μέτριο/μεγάλο)": {
+      "unit": "piece",
+      "cal": 72,
+      "p": 6.0,
+      "c": 0.4,
+      "f": 4.8
+    },
+    "🥛 GetPRO / GoPRO Protein Yoghurt (160g)": {
+      "unit": "piece",
+      "cal": 104,
+      "p": 15.0,
+      "c": 7.2,
+      "f": 0.3
+    },
+    "🥣 Tesco Plain Skyr / Quark": {
+      "unit": "100g",
+      "cal": 65,
+      "p": 11.0,
+      "c": 4.0,
+      "f": 0.2
+    },
+    "🍨 Ελληνικό Γιαούρτι 2%": {
+      "unit": "100g",
+      "cal": 73,
+      "p": 10.0,
+      "c": 3.8,
+      "f": 2.0
+    },
+    "🍫 Nature Valley Extra Protein Bar": {
+      "unit": "piece",
+      "cal": 198,
+      "p": 10.0,
+      "c": 15.0,
+      "f": 11.0
+    },
+    "🥔 Tesco Country Potatoes (κατεψυγμένες)": {
+      "unit": "100g",
+      "cal": 135,
+      "p": 2.5,
+      "c": 22.0,
+      "f": 3.8
+    },
+    "🍌 Μπανάνα (1 μέτρια ~120g)": {
+      "unit": "piece",
+      "cal": 105,
+      "p": 1.3,
+      "c": 27.0,
+      "f": 0.3
+    },
+    "🍎 Μήλο (1 μέτριο ~150g)": {
+      "unit": "piece",
+      "cal": 78,
+      "p": 0.5,
+      "c": 21.0,
+      "f": 0.3
+    },
+    "🥜 Φυστικοβούτυρο 100%": {
+      "unit": "100g",
+      "cal": 590,
+      "p": 25.0,
+      "c": 12.0,
+      "f": 49.0
+    },
+    "🍚 Ρύζι βρασμένο": {
+      "unit": "100g",
+      "cal": 130,
+      "p": 2.7,
+      "c": 28.0,
+      "f": 0.3
+    },
+    "🍝 Μακαρόνια βρασμένα": {
+      "unit": "100g",
+      "cal": 158,
+      "p": 5.8,
+      "c": 31.0,
+      "f": 0.9
+    },
+    "🍲 Φακές βρασμένες / Σούπα": {
+      "unit": "100g",
+      "cal": 116,
+      "p": 9.0,
+      "c": 20.0,
+      "f": 0.4
+    }
+  },
+  "daily_logs": [],
+  "weight_log": [
+    {
+      "date": "27/10/2026",
+      "weight": 72.8
+    }
+  ],
+  "exercise_database": {
+    "Stationary Bike (Ποδήλατο)": {
+      "muscle": "Cardio",
+      "type": "cardio",
+      "primary": "Cardio",
+      "secondary": null
+    },
+    "Treadmill (Διάδρομος)": {
+      "muscle": "Cardio",
+      "type": "cardio",
+      "primary": "Cardio",
+      "secondary": null
+    },
+    "Leg Press": {
+      "muscle": "Quads",
+      "type": "weight",
+      "is_db": false,
+      "primary": "Quads",
+      "secondary": "Glutes"
+    },
+    "Leg Extension Machine": {
+      "muscle": "Quads",
+      "type": "weight",
+      "is_db": false,
+      "primary": "Quads",
+      "secondary": null
+    },
+    "Seated Leg Curl Machine": {
+      "muscle": "Hamstrings",
+      "type": "weight",
+      "is_db": false,
+      "primary": "Hamstrings",
+      "secondary": null
+    },
+    "Romanian Deadlift (RDL)": {
+      "muscle": "Hamstrings",
+      "type": "weight",
+      "is_db": true,
+      "primary": "Hamstrings",
+      "secondary": "Glutes"
+    },
+    "Roman Chair Hyperextensions (Ρωμαϊκή Έδρα)": {
+      "muscle": "Lower Back",
+      "type": "bodyweight",
+      "primary": "Hamstrings",
+      "secondary": "Glutes"
+    },
+    "Pull-ups (Έλξεις στο Ζυγό)": {
+      "muscle": "Lats",
+      "type": "bodyweight",
+      "primary": "Lats",
+      "secondary": "Biceps"
+    },
+    "Chin-ups (Υπτιάστιες Έλξεις)": {
+      "muscle": "Lats",
+      "type": "bodyweight",
+      "primary": "Lats",
+      "secondary": "Biceps"
+    },
+    "Lat Pulldown (Τροχαλία)": {
+      "muscle": "Lats",
+      "type": "weight",
+      "is_db": false,
+      "primary": "Lats",
+      "secondary": "Biceps"
+    },
+    "Seated Cable Row (Κωπηλατική Τροχαλία)": {
+      "muscle": "Upper Back",
+      "type": "weight",
+      "is_db": false,
+      "primary": "Upper Back",
+      "secondary": "Biceps"
+    },
+    "Chest-Supported DB Row (30°)": {
+      "muscle": "Upper Back",
+      "type": "weight",
+      "is_db": true,
+      "primary": "Upper Back",
+      "secondary": "Rear Delts"
+    },
+    "Flat Dumbbell Chest Press": {
+      "muscle": "Chest",
+      "type": "weight",
+      "is_db": true,
+      "primary": "Chest",
+      "secondary": "Triceps"
+    },
+    "Incline DB Bench Press": {
+      "muscle": "Upper Chest",
+      "type": "weight",
+      "is_db": true,
+      "primary": "Chest",
+      "secondary": "Front Delts"
+    },
+    "Cable Chest Flyes (Τροχαλία)": {
+      "muscle": "Chest",
+      "type": "weight",
+      "is_db": false,
+      "primary": "Chest",
+      "secondary": null
+    },
+    "Dumbbell Shoulder Press": {
+      "muscle": "Shoulders",
+      "type": "weight",
+      "is_db": true,
+      "primary": "Front Delts",
+      "secondary": "Triceps"
+    },
+    "Cable Lateral Raises (Τροχαλία)": {
+      "muscle": "Side Delts",
+      "type": "weight",
+      "is_db": false,
+      "primary": "Side Delts",
+      "secondary": null
+    },
+    "Lateral Raises (Αλτήρες)": {
+      "muscle": "Side Delts",
+      "type": "weight",
+      "is_db": true,
+      "primary": "Side Delts",
+      "secondary": null
+    },
+    "Cable Face Pulls": {
+      "muscle": "Rear Delts",
+      "type": "weight",
+      "is_db": false,
+      "primary": "Rear Delts",
+      "secondary": "Upper Back"
+    },
+    "Cable Bicep Curls": {
+      "muscle": "Biceps",
+      "type": "weight",
+      "is_db": false,
+      "primary": "Biceps",
+      "secondary": null
+    },
+    "Dumbbell Bicep Curls": {
+      "muscle": "Biceps",
+      "type": "weight",
+      "is_db": true,
+      "primary": "Biceps",
+      "secondary": null
+    },
+    "Triceps Rope Pushdown": {
+      "muscle": "Triceps",
+      "type": "weight",
+      "is_db": false,
+      "primary": "Triceps",
+      "secondary": null
+    },
+    "Overhead Cable Triceps Extension": {
+      "muscle": "Triceps",
+      "type": "weight",
+      "is_db": false,
+      "primary": "Triceps",
+      "secondary": null
+    },
+    "Crunches": {
+      "muscle": "Abs",
+      "type": "bodyweight",
+      "primary": "Abs",
+      "secondary": null
+    },
+    "Plank": {
+      "muscle": "Core",
+      "type": "bodyweight_time",
+      "primary": "Abs",
+      "secondary": null
+    }
+  },
+  "templates": {
+    "Δευτέρα": [
+      {
+        "ex": "Stationary Bike (Ποδήλατο)",
+        "s": 1,
+        "w": 6.0,
+        "r": 5,
+        "rir": 0
+      },
+      {
+        "ex": "Leg Press",
+        "s": 3,
+        "w": 105.0,
+        "r": 12,
+        "rir": 2
+      },
+      {
+        "ex": "Flat Dumbbell Chest Press",
+        "s": 3,
+        "w": 17.5,
+        "r": 12,
+        "rir": 2
+      },
+      {
+        "ex": "Pull-ups (Έλξεις στο Ζυγό)",
+        "s": 3,
+        "w": 0.0,
+        "r": 8,
+        "rir": 2
+      },
+      {
+        "ex": "Chest-Supported DB Row (30°)",
+        "s": 3,
+        "w": 10.0,
+        "r": 12,
+        "rir": 2
+      },
+      {
+        "ex": "Roman Chair Hyperextensions (Ρωμαϊκή Έδρα)",
+        "s": 3,
+        "w": 0.0,
+        "r": 12,
+        "rir": 2
+      },
+      {
+        "ex": "Triceps Rope Pushdown",
+        "s": 3,
+        "w": 15.0,
+        "r": 12,
+        "rir": 2
+      },
+      {
+        "ex": "Crunches",
+        "s": 2,
+        "w": 0.0,
+        "r": 20,
+        "rir": 1
+      }
+    ],
+    "Τετάρτη": [
+      {
+        "ex": "Treadmill (Διάδρομος)",
+        "s": 1,
+        "w": 12.0,
+        "r": 5,
+        "rir": 0
+      },
+      {
+        "ex": "Romanian Deadlift (RDL)",
+        "s": 3,
+        "w": 16.0,
+        "r": 10,
+        "rir": 2
+      },
+      {
+        "ex": "Chin-ups (Υπτιάστιες Έλξεις)",
+        "s": 3,
+        "w": 0.0,
+        "r": 8,
+        "rir": 2
+      },
+      {
+        "ex": "Incline DB Bench Press",
+        "s": 3,
+        "w": 12.5,
+        "r": 10,
+        "rir": 2
+      },
+      {
+        "ex": "Dumbbell Shoulder Press",
+        "s": 3,
+        "w": 12.5,
+        "r": 8,
+        "rir": 2
+      },
+      {
+        "ex": "Cable Lateral Raises (Τροχαλία)",
+        "s": 3,
+        "w": 5.0,
+        "r": 12,
+        "rir": 2
+      },
+      {
+        "ex": "Cable Face Pulls",
+        "s": 3,
+        "w": 12.5,
+        "r": 15,
+        "rir": 2
+      },
+      {
+        "ex": "Plank",
+        "s": 2,
+        "w": 0.0,
+        "r": 60,
+        "rir": 1
+      }
+    ],
+    "Παρασκευή": [
+      {
+        "ex": "Stationary Bike (Ποδήλατο)",
+        "s": 1,
+        "w": 6.0,
+        "r": 5,
+        "rir": 0
+      },
+      {
+        "ex": "Leg Extension Machine",
+        "s": 3,
+        "w": 45.0,
+        "r": 12,
+        "rir": 2
+      },
+      {
+        "ex": "Seated Leg Curl Machine",
+        "s": 3,
+        "w": 40.0,
+        "r": 12,
+        "rir": 2
+      },
+      {
+        "ex": "Seated Cable Row (Κωπηλατική Τροχαλία)",
+        "s": 3,
+        "w": 45.0,
+        "r": 12,
+        "rir": 2
+      },
+      {
+        "ex": "Lateral Raises (Αλτήρες)",
+        "s": 3,
+        "w": 5.0,
+        "r": 12,
+        "rir": 2
+      },
+      {
+        "ex": "Cable Bicep Curls",
+        "s": 3,
+        "w": 12.5,
+        "r": 12,
+        "rir": 2
+      },
+      {
+        "ex": "Overhead Cable Triceps Extension",
+        "s": 3,
+        "w": 15.0,
+        "r": 12,
+        "rir": 2
+      },
+      {
+        "ex": "Crunches",
+        "s": 2,
+        "w": 0.0,
+        "r": 20,
+        "rir": 1
+      }
+    ]
+  },
+  "prs": {},
+  "achievements": [],
+  "history": []
+}
