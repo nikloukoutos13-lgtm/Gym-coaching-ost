@@ -7,8 +7,8 @@
     "activity_level": 1.55,
     "goal": "Bulking",
     "training_age": "Αρχάριος (0-1 έτος)",
-    "xp": 1110,
-    "level": 2,
+    "xp": 2110,
+    "level": 3,
     "quizzes_solved": 0
   },
   "food_db": {
@@ -411,44 +411,44 @@
       {
         "ex": "Romanian Deadlift (RDL)",
         "s": 3,
-        "w": 16.0,
-        "r": 10,
-        "rir": 2
+        "w": 15.0,
+        "r": 12,
+        "rir": 4
       },
       {
         "ex": "Chin-ups (Υπτιάστιες Έλξεις)",
         "s": 3,
         "w": 0.0,
-        "r": 8,
-        "rir": 2
+        "r": 5,
+        "rir": 0
       },
       {
         "ex": "Incline DB Bench Press",
         "s": 3,
-        "w": 12.5,
+        "w": 15.0,
         "r": 10,
-        "rir": 2
+        "rir": 1
       },
       {
         "ex": "Dumbbell Shoulder Press",
         "s": 3,
         "w": 12.5,
         "r": 8,
-        "rir": 2
+        "rir": 1
       },
       {
         "ex": "Cable Lateral Raises (Τροχαλία)",
         "s": 3,
-        "w": 5.0,
+        "w": 2.5,
         "r": 12,
-        "rir": 2
+        "rir": 1
       },
       {
         "ex": "Cable Face Pulls",
         "s": 3,
         "w": 12.5,
         "r": 15,
-        "rir": 2
+        "rir": 4
       },
       {
         "ex": "Plank",
@@ -521,7 +521,12 @@
     "Leg Press": 162.7,
     "Flat Dumbbell Chest Press": 49.5,
     "Chest-Supported DB Row (30°)": 42.4,
-    "Triceps Rope Pushdown": 21.2
+    "Triceps Rope Pushdown": 21.2,
+    "Romanian Deadlift (RDL)": 42.4,
+    "Incline DB Bench Press": 40.0,
+    "Dumbbell Shoulder Press": 31.7,
+    "Cable Lateral Raises (Τροχαλία)": 3.5,
+    "Cable Face Pulls": 18.9
   },
   "achievements": [
     "🏆 First Blood (Πρώτο PR)"
@@ -627,6 +632,110 @@
           "total_reps_or_min": 20,
           "type": "bodyweight",
           "muscle": "Abs",
+          "cal": 0
+        }
+      }
+    },
+    {
+      "date": "28/10/2026 10:00",
+      "day": "Τετάρτη",
+      "tonnage": 3232.5,
+      "cardio_cal": 70.0,
+      "exercises": {
+        "Treadmill (Διάδρομος)": {
+          "sets": 1,
+          "max_1rm": 0,
+          "max_weight": 12.0,
+          "rirs": [
+            0
+          ],
+          "total_reps_or_min": 5,
+          "type": "cardio",
+          "muscle": "Cardio",
+          "cal": 70.0
+        },
+        "Romanian Deadlift (RDL)": {
+          "sets": 3,
+          "max_1rm": 42.4,
+          "max_weight": 15.0,
+          "rirs": [
+            4
+          ],
+          "total_reps_or_min": 12,
+          "type": "weight",
+          "muscle": "Hamstrings",
+          "cal": 0
+        },
+        "Chin-ups (Υπτιάστιες Έλξεις)": {
+          "sets": 3,
+          "max_1rm": 0,
+          "max_weight": 0.0,
+          "rirs": [
+            0
+          ],
+          "total_reps_or_min": 5,
+          "type": "bodyweight",
+          "muscle": "Lats",
+          "cal": 0
+        },
+        "Incline DB Bench Press": {
+          "sets": 3,
+          "max_1rm": 40.0,
+          "max_weight": 15.0,
+          "rirs": [
+            1
+          ],
+          "total_reps_or_min": 10,
+          "type": "weight",
+          "muscle": "Upper Chest",
+          "cal": 0
+        },
+        "Dumbbell Shoulder Press": {
+          "sets": 3,
+          "max_1rm": 31.7,
+          "max_weight": 12.5,
+          "rirs": [
+            1
+          ],
+          "total_reps_or_min": 8,
+          "type": "weight",
+          "muscle": "Shoulders",
+          "cal": 0
+        },
+        "Cable Lateral Raises (Τροχαλία)": {
+          "sets": 3,
+          "max_1rm": 3.5,
+          "max_weight": 2.5,
+          "rirs": [
+            1
+          ],
+          "total_reps_or_min": 12,
+          "type": "weight",
+          "muscle": "Side Delts",
+          "cal": 0
+        },
+        "Cable Face Pulls": {
+          "sets": 3,
+          "max_1rm": 18.9,
+          "max_weight": 12.5,
+          "rirs": [
+            4
+          ],
+          "total_reps_or_min": 15,
+          "type": "weight",
+          "muscle": "Rear Delts",
+          "cal": 0
+        },
+        "Plank": {
+          "sets": 2,
+          "max_1rm": 0,
+          "max_weight": 0.0,
+          "rirs": [
+            1
+          ],
+          "total_reps_or_min": 60,
+          "type": "bodyweight_time",
+          "muscle": "Core",
           "cal": 0
         }
       }
