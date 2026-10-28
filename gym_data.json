@@ -2,7 +2,7 @@
   "profile": {
     "gender": "Άνδρας",
     "age": 28,
-    "weight_kg": 72.8,
+    "weight_kg": 73.0,
     "height_cm": 177.0,
     "activity_level": 1.55,
     "goal": "Bulking",
@@ -198,6 +198,10 @@
     {
       "date": "27/10/2026",
       "weight": 72.8
+    },
+    {
+      "date": "28/10/2026",
+      "weight": 73.0
     }
   ],
   "exercise_database": {
