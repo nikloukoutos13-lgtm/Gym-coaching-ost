@@ -391,6 +391,65 @@
       "type": "bodyweight_time",
       "primary": "Abs",
       "secondary": null
+    },
+    "Running (Εξωτερικό Τρέξιμο)": {
+      "muscle": "Cardio",
+      "type": "cardio",
+      "primary": "Cardio",
+      "secondary": null
+    },
+    "SkiErg (HYROX)": {
+      "muscle": "Cardio",
+      "type": "cardio",
+      "primary": "Cardio",
+      "secondary": "Lats"
+    },
+    "Sled Push (HYROX)": {
+      "muscle": "Quads",
+      "type": "weight",
+      "is_db": false,
+      "primary": "Quads",
+      "secondary": "Glutes"
+    },
+    "Sled Pull (HYROX)": {
+      "muscle": "Hamstrings",
+      "type": "weight",
+      "is_db": false,
+      "primary": "Hamstrings",
+      "secondary": "Upper Back"
+    },
+    "Burpee Broad Jumps (HYROX)": {
+      "muscle": "Full Body",
+      "type": "bodyweight",
+      "primary": "Quads",
+      "secondary": "Cardio"
+    },
+    "RowErg / Κωπηλατικό (HYROX)": {
+      "muscle": "Cardio",
+      "type": "cardio",
+      "primary": "Cardio",
+      "secondary": "Upper Back"
+    },
+    "Farmers Carry (HYROX)": {
+      "muscle": "Upper Back",
+      "type": "weight",
+      "is_db": true,
+      "primary": "Upper Back",
+      "secondary": "Abs"
+    },
+    "Sandbag Lunges (HYROX)": {
+      "muscle": "Quads",
+      "type": "weight",
+      "is_db": false,
+      "primary": "Quads",
+      "secondary": "Glutes"
+    },
+    "Wall Balls (HYROX)": {
+      "muscle": "Full Body",
+      "type": "weight",
+      "is_db": false,
+      "primary": "Quads",
+      "secondary": "Front Delts"
     }
   },
   "templates": {
@@ -903,5 +962,704 @@
         }
       }
     }
-  ]
+  ],
+  "profiles": {
+    "Προφίλ 1 (Alex - Gym)": {
+      "profile": {
+        "gender": "Άνδρας",
+        "age": 25,
+        "weight_kg": 72.7,
+        "height_cm": 177.0,
+        "activity_level": 1.55,
+        "goal": "Bulking",
+        "training_age": "Αρχάριος (0-1 έτος)",
+        "xp": 3480,
+        "level": 4,
+        "quizzes_solved": 0
+      },
+      "daily_logs": [
+        {
+          "name": "🌯 Burrito (Μοσχαρίσιος κιμάς, φασόλια, ρύζι)",
+          "portion": "350g",
+          "cal": 595.0,
+          "p": 29.75,
+          "c": 70.0,
+          "f": 21.0
+        },
+        {
+          "name": "🥚 Αυγό Ολόκληρο (1 μέτριο/μεγάλο)",
+          "portion": "3.0 τεμάχιο/α",
+          "cal": 216.0,
+          "p": 18.0,
+          "c": 1.2000000000000002,
+          "f": 14.399999999999999
+        },
+        {
+          "name": "🥛 GetPRO / GoPRO Protein Yoghurt (160g)",
+          "portion": "1.0 τεμάχιο/α",
+          "cal": 104.0,
+          "p": 15.0,
+          "c": 7.2,
+          "f": 0.3
+        },
+        {
+          "name": "🍫 Nature Valley Extra Protein Bar",
+          "portion": "1.0 τεμάχιο/α",
+          "cal": 198.0,
+          "p": 10.0,
+          "c": 15.0,
+          "f": 11.0
+        },
+        {
+          "name": "Μπάρα γερμανικη",
+          "portion": "100g",
+          "cal": 549.0,
+          "p": 21.0,
+          "c": 38.0,
+          "f": 34.0
+        }
+      ],
+      "weight_log": [
+        {
+          "date": "27/10/2026",
+          "weight": 72.8
+        },
+        {
+          "date": "28/10/2026",
+          "weight": 73.0
+        },
+        {
+          "date": "30/10/2026",
+          "weight": 72.7
+        }
+      ],
+      "templates": {
+        "Δευτέρα": [
+          {
+            "ex": "Stationary Bike (Ποδήλατο)",
+            "s": 1,
+            "w": 6.0,
+            "r": 5,
+            "rir": 0
+          },
+          {
+            "ex": "Leg Press",
+            "s": 3,
+            "w": 115.0,
+            "r": 12,
+            "rir": 2
+          },
+          {
+            "ex": "Flat Dumbbell Chest Press",
+            "s": 3,
+            "w": 17.5,
+            "r": 12,
+            "rir": 2
+          },
+          {
+            "ex": "Pull-ups (Έλξεις στο Ζυγό)",
+            "s": 3,
+            "w": 0.0,
+            "r": 4,
+            "rir": 0
+          },
+          {
+            "ex": "Chest-Supported DB Row (30°)",
+            "s": 3,
+            "w": 15.0,
+            "r": 12,
+            "rir": 2
+          },
+          {
+            "ex": "Roman Chair Hyperextensions (Ρωμαϊκή Έδρα)",
+            "s": 3,
+            "w": 0.0,
+            "r": 12,
+            "rir": 2
+          },
+          {
+            "ex": "Triceps Rope Pushdown",
+            "s": 3,
+            "w": 15.0,
+            "r": 12,
+            "rir": 1
+          },
+          {
+            "ex": "Crunches",
+            "s": 2,
+            "w": 0.0,
+            "r": 20,
+            "rir": 1
+          }
+        ],
+        "Τετάρτη": [
+          {
+            "ex": "Treadmill (Διάδρομος)",
+            "s": 1,
+            "w": 12.0,
+            "r": 5,
+            "rir": 0
+          },
+          {
+            "ex": "Romanian Deadlift (RDL)",
+            "s": 3,
+            "w": 15.0,
+            "r": 12,
+            "rir": 4
+          },
+          {
+            "ex": "Chin-ups (Υπτιάστιες Έλξεις)",
+            "s": 3,
+            "w": 0.0,
+            "r": 5,
+            "rir": 0
+          },
+          {
+            "ex": "Incline DB Bench Press",
+            "s": 3,
+            "w": 15.0,
+            "r": 10,
+            "rir": 1
+          },
+          {
+            "ex": "Dumbbell Shoulder Press",
+            "s": 3,
+            "w": 12.5,
+            "r": 8,
+            "rir": 1
+          },
+          {
+            "ex": "Cable Lateral Raises (Τροχαλία)",
+            "s": 3,
+            "w": 2.5,
+            "r": 12,
+            "rir": 1
+          },
+          {
+            "ex": "Cable Face Pulls",
+            "s": 3,
+            "w": 12.5,
+            "r": 15,
+            "rir": 4
+          },
+          {
+            "ex": "Plank",
+            "s": 2,
+            "w": 0.0,
+            "r": 60,
+            "rir": 1
+          }
+        ],
+        "Παρασκευή": [
+          {
+            "ex": "Stationary Bike (Ποδήλατο)",
+            "s": 1,
+            "w": 6.0,
+            "r": 5,
+            "rir": 0
+          },
+          {
+            "ex": "Leg Extension Machine",
+            "s": 3,
+            "w": 45.0,
+            "r": 12,
+            "rir": 2
+          },
+          {
+            "ex": "Seated Leg Curl Machine",
+            "s": 3,
+            "w": 40.0,
+            "r": 12,
+            "rir": 2
+          },
+          {
+            "ex": "Seated Cable Row (Κωπηλατική Τροχαλία)",
+            "s": 3,
+            "w": 45.0,
+            "r": 12,
+            "rir": 2
+          },
+          {
+            "ex": "Lateral Raises (Αλτήρες)",
+            "s": 3,
+            "w": 5.0,
+            "r": 12,
+            "rir": 2
+          },
+          {
+            "ex": "Cable Bicep Curls",
+            "s": 3,
+            "w": 12.5,
+            "r": 12,
+            "rir": 2
+          },
+          {
+            "ex": "Overhead Cable Triceps Extension",
+            "s": 3,
+            "w": 15.0,
+            "r": 12,
+            "rir": 2
+          },
+          {
+            "ex": "Lat Pulldown (Τροχαλία)",
+            "s": 3,
+            "w": 42.0,
+            "r": 12,
+            "rir": 2
+          }
+        ]
+      },
+      "prs": {
+        "Leg Press": 162.7,
+        "Flat Dumbbell Chest Press": 49.5,
+        "Chest-Supported DB Row (30°)": 42.4,
+        "Triceps Rope Pushdown": 21.2,
+        "Romanian Deadlift (RDL)": 42.4,
+        "Incline DB Bench Press": 40.0,
+        "Dumbbell Shoulder Press": 31.7,
+        "Cable Lateral Raises (Τροχαλία)": 3.5,
+        "Cable Face Pulls": 18.9,
+        "Leg Extension Machine": 63.7,
+        "Seated Leg Curl Machine": 56.6,
+        "Seated Cable Row (Κωπηλατική Τροχαλία)": 63.7,
+        "Lateral Raises (Αλτήρες)": 14.1,
+        "Cable Bicep Curls": 17.7,
+        "Overhead Cable Triceps Extension": 21.2,
+        "Lat Pulldown (Τροχαλία)": 59.4
+      },
+      "achievements": [
+        "🏆 First Blood (Πρώτο PR)"
+      ],
+      "history": [
+        {
+          "date": "27/10/2026 09:30",
+          "day": "Δευτέρα",
+          "tonnage": 7020.0,
+          "cardio_cal": 37.9,
+          "exercises": {
+            "Stationary Bike (Ποδήλατο)": {
+              "sets": 1,
+              "max_1rm": 0,
+              "max_weight": 6.0,
+              "rirs": [
+                0
+              ],
+              "total_reps_or_min": 5,
+              "type": "cardio",
+              "muscle": "Cardio",
+              "cal": 37.9
+            },
+            "Leg Press": {
+              "sets": 3,
+              "max_1rm": 162.7,
+              "max_weight": 115.0,
+              "rirs": [
+                2
+              ],
+              "total_reps_or_min": 12,
+              "type": "weight",
+              "muscle": "Quads",
+              "cal": 0
+            },
+            "Flat Dumbbell Chest Press": {
+              "sets": 3,
+              "max_1rm": 49.5,
+              "max_weight": 17.5,
+              "rirs": [
+                2
+              ],
+              "total_reps_or_min": 12,
+              "type": "weight",
+              "muscle": "Chest",
+              "cal": 0
+            },
+            "Pull-ups (Έλξεις στο Ζυγό)": {
+              "sets": 3,
+              "max_1rm": 0,
+              "max_weight": 0.0,
+              "rirs": [
+                0
+              ],
+              "total_reps_or_min": 4,
+              "type": "bodyweight",
+              "muscle": "Lats",
+              "cal": 0
+            },
+            "Chest-Supported DB Row (30°)": {
+              "sets": 3,
+              "max_1rm": 42.4,
+              "max_weight": 15.0,
+              "rirs": [
+                2
+              ],
+              "total_reps_or_min": 12,
+              "type": "weight",
+              "muscle": "Upper Back",
+              "cal": 0
+            },
+            "Roman Chair Hyperextensions (Ρωμαϊκή Έδρα)": {
+              "sets": 3,
+              "max_1rm": 0,
+              "max_weight": 0.0,
+              "rirs": [
+                2
+              ],
+              "total_reps_or_min": 12,
+              "type": "bodyweight",
+              "muscle": "Lower Back",
+              "cal": 0
+            },
+            "Triceps Rope Pushdown": {
+              "sets": 3,
+              "max_1rm": 21.2,
+              "max_weight": 15.0,
+              "rirs": [
+                1
+              ],
+              "total_reps_or_min": 12,
+              "type": "weight",
+              "muscle": "Triceps",
+              "cal": 0
+            },
+            "Crunches": {
+              "sets": 2,
+              "max_1rm": 0,
+              "max_weight": 0.0,
+              "rirs": [
+                1
+              ],
+              "total_reps_or_min": 20,
+              "type": "bodyweight",
+              "muscle": "Abs",
+              "cal": 0
+            }
+          }
+        },
+        {
+          "date": "28/10/2026 10:00",
+          "day": "Τετάρτη",
+          "tonnage": 3232.5,
+          "cardio_cal": 70.0,
+          "exercises": {
+            "Treadmill (Διάδρομος)": {
+              "sets": 1,
+              "max_1rm": 0,
+              "max_weight": 12.0,
+              "rirs": [
+                0
+              ],
+              "total_reps_or_min": 5,
+              "type": "cardio",
+              "muscle": "Cardio",
+              "cal": 70.0
+            },
+            "Romanian Deadlift (RDL)": {
+              "sets": 3,
+              "max_1rm": 42.4,
+              "max_weight": 15.0,
+              "rirs": [
+                4
+              ],
+              "total_reps_or_min": 12,
+              "type": "weight",
+              "muscle": "Hamstrings",
+              "cal": 0
+            },
+            "Chin-ups (Υπτιάστιες Έλξεις)": {
+              "sets": 3,
+              "max_1rm": 0,
+              "max_weight": 0.0,
+              "rirs": [
+                0
+              ],
+              "total_reps_or_min": 5,
+              "type": "bodyweight",
+              "muscle": "Lats",
+              "cal": 0
+            },
+            "Incline DB Bench Press": {
+              "sets": 3,
+              "max_1rm": 40.0,
+              "max_weight": 15.0,
+              "rirs": [
+                1
+              ],
+              "total_reps_or_min": 10,
+              "type": "weight",
+              "muscle": "Upper Chest",
+              "cal": 0
+            },
+            "Dumbbell Shoulder Press": {
+              "sets": 3,
+              "max_1rm": 31.7,
+              "max_weight": 12.5,
+              "rirs": [
+                1
+              ],
+              "total_reps_or_min": 8,
+              "type": "weight",
+              "muscle": "Shoulders",
+              "cal": 0
+            },
+            "Cable Lateral Raises (Τροχαλία)": {
+              "sets": 3,
+              "max_1rm": 3.5,
+              "max_weight": 2.5,
+              "rirs": [
+                1
+              ],
+              "total_reps_or_min": 12,
+              "type": "weight",
+              "muscle": "Side Delts",
+              "cal": 0
+            },
+            "Cable Face Pulls": {
+              "sets": 3,
+              "max_1rm": 18.9,
+              "max_weight": 12.5,
+              "rirs": [
+                4
+              ],
+              "total_reps_or_min": 15,
+              "type": "weight",
+              "muscle": "Rear Delts",
+              "cal": 0
+            },
+            "Plank": {
+              "sets": 2,
+              "max_1rm": 0,
+              "max_weight": 0.0,
+              "rirs": [
+                1
+              ],
+              "total_reps_or_min": 60,
+              "type": "bodyweight_time",
+              "muscle": "Core",
+              "cal": 0
+            }
+          }
+        },
+        {
+          "date": "30/10/2026 09:03",
+          "day": "Παρασκευή",
+          "tonnage": 7542.0,
+          "cardio_cal": 37.9,
+          "exercises": {
+            "Stationary Bike (Ποδήλατο)": {
+              "sets": 1,
+              "max_1rm": 0,
+              "max_weight": 6.0,
+              "rirs": [
+                0
+              ],
+              "total_reps_or_min": 5,
+              "type": "cardio",
+              "muscle": "Cardio",
+              "cal": 37.9
+            },
+            "Leg Extension Machine": {
+              "sets": 3,
+              "max_1rm": 63.7,
+              "max_weight": 45.0,
+              "rirs": [
+                2
+              ],
+              "total_reps_or_min": 12,
+              "type": "weight",
+              "muscle": "Quads",
+              "cal": 0
+            },
+            "Seated Leg Curl Machine": {
+              "sets": 3,
+              "max_1rm": 56.6,
+              "max_weight": 40.0,
+              "rirs": [
+                2
+              ],
+              "total_reps_or_min": 12,
+              "type": "weight",
+              "muscle": "Hamstrings",
+              "cal": 0
+            },
+            "Seated Cable Row (Κωπηλατική Τροχαλία)": {
+              "sets": 3,
+              "max_1rm": 63.7,
+              "max_weight": 45.0,
+              "rirs": [
+                2
+              ],
+              "total_reps_or_min": 12,
+              "type": "weight",
+              "muscle": "Upper Back",
+              "cal": 0
+            },
+            "Lateral Raises (Αλτήρες)": {
+              "sets": 3,
+              "max_1rm": 14.1,
+              "max_weight": 5.0,
+              "rirs": [
+                2
+              ],
+              "total_reps_or_min": 12,
+              "type": "weight",
+              "muscle": "Side Delts",
+              "cal": 0
+            },
+            "Cable Bicep Curls": {
+              "sets": 3,
+              "max_1rm": 17.7,
+              "max_weight": 12.5,
+              "rirs": [
+                2
+              ],
+              "total_reps_or_min": 12,
+              "type": "weight",
+              "muscle": "Biceps",
+              "cal": 0
+            },
+            "Overhead Cable Triceps Extension": {
+              "sets": 3,
+              "max_1rm": 21.2,
+              "max_weight": 15.0,
+              "rirs": [
+                2
+              ],
+              "total_reps_or_min": 12,
+              "type": "weight",
+              "muscle": "Triceps",
+              "cal": 0
+            },
+            "Lat Pulldown (Τροχαλία)": {
+              "sets": 3,
+              "max_1rm": 59.4,
+              "max_weight": 42.0,
+              "rirs": [
+                2
+              ],
+              "total_reps_or_min": 12,
+              "type": "weight",
+              "muscle": "Lats",
+              "cal": 0
+            }
+          }
+        }
+      ]
+    },
+    "Προφίλ 2 (Girlfriend - HYROX & Run)": {
+      "profile": {
+        "gender": "Γυναίκα",
+        "age": 26,
+        "weight_kg": 60.0,
+        "height_cm": 165.0,
+        "activity_level": 1.725,
+        "goal": "Συντήρηση",
+        "training_age": "Ενδιάμεσος (1-3 έτη)",
+        "xp": 0,
+        "level": 1
+      },
+      "daily_logs": [],
+      "weight_log": [
+        {
+          "date": "30/10/2026",
+          "weight": 60.0
+        }
+      ],
+      "templates": {
+        "Δευτέρα": [
+          {
+            "ex": "Running (Εξωτερικό Τρέξιμο)",
+            "s": 1,
+            "w": 0.0,
+            "r": 20,
+            "rir": 0
+          },
+          {
+            "ex": "SkiErg (HYROX)",
+            "s": 3,
+            "w": 0.0,
+            "r": 10,
+            "rir": 1
+          },
+          {
+            "ex": "Sled Push (HYROX)",
+            "s": 4,
+            "w": 75.0,
+            "r": 15,
+            "rir": 2
+          },
+          {
+            "ex": "Burpee Broad Jumps (HYROX)",
+            "s": 3,
+            "w": 0.0,
+            "r": 15,
+            "rir": 1
+          }
+        ],
+        "Τετάρτη": [
+          {
+            "ex": "Running (Εξωτερικό Τρέξιμο)",
+            "s": 1,
+            "w": 0.0,
+            "r": 25,
+            "rir": 0
+          },
+          {
+            "ex": "RowErg / Κωπηλατικό (HYROX)",
+            "s": 3,
+            "w": 0.0,
+            "r": 10,
+            "rir": 1
+          },
+          {
+            "ex": "Sandbag Lunges (HYROX)",
+            "s": 3,
+            "w": 15.0,
+            "r": 20,
+            "rir": 2
+          },
+          {
+            "ex": "Wall Balls (HYROX)",
+            "s": 4,
+            "w": 6.0,
+            "r": 20,
+            "rir": 1
+          }
+        ],
+        "Παρασκευή": [
+          {
+            "ex": "Running (Εξωτερικό Τρέξιμο)",
+            "s": 1,
+            "w": 0.0,
+            "r": 30,
+            "rir": 0
+          },
+          {
+            "ex": "Sled Pull (HYROX)",
+            "s": 4,
+            "w": 50.0,
+            "r": 15,
+            "rir": 2
+          },
+          {
+            "ex": "Farmers Carry (HYROX)",
+            "s": 3,
+            "w": 16.0,
+            "r": 50,
+            "rir": 2
+          },
+          {
+            "ex": "Plank",
+            "s": 2,
+            "w": 0.0,
+            "r": 60,
+            "rir": 1
+          }
+        ]
+      },
+      "prs": {},
+      "achievements": [],
+      "history": []
+    }
+  },
+  "active_profile": "Προφίλ 2 (Girlfriend - HYROX & Run)"
 }
