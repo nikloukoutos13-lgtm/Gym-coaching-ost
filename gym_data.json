@@ -1100,11 +1100,12 @@
             "rir": 1
           },
           {
-            "ex": "Stationary Bike (Ποδήλατο)",
+            "ex": "Dumbbell bicep curls",
             "s": 3,
-            "w": 20.0,
+            "w": 10.0,
             "r": 12,
-            "rir": 2
+            "rir": 2,
+            "hr": 145
           }
         ],
         "Τετάρτη": [
