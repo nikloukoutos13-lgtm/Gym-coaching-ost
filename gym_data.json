@@ -1554,8 +1554,8 @@
         "activity_level": 1.55,
         "goal": "Συντήρηση",
         "training_age": "Αρχάριος (0-1 έτος)",
-        "xp": 110,
-        "level": 1
+        "xp": 220,
+        "level": 2
       },
       "daily_logs": [],
       "weight_log": [
@@ -1640,6 +1640,26 @@
       "history": [
         {
           "date": "30/10/2026 18:42",
+          "day": "Δευτέρα",
+          "tonnage": 0,
+          "cardio_cal": 281.2,
+          "exercises": {
+            "Running (Εξωτερικό Τρέξιμο)": {
+              "sets": 1,
+              "max_1rm": 0,
+              "max_weight": 6.0,
+              "rirs": [
+                0
+              ],
+              "total_reps_or_min": 45,
+              "type": "cardio",
+              "muscle": "Cardio",
+              "cal": 281.2
+            }
+          }
+        },
+        {
+          "date": "30/10/2026 18:45",
           "day": "Δευτέρα",
           "tonnage": 0,
           "cardio_cal": 281.2,
