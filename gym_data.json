@@ -450,6 +450,13 @@
       "is_db": false,
       "primary": "Quads",
       "secondary": "Front Delts"
+    },
+    "Dumbbell bicep curls": {
+      "muscle": "Biceps",
+      "type": "weight",
+      "is_db": true,
+      "primary": "Biceps",
+      "secondary": null
     }
   },
   "templates": {
