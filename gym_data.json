@@ -457,6 +457,13 @@
       "is_db": true,
       "primary": "Biceps",
       "secondary": null
+    },
+    "Cable Rope Crunches": {
+      "muscle": "Abs",
+      "type": "weight",
+      "is_db": false,
+      "primary": "Abs",
+      "secondary": null
     }
   },
   "templates": {
