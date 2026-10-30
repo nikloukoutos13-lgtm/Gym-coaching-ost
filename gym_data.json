@@ -1572,14 +1572,16 @@
             "s": 1,
             "w": 0.0,
             "r": 25,
-            "rir": 0
+            "rir": 0,
+            "hr": 145
           },
           {
             "ex": "RowErg / Κωπηλατικό (HYROX)",
             "s": 3,
             "w": 0.0,
             "r": 10,
-            "rir": 1
+            "rir": 1,
+            "hr": 145
           },
           {
             "ex": "Sandbag Lunges (HYROX)",
@@ -1602,7 +1604,8 @@
             "s": 1,
             "w": 0.0,
             "r": 30,
-            "rir": 0
+            "rir": 0,
+            "hr": 145
           },
           {
             "ex": "Sled Pull (HYROX)",
@@ -1625,7 +1628,8 @@
             "r": 60,
             "rir": 1
           }
-        ]
+        ],
+        "Τρίτη": []
       },
       "prs": {},
       "achievements": [],
@@ -1673,5 +1677,5 @@
       ]
     }
   },
-  "active_profile": "Προφίλ 2 (Girlfriend - HYROX & Run)"
+  "active_profile": "Προφίλ 1 (Alex - Gym)"
 }
