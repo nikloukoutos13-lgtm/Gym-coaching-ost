@@ -35,7 +35,7 @@ DATA_FILE = "gym_data.json"
 DAYS = ["Δευτέρα", "Τρίτη", "Τετάρτη", "Πέμπτη", "Παρασκευή", "Σάββατο", "Κυριακή"]
 
 # ------------------------------------------------------------------------------
-# 2. DEFAULT FOOD & EXERCISE DATABASES & 30+ QUIPS
+# 2. DEFAULT DATABASES & 30+ QUIPS
 # ------------------------------------------------------------------------------
 default_food_db = {
     # 🍗 ΚΡΕΑΤΑ & ΨΑΡΙΑ (ανά 100g ή ανά τεμάχιο)
@@ -67,7 +67,7 @@ default_food_db = {
 }
 
 default_exercise_db = {
-    # Traditional Gym Exercises
+    # Traditional Gym
     "Stationary Bike (Ποδήλατο)": {"muscle": "Cardio", "type": "cardio", "primary": "Cardio", "secondary": None},
     "Treadmill (Διάδρομος)": {"muscle": "Cardio", "type": "cardio", "primary": "Cardio", "secondary": None},
     "Running (Εξωτερικό Τρέξιμο)": {"muscle": "Cardio", "type": "cardio", "primary": "Cardio", "secondary": None},
@@ -167,7 +167,9 @@ default_nikos_profile = {
             {"ex": "Flat Dumbbell Chest Press", "s": 3, "w": 17.5, "r": 12, "rir": 2},
             {"ex": "Pull-ups (Έλξεις στο Ζυγό)", "s": 3, "w": 0.0, "r": 8, "rir": 2},
             {"ex": "Chest-Supported DB Row (30°)", "s": 3, "w": 10.0, "r": 12, "rir": 2},
-            {"ex": "Triceps Rope Pushdown", "s": 3, "w": 15.0, "r": 12, "rir": 2}
+            {"ex": "Roman Chair Hyperextensions (Ρωμαϊκή Έδρα)", "s": 3, "w": 0.0, "r": 12, "rir": 2},
+            {"ex": "Triceps Rope Pushdown", "s": 3, "w": 15.0, "r": 12, "rir": 2},
+            {"ex": "Crunches", "s": 2, "w": 0.0, "r": 20, "rir": 1}
         ],
         "Τρίτη": [],
         "Τετάρτη": [
@@ -175,7 +177,10 @@ default_nikos_profile = {
             {"ex": "Romanian Deadlift (RDL)", "s": 3, "w": 16.0, "r": 10, "rir": 2},
             {"ex": "Chin-ups (Υπτιάστιες Έλξεις)", "s": 3, "w": 0.0, "r": 8, "rir": 2},
             {"ex": "Incline DB Bench Press", "s": 3, "w": 12.5, "r": 10, "rir": 2},
-            {"ex": "Dumbbell Shoulder Press", "s": 3, "w": 12.5, "r": 8, "rir": 2}
+            {"ex": "Dumbbell Shoulder Press", "s": 3, "w": 12.5, "r": 8, "rir": 2},
+            {"ex": "Cable Lateral Raises (Τροχαλία)", "s": 3, "w": 5.0, "r": 12, "rir": 2},
+            {"ex": "Cable Face Pulls", "s": 3, "w": 12.5, "r": 15, "rir": 2},
+            {"ex": "Plank", "s": 2, "w": 0.0, "r": 60, "rir": 1}
         ],
         "Πέμπτη": [],
         "Παρασκευή": [
@@ -183,7 +188,10 @@ default_nikos_profile = {
             {"ex": "Leg Extension Machine", "s": 3, "w": 45.0, "r": 12, "rir": 2},
             {"ex": "Seated Leg Curl Machine", "s": 3, "w": 40.0, "r": 12, "rir": 2},
             {"ex": "Seated Cable Row (Κωπηλατική Τροχαλία)", "s": 3, "w": 45.0, "r": 12, "rir": 2},
-            {"ex": "Cable Bicep Curls", "s": 3, "w": 12.5, "r": 12, "rir": 2}
+            {"ex": "Lateral Raises (Αλτήρες)", "s": 3, "w": 5.0, "r": 12, "rir": 2},
+            {"ex": "Cable Bicep Curls", "s": 3, "w": 12.5, "r": 12, "rir": 2},
+            {"ex": "Overhead Cable Triceps Extension", "s": 3, "w": 15.0, "r": 12, "rir": 2},
+            {"ex": "Crunches", "s": 2, "w": 0.0, "r": 20, "rir": 1}
         ],
         "Σάββατο": [],
         "Κυριακή": []
@@ -205,19 +213,22 @@ default_marilena_profile = {
         "Δευτέρα": [
             {"ex": "Running (Εξωτερικό Τρέξιμο)", "s": 1, "w": 5.0, "r": 28, "rir": 0, "hr": 145},
             {"ex": "SkiErg (HYROX)", "s": 3, "w": 0.0, "r": 10, "rir": 1},
-            {"ex": "Sled Push (HYROX)", "s": 4, "w": 75.0, "r": 15, "rir": 2}
+            {"ex": "Sled Push (HYROX)", "s": 4, "w": 75.0, "r": 15, "rir": 2},
+            {"ex": "Burpee Broad Jumps (HYROX)", "s": 3, "w": 0.0, "r": 15, "rir": 1}
         ],
         "Τρίτη": [],
         "Τετάρτη": [
             {"ex": "Running (Εξωτερικό Τρέξιμο)", "s": 1, "w": 6.0, "r": 33, "rir": 0, "hr": 152},
             {"ex": "RowErg / Κωπηλατικό (HYROX)", "s": 3, "w": 0.0, "r": 10, "rir": 1},
+            {"ex": "Sandbag Lunges (HYROX)", "s": 3, "w": 15.0, "r": 20, "rir": 2},
             {"ex": "Wall Balls (HYROX)", "s": 4, "w": 6.0, "r": 20, "rir": 1}
         ],
         "Πέμπτη": [],
         "Παρασκευή": [
             {"ex": "Running (Εξωτερικό Τρέξιμο)", "s": 1, "w": 8.0, "r": 45, "rir": 0, "hr": 158},
             {"ex": "Sled Pull (HYROX)", "s": 4, "w": 50.0, "r": 15, "rir": 2},
-            {"ex": "Farmers Carry (HYROX)", "s": 3, "w": 16.0, "r": 50, "rir": 2}
+            {"ex": "Farmers Carry (HYROX)", "s": 3, "w": 16.0, "r": 50, "rir": 2},
+            {"ex": "Plank", "s": 2, "w": 0.0, "r": 60, "rir": 1}
         ],
         "Σάββατο": [],
         "Κυριακή": []
@@ -307,11 +318,23 @@ def req_xp_for_level(lvl):
 
 def get_level_title(lvl):
     titles = {
-        1: "Novice (Πρωτάρης)", 2: "Enthusiast (Σιδερένιος)", 3: "Apprentice (Μαθητευόμενος)",
-        4: "Specialist (Ειδικός)", 5: "Warrior (Πολεμιστής)", 6: "Volume Monster (Τέρας)",
-        7: "Gym Legend (Θρύλος)", 8: "Master Υπερτροφίας", 9: "Iron God (Θεός)", 10: "Titan (Τιτάνας)"
+        1: "Gym Novice (Πρωτάρης)",
+        2: "Iron Enthusiast (Σιδερένιος)",
+        3: "Hypertrophy Apprentice (Μαθητευόμενος)",
+        4: "Bench Press Specialist (Παγκίτης)",
+        5: "Iron Warrior (Πολεμιστής)",
+        6: "Volume Monster (Τέρας Όγκου)",
+        7: "Local Gym Legend (Θρύλος του Gym)",
+        8: "Hypertrophy Master (Master Υπερτροφίας)",
+        9: "Iron God (Θεός του Σιδήρου)",
+        10: "Titan of Muscle (Τιτάνας)"
     }
-    return titles.get(lvl, f"Level {lvl} Master")
+    return titles.get(lvl, f"Overlord Level {lvl}")
+
+def get_tonnage_quips(tonnage_kg):
+    for limit, text in TONNAGE_QUIPS:
+        if tonnage_kg <= limit: return text
+    return TONNAGE_QUIPS[-1][1]
 
 def calculate_streak(log_dates_strs):
     if not log_dates_strs: return 0, False
@@ -380,22 +403,31 @@ def calc_progressive_overload(ex_name, history, ex_db):
     
     if avg_rir >= 3.0:
         inc = 1.0 if is_db else 2.5
-        return {"w": max_w + inc, "r": reps, "msg": f"🚀 **High RIR ({avg_rir:.1f}):** Increase load by +{inc} kg!"}
+        return {"w": max_w + inc, "r": reps, "msg": f"🚀 **High RIR ({avg_rir:.1f}):** Αύξηση φορτίου κατά +{inc} kg!"}
     elif avg_rir >= 1.5:
         inc = 0.5 if is_db else 1.25
-        return {"w": max_w + inc, "r": reps, "msg": f"🎯 **Optimal RIR ({avg_rir:.1f}):** Moderate overload +{inc} kg."}
+        return {"w": max_w + inc, "r": reps, "msg": f"🎯 **Optimal RIR ({avg_rir:.1f}):** Σταδιακή αύξηση +{inc} kg."}
     else:
-        return {"w": max_w, "r": reps + 1, "msg": f"💪 **Near Failure (RIR {avg_rir:.1f}):** Keep weight at {max_w} kg, target {reps+1} reps."}
+        return {"w": max_w, "r": reps + 1, "msg": f"💪 **Near Failure (RIR {avg_rir:.1f}):** Διατήρηση {max_w} kg, στόχος {reps+1} επαναλήψεις."}
 
 def calc_macros(prof):
     p_wt, p_ht, p_age = prof["weight_kg"], prof["height_cm"], prof["age"]
-    bmr = (10 * p_wt) + (6.25 * p_ht) - (5 * p_age) + (5 if prof["gender"] == "Άνδρας" else -161)
+    bmr = (10 * p_wt) + (6.25 * p_ht) - (5 * p_age) + 5 if prof["gender"] == "Άνδρας" else (10 * p_wt) + (6.25 * p_ht) - (5 * p_age) - 161
     tdee = bmr * prof["activity_level"]
     target_cal = tdee + 350 if prof["goal"] == "Bulking" else (tdee - 450 if prof["goal"] == "Cutting" else tdee)
     prot_g = p_wt * (2.2 if prof["goal"] == "Cutting" else 2.0)
     fat_g = (target_cal * 0.25) / 9
     carb_g = (target_cal - (prot_g * 4 + fat_g * 9)) / 4
     return round(bmr), round(tdee), round(target_cal), round(prot_g), round(carb_g), round(fat_g)
+
+def calc_1rm(w, r):
+    if r <= 1: return w
+    elif r <= 10: return round(w * (1 + r / 30.0), 1)
+    else: return round((100 * w) / (48.8 + 53.8 * math.exp(-0.075 * r)), 1)
+
+def calc_cardio_calories(speed_kmh, duration_mins, weight_kg):
+    met = 1.0 + (0.875 * speed_kmh)
+    return round(met * weight_kg * (duration_mins / 60.0), 1)
 
 def calc_projected_vs_real_weight(profile, weight_log):
     logs = []
@@ -413,7 +445,9 @@ def calc_projected_vs_real_weight(profile, weight_log):
     start_date = logs[0]["date_obj"]
     start_weight = logs[0]["weight"]
     
-    real_dates, moving_avgs = [], []
+    real_dates = []
+    moving_avgs = []
+    
     for i, entry in enumerate(logs):
         real_dates.append(entry["date_str"])
         window = [logs[j]["weight"] for j in range(max(0, i-6), i+1)]
@@ -421,84 +455,148 @@ def calc_projected_vs_real_weight(profile, weight_log):
         
     goal = profile.get("goal", "Bulking")
     training_age = profile.get("training_age", "Αρχάριος (0-1 έτος)")
-    weekly_rate = 0.0030 if goal == "Bulking" and "Αρχάριος" in training_age else (-0.0075 if goal == "Cutting" else 0.0)
+    
+    if goal == "Bulking":
+        weekly_rate = 0.0030 if "Αρχάριος" in training_age else (0.0018 if "Ενδιάμεσος" in training_age else 0.0009)
+    elif goal == "Cutting":
+        weekly_rate = -0.0075
+    else:
+        weekly_rate = 0.0
         
     projected_weights = []
     for entry in logs:
         days_diff = (entry["date_obj"] - start_date).days
-        proj_w = start_weight * ((1 + weekly_rate) ** (days_diff / 7.0))
+        weeks_diff = days_diff / 7.0
+        proj_w = start_weight * ((1 + weekly_rate) ** weeks_diff)
         projected_weights.append(round(proj_w, 2))
         
-    status_msg = "🟢 **Σταθερή Πορεία:** Το βάρος εξελίσσεται ομαλά!" if len(logs) >= 2 else ""
+    status_msg = ""
+    if len(logs) >= 2:
+        actual_gain_kg = moving_avgs[-1] - start_weight
+        projected_gain_kg = projected_weights[-1] - start_weight
+        
+        if goal == "Bulking":
+            if actual_gain_kg <= 0:
+                status_msg = "⚠️ <b>Υποσιτισμός / Στασιμότητα:</b> Το βάρος δεν αυξάνεται. Προτείνεται αύξηση +200 kcal/ημέρα!"
+            elif actual_gain_kg > (projected_gain_kg * 1.8 + 0.5):
+                status_msg = "🚨 <b>Πολύ γρήγορη αύξηση:</b> Κίνδυνος αυξημένου λίπους. Μειώστε τις θερμίδες κατά -150 kcal/ημέρα."
+            else:
+                status_msg = "🟢 <b>Ιδανικός Ρυθμός Καθαρής Υπερτροφίας:</b> Το βάρος αυξάνεται σύμφωνα με το μοντέλο!"
+        elif goal == "Cutting":
+            if actual_gain_kg >= 0:
+                status_msg = "⚠️ <b>Στασιμότητα:</b> Δεν παρατηρείται απώλεια. Μειώστε τις θερμίδες κατά -200 kcal/ημέρα."
+            else:
+                status_msg = "🟢 <b>Αποτελεσματική Λιποδιάλυση:</b> Το βάρος μειώνεται σύμφωνα με τον στόχο!"
+        else:
+            status_msg = "🟢 <b>Σταθερή Συντήρηση:</b> Το σωματικό βάρος διατηρείται σταθερό."
+            
     return real_dates, moving_avgs, projected_weights, status_msg
 
+def check_and_unlock_achievements(total_tonnage):
+    unlocked = []
+    current_achs = active_p.get("achievements", [])
+    
+    if active_p.get("prs") and "🏆 First Blood (Πρώτο PR)" not in current_achs:
+        unlocked.append("🏆 First Blood (Έσπασες το πρώτο σου ατομικό ρεκόρ!)")
+        current_achs.append("🏆 First Blood (Πρώτο PR)")
+        
+    if total_tonnage >= 10000 and "🏋️ 10 Ton Club" not in current_achs:
+        unlocked.append("🏋️ 10 Ton Club (Σήκωσες πάνω από 10.000 kg σε μία συνεδρία!)")
+        current_achs.append("🏋️ 10 Ton Club")
+
+    if total_tonnage >= 25000 and "🐘 25 Ton Titan" not in current_achs:
+        unlocked.append("🐘 25 Ton Titan (Ξεπέρασες τα 25.000 kg σε μία προπόνηση!)")
+        current_achs.append("🐘 25 Ton Titan")
+
+    if len(active_p.get("weight_log", [])) >= 7 and "⚖️ Scale Master" not in current_achs:
+        unlocked.append("⚖️ Scale Master (Κατέγραψες το βάρος σου για 7+ ημέρες!)")
+        current_achs.append("⚖️ Scale Master")
+
+    active_p["achievements"] = current_achs
+    return unlocked
+
 # ------------------------------------------------------------------------------
-# 5. SIDEBAR: PROFILE SWITCHER & STREAKS
+# 5. SIDEBAR: PROFILE SWITCHER & STREAKS & BACKUP
 # ------------------------------------------------------------------------------
 with st.sidebar:
-    st.subheader("👤 Profile Selector")
-    profile_list = list(user_data["profiles"].keys())
-    curr_idx = profile_list.index(active_profile_name) if active_profile_name in profile_list else 0
+    st.subheader("👤 Διαχείριση Προφίλ")
     
-    selected_prof = st.selectbox("Active Profile:", profile_list, index=curr_idx)
+    profile_list = list(user_data["profiles"].keys())
+    curr_index = profile_list.index(active_profile_name) if active_profile_name in profile_list else 0
+    
+    selected_prof = st.selectbox("Επιλογή Ενεργού Προφίλ:", profile_list, index=curr_index)
     if selected_prof != active_profile_name:
         user_data["active_profile"] = selected_prof
         save_user_data()
         st.rerun()
 
-    # Calculate Streak
+    # Calculate Daily Streak
     history_dates = [h.get("date", "") for h in active_p.get("history", [])] + [w.get("date", "") for w in active_p.get("weight_log", [])]
     streak_days, logged_today = calculate_streak(history_dates)
     
-    st.markdown(f"### 🔥 Streak: **{streak_days} Days**")
+    st.markdown(f"### 🔥 Streak: **{streak_days} Ημέρες**")
     if logged_today:
-        st.success("✅ Logged today!")
+        st.success("✅ Κατέγραψες δεδομένα σήμερα!")
     else:
-        st.warning("⚠️ Log a workout/weight to maintain streak!")
+        st.warning("⚠️ Κατέγραψε βάρος/προπόνηση για να κρατήσεις το streak!")
 
     st.divider()
-    with st.expander("➕ Create New Profile"):
-        new_p_name = st.text_input("Name:")
-        new_p_type = st.selectbox("Type:", ["Gym & Hypertrophy", "HYROX & Running"])
-        if st.button("Create Profile"):
-            if new_p_name.strip() and new_p_name.strip() not in user_data["profiles"]:
-                tpl = default_marilena_profile if "HYROX" in new_p_type else default_nikos_profile
-                user_data["profiles"][new_p_name.strip()] = json.loads(json.dumps(tpl))
-                user_data["active_profile"] = new_p_name.strip()
+    with st.expander("➕ Προσθήκη Νέου Προφίλ"):
+        new_prof_name = st.text_input("Όνομα νέου προφίλ:")
+        new_prof_type = st.selectbox("Τύπος Προγράμματος:", ["Gym & Hypertrophy", "HYROX & Running"])
+        if st.button("Δημιουργία Προφίλ"):
+            if new_prof_name.strip() and new_prof_name.strip() not in user_data["profiles"]:
+                template_to_use = default_marilena_profile if "HYROX" in new_prof_type else default_nikos_profile
+                user_data["profiles"][new_prof_name.strip()] = json.loads(json.dumps(template_to_use))
+                user_data["active_profile"] = new_prof_name.strip()
                 save_user_data()
+                st.success(f"Το προφίλ '{new_prof_name}' δημιουργήθηκε!")
                 st.rerun()
+            else:
+                st.warning("Παρακαλώ δώσε μοναδικό όνομα.")
 
     st.divider()
-    st.subheader("⚙️ Data Management")
+    st.subheader("⚙️ Διαχείριση Δεδομένων & Sync")
     json_str = json.dumps(user_data, ensure_ascii=False, indent=2)
-    st.download_button("📥 Backup JSON", data=json_str, file_name="gym_data.json", mime="application/json")
+    st.download_button("📥 Download gym_data.json", data=json_str, file_name="gym_data.json", mime="application/json")
     
-    uploaded_json = st.file_uploader("📤 Restore JSON", type=["json"])
+    uploaded_json = st.file_uploader("📤 Restore gym_data.json", type=["json"])
     if uploaded_json is not None:
         try:
             data = json.load(uploaded_json)
             st.session_state["user_data"] = data
             save_user_data()
-            st.success("✅ Restore successful!")
+            st.success("✅ Restore επιτυχές!")
             st.rerun()
         except Exception:
-            st.error("❌ Invalid JSON file.")
+            st.error("❌ Σφάλμα αρχείου JSON.")
+
+    st.divider()
+    if st.button("🗑️ Επαναφορά Όλων (Reset)", type="secondary"):
+        st.session_state["user_data"] = {}
+        if os.path.exists(DATA_FILE):
+            try: os.remove(DATA_FILE)
+            except Exception: pass
+        load_user_data()
+        save_user_data()
+        st.warning("🗑️ Όλα τα δεδομένα μηδενίστηκαν!")
+        st.rerun()
 
 # ------------------------------------------------------------------------------
-# 6. APP TABS
+# 6. APP MAIN UI & TABS
 # ------------------------------------------------------------------------------
 st.title("🏋️ GYM & HYROX COACHING OS")
-st.caption(f"Active Profile: **{active_profile_name}**")
+st.caption(f"Ενεργό Προφίλ: **{active_profile_name}**")
 
 tab1, tab_tracker, tab2, tab3 = st.tabs([
-    "🎮 Dashboard & Weight", 
-    "🥗 Daily Nutrition", 
+    "🎮 Dashboard & Βάρος", 
+    "🥗 Daily Nutrition Tracker", 
     "🏋️ Schedule & Workout Tracker", 
-    "📊 Analytics & HR Zones"
+    "📊 Visual Analytics & HR Zones"
 ])
 
 # ==============================================================================
-# TAB 1: DASHBOARD
+# TAB 1: DASHBOARD & BODY WEIGHT
 # ==============================================================================
 with tab1:
     prof = active_p["profile"]
@@ -509,147 +607,242 @@ with tab1:
     
     st.markdown(f"### 🎮 Level {lvl} — {title}")
     st.progress(min(1.0, curr_xp / req_xp))
-    st.caption(f"XP Progress: {curr_xp} / {req_xp} XP (Stricter Exponential Scaling)")
+    st.caption(f"Progress: {curr_xp} / {req_xp} XP (Stricter Exponential Scaling Active)")
     
     achs = active_p.get("achievements", [])
     if achs:
         badge_html = "".join([f"<span class='badge-card'>{a}</span>" for a in achs])
-        st.markdown(f"**🎖️ Badges ({len(achs)}):** {badge_html}", unsafe_allow_html=True)
+        st.markdown(f"**🎖️ Παράσημα ({len(achs)}):** {badge_html}", unsafe_allow_html=True)
         
     st.divider()
-    c_w1, c_w2 = st.columns([2, 1])
-    with c_w1:
-        st.subheader("⚖️ Morning Weight Log")
-        today_val = st.number_input("Today's Weight (kg):", value=float(prof["weight_kg"]), step=0.1, key=f"w_in_{active_profile_name}")
-        if st.button("⚖️ Save Weight", key=f"btn_w_{active_profile_name}"):
+    
+    col_w1, col_w2 = st.columns([2, 1])
+    with col_w1:
+        st.subheader("⚖️ Πρωινό Ζύγισμα (Νηστικός)")
+        today_val = st.number_input("Σημερινό Βάρος (kg):", value=float(prof["weight_kg"]), step=0.1, key=f"daily_w_in_{active_profile_name}")
+        if st.button("⚖️ Καταγραφή Βάρους", key=f"btn_w_log_{active_profile_name}"):
             today_str = datetime.now().strftime("%d/%m/%Y")
             logs = active_p.get("weight_log", [])
-            logs.append({"date": today_str, "weight": today_val})
+            found = False
+            for entry in logs:
+                if entry["date"] == today_str:
+                    entry["weight"] = today_val
+                    found = True
+                    break
+            if not found:
+                logs.append({"date": today_str, "weight": today_val})
             active_p["weight_log"] = logs
             active_p["profile"]["weight_kg"] = today_val
             
             # Streak bonus XP
             active_p["profile"]["xp"] += 15
             save_user_data()
-            st.success(f"✅ Saved {today_val} kg!")
+            st.success(f"✅ Καταγράφηκε: {today_val} kg για τις {today_str}!")
             st.rerun()
 
-    # Profile Edit Form
+    _, _, _, status_msg = calc_projected_vs_real_weight(prof, active_p.get("weight_log", []))
+    if status_msg:
+        st.info(status_msg, icon="📊")
+
     st.divider()
-    st.subheader("⚙️ Profile Parameters")
-    with st.form(key=f"p_form_{active_profile_name}"):
-        fc1, fc2 = st.columns(2)
-        with fc1:
-            gender = st.selectbox("Gender", ["Άνδρας", "Γυναίκα"], index=0 if prof["gender"]=="Άνδρας" else 1)
-            age = st.number_input("Age", value=int(prof["age"]), step=1)
-            height = st.number_input("Height (cm)", value=float(prof["height_cm"]), step=0.5)
-            weight = st.number_input("Weight (kg)", value=float(prof["weight_kg"]), step=0.1)
-        with fc2:
-            goal = st.selectbox("Goal", ["Bulking", "Cutting", "Συντήρηση"], index=["Bulking", "Cutting", "Συντήρηση"].index(prof.get("goal","Bulking")))
-            train_age = st.selectbox("Training Level", ["Αρχάριος (0-1 έτος)", "Ενδιάμεσος (1-3 έτη)", "Προχωρημένος (3+ έτη)"], index=["Αρχάριος (0-1 έτος)", "Ενδιάμεσος (1-3 έτη)", "Προχωρημένος (3+ έτη)"].index(prof.get("training_age","Αρχάριος (0-1 έτος)")))
+    st.subheader("⚙️ Προσωπικά Στοιχεία & Στόχοι")
+    
+    with st.form(key=f"profile_form_{active_profile_name}"):
+        c1, c2 = st.columns(2)
+        with c1:
+            gender = st.selectbox("Φύλο", ["Άνδρας", "Γυναίκα"], index=0 if prof["gender"]=="Άνδρας" else 1)
+            age = st.number_input("Ηλικία", value=int(prof["age"]), step=1)
+            height = st.number_input("Ύψος (cm)", value=float(prof["height_cm"]), step=0.5)
+            weight = st.number_input("Βάρος (kg)", value=float(prof["weight_kg"]), step=0.1)
+        with c2:
+            goal = st.selectbox("Στόχος", ["Bulking", "Cutting", "Συντήρηση"], index=["Bulking", "Cutting", "Συντήρηση"].index(prof.get("goal","Bulking")))
+            train_age = st.selectbox("Επίπεδο", ["Αρχάριος (0-1 έτος)", "Ενδιάμεσος (1-3 έτη)", "Προχωρημένος (3+ έτη)"], index=["Αρχάριος (0-1 έτος)", "Ενδιάμεσος (1-3 έτη)", "Προχωρημένος (3+ έτη)"].index(prof.get("training_age","Αρχάριος (0-1 έτος)")))
             act_idx = [1.2, 1.375, 1.55, 1.725].index(prof.get("activity_level", 1.55))
-            act_level = st.selectbox("Activity Level", [("Sedentary (1.2)", 1.2), ("Light (1.375)", 1.375), ("Moderate (1.55)", 1.55), ("High (1.725)", 1.725)], index=act_idx, format_func=lambda x: x[0])[1]
+            act_level = st.selectbox("Δραστηριότητα", [("Καθιστική (1.2)", 1.2), ("Ελαφριά (1.375)", 1.375), ("Μέτρια (1.55)", 1.55), ("Υψηλή (1.725)", 1.725)], index=act_idx, format_func=lambda x: x[0])[1]
             
-        if st.form_submit_button("💾 Save Profile Settings"):
-            prof.update({"gender": gender, "age": age, "height_cm": height, "weight_kg": weight, "goal": goal, "training_age": train_age, "activity_level": act_level})
+        btn_save_p = st.form_submit_button("💾 Αποθήκευση Προφίλ")
+        if btn_save_p:
+            prof["gender"] = gender
+            prof["age"] = age
+            prof["height_cm"] = height
+            prof["weight_kg"] = weight
+            prof["goal"] = goal
+            prof["training_age"] = train_age
+            prof["activity_level"] = act_level
             save_user_data()
-            st.success("✅ Profile Updated!")
+            st.success("✅ Το προφίλ ενημερώθηκε επιτυχώς!")
             st.rerun()
 
     bmr, tdee, target_cal, prot_g, carb_g, fat_g = calc_macros(prof)
-    st.markdown("#### 📊 Target Daily Macros (Mifflin-St Jeor):")
+    st.markdown("#### 📊 Στόχοι Μεταβολισμού (Mifflin-St Jeor):")
     m1, m2, m3, m4 = st.columns(4)
     m1.metric("BMR", f"{bmr} kcal")
     m2.metric("TDEE", f"{tdee} kcal")
-    m3.metric("Calorie Goal", f"{target_cal} kcal")
+    m3.metric("Στόχος Calories", f"{target_cal} kcal", f"{prof.get('goal')}")
     m4.metric("Macros (P/C/F)", f"{prot_g}g / {carb_g}g / {fat_g}g")
 
 # ==============================================================================
-# TAB 2: NUTRITION
+# TAB 2: DAILY NUTRITION TRACKER (Δυναμικά Συνδεδεμένο)
 # ==============================================================================
 with tab_tracker:
-    st.subheader("🥗 Daily Food & Protein Tracker")
+    st.title("🥗 Daily Nutrition & Protein Tracker")
+    st.caption(f"Διατροφή για **{active_profile_name}** (Δυναμικά Συνδεδεμένο)")
+
+    # Υπολογισμός Δυναμικών Στόχων από το Προφίλ
     bmr, tdee, target_cal, prot_g, carb_g, fat_g = calc_macros(active_p["profile"])
-    
+
+    # Υπολογισμός Συνόλων Ημέρας από τα daily_logs
     totals = {"cal": 0.0, "p": 0.0, "c": 0.0, "f": 0.0}
-    for log in active_p.get("daily_logs", []):
+    for log in active_p["daily_logs"]:
         totals["cal"] += log.get("cal", 0.0)
         totals["p"] += log.get("p", 0.0)
         totals["c"] += log.get("c", 0.0)
         totals["f"] += log.get("f", 0.0)
 
+    # KPIs DASHBOARD ΜΕ INTERACTIVE PROGRESS BARS ΓΙΑ ΚΑΘΕ MACRO!
     col1, col2, col3, col4 = st.columns(4)
-    col1.metric("Protein", f"{totals['p']:.1f}g", f"Goal: {prot_g}g")
-    col2.metric("Calories", f"{int(totals['cal'])} kcal", f"Goal: {target_cal} kcal")
-    col3.metric("Carbs", f"{totals['c']:.1f}g", f"Goal: {carb_g}g")
-    col4.metric("Fats", f"{totals['f']:.1f}g", f"Goal: {fat_g}g")
+
+    with col1:
+        p_rem = max(0.0, prot_g - totals["p"])
+        st.metric(f"Πρωτεΐνη (Στόχος: {prot_g}g)", f"{totals['p']:.1f}g", f"Λείπουν {p_rem:.1f}g", delta_color="inverse" if p_rem > 0 else "normal")
+        st.progress(min(1.0, totals["p"] / prot_g if prot_g > 0 else 0.0))
+
+    with col2:
+        cal_rem = max(0.0, target_cal - totals["cal"])
+        st.metric(f"Θερμίδες (Στόχος: {target_cal}kcal)", f"{int(totals['cal'])} kcal", f"Λείπουν {int(cal_rem)} kcal")
+        st.progress(min(1.0, totals["cal"] / target_cal if target_cal > 0 else 0.0))
+
+    with col3:
+        c_rem = max(0.0, carb_g - totals["c"])
+        st.metric(f"Υδατάνθρακες (Στόχος: {carb_g}g)", f"{totals['c']:.1f}g", f"Λείπουν {c_rem:.1f}g")
+        st.progress(min(1.0, totals["c"] / carb_g if carb_g > 0 else 0.0))
+
+    with col4:
+        f_rem = max(0.0, fat_g - totals["f"])
+        st.metric(f"Λιπαρά (Στόχος: {fat_g}g)", f"{totals['f']:.1f}g", f"Λείπουν {f_rem:.1f}g")
+        st.progress(min(1.0, totals["f"] / fat_g if fat_g > 0 else 0.0))
+
+    if totals["p"] >= prot_g:
+        st.success(f"🎉 Συγχαρητήρια! Κάλυψες τον ημερήσιο στόχο πρωτεΐνης ({prot_g}g)!")
 
     st.markdown("---")
-    st.subheader("➕ Log Meal")
+
+    # ΚΑΤΑΓΡΑΦΗ ΓΕΥΜΑΤΟΣ
+    st.subheader("➕ Καταγραφή Γεύματος")
+
+    c_select, c_qty, c_btn = st.columns([3, 1.5, 1])
     food_db = user_data["food_db"]
-    c_sel, c_qty, c_btn = st.columns([3, 1.5, 1])
-    with c_sel:
-        selected_food = st.selectbox("Select Food Item:", list(food_db.keys()), key=f"food_s_{active_profile_name}")
-        f_info = food_db[selected_food]
+
+    with c_select:
+        selected_name = st.selectbox("Επίλεξε Τρόφιμο:", list(food_db.keys()), key=f"f_select_{active_profile_name}")
+        food_info = food_db[selected_name]
+
     with c_qty:
-        qty = st.number_input("Amount (g or pieces):", value=150.0 if f_info["unit"]=="100g" else 1.0, step=10.0 if f_info["unit"]=="100g" else 0.5, key=f"food_q_{active_profile_name}")
-        factor = (qty / 100.0) if f_info["unit"] == "100g" else qty
+        if food_info["unit"] == "100g":
+            qty = st.number_input("Γραμμάρια (g):", min_value=10, max_value=1000, value=150, step=10, key=f"qty_g_{active_profile_name}")
+            factor = qty / 100.0
+            unit_str = f"{qty}g"
+        else:
+            qty = st.number_input("Τεμάχια / Μερίδες:", min_value=0.5, max_value=10.0, value=1.0, step=0.5, key=f"qty_p_{active_profile_name}")
+            factor = qty
+            unit_str = f"{qty} τεμάχιο/α"
+
     with c_btn:
         st.write("")
         st.write("")
-        if st.button("Add ➕", key=f"btn_food_add_{active_profile_name}"):
-            active_p["daily_logs"].append({
-                "name": selected_food, "portion": f"{qty}{'g' if f_info['unit']=='100g' else ' pc'}",
-                "cal": f_info["cal"] * factor, "p": f_info["p"] * factor,
-                "c": f_info["c"] * factor, "f": f_info["f"] * factor
-            })
+        if st.button("Προσθήκη ➕", key=f"btn_add_food_{active_profile_name}"):
+            calc_item = {
+                "name": selected_name,
+                "portion": unit_str,
+                "cal": food_info["cal"] * factor,
+                "p": food_info["p"] * factor,
+                "c": food_info["c"] * factor,
+                "f": food_info["f"] * factor,
+            }
+            active_p["daily_logs"].append(calc_item)
             save_user_data()
             st.rerun()
 
-    # Custom Food Creator
-    with st.expander("✨ Add Custom Item to Food Database"):
-        cf_n = st.text_input("Name:", key="cf_n")
-        cf_u = st.selectbox("Unit:", ["100g", "piece"], key="cf_u")
-        c1, c2, c3, c4 = st.columns(4)
-        cf_cal = c1.number_input("Calories", value=100.0, key="cf_cal")
-        cf_p = c2.number_input("Protein (g)", value=10.0, key="cf_p")
-        cf_c = c3.number_input("Carbs (g)", value=10.0, key="cf_c")
-        cf_f = c4.number_input("Fats (g)", value=2.0, key="cf_f")
-        if st.button("Save Custom Food", key="btn_cf"):
-            if cf_n.strip():
-                user_data["food_db"][cf_n.strip()] = {"unit": cf_u, "cal": cf_cal, "p": cf_p, "c": cf_c, "f": cf_f}
+    # ΠΡΟΣΘΗΚΗ ΝΕΟΥ CUSTOM ΤΡΟΦΙΜΟΥ ΣΤΗ ΒΑΣΗ
+    with st.expander("✨ Πρόσθεσε Νέο Τρόφιμο στη Βάση Δεδομένων (Custom Food Creator)"):
+        st.write("Αν αγοράσεις κάποιο νέο προϊόν, πρόσθεσέ το εδώ για να αποθηκευτεί στη λιστα σου!")
+        c_n, c_u = st.columns([3, 1])
+        new_name = c_n.text_input("Όνομα Προϊόντος (π.χ. Tesco High Protein Pudding):", key="cf_name")
+        new_unit = c_u.selectbox("Μονάδα μέτρησης:", ["100g", "piece"], key="cf_unit")
+        
+        col_c1, col_c2, col_c3, col_c4 = st.columns(4)
+        new_cal = col_c1.number_input("Θερμίδες (kcal):", min_value=0.0, value=100.0, key="cf_cal")
+        new_p = col_c2.number_input("Πρωτεΐνη (g):", min_value=0.0, value=10.0, key="cf_p")
+        new_c = col_c3.number_input("Υδατάνθρακες (g):", min_value=0.0, value=10.0, key="cf_c")
+        new_f = col_c4.number_input("Λιπαρά (g):", min_value=0.0, value=2.0, key="cf_f")
+        
+        if st.button("💾 Αποθήκευση στη Βάση", key="btn_save_custom_food"):
+            if new_name.strip():
+                user_data["food_db"][new_name.strip()] = {
+                    "unit": new_unit,
+                    "cal": new_cal,
+                    "p": new_p,
+                    "c": new_c,
+                    "f": new_f
+                }
                 save_user_data()
-                st.success("Food added!")
+                st.success(f"Το '{new_name}' προστέθηκε επιτυχώς στη βάση δεδομένων!")
                 st.rerun()
+            else:
+                st.warning("Παρακαλώ δώσε ένα όνομα στο νέο προϊόν.")
 
+    # ΙΣΤΟΡΙΚΟ ΗΜΕΡΑΣ & DELETE/RESET
     st.markdown("---")
-    st.subheader("📋 Today's Meals:")
-    if active_p.get("daily_logs"):
+    st.subheader("📋 Τι κατέγραψες σήμερα:")
+
+    if active_p["daily_logs"]:
+        rows_to_del_food = []
         for idx, item in enumerate(active_p["daily_logs"]):
-            cd1, cd2 = st.columns([5, 1])
-            cd1.write(f"• **{item['name']}** ({item['portion']}) $\rightarrow$ **{item['p']:.1f}g P** | {int(item['cal'])} kcal")
-            if cd2.button("🗑️", key=f"del_meal_{active_profile_name}_{idx}"):
-                active_p["daily_logs"].pop(idx)
-                save_user_data()
-                st.rerun()
+            c_desc, c_del = st.columns([5, 1])
+            with c_desc:
+                st.write(
+                    f"• **{item['name']}** ({item['portion']}) $\rightarrow$ "
+                    f"**{item.get('p', 0.0):.1f}g P** | {int(item.get('cal', 0.0))} kcal | {item.get('c', 0.0):.1f}g C | {item.get('f', 0.0):.1f}g F"
+                )
+            with c_del:
+                if st.button("🗑️", key=f"del_food_{active_profile_name}_{idx}"):
+                    rows_to_del_food.append(idx)
+        
+        if rows_to_del_food:
+            for i in sorted(rows_to_del_food, reverse=True):
+                active_p["daily_logs"].pop(i)
+            save_user_data()
+            st.rerun()
+    else:
+        st.info("Δεν έχεις καταγράψει ακόμα κάποιο γεύμα σήμερα.")
+
+    st.write("")
+    if st.button("🔄 Επαναφορά (Μηδενισμός Νέας Ημέρας)", key=f"btn_reset_day_{active_profile_name}"):
+        active_p["daily_logs"] = []
+        save_user_data()
+        st.rerun()
 
 # ==============================================================================
 # TAB 3: WORKOUT TRACKER & AUTO OVERLOAD
 # ==============================================================================
 with tab2:
-    st.subheader("🏋️ Weekly Schedule (Monday – Sunday)")
-    day_selected = st.selectbox("📅 Choose Day:", DAYS, key=f"day_sel_{active_profile_name}")
+    st.subheader("🏋️ Καταγραφή Προπόνησης (Πλήρες 7-Ημερο Schedule)")
+    day_selected = st.selectbox("📅 Επιλογή Ημέρας:", DAYS, key=f"day_select_{active_profile_name}")
     
-    if "templates" not in active_p: active_p["templates"] = {}
-    if day_selected not in active_p["templates"]: active_p["templates"][day_selected] = []
-    
+    if "templates" not in active_p:
+        active_p["templates"] = {}
+    if day_selected not in active_p["templates"]:
+        active_p["templates"][day_selected] = []
+        
     current_list = active_p["templates"][day_selected]
+    
+    st.markdown("##### 📋 Ασκήσεις Ημέρας:")
     ex_options = list(user_data["exercise_database"].keys())
     
     rows_to_delete = []
     
     for idx, item in enumerate(current_list):
-        p_key = active_profile_name.replace(" ", "_")
+        prof_key_id = active_profile_name.replace(" ", "_").replace("(", "").replace(")", "")
         ex_name = item["ex"]
         ex_info = user_data["exercise_database"].get(ex_name, {})
         ex_type = ex_info.get("type", "weight")
@@ -659,37 +852,57 @@ with tab2:
         
         with st.expander(f"🔹 #{idx+1} {ex_name}", expanded=True):
             if overload_info and "NIKOS" in active_profile_name:
-                st.markdown(f"<div class='overload-card'>⚡ <b>Auto Progressive Overload Suggestion:</b><br>{overload_info['msg']}<br>Target: <b>{overload_info['w']} kg x {overload_info['r']} reps</b></div>", unsafe_allow_html=True)
-                if st.button(f"⚡ Apply Overload Target ({overload_info['w']}kg)", key=f"ov_btn_{p_key}_{day_selected}_{idx}"):
+                st.markdown(f"<div class='overload-card'>⚡ <b>Auto Progressive Overload Πρόταση:</b><br>{overload_info['msg']}<br>Στόχος Επόμενης Προπόνησης: <b>{overload_info['w']} kg x {overload_info['r']} reps</b></div>", unsafe_allow_html=True)
+                if st.button(f"⚡ Εφαρμογή Overload Target ({overload_info['w']}kg)", key=f"ov_btn_{prof_key_id}_{day_selected}_{idx}"):
                     item["w"] = overload_info["w"]
                     item["r"] = overload_info["r"]
                     save_user_data()
                     st.rerun()
 
-            c_ex, c_s, c_w, c_r, c_rir, c_del = st.columns([3, 1, 1, 1, 1, 0.5])
-            with c_ex:
-                curr_idx = ex_options.index(ex_name) if ex_name in ex_options else 0
-                item["ex"] = st.selectbox("Exercise", ex_options, index=curr_idx, key=f"ex_{p_key}_{day_selected}_{idx}")
-            with c_s:
-                item["s"] = st.number_input("Sets", value=int(item.get("s", 3)), min_value=1, key=f"s_{p_key}_{day_selected}_{idx}")
-            with c_w:
+            col_ex, col_s, col_w, col_r, col_rir, col_del = st.columns([3, 1, 1, 1, 1, 1])
+            
+            with col_ex:
+                curr_ex_val = ex_name if ex_name in ex_options else ex_options[0]
+                new_ex = st.selectbox(
+                    "Άσκηση", ex_options, 
+                    index=ex_options.index(curr_ex_val), 
+                    key=f"ex_{prof_key_id}_{day_selected}_{idx}"
+                )
+                item["ex"] = new_ex
+                
+            with col_s:
+                item["s"] = st.number_input(
+                    "Sets", value=int(item.get("s", 3)), min_value=1, max_value=20, 
+                    key=f"s_{prof_key_id}_{day_selected}_{idx}"
+                )
+            
+            with col_w:
                 if ex_type == "cardio":
-                    item["w"] = st.number_input("Dist (km)", value=float(item.get("w", 5.0)), step=0.5, key=f"w_{p_key}_{day_selected}_{idx}")
+                    item["w"] = st.number_input("Απόσταση (Km)", value=float(item.get("w", 5.0)), step=0.5, key=f"w_{prof_key_id}_{day_selected}_{idx}")
+                elif "bodyweight" in ex_type:
+                    st.number_input("Kg", value=0.0, disabled=True, key=f"w_{prof_key_id}_{day_selected}_{idx}")
+                    item["w"] = 0.0
                 else:
-                    item["w"] = st.number_input("Kg", value=float(item.get("w", 20.0)), step=0.5, key=f"w_{p_key}_{day_selected}_{idx}")
-            with c_r:
+                    item["w"] = st.number_input("Kg", value=float(item.get("w", 20.0)), step=0.5, key=f"w_{prof_key_id}_{day_selected}_{idx}")
+                    
+            with col_r:
+                if ex_type == "bodyweight_time":
+                    item["r"] = st.number_input("Sec", value=int(item.get("r", 60)), step=5, key=f"r_{prof_key_id}_{day_selected}_{idx}")
+                elif ex_type == "cardio":
+                    item["r"] = st.number_input("Διάρκεια (Min)", value=int(item.get("r", 25)), step=1, key=f"r_{prof_key_id}_{day_selected}_{idx}")
+                else:
+                    item["r"] = st.number_input("Reps", value=int(item.get("r", 12)), step=1, key=f"r_{prof_key_id}_{day_selected}_{idx}")
+                    
+            with col_rir:
                 if ex_type == "cardio":
-                    item["r"] = st.number_input("Time (Min)", value=int(item.get("r", 25)), step=1, key=f"r_{p_key}_{day_selected}_{idx}")
+                    item["hr"] = st.number_input("Μέσοι Παλμοί (HR)", value=int(item.get("hr", 145)), min_value=60, max_value=220, key=f"hr_{prof_key_id}_{day_selected}_{idx}")
                 else:
-                    item["r"] = st.number_input("Reps", value=int(item.get("r", 12)), step=1, key=f"r_{p_key}_{day_selected}_{idx}")
-            with c_rir:
-                if ex_type == "cardio":
-                    item["hr"] = st.number_input("Avg HR", value=int(item.get("hr", 145)), min_value=60, max_value=220, key=f"hr_{p_key}_{day_selected}_{idx}")
-                else:
-                    item["rir"] = st.number_input("RIR", value=int(item.get("rir", 2)), min_value=0, max_value=5, key=f"rir_{p_key}_{day_selected}_{idx}")
-            with c_del:
+                    item["rir"] = st.number_input("RIR", value=int(item.get("rir", 2)), min_value=0, max_value=5, key=f"rir_{prof_key_id}_{day_selected}_{idx}")
+                
+            with col_del:
                 st.write("")
-                if st.button("❌", key=f"del_{p_key}_{day_selected}_{idx}"):
+                st.write("")
+                if st.button("❌", key=f"del_{prof_key_id}_{day_selected}_{idx}"):
                     rows_to_delete.append(idx)
 
             # Display Running Pace & HR Zone if Cardio (Marilena Specialized)
@@ -701,147 +914,278 @@ with tab2:
                 pace_s = int((pace_dec - pace_m) * 60)
                 z_name, z_color = calc_hr_zone(item.get("hr", 145), active_p["profile"]["age"])
                 
-                st.info(f"🏃 **Pace:** {pace_m}:{pace_s:02d} min/km | **Speed:** {60/pace_dec:.1f} km/h | **HR Zone:** {z_name}", icon="⚡")
+                st.info(f"🏃 **Pace:** {pace_m}:{pace_s:02d} min/km | **Speed:** {60/pace_dec:.1f} km/h | **HR Zone:** <span style='color:{z_color}; font-weight:bold;'>{z_name}</span>", icon="⚡")
 
     if rows_to_delete:
-        for i in sorted(rows_to_delete, reverse=True): current_list.pop(i)
+        for i in sorted(rows_to_delete, reverse=True):
+            current_list.pop(i)
         save_user_data()
         st.rerun()
 
-    c_b1, c_b2, c_b3 = st.columns(3)
-    with c_b1:
-        if st.button("➕ Add Exercise to Routine"):
-            current_list.append({"ex": ex_options[0], "s": 3, "w": 10.0, "r": 12, "rir": 2})
+    c_btn1, c_btn2, c_btn3 = st.columns(3)
+    with c_btn1:
+        if st.button("➕ Προσθήκη Extra Άσκησης"):
+            current_list.append({"ex": ex_options[0], "s": 3, "w": 20.0, "r": 12, "rir": 2})
             save_user_data()
             st.rerun()
-    with c_b2:
-        if st.button("💾 Save Schedule Changes"):
+
+    with c_btn2:
+        if st.button("💾 Αποθήκευση Αλλαγών Προγράμματος"):
             save_user_data()
-            st.success("✅ Schedule saved successfully!")
-    with c_b3:
-        if st.button("🔥 Complete & Log Workout", type="primary"):
-            if not current_list:
-                st.error("Routine is empty!")
-            else:
-                total_tonnage = 0
-                ex_summary = {}
-                quip_msg = ""
+            st.success("✅ Οι αλλαγές στο πρόγραμμα αποθηκεύτηκαν επιτυχώς!")
+
+    with c_btn3:
+        btn_digest = st.button("🔥 Ολοκλήρωση & Αποθήκευση", type="primary")
+
+    if btn_digest:
+        if not current_list:
+            st.error("⚠️ Η λίστα ασκήσεων είναι κενή!")
+        else:
+            total_tonnage = 0
+            total_cardio_cal = 0
+            ex_summary = {}
+            pr_alerts = []
+            effective_sets = 0
+            bonus_pr_xp = 0
+            quip_msg = ""
+            
+            for item in current_list:
+                ex = item["ex"]
+                s = item["s"]
+                w = item["w"]
+                r = item["r"]
+                rir = item.get("rir", 2)
                 
-                for item in current_list:
-                    ex = item["ex"]
-                    s, w, r = item["s"], item["w"], item["r"]
-                    ex_info = user_data["exercise_database"].get(ex, {})
-                    ex_type = ex_info.get("type", "weight")
+                if rir <= 3: effective_sets += s
+                ex_info = user_data["exercise_database"].get(ex, {})
+                ex_type = ex_info.get("type", "weight")
+                is_db = ex_info.get("is_db", False)
+                muscle = ex_info.get("muscle", "General")
+                
+                cardio_cal = 0
+                e1rm = 0
+                
+                if ex_type == "cardio":
+                    cardio_cal = calc_cardio_calories(60.0 / (r / max(0.1, w)) if w > 0 else 9.0, r, active_p["profile"]["weight_kg"])
+                    total_cardio_cal += cardio_cal
+                    quip_msg = get_cardio_quip(w, ex)
+                elif ex_type == "weight":
+                    eff_w = w * 2 if is_db else w
+                    total_tonnage += s * eff_w * r
+                    e1rm = calc_1rm(eff_w, r)
                     
-                    if ex_type == "weight":
-                        total_tonnage += s * w * r
-                    elif ex_type == "cardio":
-                        quip_msg = get_cardio_quip(w, ex)
+                if ex not in ex_summary:
+                    ex_summary[ex] = {"sets": 0, "max_1rm": 0, "max_weight": w, "rirs": [], "total_reps_or_min": 0, "type": ex_type, "muscle": muscle, "cal": 0}
+                    
+                ex_summary[ex]["sets"] += s
+                ex_summary[ex]["total_reps_or_min"] += r
+                ex_summary[ex]["rirs"].append(rir)
+                ex_summary[ex]["cal"] += cardio_cal
+                if w > ex_summary[ex]["max_weight"]: ex_summary[ex]["max_weight"] = w
+                if e1rm > ex_summary[ex]["max_1rm"]: ex_summary[ex]["max_1rm"] = e1rm
 
-                    ex_summary[ex] = {"sets": s, "max_weight": w, "total_reps_or_min": r, "type": ex_type}
+            if "prs" not in active_p: active_p["prs"] = {}
+            for ex_name, ex_data in ex_summary.items():
+                if ex_data["type"] == "weight":
+                    c_1rm = ex_data["max_1rm"]
+                    p_pr = active_p["prs"].get(ex_name, 0)
+                    if c_1rm > p_pr:
+                        active_p["prs"][ex_name] = c_1rm
+                        pr_alerts.append(f"🏆 **ΝΕΟ PR!** {ex_name}: {c_1rm} kg (Προηγούμενο: {p_pr} kg)")
+                        bonus_pr_xp += 150
 
-                active_p["history"].append({
-                    "date": datetime.now().strftime("%d/%m/%Y %H:%M"),
-                    "day": day_selected,
-                    "tonnage": total_tonnage,
-                    "exercises": ex_summary
-                })
+            active_p["templates"][day_selected] = current_list
+            unlocked_achs = check_and_unlock_achievements(total_tonnage)
+            bonus_ach_xp = len(unlocked_achs) * 200
+            
+            active_p["history"].append({
+                "date": datetime.now().strftime("%d/%m/%Y %H:%M"),
+                "day": day_selected,
+                "tonnage": total_tonnage,
+                "cardio_cal": total_cardio_cal,
+                "exercises": ex_summary
+            })
+            
+            earned_xp = 35 + (effective_sets * 5) + bonus_pr_xp + bonus_ach_xp
+            active_p["profile"]["xp"] += earned_xp
+            
+            req_xp = req_xp_for_level(active_p["profile"]["level"])
+            if active_p["profile"]["xp"] >= req_xp:
+                active_p["profile"]["level"] += 1
+                st.balloons()
+                st.success(f"🎉 **LEVEL UP! Έφτασες στο Level {active_p['profile']['level']}!**")
                 
-                # Stricter XP reward
-                earned_xp = 35 + (len(current_list) * 5)
-                active_p["profile"]["xp"] += earned_xp
-                
-                if active_p["profile"]["xp"] >= req_xp_for_level(active_p["profile"]["level"]):
-                    active_p["profile"]["level"] += 1
-                    st.balloons()
-                    st.success(f"🎉 LEVEL UP! Reached Level {active_p['profile']['level']}!")
+            save_user_data()
+            
+            st.markdown(f"""
+            <div class='report-card'>
+                <h3 style='color:#2b8a3e; margin-top:0;'>📊 REPORT ΠΡΟΠΟΝΗΣΗΣ ({day_selected}) - {active_profile_name}</h3>
+                <p>• <b>Συνολικός Όγκος (Tonnage):</b> <span style='font-size:20px; color:#2b8a3e;'><b>{total_tonnage:,} kg</b></span></p>
+                <p>• 🎈 <i>{quip_msg if quip_msg else get_tonnage_quips(total_tonnage)}</i></p>
+                <p>• 🎮 <b>XP Earned:</b> +{earned_xp} XP</p>
+            </div>
+            """, unsafe_allow_html=True)
+            
+            if pr_alerts:
+                st.warning("\n".join(pr_alerts))
+            if unlocked_achs:
+                st.success("🎖️ **UNLOCKED ACHIEVEMENTS:**\n" + "\n".join(unlocked_achs))
 
-                save_user_data()
-                st.success(f"Workout logged! Earned +{earned_xp} XP.")
-                if quip_msg: st.info(f"🎈 **Achievement Quip:** {quip_msg}")
-
-    # Custom Exercise Creator
     st.markdown("---")
-    with st.expander("✨ Add Custom Exercise to Master Database"):
-        ce_name = st.text_input("Exercise Name:", key="ce_n")
-        ce_col1, ce_col2 = st.columns(2)
-        ce_type = ce_col1.selectbox("Type:", ["Weight (Barbell/Machine)", "Dumbbell", "Bodyweight", "Cardio / Running"], key="ce_t")
-        ce_muscle = ce_col2.selectbox("Target Muscle:", ["Quads", "Hamstrings", "Chest", "Lats", "Upper Back", "Front Delts", "Side Delts", "Rear Delts", "Biceps", "Triceps", "Abs", "Cardio"], key="ce_m")
-        if st.button("Save Exercise to Database", key="btn_ce"):
+    # CUSTOM EXERCISE BUILDER
+    with st.expander("✨ Προσθήκη Νέας Άσκησης στη Βάση (Custom Exercise Creator)"):
+        st.write("Πρόσθεσε μια νέα άσκηση στη βάση δεδομένων με όλα τα απαραίτητα στοιχεία:")
+        
+        ce_name = st.text_input("Όνομα Άσκησης (π.χ. Bulgarian Split Squat):", key="ce_name")
+        col_e1, col_e2, col_e3 = st.columns(3)
+        
+        with col_e1:
+            ce_type_desc = st.selectbox(
+                "Τύπος Άσκησης:", 
+                ["Weight (Κιλά + Reps)", "Dumbbell (Αλτήρες x2)", "Bodyweight (Reps)", "Bodyweight Timed (Sec)", "Cardio / Running (Km/Min)"],
+                key="ce_type_desc"
+            )
+        with col_e2:
+            ce_primary = st.selectbox(
+                "Κύρια Μυϊκή Ομάδα (Target Muscle):",
+                ["Quads", "Hamstrings", "Glutes", "Lower Back", "Chest", "Upper Chest", "Lats", "Upper Back", "Front Delts", "Side Delts", "Rear Delts", "Biceps", "Triceps", "Abs", "Core", "Cardio", "Full Body"],
+                key="ce_primary"
+            )
+        with col_e3:
+            ce_secondary = st.selectbox(
+                "Δευτερεύουσα Μυϊκή Ομάδα (Optional):",
+                ["None", "Quads", "Hamstrings", "Glutes", "Lower Back", "Chest", "Lats", "Upper Back", "Front Delts", "Side Delts", "Rear Delts", "Biceps", "Triceps", "Abs", "Core", "Cardio"],
+                key="ce_secondary"
+            )
+
+        if st.button("💾 Αποθήκευση Άσκησης στη Βάση", key="btn_save_custom_ex"):
             if ce_name.strip():
+                if "Dumbbell" in ce_type_desc:
+                    ex_type = "weight"
+                    is_db = True
+                elif "Bodyweight (Reps)" in ce_type_desc:
+                    ex_type = "bodyweight"
+                    is_db = False
+                elif "Bodyweight Timed" in ce_type_desc:
+                    ex_type = "bodyweight_time"
+                    is_db = False
+                elif "Cardio" in ce_type_desc:
+                    ex_type = "cardio"
+                    is_db = False
+                else:
+                    ex_type = "weight"
+                    is_db = False
+
+                sec_val = None if ce_secondary == "None" else ce_secondary
+
                 user_data["exercise_database"][ce_name.strip()] = {
-                    "muscle": ce_muscle,
-                    "type": "cardio" if "Cardio" in ce_type else "weight",
-                    "is_db": True if "Dumbbell" in ce_type else False,
-                    "primary": ce_muscle,
-                    "secondary": None
+                    "muscle": ce_primary,
+                    "type": ex_type,
+                    "is_db": is_db,
+                    "primary": ce_primary,
+                    "secondary": sec_val
                 }
                 save_user_data()
-                st.success(f"Exercise '{ce_name}' saved!")
+                st.success(f"Η άσκηση '{ce_name.strip()}' προστέθηκε επιτυχώς στη βάση δεδομένων!")
                 st.rerun()
+            else:
+                st.warning("Παρακαλώ δώσε ένα όνομα στην άσκηση.")
 
 # ==============================================================================
-# TAB 4: VISUAL ANALYTICS & HR ZONES
+# TAB 4: VISUAL ANALYTICS (5 SUBPLOTS)
 # ==============================================================================
 with tab3:
     st.subheader(f"📊 Visual Analytics & Performance — {active_profile_name}")
+    
     history = active_p.get("history", [])
     
     if not history:
-        st.info("Log your first workout in Tab 3 to generate visual charts!")
+        st.info("💡 Καταγράψτε την πρώτη σας προπόνηση στο Tab 3 για να εμφανιστούν τα αναλυτικά διαγράμματα!")
     else:
-        fig = plt.figure(figsize=(12, 10))
-        gs = fig.add_gridspec(2, 2)
+        fig = plt.figure(figsize=(12, 12))
+        gs = fig.add_gridspec(3, 2)
         
         ax1 = fig.add_subplot(gs[0, 0])
         ax2 = fig.add_subplot(gs[0, 1])
         ax3 = fig.add_subplot(gs[1, 0])
         ax4 = fig.add_subplot(gs[1, 1])
+        ax5 = fig.add_subplot(gs[2, :])
         
         # 1. Tonnage Graph
-        dates = [f"{h.get('day','')}\n{h.get('date','').split()[0]}" for h in history[-8:]]
-        tonnages = [h.get("tonnage", 0) for h in history[-8:]]
+        dates = [f"{h.get('day','')}\n{h.get('date','').split()[0]}" for h in history]
+        tonnages = [h.get("tonnage", 0) for h in history]
         ax1.plot(dates, tonnages, marker='o', color='#2b8a3e', linewidth=2)
-        ax1.set_title("📈 Tonnage Progress (kg)")
+        ax1.set_title("📈 Εξέλιξη Συνολικού Όγκου (Tonnage kg)")
         ax1.grid(True, linestyle='--', alpha=0.5)
         
-        # 2. Exercise Specific Progression
-        selected_ex = st.selectbox("Select Exercise for Chart:", list(user_data["exercise_database"].keys()), key=f"chart_ex_{active_profile_name}")
+        # 2. Selected Exercise Progress
+        selected_ex = st.selectbox("🏋️ Επιλογή Άσκησης για Γράφημα:", list(user_data["exercise_database"].keys()), key=f"ex_graph_{active_profile_name}")
         ex_dates, ex_vals = [], []
         for h in history:
             exs = h.get("exercises", {})
             if selected_ex in exs:
                 ex_dates.append(f"{h.get('day','')}\n{h.get('date','').split()[0]}")
-                ex_vals.append(exs[selected_ex].get("max_weight", 0) if exs[selected_ex].get("type") == "weight" else exs[selected_ex].get("total_reps_or_min", 0))
-                
+                ex_data = exs[selected_ex]
+                if ex_data.get("type") == "weight":
+                    ex_vals.append(ex_data.get("max_weight", 0))
+                else:
+                    ex_vals.append(ex_data.get("total_reps_or_min", 0))
+                    
         if ex_vals:
             ax2.plot(ex_dates, ex_vals, marker='s', color='#1971c2', linewidth=2)
-            ax2.set_title(f"📊 Progress: {selected_ex}")
+            ax2.set_title(f"📊 Πρόοδος: {selected_ex}")
             ax2.grid(True, linestyle='--', alpha=0.5)
         else:
-            ax2.text(0.5, 0.5, f"No history yet for:\n{selected_ex}", ha='center', va='center')
-
-        # 3. Target Muscle Volume Distribution
-        m_counts = {"Quads": 0, "Chest": 0, "Lats": 0, "Upper Back": 0, "Side Delts": 0, "Biceps": 0, "Triceps": 0, "Cardio": 0}
+            ax2.text(0.5, 0.5, f"Δεν υπάρχουν ακόμα δεδομένα για:\n{selected_ex}", ha='center', va='center')
+            
+        # 3. Muscle Volume Bar Chart
+        muscle_volume = {"Quads": 0.0, "Hamstrings": 0.0, "Chest": 0.0, "Lats": 0.0, "Upper Back": 0.0, "Front Delts": 0.0, "Side Delts": 0.0, "Biceps": 0.0, "Triceps": 0.0, "Abs": 0.0}
         for h in history:
-            for ex_n, ex_d in h.get("exercises", {}).items():
-                m = user_data["exercise_database"].get(ex_n, {}).get("primary", "Cardio")
-                if m in m_counts: m_counts[m] += ex_d.get("sets", 1)
-                
-        ax3.bar(list(m_counts.keys()), list(m_counts.values()), color='#20c997')
+            exs = h.get("exercises", {})
+            for ex_name, ex_data in exs.items():
+                s = ex_data.get("sets", 0)
+                db_info = user_data["exercise_database"].get(ex_name, {})
+                prim = db_info.get("primary", db_info.get("muscle", None))
+                sec = db_info.get("secondary", None)
+                if prim in muscle_volume: muscle_volume[prim] += s * 1.0
+                if sec in muscle_volume: muscle_volume[sec] += s * 0.5
+
+        muscles = list(muscle_volume.keys())
+        volumes = list(muscle_volume.values())
+        colors = ['#20c997' if v >= 6 else '#ff6b6b' for v in volumes]
+        ax3.bar(muscles, volumes, color=colors)
         ax3.axhline(y=10, color='#2b8a3e', linestyle='--', label='MAV (10 sets)')
-        ax3.set_title("🏋️ Weekly Volume per Muscle Target")
+        ax3.set_title("🏋️ Εβδομαδιαίος Όγκος Σετ ανά Μυϊκή Ομάδα")
         ax3.tick_params(axis='x', rotation=45)
         ax3.legend()
-
-        # 4. Projected vs Real Weight Trend
+        
+        # 4. Strength Benchmarks
+        bw = active_p["profile"]["weight_kg"]
+        my_bench = active_p.get("prs", {}).get("Flat Dumbbell Chest Press", bw * 0.7)
+        my_legpress = active_p.get("prs", {}).get("Leg Press", bw * 1.5)
+        my_lat = active_p.get("prs", {}).get("Lat Pulldown (Τροχαλία)", bw * 0.7)
+        
+        cats = ['Chest Press', 'Leg Press', 'Lat Pulldown']
+        user_scores = [my_bench, my_legpress, my_lat]
+        avg_novice = [bw * 0.8, bw * 1.6, bw * 0.75]
+        
+        x = range(len(cats))
+        width = 0.35
+        ax4.bar([p - width/2 for p in x], avg_novice, width=width, label='Μέσος Novice', color='#adb5bd')
+        ax4.bar([p + width/2 for p in x], user_scores, width=width, label='Εσύ (1RM)', color='#2b8a3e')
+        ax4.set_xticks(x)
+        ax4.set_xticklabels(cats)
+        ax4.set_title("🥊 Σύγκριση Δύναμης vs Μέσος Όρος")
+        ax4.legend()
+        
+        # 5. Projected Target Curve vs Real Weight
         w_dates, w_mov_avg, w_proj, _ = calc_projected_vs_real_weight(active_p["profile"], active_p.get("weight_log", []))
         if w_dates:
-            ax4.plot(w_dates, w_proj, color='#f59f00', linestyle='--', label='Projected Target')
-            ax4.plot(w_dates, w_mov_avg, color='#2b8a3e', marker='o', label='Real Weight Trend')
-            ax4.set_title("⚖️ Target vs Real Weight")
-            ax4.legend()
-            ax4.grid(True, linestyle='--', alpha=0.5)
+            ax5.plot(w_dates, w_proj, color='#f59f00', linestyle='--', linewidth=2, label='Projected Target Curve')
+            ax5.plot(w_dates, w_mov_avg, color='#2b8a3e', marker='o', linewidth=3, label='Real Weight Trend (Moving Avg)')
+            ax5.set_title("⚖️ Projected Target vs Real Weight Trend")
+            ax5.legend()
+            ax5.grid(True, linestyle='--', alpha=0.5)
 
         plt.tight_layout()
         st.pyplot(fig)
