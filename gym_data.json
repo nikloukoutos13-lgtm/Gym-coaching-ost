@@ -1114,7 +1114,8 @@
             "s": 1,
             "w": 12.0,
             "r": 5,
-            "rir": 0
+            "rir": 0,
+            "hr": 145
           },
           {
             "ex": "Romanian Deadlift (RDL)",
@@ -1172,7 +1173,8 @@
             "s": 1,
             "w": 6.0,
             "r": 5,
-            "rir": 0
+            "rir": 0,
+            "hr": 145
           },
           {
             "ex": "Leg Extension Machine",
@@ -1220,6 +1222,13 @@
             "ex": "Lat Pulldown (Τροχαλία)",
             "s": 3,
             "w": 42.0,
+            "r": 12,
+            "rir": 2
+          },
+          {
+            "ex": "Stationary Bike (Ποδήλατο)",
+            "s": 3,
+            "w": 20.0,
             "r": 12,
             "rir": 2
           }
