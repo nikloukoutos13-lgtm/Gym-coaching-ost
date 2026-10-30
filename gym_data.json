@@ -1015,6 +1015,14 @@
           "p": 10.0,
           "c": 15.0,
           "f": 11.0
+        },
+        {
+          "name": "🥛 GetPRO / GoPRO Protein Yoghurt (160g)",
+          "portion": "1.0 τεμάχιο/α",
+          "cal": 104.0,
+          "p": 15.0,
+          "c": 7.2,
+          "f": 0.3
         }
       ],
       "weight_log": [
