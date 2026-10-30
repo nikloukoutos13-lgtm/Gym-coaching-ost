@@ -7,8 +7,8 @@
     "activity_level": 1.55,
     "goal": "Bulking",
     "training_age": "Αρχάριος (0-1 έτος)",
-    "xp": 2110,
-    "level": 3,
+    "xp": 3480,
+    "level": 4,
     "quizzes_solved": 0
   },
   "food_db": {
@@ -513,11 +513,11 @@
         "rir": 2
       },
       {
-        "ex": "Crunches",
-        "s": 2,
-        "w": 0.0,
-        "r": 20,
-        "rir": 1
+        "ex": "Lat Pulldown (Τροχαλία)",
+        "s": 3,
+        "w": 42.0,
+        "r": 12,
+        "rir": 2
       }
     ]
   },
@@ -530,7 +530,14 @@
     "Incline DB Bench Press": 40.0,
     "Dumbbell Shoulder Press": 31.7,
     "Cable Lateral Raises (Τροχαλία)": 3.5,
-    "Cable Face Pulls": 18.9
+    "Cable Face Pulls": 18.9,
+    "Leg Extension Machine": 63.7,
+    "Seated Leg Curl Machine": 56.6,
+    "Seated Cable Row (Κωπηλατική Τροχαλία)": 63.7,
+    "Lateral Raises (Αλτήρες)": 14.1,
+    "Cable Bicep Curls": 17.7,
+    "Overhead Cable Triceps Extension": 21.2,
+    "Lat Pulldown (Τροχαλία)": 59.4
   },
   "achievements": [
     "🏆 First Blood (Πρώτο PR)"
@@ -740,6 +747,110 @@
           "total_reps_or_min": 60,
           "type": "bodyweight_time",
           "muscle": "Core",
+          "cal": 0
+        }
+      }
+    },
+    {
+      "date": "30/10/2026 09:03",
+      "day": "Παρασκευή",
+      "tonnage": 7542.0,
+      "cardio_cal": 37.9,
+      "exercises": {
+        "Stationary Bike (Ποδήλατο)": {
+          "sets": 1,
+          "max_1rm": 0,
+          "max_weight": 6.0,
+          "rirs": [
+            0
+          ],
+          "total_reps_or_min": 5,
+          "type": "cardio",
+          "muscle": "Cardio",
+          "cal": 37.9
+        },
+        "Leg Extension Machine": {
+          "sets": 3,
+          "max_1rm": 63.7,
+          "max_weight": 45.0,
+          "rirs": [
+            2
+          ],
+          "total_reps_or_min": 12,
+          "type": "weight",
+          "muscle": "Quads",
+          "cal": 0
+        },
+        "Seated Leg Curl Machine": {
+          "sets": 3,
+          "max_1rm": 56.6,
+          "max_weight": 40.0,
+          "rirs": [
+            2
+          ],
+          "total_reps_or_min": 12,
+          "type": "weight",
+          "muscle": "Hamstrings",
+          "cal": 0
+        },
+        "Seated Cable Row (Κωπηλατική Τροχαλία)": {
+          "sets": 3,
+          "max_1rm": 63.7,
+          "max_weight": 45.0,
+          "rirs": [
+            2
+          ],
+          "total_reps_or_min": 12,
+          "type": "weight",
+          "muscle": "Upper Back",
+          "cal": 0
+        },
+        "Lateral Raises (Αλτήρες)": {
+          "sets": 3,
+          "max_1rm": 14.1,
+          "max_weight": 5.0,
+          "rirs": [
+            2
+          ],
+          "total_reps_or_min": 12,
+          "type": "weight",
+          "muscle": "Side Delts",
+          "cal": 0
+        },
+        "Cable Bicep Curls": {
+          "sets": 3,
+          "max_1rm": 17.7,
+          "max_weight": 12.5,
+          "rirs": [
+            2
+          ],
+          "total_reps_or_min": 12,
+          "type": "weight",
+          "muscle": "Biceps",
+          "cal": 0
+        },
+        "Overhead Cable Triceps Extension": {
+          "sets": 3,
+          "max_1rm": 21.2,
+          "max_weight": 15.0,
+          "rirs": [
+            2
+          ],
+          "total_reps_or_min": 12,
+          "type": "weight",
+          "muscle": "Triceps",
+          "cal": 0
+        },
+        "Lat Pulldown (Τροχαλία)": {
+          "sets": 3,
+          "max_1rm": 59.4,
+          "max_weight": 42.0,
+          "rirs": [
+            2
+          ],
+          "total_reps_or_min": 12,
+          "type": "weight",
+          "muscle": "Lats",
           "cal": 0
         }
       }
