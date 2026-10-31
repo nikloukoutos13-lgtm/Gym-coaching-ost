@@ -375,6 +375,13 @@
       "is_db": false,
       "primary": "Quads",
       "secondary": "Front Delts"
+    },
+    "Preacher curls": {
+      "muscle": "Biceps",
+      "type": "weight",
+      "is_db": false,
+      "primary": "Biceps",
+      "secondary": null
     }
   },
   "profiles": {
