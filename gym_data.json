@@ -1737,19 +1737,19 @@
       "profile": {
         "gender": "Άνδρας",
         "age": 28,
-        "weight_kg": 72.0,
+        "weight_kg": 74.1,
         "height_cm": 177.0,
         "activity_level": 1.55,
         "goal": "Bulking",
         "training_age": "Αρχάριος (0-1 έτος)",
-        "xp": 0,
+        "xp": 15,
         "level": 1
       },
       "daily_logs": [],
       "weight_log": [
         {
           "date": "31/10/2026",
-          "weight": 72.0
+          "weight": 74.1
         }
       ],
       "templates": {
@@ -1759,7 +1759,8 @@
             "s": 1,
             "w": 6.0,
             "r": 5,
-            "rir": 0
+            "rir": 0,
+            "hr": 145
           },
           {
             "ex": "Leg Press",
