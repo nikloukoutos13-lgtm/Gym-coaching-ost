@@ -382,6 +382,13 @@
       "is_db": false,
       "primary": "Biceps",
       "secondary": null
+    },
+    "Cable row crunches": {
+      "muscle": "Abs",
+      "type": "weight",
+      "is_db": false,
+      "primary": "Abs",
+      "secondary": "Core"
     }
   },
   "profiles": {
@@ -479,12 +486,13 @@
             "s": 1,
             "w": 12.0,
             "r": 5,
-            "rir": 0
+            "rir": 0,
+            "hr": 145
           },
           {
             "ex": "Romanian Deadlift (RDL)",
             "s": 3,
-            "w": 16.0,
+            "w": 15.0,
             "r": 10,
             "rir": 2
           },
@@ -492,7 +500,7 @@
             "ex": "Chin-ups (Υπτιάστιες Έλξεις)",
             "s": 3,
             "w": 0.0,
-            "r": 8,
+            "r": 4,
             "rir": 2
           },
           {
@@ -512,14 +520,14 @@
           {
             "ex": "Cable Lateral Raises (Τροχαλία)",
             "s": 3,
-            "w": 5.0,
+            "w": 2.5,
             "r": 12,
             "rir": 2
           },
           {
             "ex": "Cable Face Pulls",
             "s": 3,
-            "w": 12.5,
+            "w": 10.0,
             "r": 15,
             "rir": 2
           },
