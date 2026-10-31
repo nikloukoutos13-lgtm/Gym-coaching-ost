@@ -1736,12 +1736,12 @@
     "Petrinio": {
       "profile": {
         "gender": "Άνδρας",
-        "age": 28,
+        "age": 25,
         "weight_kg": 74.1,
-        "height_cm": 177.0,
+        "height_cm": 173.0,
         "activity_level": 1.55,
-        "goal": "Bulking",
-        "training_age": "Αρχάριος (0-1 έτος)",
+        "goal": "Cutting",
+        "training_age": "Ενδιάμεσος (1-3 έτη)",
         "xp": 15,
         "level": 1
       },
