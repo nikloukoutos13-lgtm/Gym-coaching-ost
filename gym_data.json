@@ -1732,7 +1732,210 @@
           }
         }
       ]
+    },
+    "Petrinio": {
+      "profile": {
+        "gender": "Άνδρας",
+        "age": 28,
+        "weight_kg": 72.0,
+        "height_cm": 177.0,
+        "activity_level": 1.55,
+        "goal": "Bulking",
+        "training_age": "Αρχάριος (0-1 έτος)",
+        "xp": 0,
+        "level": 1
+      },
+      "daily_logs": [],
+      "weight_log": [
+        {
+          "date": "31/10/2026",
+          "weight": 72.0
+        }
+      ],
+      "templates": {
+        "Δευτέρα": [
+          {
+            "ex": "Stationary Bike (Ποδήλατο)",
+            "s": 1,
+            "w": 6.0,
+            "r": 5,
+            "rir": 0
+          },
+          {
+            "ex": "Leg Press",
+            "s": 3,
+            "w": 105.0,
+            "r": 12,
+            "rir": 2
+          },
+          {
+            "ex": "Flat Dumbbell Chest Press",
+            "s": 3,
+            "w": 17.5,
+            "r": 12,
+            "rir": 2
+          },
+          {
+            "ex": "Pull-ups (Έλξεις στο Ζυγό)",
+            "s": 3,
+            "w": 0.0,
+            "r": 8,
+            "rir": 2
+          },
+          {
+            "ex": "Chest-Supported DB Row (30°)",
+            "s": 3,
+            "w": 10.0,
+            "r": 12,
+            "rir": 2
+          },
+          {
+            "ex": "Roman Chair Hyperextensions (Ρωμαϊκή Έδρα)",
+            "s": 3,
+            "w": 0.0,
+            "r": 12,
+            "rir": 2
+          },
+          {
+            "ex": "Triceps Rope Pushdown",
+            "s": 3,
+            "w": 15.0,
+            "r": 12,
+            "rir": 2
+          },
+          {
+            "ex": "Crunches",
+            "s": 2,
+            "w": 0.0,
+            "r": 20,
+            "rir": 1
+          }
+        ],
+        "Τρίτη": [],
+        "Τετάρτη": [
+          {
+            "ex": "Treadmill (Διάδρομος)",
+            "s": 1,
+            "w": 12.0,
+            "r": 5,
+            "rir": 0
+          },
+          {
+            "ex": "Romanian Deadlift (RDL)",
+            "s": 3,
+            "w": 16.0,
+            "r": 10,
+            "rir": 2
+          },
+          {
+            "ex": "Chin-ups (Υπτιάστιες Έλξεις)",
+            "s": 3,
+            "w": 0.0,
+            "r": 8,
+            "rir": 2
+          },
+          {
+            "ex": "Incline DB Bench Press",
+            "s": 3,
+            "w": 12.5,
+            "r": 10,
+            "rir": 2
+          },
+          {
+            "ex": "Dumbbell Shoulder Press",
+            "s": 3,
+            "w": 12.5,
+            "r": 8,
+            "rir": 2
+          },
+          {
+            "ex": "Cable Lateral Raises (Τροχαλία)",
+            "s": 3,
+            "w": 5.0,
+            "r": 12,
+            "rir": 2
+          },
+          {
+            "ex": "Cable Face Pulls",
+            "s": 3,
+            "w": 12.5,
+            "r": 15,
+            "rir": 2
+          },
+          {
+            "ex": "Plank",
+            "s": 2,
+            "w": 0.0,
+            "r": 60,
+            "rir": 1
+          }
+        ],
+        "Πέμπτη": [],
+        "Παρασκευή": [
+          {
+            "ex": "Stationary Bike (Ποδήλατο)",
+            "s": 1,
+            "w": 6.0,
+            "r": 5,
+            "rir": 0
+          },
+          {
+            "ex": "Leg Extension Machine",
+            "s": 3,
+            "w": 45.0,
+            "r": 12,
+            "rir": 2
+          },
+          {
+            "ex": "Seated Leg Curl Machine",
+            "s": 3,
+            "w": 40.0,
+            "r": 12,
+            "rir": 2
+          },
+          {
+            "ex": "Seated Cable Row (Κωπηλατική Τροχαλία)",
+            "s": 3,
+            "w": 45.0,
+            "r": 12,
+            "rir": 2
+          },
+          {
+            "ex": "Lateral Raises (Αλτήρες)",
+            "s": 3,
+            "w": 5.0,
+            "r": 12,
+            "rir": 2
+          },
+          {
+            "ex": "Cable Bicep Curls",
+            "s": 3,
+            "w": 12.5,
+            "r": 12,
+            "rir": 2
+          },
+          {
+            "ex": "Overhead Cable Triceps Extension",
+            "s": 3,
+            "w": 15.0,
+            "r": 12,
+            "rir": 2
+          },
+          {
+            "ex": "Crunches",
+            "s": 2,
+            "w": 0.0,
+            "r": 20,
+            "rir": 1
+          }
+        ],
+        "Σάββατο": [],
+        "Κυριακή": []
+      },
+      "prs": {},
+      "achievements": [],
+      "history": []
     }
   },
-  "active_profile": "Προφίλ 1 (Alex - Gym)"
+  "active_profile": "Petrinio"
 }
