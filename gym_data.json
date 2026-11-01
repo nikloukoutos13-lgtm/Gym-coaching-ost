@@ -983,7 +983,8 @@
             "s": 3,
             "w": 0.0,
             "r": 10,
-            "rir": 1
+            "rir": 1,
+            "hr": 145
           },
           {
             "ex": "Sled Push (HYROX)",
@@ -1072,5 +1073,5 @@
       "history": []
     }
   },
-  "active_profile": "Κατερίνα"
+  "active_profile": "NIKOS (Gym & Hypertrophy)"
 }
