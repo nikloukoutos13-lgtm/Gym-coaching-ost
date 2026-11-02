@@ -424,16 +424,16 @@
           {
             "ex": "Leg Press",
             "s": 3,
-            "w": 115.0,
+            "w": 135.0,
             "r": 12,
-            "rir": 2
+            "rir": 4
           },
           {
             "ex": "Flat Dumbbell Chest Press",
             "s": 3,
             "w": 17.5,
             "r": 12,
-            "rir": 2
+            "rir": 1
           },
           {
             "ex": "Pull-ups (Έλξεις στο Ζυγό)",
@@ -445,7 +445,7 @@
           {
             "ex": "Chest-Supported DB Row (30°)",
             "s": 3,
-            "w": 10.0,
+            "w": 12.5,
             "r": 12,
             "rir": 2
           },
@@ -459,7 +459,7 @@
           {
             "ex": "Triceps Rope Pushdown",
             "s": 3,
-            "w": 15.0,
+            "w": 17.5,
             "r": 12,
             "rir": 2
           },
