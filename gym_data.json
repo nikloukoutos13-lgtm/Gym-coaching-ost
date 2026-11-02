@@ -401,8 +401,8 @@
         "activity_level": 1.55,
         "goal": "Bulking",
         "training_age": "Αρχάριος (0-1 έτος)",
-        "xp": 0,
-        "level": 1
+        "xp": 1090,
+        "level": 2
       },
       "daily_logs": [],
       "weight_log": [
@@ -618,9 +618,134 @@
         "Σάββατο": [],
         "Κυριακή": []
       },
-      "prs": {},
-      "achievements": [],
-      "history": []
+      "prs": {
+        "Leg Press": 191.0,
+        "Flat Dumbbell Chest Press": 49.5,
+        "Chest-Supported DB Row (30°)": 35.4,
+        "Triceps Rope Pushdown": 24.8,
+        "Preacher curls": 31.7
+      },
+      "achievements": [
+        "🏆 First Blood (Πρώτο PR)"
+      ],
+      "history": [
+        {
+          "date": "02/11/2026 11:07",
+          "day": "Δευτέρα",
+          "tonnage": 8250.0,
+          "cardio_cal": 387.7,
+          "exercises": {
+            "Stationary Bike (Ποδήλατο)": {
+              "sets": 1,
+              "max_1rm": 0,
+              "max_weight": 6.0,
+              "rirs": [
+                0
+              ],
+              "total_reps_or_min": 5,
+              "type": "cardio",
+              "muscle": "Cardio",
+              "cal": 387.7
+            },
+            "Leg Press": {
+              "sets": 3,
+              "max_1rm": 191.0,
+              "max_weight": 135.0,
+              "rirs": [
+                4
+              ],
+              "total_reps_or_min": 12,
+              "type": "weight",
+              "muscle": "Quads",
+              "cal": 0
+            },
+            "Flat Dumbbell Chest Press": {
+              "sets": 3,
+              "max_1rm": 49.5,
+              "max_weight": 17.5,
+              "rirs": [
+                1
+              ],
+              "total_reps_or_min": 12,
+              "type": "weight",
+              "muscle": "Chest",
+              "cal": 0
+            },
+            "Pull-ups (Έλξεις στο Ζυγό)": {
+              "sets": 3,
+              "max_1rm": 0,
+              "max_weight": 0.0,
+              "rirs": [
+                1
+              ],
+              "total_reps_or_min": 5,
+              "type": "bodyweight",
+              "muscle": "Lats",
+              "cal": 0
+            },
+            "Chest-Supported DB Row (30°)": {
+              "sets": 3,
+              "max_1rm": 35.4,
+              "max_weight": 12.5,
+              "rirs": [
+                2
+              ],
+              "total_reps_or_min": 12,
+              "type": "weight",
+              "muscle": "Upper Back",
+              "cal": 0
+            },
+            "Roman Chair Hyperextensions (Ρωμαϊκή Έδρα)": {
+              "sets": 3,
+              "max_1rm": 0,
+              "max_weight": 0.0,
+              "rirs": [
+                2
+              ],
+              "total_reps_or_min": 20,
+              "type": "bodyweight",
+              "muscle": "Lower Back",
+              "cal": 0
+            },
+            "Triceps Rope Pushdown": {
+              "sets": 3,
+              "max_1rm": 24.8,
+              "max_weight": 17.5,
+              "rirs": [
+                2
+              ],
+              "total_reps_or_min": 12,
+              "type": "weight",
+              "muscle": "Triceps",
+              "cal": 0
+            },
+            "Crunches": {
+              "sets": 2,
+              "max_1rm": 0,
+              "max_weight": 0.0,
+              "rirs": [
+                1
+              ],
+              "total_reps_or_min": 20,
+              "type": "bodyweight",
+              "muscle": "Abs",
+              "cal": 0
+            },
+            "Preacher curls": {
+              "sets": 3,
+              "max_1rm": 31.7,
+              "max_weight": 25.0,
+              "rirs": [
+                0
+              ],
+              "total_reps_or_min": 8,
+              "type": "weight",
+              "muscle": "Biceps",
+              "cal": 0
+            }
+          }
+        }
+      ]
     },
     "MARILENA (HYROX & Run)": {
       "profile": {
