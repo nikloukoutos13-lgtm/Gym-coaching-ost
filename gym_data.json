@@ -440,6 +440,14 @@
           "p": 25.5,
           "c": 60.0,
           "f": 18.0
+        },
+        {
+          "name": "🍫 Nature Valley Extra Protein Bar",
+          "portion": "1.0 τεμάχιο/α",
+          "cal": 198.0,
+          "p": 10.0,
+          "c": 15.0,
+          "f": 11.0
         }
       ],
       "weight_log": [
