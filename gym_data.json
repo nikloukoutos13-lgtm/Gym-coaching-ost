@@ -456,6 +456,14 @@
           "p": 22.0,
           "c": 2.7,
           "f": 1.8
+        },
+        {
+          "name": "🥩 Tesco Basted Pork",
+          "portion": "150g",
+          "cal": 217.5,
+          "p": 31.5,
+          "c": 1.5,
+          "f": 9.0
         }
       ],
       "weight_log": [
