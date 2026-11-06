@@ -677,16 +677,16 @@
           {
             "ex": "Cable Bicep Curls",
             "s": 3,
-            "w": 12.5,
-            "r": 12,
-            "rir": 2
+            "w": 15.0,
+            "r": 10,
+            "rir": 1
           },
           {
             "ex": "Overhead Cable Triceps Extension",
             "s": 3,
             "w": 15.0,
-            "r": 12,
-            "rir": 2
+            "r": 10,
+            "rir": 0
           },
           {
             "ex": "Crunches",
@@ -698,7 +698,7 @@
           {
             "ex": "Leg Press",
             "s": 3,
-            "w": 115.0,
+            "w": 145.0,
             "r": 12,
             "rir": 2,
             "hr": 145
