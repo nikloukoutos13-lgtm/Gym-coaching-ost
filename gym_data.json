@@ -1489,13 +1489,13 @@
     },
     "Anna weak": {
       "profile": {
-        "gender": "Γυναίκα",
+        "gender": "Female",
         "age": 25,
         "weight_kg": 52.0,
         "height_cm": 165.0,
         "activity_level": 1.55,
         "goal": "Cutting",
-        "training_age": "Αρχάριος (0-1 έτος)",
+        "training_age": "Novice (0-1 yr)",
         "xp": 0,
         "level": 1
       },
