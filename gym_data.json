@@ -1459,7 +1459,7 @@
         "age": 25,
         "weight_kg": 52.0,
         "height_cm": 165.0,
-        "activity_level": 1.2,
+        "activity_level": 1.55,
         "goal": "Cutting",
         "training_age": "Αρχάριος (0-1 έτος)",
         "xp": 0,
@@ -1492,7 +1492,7 @@
           {
             "ex": "Flat Dumbbell Chest Press",
             "s": 3,
-            "w": 19.0,
+            "w": 17.5,
             "r": 12,
             "rir": 2
           },
