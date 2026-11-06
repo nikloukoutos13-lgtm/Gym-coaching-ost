@@ -651,26 +651,26 @@
             "s": 3,
             "w": 45.0,
             "r": 12,
-            "rir": 2
+            "rir": 3
           },
           {
             "ex": "Seated Leg Curl Machine",
             "s": 3,
             "w": 40.0,
             "r": 12,
-            "rir": 2
+            "rir": 1
           },
           {
             "ex": "Seated Cable Row (Κωπηλατική Τροχαλία)",
             "s": 3,
-            "w": 45.0,
+            "w": 33.0,
             "r": 12,
             "rir": 2
           },
           {
             "ex": "Lateral Raises (Αλτήρες)",
             "s": 3,
-            "w": 5.0,
+            "w": 6.0,
             "r": 12,
             "rir": 2
           },
@@ -684,7 +684,7 @@
           {
             "ex": "Overhead Cable Triceps Extension",
             "s": 3,
-            "w": 15.0,
+            "w": 12.5,
             "r": 10,
             "rir": 0
           },
