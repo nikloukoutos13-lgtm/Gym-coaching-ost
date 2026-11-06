@@ -417,6 +417,40 @@
       "is_db": false,
       "primary": "Abs",
       "secondary": "Core"
+    },
+    "Roman Chair Hyperextensions": {
+      "muscle": "Lower Back",
+      "type": "bodyweight",
+      "primary": "Hamstrings",
+      "secondary": "Glutes"
+    },
+    "Seated Cable Row": {
+      "muscle": "Upper Back",
+      "type": "weight",
+      "is_db": false,
+      "primary": "Upper Back",
+      "secondary": "Biceps"
+    },
+    "Cable Chest Flyes": {
+      "muscle": "Chest",
+      "type": "weight",
+      "is_db": false,
+      "primary": "Chest",
+      "secondary": null
+    },
+    "Cable Lateral Raises": {
+      "muscle": "Side Delts",
+      "type": "weight",
+      "is_db": false,
+      "primary": "Side Delts",
+      "secondary": null
+    },
+    "Lateral Raises (Dumbbells)": {
+      "muscle": "Side Delts",
+      "type": "weight",
+      "is_db": true,
+      "primary": "Side Delts",
+      "secondary": null
     }
   },
   "profiles": {
@@ -1667,5 +1701,5 @@
       "history": []
     }
   },
-  "active_profile": "NIKOS (Gym & Hypertrophy)"
+  "active_profile": "Anna weak"
 }
