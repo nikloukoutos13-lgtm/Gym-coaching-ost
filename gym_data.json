@@ -1479,7 +1479,8 @@
             "s": 1,
             "w": 6.0,
             "r": 5,
-            "rir": 0
+            "rir": 0,
+            "hr": 145
           },
           {
             "ex": "Leg Press",
@@ -1491,7 +1492,7 @@
           {
             "ex": "Flat Dumbbell Chest Press",
             "s": 3,
-            "w": 17.5,
+            "w": 19.0,
             "r": 12,
             "rir": 2
           },
@@ -1597,7 +1598,8 @@
             "s": 1,
             "w": 6.0,
             "r": 5,
-            "rir": 0
+            "rir": 0,
+            "hr": 145
           },
           {
             "ex": "Leg Extension Machine",
@@ -1609,7 +1611,7 @@
           {
             "ex": "Seated Leg Curl Machine",
             "s": 3,
-            "w": 40.0,
+            "w": 46.0,
             "r": 12,
             "rir": 2
           },
