@@ -904,8 +904,7 @@ with tab_tracker:
             c_desc, c_del = st.columns([5, 1])
             with c_desc:
                 st.write(
-                    f"• **{item['name']}** ({item['portion']}) $
-ightarrow$ "
+                  f"• **{item['name']}** ({item['portion']}) -> **{item.get('p', 0.0):.1f}g P** | {int(item.get('cal', 0.0))} kcal"
                     f"**{item.get('p', 0.0):.1f}g P** | {int(item.get('cal', 0.0))} kcal | {item.get('c', 0.0):.1f}g C | {item.get('f', 0.0):.1f}g F"
                 )
             with c_del:
