@@ -51,7 +51,6 @@ DAY_MAP_TO_EL = dict(zip(DAYS_EN, DAYS_EL))
 # 2. DEFAULT DATABASES & QUIPS
 # ------------------------------------------------------------------------------
 default_food_db = {
-    # 🍗 MEATS & FISH
     "🍗 Chicken Breast (Grilled) / Κοτόπουλο Στήθος": {"unit": "100g", "cal": 165, "p": 31.0, "c": 0.0, "f": 3.6},
     "🍗 Chicken Thigh (Skinless) / Κοτόπουλο Μπούτι": {"unit": "100g", "cal": 180, "p": 24.0, "c": 0.0, "f": 9.0},
     "🍗 Chicken Wings / Κοτόπουλο Φτερούγες": {"unit": "100g", "cal": 203, "p": 18.0, "c": 0.0, "f": 14.0},
@@ -60,16 +59,12 @@ default_food_db = {
     "🥩 Tesco Basted Pork": {"unit": "100g", "cal": 145, "p": 21.0, "c": 1.0, "f": 6.0},
     "🌭 Tesco Finest Irish Pork & Apple Sausage": {"unit": "piece", "cal": 137, "p": 8.0, "c": 3.4, "f": 9.7},
     "🌯 Burrito (Beef, beans, rice) / Μπουρίτο": {"unit": "100g", "cal": 170, "p": 8.5, "c": 20.0, "f": 6.0},
-    
-    # 🥛 PROTEIN & DAIRY
     "🥤 Myprotein Impact Whey Protein (1 scoop 30g)": {"unit": "piece", "cal": 114, "p": 23.0, "c": 1.8, "f": 1.9},
     "🥚 Whole Egg (1 Large) / Αυγό Ολόκληρο": {"unit": "piece", "cal": 72, "p": 6.0, "c": 0.4, "f": 4.8},
     "🥛 GetPRO / GoPRO Protein Yoghurt (160g)": {"unit": "piece", "cal": 104, "p": 15.0, "c": 7.2, "f": 0.3},
     "🥣 Tesco Plain Skyr / Quark": {"unit": "100g", "cal": 65, "p": 11.0, "c": 4.0, "f": 0.2},
     "🍨 Greek Yoghurt 2% / Ελληνικό Γιαούρτι 2%": {"unit": "100g", "cal": 73, "p": 10.0, "c": 3.8, "f": 2.0},
     "🍫 Nature Valley Extra Protein Bar": {"unit": "piece", "cal": 198, "p": 10.0, "c": 15.0, "f": 11.0},
-    
-    # 🥔 CARBS, FRUITS & FATS
     "🥔 Tesco Country Potatoes": {"unit": "100g", "cal": 135, "p": 2.5, "c": 22.0, "f": 3.8},
     "🍌 Banana / Μπανάνα (1 Medium ~120g)": {"unit": "piece", "cal": 105, "p": 1.3, "c": 27.0, "f": 0.3},
     "🍎 Apple / Μήλο (1 Medium ~150g)": {"unit": "piece", "cal": 78, "p": 0.5, "c": 21.0, "f": 0.3},
@@ -106,8 +101,6 @@ default_exercise_db = {
     "Overhead Cable Triceps Extension": {"muscle": "Triceps", "type": "weight", "is_db": False, "primary": "Triceps", "secondary": None},
     "Crunches": {"muscle": "Abs", "type": "bodyweight", "primary": "Abs", "secondary": None},
     "Plank": {"muscle": "Core", "type": "bodyweight_time", "primary": "Abs", "secondary": None},
-
-    # HYROX Specific Movements
     "SkiErg (HYROX)": {"muscle": "Cardio", "type": "cardio", "primary": "Cardio", "secondary": "Lats"},
     "Sled Push (HYROX)": {"muscle": "Quads", "type": "weight", "is_db": False, "primary": "Quads", "secondary": "Glutes"},
     "Sled Pull (HYROX)": {"muscle": "Hamstrings", "type": "weight", "is_db": False, "primary": "Hamstrings", "secondary": "Upper Back"},
@@ -904,8 +897,7 @@ with tab_tracker:
             c_desc, c_del = st.columns([5, 1])
             with c_desc:
                 st.write(
-                  f"• **{item['name']}** ({item['portion']}) -> **{item.get('p', 0.0):.1f}g P** | {int(item.get('cal', 0.0))} kcal"
-                    f"**{item.get('p', 0.0):.1f}g P** | {int(item.get('cal', 0.0))} kcal | {item.get('c', 0.0):.1f}g C | {item.get('f', 0.0):.1f}g F"
+                    f"• **{item['name']}** ({item['portion']}) -> **{item.get('p', 0.0):.1f}g P** | {int(item.get('cal', 0.0))} kcal | {item.get('c', 0.0):.1f}g C | {item.get('f', 0.0):.1f}g F"
                 )
             with c_del:
                 if st.button("🗑️", key=f"del_food_{active_profile_name}_{idx}"):
@@ -1137,12 +1129,9 @@ with tab2:
             """, unsafe_allow_html=True)
             
             if pr_alerts:
-                st.warning("
-".join(pr_alerts))
+                st.warning("\n".join(pr_alerts))
             if unlocked_achs:
-                st.success("🎖️ **UNLOCKED ACHIEVEMENTS:**
-" + "
-".join(unlocked_achs))
+                st.success("🎖️ **UNLOCKED ACHIEVEMENTS:**\n" + "\n".join(unlocked_achs))
 
     st.markdown("---")
     # CUSTOM EXERCISE BUILDER
@@ -1223,8 +1212,7 @@ with tab3:
         ax5 = fig.add_subplot(gs[2, :])
         
         # 1. Tonnage Graph
-        dates = [f"{DAY_MAP_TO_EN.get(h.get('day',''), h.get('day','')) if st.session_state.get('lang') == 'English' else h.get('day','')}
-{h.get('date','').split()[0]}" for h in history]
+        dates = [f"{DAY_MAP_TO_EN.get(h.get('day',''), h.get('day','')) if st.session_state.get('lang') == 'English' else h.get('day','')}\n{h.get('date','').split()[0]}" for h in history]
         tonnages = [h.get("tonnage", 0) for h in history]
         ax1.plot(dates, tonnages, marker='o', color='#2b8a3e', linewidth=2)
         ax1.set_title(t("📈 Εξέλιξη Συνολικού Όγκου (Tonnage kg)", "📈 Total Tonnage Progress (kg)"))
@@ -1236,8 +1224,7 @@ with tab3:
         for h in history:
             exs = h.get("exercises", {})
             if selected_ex in exs:
-                ex_dates.append(f"{DAY_MAP_TO_EN.get(h.get('day',''), h.get('day','')) if st.session_state.get('lang') == 'English' else h.get('day','')}
-{h.get('date','').split()[0]}")
+                ex_dates.append(f"{DAY_MAP_TO_EN.get(h.get('day',''), h.get('day','')) if st.session_state.get('lang') == 'English' else h.get('day','')}\n{h.get('date','').split()[0]}")
                 ex_data = exs[selected_ex]
                 if ex_data.get("type") == "weight":
                     ex_vals.append(ex_data.get("max_weight", 0))
@@ -1249,8 +1236,7 @@ with tab3:
             ax2.set_title(f"📊 {t('Πρόοδος', 'Progress')}: {selected_ex}")
             ax2.grid(True, linestyle='--', alpha=0.5)
         else:
-            ax2.text(0.5, 0.5, f"{t('Δεν υπάρχουν ακόμα δεδομένα για:', 'No data yet for:')}
-{selected_ex}", ha='center', va='center')
+            ax2.text(0.5, 0.5, f"{t('Δεν υπάρχουν ακόμα δεδομένα για:', 'No data yet for:')}\n{selected_ex}", ha='center', va='center')
             
         # 3. Muscle Volume Bar Chart
         muscle_volume = {"Quads": 0.0, "Hamstrings": 0.0, "Chest": 0.0, "Lats": 0.0, "Upper Back": 0.0, "Front Delts": 0.0, "Side Delts": 0.0, "Biceps": 0.0, "Triceps": 0.0, "Abs": 0.0}
