@@ -1606,14 +1606,14 @@
             "s": 3,
             "w": 45.0,
             "r": 12,
-            "rir": 2
+            "rir": 4
           },
           {
             "ex": "Seated Leg Curl Machine",
             "s": 3,
             "w": 46.0,
-            "r": 12,
-            "rir": 2
+            "r": 10,
+            "rir": 0
           },
           {
             "ex": "Seated Cable Row (Κωπηλατική Τροχαλία)",
