@@ -1455,12 +1455,12 @@
     },
     "Anna weak": {
       "profile": {
-        "gender": "Άνδρας",
-        "age": 28,
-        "weight_kg": 72.0,
-        "height_cm": 177.0,
-        "activity_level": 1.55,
-        "goal": "Bulking",
+        "gender": "Γυναίκα",
+        "age": 25,
+        "weight_kg": 52.0,
+        "height_cm": 165.0,
+        "activity_level": 1.2,
+        "goal": "Cutting",
         "training_age": "Αρχάριος (0-1 έτος)",
         "xp": 0,
         "level": 1
