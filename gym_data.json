@@ -463,7 +463,7 @@
         "activity_level": 1.55,
         "goal": "Bulking",
         "training_age": "Αρχάριος (0-1 έτος)",
-        "xp": 3580,
+        "xp": 4035,
         "level": 4
       },
       "daily_logs": [
@@ -543,7 +543,7 @@
           {
             "ex": "Stationary Bike (Ποδήλατο)",
             "s": 1,
-            "w": 6.0,
+            "w": 3.0,
             "r": 5,
             "rir": 0,
             "hr": 160
@@ -560,14 +560,14 @@
             "s": 3,
             "w": 20.0,
             "r": 8,
-            "rir": 1
+            "rir": 2
           },
           {
             "ex": "Pull-ups (Έλξεις στο Ζυγό)",
             "s": 3,
             "w": 0.0,
-            "r": 4,
-            "rir": 1
+            "r": 5,
+            "rir": 0
           },
           {
             "ex": "Chest-Supported DB Row (30°)",
@@ -588,7 +588,7 @@
             "s": 3,
             "w": 17.5,
             "r": 12,
-            "rir": 2
+            "rir": 3
           },
           {
             "ex": "Crunches",
@@ -747,8 +747,8 @@
       },
       "prs": {
         "Leg Press": 205.2,
-        "Flat Dumbbell Chest Press": 49.5,
-        "Chest-Supported DB Row (30°)": 35.4,
+        "Flat Dumbbell Chest Press": 50.7,
+        "Chest-Supported DB Row (30°)": 40.0,
         "Triceps Rope Pushdown": 24.8,
         "Preacher curls": 31.7,
         "Romanian Deadlift (RDL)": 49.5,
@@ -1113,6 +1113,122 @@
               "total_reps_or_min": 12,
               "type": "weight",
               "muscle": "Quads",
+              "cal": 0
+            }
+          }
+        },
+        {
+          "date": "09/11/2026 09:46",
+          "day": "Δευτέρα",
+          "tonnage": 8310.0,
+          "cardio_cal": 199.1,
+          "exercises": {
+            "Stationary Bike (Ποδήλατο)": {
+              "sets": 1,
+              "max_1rm": 0,
+              "max_weight": 3.0,
+              "rirs": [
+                0
+              ],
+              "total_reps_or_min": 5,
+              "type": "cardio",
+              "muscle": "Cardio",
+              "cal": 199.1
+            },
+            "Leg Press": {
+              "sets": 3,
+              "max_1rm": 205.2,
+              "max_weight": 145.0,
+              "rirs": [
+                2
+              ],
+              "total_reps_or_min": 12,
+              "type": "weight",
+              "muscle": "Quads",
+              "cal": 0
+            },
+            "Flat Dumbbell Chest Press": {
+              "sets": 3,
+              "max_1rm": 50.7,
+              "max_weight": 20.0,
+              "rirs": [
+                2
+              ],
+              "total_reps_or_min": 8,
+              "type": "weight",
+              "muscle": "Chest",
+              "cal": 0
+            },
+            "Pull-ups (Έλξεις στο Ζυγό)": {
+              "sets": 3,
+              "max_1rm": 0,
+              "max_weight": 0.0,
+              "rirs": [
+                0
+              ],
+              "total_reps_or_min": 5,
+              "type": "bodyweight",
+              "muscle": "Lats",
+              "cal": 0
+            },
+            "Chest-Supported DB Row (30°)": {
+              "sets": 3,
+              "max_1rm": 40.0,
+              "max_weight": 15.0,
+              "rirs": [
+                3
+              ],
+              "total_reps_or_min": 10,
+              "type": "weight",
+              "muscle": "Upper Back",
+              "cal": 0
+            },
+            "Roman Chair Hyperextensions (Ρωμαϊκή Έδρα)": {
+              "sets": 3,
+              "max_1rm": 0,
+              "max_weight": 0.0,
+              "rirs": [
+                2
+              ],
+              "total_reps_or_min": 20,
+              "type": "bodyweight",
+              "muscle": "Lower Back",
+              "cal": 0
+            },
+            "Triceps Rope Pushdown": {
+              "sets": 3,
+              "max_1rm": 24.8,
+              "max_weight": 17.5,
+              "rirs": [
+                3
+              ],
+              "total_reps_or_min": 12,
+              "type": "weight",
+              "muscle": "Triceps",
+              "cal": 0
+            },
+            "Crunches": {
+              "sets": 2,
+              "max_1rm": 0,
+              "max_weight": 0.0,
+              "rirs": [
+                1
+              ],
+              "total_reps_or_min": 20,
+              "type": "bodyweight",
+              "muscle": "Abs",
+              "cal": 0
+            },
+            "Preacher curls": {
+              "sets": 3,
+              "max_1rm": 31.7,
+              "max_weight": 25.0,
+              "rirs": [
+                0
+              ],
+              "total_reps_or_min": 8,
+              "type": "weight",
+              "muscle": "Biceps",
               "cal": 0
             }
           }
