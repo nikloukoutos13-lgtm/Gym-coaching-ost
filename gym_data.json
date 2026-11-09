@@ -473,7 +473,16 @@
         "xp": 4035,
         "level": 4
       },
-      "daily_logs": [],
+      "daily_logs": [
+        {
+          "name": "Protein puting",
+          "portion": "1.0 τεμάχιο/α",
+          "cal": 161.0,
+          "p": 20.0,
+          "c": 13.4,
+          "f": 3.0
+        }
+      ],
       "weight_log": [
         {
           "date": "31/10/2026",
