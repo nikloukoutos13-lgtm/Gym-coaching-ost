@@ -551,9 +551,9 @@
           {
             "ex": "Leg Press",
             "s": 3,
-            "w": 135.0,
+            "w": 145.0,
             "r": 12,
-            "rir": 4
+            "rir": 2
           },
           {
             "ex": "Flat Dumbbell Chest Press",
@@ -566,7 +566,7 @@
             "ex": "Pull-ups (Έλξεις στο Ζυγό)",
             "s": 3,
             "w": 0.0,
-            "r": 5,
+            "r": 4,
             "rir": 1
           },
           {
@@ -574,7 +574,7 @@
             "s": 3,
             "w": 15.0,
             "r": 10,
-            "rir": 2
+            "rir": 3
           },
           {
             "ex": "Roman Chair Hyperextensions (Ρωμαϊκή Έδρα)",
