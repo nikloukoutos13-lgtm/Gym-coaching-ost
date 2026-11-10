@@ -1259,7 +1259,7 @@
         "activity_level": 1.725,
         "goal": "Cutting",
         "training_age": "Ενδιάμεσος (1-3 έτη)",
-        "xp": 1060,
+        "xp": 1185,
         "level": 2
       },
       "daily_logs": [
@@ -1495,6 +1495,98 @@
               "type": "cardio",
               "muscle": "Cardio",
               "cal": 382.8
+            }
+          }
+        },
+        {
+          "date": "10/11/2026 20:29",
+          "day": "Τρίτη",
+          "tonnage": 1170.0,
+          "cardio_cal": 166.4,
+          "exercises": {
+            "Wall Balls (HYROX)": {
+              "sets": 5,
+              "max_1rm": 4.0,
+              "max_weight": 3.0,
+              "rirs": [
+                1
+              ],
+              "total_reps_or_min": 10,
+              "type": "weight",
+              "muscle": "Full Body",
+              "cal": 0
+            },
+            "Farmers Carry (HYROX)": {
+              "sets": 3,
+              "max_1rm": 22.0,
+              "max_weight": 10.0,
+              "rirs": [
+                0
+              ],
+              "total_reps_or_min": 3,
+              "type": "weight",
+              "muscle": "Upper Back",
+              "cal": 0
+            },
+            "Sandbag Lunges (HYROX)": {
+              "sets": 3,
+              "max_1rm": 26.7,
+              "max_weight": 20.0,
+              "rirs": [
+                2
+              ],
+              "total_reps_or_min": 10,
+              "type": "weight",
+              "muscle": "Quads",
+              "cal": 0
+            },
+            "Sled Push (HYROX)": {
+              "sets": 2,
+              "max_1rm": 64.0,
+              "max_weight": 60.0,
+              "rirs": [
+                2
+              ],
+              "total_reps_or_min": 2,
+              "type": "weight",
+              "muscle": "Quads",
+              "cal": 0
+            },
+            "Stationary Bike (Ποδήλατο)": {
+              "sets": 1,
+              "max_1rm": 0,
+              "max_weight": 0.8,
+              "rirs": [
+                2
+              ],
+              "total_reps_or_min": 8,
+              "type": "cardio",
+              "muscle": "Cardio",
+              "cal": 53.2
+            },
+            "Burpee Broad Jumps (HYROX)": {
+              "sets": 1,
+              "max_1rm": 0,
+              "max_weight": 0.0,
+              "rirs": [
+                0
+              ],
+              "total_reps_or_min": 10,
+              "type": "bodyweight",
+              "muscle": "Full Body",
+              "cal": 0
+            },
+            "RowErg / Κωπηλατικό (HYROX)": {
+              "sets": 3,
+              "max_1rm": 0,
+              "max_weight": 1.8,
+              "rirs": [
+                2
+              ],
+              "total_reps_or_min": 12,
+              "type": "cardio",
+              "muscle": "Cardio",
+              "cal": 113.2
             }
           }
         },
