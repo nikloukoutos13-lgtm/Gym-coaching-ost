@@ -7,6 +7,16 @@ from datetime import datetime, timedelta
 import streamlit as st
 import matplotlib.pyplot as plt
 
+# Εισαγωγή του Data Manager Module
+from data_manager import (
+    load_all_app_data, 
+    save_profile_file, 
+    save_settings_file, 
+    save_custom_foods_file, 
+    save_custom_exercises_file,
+    load_json
+)
+
 # ------------------------------------------------------------------------------
 # 1. PAGE CONFIG & STYLING
 # ------------------------------------------------------------------------------
@@ -32,7 +42,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ------------------------------------------------------------------------------
-# LANGUAGE SWITCHER HELPER
+# LANGUAGE SWITCHER HELPER & CONSTANTS
 # ------------------------------------------------------------------------------
 if "lang" not in st.session_state:
     st.session_state["lang"] = "Ελληνικά"
@@ -40,167 +50,57 @@ if "lang" not in st.session_state:
 def t(el_text, en_text):
     return en_text if st.session_state.get("lang") == "English" else el_text
 
-DATA_FILE = "gym_data.json"
 DAYS_EL = ["Δευτέρα", "Τρίτη", "Τετάρτη", "Πέμπτη", "Παρασκευή", "Σάββατο", "Κυριακή"]
 DAYS_EN = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 
 DAY_MAP_TO_EN = dict(zip(DAYS_EL, DAYS_EN))
 DAY_MAP_TO_EL = dict(zip(DAYS_EN, DAYS_EL))
 
-# ------------------------------------------------------------------------------
-# 2. DEFAULT DATABASES & QUIPS
-# ------------------------------------------------------------------------------
-default_food_db = {
-    "🍗 Chicken Breast (Grilled) / Κοτόπουλο Στήθος": {"unit": "100g", "cal": 165, "p": 31.0, "c": 0.0, "f": 3.6},
-    "🍗 Chicken Thigh (Skinless) / Κοτόπουλο Μπούτι": {"unit": "100g", "cal": 180, "p": 24.0, "c": 0.0, "f": 9.0},
-    "🍗 Chicken Wings / Κοτόπουλο Φτερούγες": {"unit": "100g", "cal": 203, "p": 18.0, "c": 0.0, "f": 14.0},
-    "🐟 Canned Tuna in Water / Τόνος σε Νερό": {"unit": "100g", "cal": 110, "p": 25.0, "c": 0.0, "f": 0.6},
-    "🦐 King Prawns / Γαρίδες": {"unit": "100g", "cal": 85, "p": 18.5, "c": 0.5, "f": 0.9},
-    "🥩 Tesco Basted Pork": {"unit": "100g", "cal": 145, "p": 21.0, "c": 1.0, "f": 6.0},
-    "🌭 Tesco Finest Irish Pork & Apple Sausage": {"unit": "piece", "cal": 137, "p": 8.0, "c": 3.4, "f": 9.7},
-    "🌯 Burrito (Beef, beans, rice) / Μπουρίτο": {"unit": "100g", "cal": 170, "p": 8.5, "c": 20.0, "f": 6.0},
-    "🥤 Myprotein Impact Whey Protein (1 scoop 30g)": {"unit": "piece", "cal": 114, "p": 23.0, "c": 1.8, "f": 1.9},
-    "🥚 Whole Egg (1 Large) / Αυγό Ολόκληρο": {"unit": "piece", "cal": 72, "p": 6.0, "c": 0.4, "f": 4.8},
-    "🥛 GetPRO / GoPRO Protein Yoghurt (160g)": {"unit": "piece", "cal": 104, "p": 15.0, "c": 7.2, "f": 0.3},
-    "🥣 Tesco Plain Skyr / Quark": {"unit": "100g", "cal": 65, "p": 11.0, "c": 4.0, "f": 0.2},
-    "🍨 Greek Yoghurt 2% / Ελληνικό Γιαούρτι 2%": {"unit": "100g", "cal": 73, "p": 10.0, "c": 3.8, "f": 2.0},
-    "🍫 Nature Valley Extra Protein Bar": {"unit": "piece", "cal": 198, "p": 10.0, "c": 15.0, "f": 11.0},
-    "🥔 Tesco Country Potatoes": {"unit": "100g", "cal": 135, "p": 2.5, "c": 22.0, "f": 3.8},
-    "🍌 Banana / Μπανάνα (1 Medium ~120g)": {"unit": "piece", "cal": 105, "p": 1.3, "c": 27.0, "f": 0.3},
-    "🍎 Apple / Μήλο (1 Medium ~150g)": {"unit": "piece", "cal": 78, "p": 0.5, "c": 21.0, "f": 0.3},
-    "🥜 Peanut Butter 100% / Φυστικοβούτυρο": {"unit": "100g", "cal": 590, "p": 25.0, "c": 12.0, "f": 49.0},
-    "🍚 Cooked Rice / Ρύζι βρασμένο": {"unit": "100g", "cal": 130, "p": 2.7, "c": 28.0, "f": 0.3},
-    "🍝 Cooked Pasta / Μακαρόνια βρασμένα": {"unit": "100g", "cal": 158, "p": 5.8, "c": 31.0, "f": 0.9},
-    "🍲 Lentils / Φακές βρασμένες": {"unit": "100g", "cal": 116, "p": 9.0, "c": 20.0, "f": 0.4},
-}
-
-default_exercise_db = {
-    "Stationary Bike (Ποδήλατο)": {"muscle": "Cardio", "type": "cardio", "primary": "Cardio", "secondary": None},
-    "Treadmill (Διάδρομος)": {"muscle": "Cardio", "type": "cardio", "primary": "Cardio", "secondary": None},
-    "Running (Εξωτερικό Τρέξιμο)": {"muscle": "Cardio", "type": "cardio", "primary": "Cardio", "secondary": None},
-    "Leg Press": {"muscle": "Quads", "type": "weight", "is_db": False, "primary": "Quads", "secondary": "Glutes"},
-    "Leg Extension Machine": {"muscle": "Quads", "type": "weight", "is_db": False, "primary": "Quads", "secondary": None},
-    "Seated Leg Curl Machine": {"muscle": "Hamstrings", "type": "weight", "is_db": False, "primary": "Hamstrings", "secondary": None},
-    "Romanian Deadlift (RDL)": {"muscle": "Hamstrings", "type": "weight", "is_db": True, "primary": "Hamstrings", "secondary": "Glutes"},
-    "Roman Chair Hyperextensions": {"muscle": "Lower Back", "type": "bodyweight", "primary": "Hamstrings", "secondary": "Glutes"},
-    "Pull-ups (Έλξεις στο Ζυγό)": {"muscle": "Lats", "type": "bodyweight", "primary": "Lats", "secondary": "Biceps"},
-    "Chin-ups (Υπτιάστιες Έλξεις)": {"muscle": "Lats", "type": "bodyweight", "primary": "Lats", "secondary": "Biceps"},
-    "Lat Pulldown (Τροχαλία)": {"muscle": "Lats", "type": "weight", "is_db": False, "primary": "Lats", "secondary": "Biceps"},
-    "Seated Cable Row": {"muscle": "Upper Back", "type": "weight", "is_db": False, "primary": "Upper Back", "secondary": "Biceps"},
-    "Chest-Supported DB Row (30°)": {"muscle": "Upper Back", "type": "weight", "is_db": True, "primary": "Upper Back", "secondary": "Rear Delts"},
-    "Flat Dumbbell Chest Press": {"muscle": "Chest", "type": "weight", "is_db": True, "primary": "Chest", "secondary": "Triceps"},
-    "Incline DB Bench Press": {"muscle": "Upper Chest", "type": "weight", "is_db": True, "primary": "Chest", "secondary": "Front Delts"},
-    "Cable Chest Flyes": {"muscle": "Chest", "type": "weight", "is_db": False, "primary": "Chest", "secondary": None},
-    "Dumbbell Shoulder Press": {"muscle": "Shoulders", "type": "weight", "is_db": True, "primary": "Front Delts", "secondary": "Triceps"},
-    "Cable Lateral Raises": {"muscle": "Side Delts", "type": "weight", "is_db": False, "primary": "Side Delts", "secondary": None},
-    "Lateral Raises (Dumbbells)": {"muscle": "Side Delts", "type": "weight", "is_db": True, "primary": "Side Delts", "secondary": None},
-    "Cable Face Pulls": {"muscle": "Rear Delts", "type": "weight", "is_db": False, "primary": "Rear Delts", "secondary": "Upper Back"},
-    "Cable Bicep Curls": {"muscle": "Biceps", "type": "weight", "is_db": False, "primary": "Biceps", "secondary": None},
-    "Dumbbell Bicep Curls": {"muscle": "Biceps", "type": "weight", "is_db": True, "primary": "Biceps", "secondary": None},
-    "Triceps Rope Pushdown": {"muscle": "Triceps", "type": "weight", "is_db": False, "primary": "Triceps", "secondary": None},
-    "Overhead Cable Triceps Extension": {"muscle": "Triceps", "type": "weight", "is_db": False, "primary": "Triceps", "secondary": None},
-    "Crunches": {"muscle": "Abs", "type": "bodyweight", "primary": "Abs", "secondary": None},
-    "Plank": {"muscle": "Core", "type": "bodyweight_time", "primary": "Abs", "secondary": None},
-    "SkiErg (HYROX)": {"muscle": "Cardio", "type": "cardio", "primary": "Cardio", "secondary": "Lats"},
-    "Sled Push (HYROX)": {"muscle": "Quads", "type": "weight", "is_db": False, "primary": "Quads", "secondary": "Glutes"},
-    "Sled Pull (HYROX)": {"muscle": "Hamstrings", "type": "weight", "is_db": False, "primary": "Hamstrings", "secondary": "Upper Back"},
-    "Burpee Broad Jumps (HYROX)": {"muscle": "Full Body", "type": "bodyweight", "primary": "Quads", "secondary": "Cardio"},
-    "RowErg / Κωπηλατικό (HYROX)": {"muscle": "Cardio", "type": "cardio", "primary": "Cardio", "secondary": "Upper Back"},
-    "Farmers Carry (HYROX)": {"muscle": "Upper Back", "type": "weight", "is_db": True, "primary": "Upper Back", "secondary": "Abs"},
-    "Sandbag Lunges (HYROX)": {"muscle": "Quads", "type": "weight", "is_db": False, "primary": "Quads", "secondary": "Glutes"},
-    "Wall Balls (HYROX)": {"muscle": "Full Body", "type": "weight", "is_db": False, "primary": "Quads", "secondary": "Front Delts"}
-}
-
-TONNAGE_QUIPS_EL = [
-    (100, "🦆 Σήκωσες το βάρος από 40 πάπιες!"),
-    (250, "🦭 Σήκωσες το βάρος από 1 ενήλικη φώκια!"),
-    (500, "🎹 Σήκωσες 1 πιάνο με ουρά Konzertflügel!"),
-    (1200, "🚗 Σήκωσες 1 Fiat 500 / Mini Cooper!"),
-    (2500, "🦏 Σήκωσες έναν αρσενικό Λευκό Ρινόκερο!"),
-    (6000, "🐘 Σήκωσες έναν ενήλικο Αφρικανικό Ελέφαντα!"),
-    (12000, "🦖 Σήκωσες έναν πλήρως αναπτυγμένο Tyrannosaurus Rex!"),
-    (22000, "🚌 Σήκωσες 2 διώροφα κόκκινα λεωφορεία του Λονδίνου!"),
-    (55000, "✈️ Σήκωσες ένα άδειο επιβατικό Boeing 737-800!"),
-    (100000, "🚂 Σήκωσες μια ατμομηχανή τρένου Orient Express!")
-]
-
-TONNAGE_QUIPS_EN = [
-    (100, "🦆 You lifted the weight of 40 ducks!"),
-    (250, "🦭 You lifted the weight of 1 adult seal!"),
-    (500, "🎹 You lifted 1 Konzertflügel grand piano!"),
-    (1200, "🚗 You lifted 1 Fiat 500 / Mini Cooper!"),
-    (2500, "🦏 You lifted a male White Rhino!"),
-    (6000, "🐘 You lifted an adult African Elephant!"),
-    (12000, "🦖 You lifted a fully grown Tyrannosaurus Rex!"),
-    (22000, "🚌 You lifted 2 London double-decker buses!"),
-    (55000, "✈️ You lifted an empty Boeing 737-800 passenger jet!"),
-    (100000, "🚂 You lifted an Orient Express steam locomotive!")
-]
+# Φόρτωση ατακών από το data/quips.json
+quips_data = load_json(os.path.join("data", "quips.json"), {})
+TONNAGE_QUIPS_EL = quips_data.get("tonnage_el", [
+    [100, "🦆 Σήκωσες το βάρος από 40 πάπιες!"],
+    [500, "🎹 Σήκωσες 1 πιάνο με ουρά Konzertflügel!"],
+    [1200, "🚗 Σήκωσες 1 Fiat 500 / Mini Cooper!"],
+    [6000, "🐘 Σήκωσες έναν ενήλικο Αφρικανικό Ελέφαντα!"],
+    [100000, "🚂 Σήκωσες μια ατμομηχανή τρένου Orient Express!"]
+])
+TONNAGE_QUIPS_EN = quips_data.get("tonnage_en", [
+    [100, "🦆 You lifted the weight of 40 ducks!"],
+    [500, "🎹 You lifted 1 Konzertflügel grand piano!"],
+    [1200, "🚗 You lifted 1 Fiat 500 / Mini Cooper!"],
+    [6000, "🐘 You lifted an adult African Elephant!"],
+    [100000, "🚂 You lifted an Orient Express steam locomotive!"]
+])
 
 CARDIO_RUNNING_QUIPS_EL = [
     (1, "🐢 Πρώτο χιλιόμετρο! Ξεπέρασες τη χελώνα του Αισώπου!"),
-    (2, "🏃 Τρέχεις ήδη πιο γρήγορα από το 80% των ανθρώπων στον καναπέ!"),
-    (3, "🐕 Έτρεξες όσο ένας δραστήριος σκύλος Golden Retriever στο πάρκο!"),
-    (4, "🐈 Προσπέρασες μια γάτα που κυνηγάει ποντίκι!"),
     (5, "🐇 5km! Ξεπέρασες ένα κουνέλι σε πλήρη ταχύτητα!"),
-    (6, "🦔 Κινείσαι πιο γρήγορα κι από τον Sonic the Hedgehog!"),
-    (8, "🐺 8km! Κάλυψες την ημερήσια περιοδεία μιας αγέλης λύκων!"),
     (10, "🐎 10km! Τρέχεις με το σθένος και την αντοχή ενός καθαρόαιμου αλόγου!"),
-    (12, "🦘 Κάλυψες απόσταση μεγαλύτερη από 1.000 άλματα καγκουρό!"),
-    (15, "🐆 15km! Σήμερα προσπέρασες έναν γατόπαρδο (Cheetah) σε αντοχή!"),
-    (18, "🦅 Έτρεξες όσο πετάει ένας αετός σε μια πρωινή περιπολία!"),
     (21, "🏅 21km Ημιμαραθώνιος! Είσαι επίσημα μηχανή αντοχής!"),
-    (25, "🦁 Έτρεξες περισσότερο από όσο διανύει ένα λιοντάρι στη σαβάνα!"),
-    (30, "🐬 Κάλυψες την απόσταση που κολυμπάει ένα δελφίνι στον ωκεανό!"),
-    (35, "🐫 Διασχίζεις αποστάσεις σαν καμήλα στη Σαχάρα χωρίς να σταματάς!"),
     (42, "🏆 42.2km ΜΑΡΑΘΩΝΙΟΣ! Γράφεις ιστορία σαν τον Φειδιππίδη!"),
-    (50, "🚀 50km Ultramarathon! Προσπέρασες τα σύνορα της πόλης!"),
-    (100, "🛸 100km! Είσαι πλέον υπεράνθρωπος, εκτός γήινου συναγωνισμού!"),
     (101, "🛷 Sled Push: Σπρώξατε βάρος μεγαλύτερο από έναν ενήλικο Γορίλα!"),
     (102, "🐻 Sled Pull: Τραβήξατε το βάρος μιας επιθετικής Πολικής Αρκούδας!"),
     (103, "🚣 SkiErg / RowErg: Κωπηλατήσατε τη διαδρομή μιας ολόκληρης λίμνης!"),
     (104, "☄️ Burpee Broad Jumps: Εξερράγης σαν πύραυλος SpaceX σε κάθε άλμα!"),
     (105, "🧱 Wall Balls: Εκτοξεύσατε τη μπάλα πιο ψηλά κι από τον τοίχο!"),
     (106, "🎒 Sandbag Lunges: Κουβαλήσατε το βάρος ενός πολεμιστή Spartan Race!"),
-    (107, "🏋️ Farmers Carry: Σφίξατε τη λαβή σας σαν μέγγενη από τιτάνιο!"),
-    (108, "🔥 HYROX Workout Complete: Κάψατε θερμίδες για ένα μικρό χωριό!"),
-    (109, "⚡ Roxzone Master: Μεταβάσεις πιο γρήγορες κι από pit stop Formula 1!"),
-    (110, "👑 HYROX Queen: Ένταση προπόνησης επιπέδου World Championship!"),
-    (111, "💣 Cardio Explosion: Η καρδιά σου δουλεύει σαν ελβετικό ρολόι!"),
-    (112, "🛡️ Unstoppable Endurance: Η αντοχή σου λυγίζει ακόμα και σίδερα!")
+    (107, "🏋️ Farmers Carry: Σφίξατε τη λαβή σας σαν μέγγενη από τιτάνιο!")
 ]
 
 CARDIO_RUNNING_QUIPS_EN = [
     (1, "🐢 First kilometer! Faster than Aesop's tortoise!"),
-    (2, "🏃 You're moving faster than 80% of people on the couch!"),
-    (3, "🐕 Covered the distance of an energetic Golden Retriever in the park!"),
-    (4, "🐈 Overtook a cat chasing a mouse!"),
     (5, "🐇 5km! Outran a sprinting rabbit!"),
-    (6, "🦔 Moving faster than Sonic the Hedgehog!"),
-    (8, "🐺 8km! Outpaced a wolf pack's daily range!"),
     (10, "🐎 10km! Running with the stamina of a thoroughbred horse!"),
-    (12, "🦘 Greater distance than 1,000 kangaroo hops!"),
-    (15, "🐆 15km! Outlasted a cheetah in endurance today!"),
-    (18, "🦅 Ran as far as an eagle flies on a morning patrol!"),
     (21, "🏅 21km Half Marathon! You are an endurance machine!"),
-    (25, "🦁 Covered more ground than a lion hunting in the savanna!"),
-    (30, "🐬 Swam the distance of an oceanic dolphin!"),
-    (35, "🐫 Crossing distances like a desert camel without stopping!"),
     (42, "🏆 42.2km MARATHON! Making history like Pheidippides!"),
-    (50, "🚀 50km Ultramarathon! Beyond city borders!"),
-    (100, "🛸 100km! Superhuman endurance unlocked!"),
     (101, "🛷 Sled Push: Pushed heavier than an adult Gorilla!"),
     (102, "🐻 Sled Pull: Pulled the weight of an aggressive Polar Bear!"),
     (103, "🚣 SkiErg / RowErg: Rowed across an entire lake!"),
     (104, "☄️ Burpee Broad Jumps: Explosive like a SpaceX rocket on every jump!"),
     (105, "🧱 Wall Balls: Launched higher than the wall!"),
     (106, "🎒 Sandbag Lunges: Carried the load of a Spartan Race warrior!"),
-    (107, "🏋️ Farmers Carry: Titanium grip unlocked!"),
-    (108, "🔥 HYROX Workout Complete: Burned calories for a small village!"),
-    (109, "⚡ Roxzone Master: Transitions faster than a Formula 1 pit stop!"),
-    (110, "👑 HYROX Queen: World Championship level intensity!"),
-    (111, "💣 Cardio Explosion: Heart ticking like a Swiss watch!"),
-    (112, "🛡️ Unstoppable Endurance: Bending iron with pure stamina!")
+    (107, "🏋️ Farmers Carry: Titanium grip unlocked!")
 ]
 
 default_nikos_profile = {
@@ -216,40 +116,11 @@ default_nikos_profile = {
             {"ex": "Stationary Bike (Ποδήλατο)", "s": 1, "w": 6.0, "r": 5, "rir": 0},
             {"ex": "Leg Press", "s": 3, "w": 105.0, "r": 12, "rir": 2},
             {"ex": "Flat Dumbbell Chest Press", "s": 3, "w": 17.5, "r": 12, "rir": 2},
-            {"ex": "Pull-ups (Έλξεις στο Ζυγό)", "s": 3, "w": 0.0, "r": 8, "rir": 2},
-            {"ex": "Chest-Supported DB Row (30°)", "s": 3, "w": 10.0, "r": 12, "rir": 2},
-            {"ex": "Roman Chair Hyperextensions", "s": 3, "w": 0.0, "r": 12, "rir": 2},
-            {"ex": "Triceps Rope Pushdown", "s": 3, "w": 15.0, "r": 12, "rir": 2},
-            {"ex": "Crunches", "s": 2, "w": 0.0, "r": 20, "rir": 1}
+            {"ex": "Pull-ups (Έλξεις στο Ζυγό)", "s": 3, "w": 0.0, "r": 8, "rir": 2}
         ],
-        "Τρίτη": [],
-        "Τετάρτη": [
-            {"ex": "Treadmill (Διάδρομος)", "s": 1, "w": 12.0, "r": 5, "rir": 0},
-            {"ex": "Romanian Deadlift (RDL)", "s": 3, "w": 16.0, "r": 10, "rir": 2},
-            {"ex": "Chin-ups (Υπτιάστιες Έλξεις)", "s": 3, "w": 0.0, "r": 8, "rir": 2},
-            {"ex": "Incline DB Bench Press", "s": 3, "w": 12.5, "r": 10, "rir": 2},
-            {"ex": "Dumbbell Shoulder Press", "s": 3, "w": 12.5, "r": 8, "rir": 2},
-            {"ex": "Cable Lateral Raises", "s": 3, "w": 5.0, "r": 12, "rir": 2},
-            {"ex": "Cable Face Pulls", "s": 3, "w": 12.5, "r": 15, "rir": 2},
-            {"ex": "Plank", "s": 2, "w": 0.0, "r": 60, "rir": 1}
-        ],
-        "Πέμπτη": [],
-        "Παρασκευή": [
-            {"ex": "Stationary Bike (Ποδήλατο)", "s": 1, "w": 6.0, "r": 5, "rir": 0},
-            {"ex": "Leg Extension Machine", "s": 3, "w": 45.0, "r": 12, "rir": 2},
-            {"ex": "Seated Leg Curl Machine", "s": 3, "w": 40.0, "r": 12, "rir": 2},
-            {"ex": "Seated Cable Row", "s": 3, "w": 45.0, "r": 12, "rir": 2},
-            {"ex": "Lateral Raises (Dumbbells)", "s": 3, "w": 5.0, "r": 12, "rir": 2},
-            {"ex": "Cable Bicep Curls", "s": 3, "w": 12.5, "r": 12, "rir": 2},
-            {"ex": "Overhead Cable Triceps Extension", "s": 3, "w": 15.0, "r": 12, "rir": 2},
-            {"ex": "Crunches", "s": 2, "w": 0.0, "r": 20, "rir": 1}
-        ],
-        "Σάββατο": [],
-        "Κυριακή": []
+        "Τρίτη": [], "Τετάρτη": [], "Πέμπτη": [], "Παρασκευή": [], "Σάββατο": [], "Κυριακή": []
     },
-    "prs": {},
-    "achievements": [],
-    "history": []
+    "prs": {}, "achievements": [], "history": []
 }
 
 default_marilena_profile = {
@@ -261,95 +132,55 @@ default_marilena_profile = {
     "daily_logs": [],
     "weight_log": [{"date": datetime.now().strftime("%d/%m/%Y"), "weight": 60.0}],
     "templates": {
-        "Δευτέρα": [
-            {"ex": "Running (Εξωτερικό Τρέξιμο)", "s": 1, "w": 5.0, "r": 28, "rir": 0, "hr": 145},
-            {"ex": "SkiErg (HYROX)", "s": 3, "w": 0.0, "r": 10, "rir": 1},
-            {"ex": "Sled Push (HYROX)", "s": 4, "w": 75.0, "r": 15, "rir": 2},
-            {"ex": "Burpee Broad Jumps (HYROX)", "s": 3, "w": 0.0, "r": 15, "rir": 1}
-        ],
-        "Τρίτη": [],
-        "Τετάρτη": [
-            {"ex": "Running (Εξωτερικό Τρέξιμο)", "s": 1, "w": 6.0, "r": 33, "rir": 0, "hr": 152},
-            {"ex": "RowErg / Κωπηλατικό (HYROX)", "s": 3, "w": 0.0, "r": 10, "rir": 1},
-            {"ex": "Sandbag Lunges (HYROX)", "s": 3, "w": 15.0, "r": 20, "rir": 2},
-            {"ex": "Wall Balls (HYROX)", "s": 4, "w": 6.0, "r": 20, "rir": 1}
-        ],
-        "Πέμπτη": [],
-        "Παρασκευή": [
-            {"ex": "Running (Εξωτερικό Τρέξιμο)", "s": 1, "w": 8.0, "r": 45, "rir": 0, "hr": 158},
-            {"ex": "Sled Pull (HYROX)", "s": 4, "w": 50.0, "r": 15, "rir": 2},
-            {"ex": "Farmers Carry (HYROX)", "s": 3, "w": 16.0, "r": 50, "rir": 2},
-            {"ex": "Plank", "s": 2, "w": 0.0, "r": 60, "rir": 1}
-        ],
-        "Σάββατο": [],
-        "Κυριακή": []
+        "Δευτέρα": [], "Τρίτη": [], "Τετάρτη": [], "Πέμπτη": [], "Παρασκευή": [], "Σάββατο": [], "Κυριακή": []
     },
-    "prs": {},
-    "achievements": [],
-    "history": []
+    "prs": {}, "achievements": [], "history": []
 }
 
 # ------------------------------------------------------------------------------
-# 3. PROFILE MIGRATION & PERSISTENCE
+# 3. PROFILE MIGRATION & PERSISTENCE (MODULAR DATA MANAGER)
 # ------------------------------------------------------------------------------
 def load_user_data():
     if "user_data" not in st.session_state:
-        data = None
-        if os.path.exists(DATA_FILE):
-            try:
-                with open(DATA_FILE, "r", encoding="utf-8") as f:
-                    data = json.load(f)
-            except Exception:
-                data = None
-        
-        if not data: data = {}
-
-        if "food_db" not in data: data["food_db"] = default_food_db.copy()
-        if "exercise_database" not in data: data["exercise_database"] = default_exercise_db.copy()
-        else:
-            for k, v in default_exercise_db.items():
-                if k not in data["exercise_database"]: data["exercise_database"][k] = v
-
-        if "profiles" not in data or not isinstance(data.get("profiles"), dict):
-            data["profiles"] = {
-                "NIKOS (Gym & Hypertrophy)": json.loads(json.dumps(default_nikos_profile)),
-                "MARILENA (HYROX & Run)": json.loads(json.dumps(default_marilena_profile))
-            }
-            data["active_profile"] = "NIKOS (Gym & Hypertrophy)"
-
-        if "active_profile" not in data or data["active_profile"] not in data["profiles"]:
-            data["active_profile"] = list(data["profiles"].keys())[0]
-
-        st.session_state["user_data"] = data
+        st.session_state["user_data"] = load_all_app_data()
 
 load_user_data()
 user_data = st.session_state["user_data"]
 
 def save_user_data():
     if "user_data" in st.session_state:
-        try:
-            with open(DATA_FILE, "w", encoding="utf-8") as f:
-                json.dump(st.session_state["user_data"], f, ensure_ascii=False, indent=2)
-        except Exception:
-            pass
+        ud = st.session_state["user_data"]
+        act_name = ud.get("active_profile", "")
+        
+        # 1. Αποθήκευση τοπικά στο user_data/
+        if act_name and act_name in ud.get("profiles", {}):
+            save_profile_file(act_name, ud["profiles"][act_name])
+            
+        save_settings_file(act_name)
+        save_custom_foods_file(ud.get("food_db", {}))
+        save_custom_exercises_file(ud.get("exercise_database", {}))
 
-        if "GITHUB_TOKEN" in st.secrets and "GITHUB_REPO" in st.secrets:
+        # 2. GitHub Auto-Sync (αν υπάρχουν secrets)
+        if "GITHUB_TOKEN" in st.secrets and "GITHUB_REPO" in st.secrets and act_name:
             try:
+                import re
                 token = st.secrets["GITHUB_TOKEN"]
                 repo = st.secrets["GITHUB_REPO"]
-                url = f"https://api.github.com/repos/{repo}/contents/{DATA_FILE}"
-                headers = {
-                    "Authorization": f"token {token}",
-                    "Accept": "application/vnd.github.v3+json"
-                }
+                
+                clean_fname = re.sub(r'[^a-zA-Z0-9_-]', '_', act_name.lower())
+                clean_fname = re.sub(r'_+', '_', clean_fname).strip('_')
+                file_path = f"user_data/profiles/{clean_fname}.json"
+                
+                url = f"https://api.github.com/repos/{repo}/contents/{file_path}"
+                headers = {"Authorization": f"token {token}", "Accept": "application/vnd.github.v3+json"}
                 get_res = requests.get(url, headers=headers, timeout=3)
                 sha = get_res.json().get("sha", "") if get_res.status_code == 200 else ""
                 
-                content_json = json.dumps(st.session_state["user_data"], ensure_ascii=False, indent=2)
+                content_json = json.dumps(ud["profiles"][act_name], ensure_ascii=False, indent=2)
                 content_b64 = base64.b64encode(content_json.encode("utf-8")).decode("utf-8")
                 
                 payload = {
-                    "message": "🤖 Auto-save multi-profile gym data",
+                    "message": f"🤖 Auto-save profile {act_name}",
                     "content": content_b64,
                     "sha": sha
                 }
@@ -397,7 +228,7 @@ def get_tonnage_quips(tonnage_kg):
     quips = TONNAGE_QUIPS_EN if st.session_state.get("lang") == "English" else TONNAGE_QUIPS_EL
     for limit, text in quips:
         if tonnage_kg <= limit: return text
-    return quips[-1][1]
+    return quips[-1][1] if quips else ""
 
 def calculate_streak(log_dates_strs):
     if not log_dates_strs: return 0, False
@@ -430,16 +261,16 @@ def calculate_streak(log_dates_strs):
 
 def get_cardio_quip(dist_km, ex_name=""):
     quips = CARDIO_RUNNING_QUIPS_EN if st.session_state.get("lang") == "English" else CARDIO_RUNNING_QUIPS_EL
-    if "Sled Push" in ex_name: return quips[18][1]
-    if "Sled Pull" in ex_name: return quips[19][1]
-    if "SkiErg" in ex_name or "RowErg" in ex_name: return quips[20][1]
-    if "Burpee" in ex_name: return quips[21][1]
-    if "Wall Balls" in ex_name: return quips[22][1]
-    if "Sandbag" in ex_name: return quips[23][1]
+    if "Sled Push" in ex_name: return quips[5][1]
+    if "Sled Pull" in ex_name: return quips[6][1]
+    if "SkiErg" in ex_name or "RowErg" in ex_name: return quips[7][1]
+    if "Burpee" in ex_name: return quips[8][1]
+    if "Wall Balls" in ex_name: return quips[9][1]
+    if "Sandbag" in ex_name: return quips[10][1]
     
     for limit, text in quips:
         if dist_km <= limit and limit <= 100: return text
-    return quips[17][1]
+    return quips[4][1]
 
 def calc_hr_zone(hr_bpm, age=26):
     max_hr = 211 - (0.64 * age)
@@ -641,31 +472,21 @@ with st.sidebar:
                 st.warning(t("Παρακαλώ δώσε μοναδικό όνομα.", "Please enter a unique name."))
 
     st.divider()
-    st.subheader(t("⚙️ Διαχείριση Δεδομένων & Sync", "⚙️ Data & Sync Management"))
-    json_str = json.dumps(user_data, ensure_ascii=False, indent=2)
-    st.download_button("📥 Download gym_data.json", data=json_str, file_name="gym_data.json", mime="application/json")
+    st.subheader(t("⚙️ Διαχείριση Δεδομένων & Backup", "⚙️ Data & Backup Management"))
+    json_str = json.dumps(active_p, ensure_ascii=False, indent=2)
+    st.download_button(f"📥 Download {active_profile_name}.json", data=json_str, file_name=f"{active_profile_name}.json", mime="application/json")
     
-    uploaded_json = st.file_uploader("📤 Restore gym_data.json", type=["json"])
+    uploaded_json = st.file_uploader(t("📤 Restore Προφίλ JSON", "📤 Restore Profile JSON"), type=["json"])
     if uploaded_json is not None:
         try:
             data = json.load(uploaded_json)
-            st.session_state["user_data"] = data
-            save_user_data()
-            st.success(t("✅ Restore επιτυχές!", "✅ Restore successful!"))
-            st.rerun()
+            if "profile" in data:
+                user_data["profiles"][active_profile_name] = data
+                save_user_data()
+                st.success(t("✅ Restore επιτυχές!", "✅ Restore successful!"))
+                st.rerun()
         except Exception:
             st.error(t("❌ Σφάλμα αρχείου JSON.", "❌ JSON file error."))
-
-    st.divider()
-    if st.button(t("🗑️ Επαναφορά Όλων (Reset)", "🗑️ Reset All Data"), type="secondary"):
-        st.session_state["user_data"] = {}
-        if os.path.exists(DATA_FILE):
-            try: os.remove(DATA_FILE)
-            except Exception: pass
-        load_user_data()
-        save_user_data()
-        st.warning(t("🗑️ Όλα τα δεδομένα μηδενίστηκαν!", "🗑️ All data reset!"))
-        st.rerun()
 
 # ------------------------------------------------------------------------------
 # 6. APP MAIN UI & TABS
@@ -927,7 +748,6 @@ with tab2:
     day_options = DAYS_EN if st.session_state.get("lang") == "English" else DAYS_EL
     day_selected_label = st.selectbox(t("📅 Επιλογή Ημέρας:", "📅 Select Day:"), day_options, key=f"day_select_{active_profile_name}")
     
-    # Map back to internal key (DAYS_EL)
     if st.session_state.get("lang") == "English":
         day_selected = DAY_MAP_TO_EL.get(day_selected_label, "Δευτέρα")
     else:
