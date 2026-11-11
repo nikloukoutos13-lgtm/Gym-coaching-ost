@@ -1,0 +1,26 @@
+{
+  "tonnage_el": [
+    [100, "🦆 Σήκωσες το βάρος από 40 πάπιες!"],
+    [250, "🦭 Σήκωσες το βάρος από 1 ενήλικη φώκια!"],
+    [500, "🎹 Σήκωσες 1 πιάνο με ουρά Konzertflügel!"],
+    [1200, "🚗 Σήκωσες 1 Fiat 500 / Mini Cooper!"],
+    [2500, "🦏 Σήκωσες έναν αρσενικό Λευκό Ρινόκερο!"],
+    [6000, "🐘 Σήκωσες έναν ενήλικο Αφρικανικό Ελέφαντα!"],
+    [12000, "🦖 Σήκωσες έναν πλήρως αναπτυγμένο Tyrannosaurus Rex!"],
+    [22000, "🚌 Σήκωσες 2 διώροφα κόκκινα λεωφορεία του Λονδίνου!"],
+    [55000, "✈️ Σήκωσες ένα άδειο επιβατικό Boeing 737-800!"],
+    [100000, "🚂 Σήκωσες μια ατμομηχανή τρένου Orient Express!"]
+  ],
+  "tonnage_en": [
+    [100, "🦆 You lifted the weight of 40 ducks!"],
+    [250, "🦭 You lifted the weight of 1 adult seal!"],
+    [500, "🎹 You lifted 1 Konzertflügel grand piano!"],
+    [1200, "🚗 You lifted 1 Fiat 500 / Mini Cooper!"],
+    [2500, "🦏 You lifted a male White Rhino!"],
+    [6000, "🐘 You lifted an adult African Elephant!"],
+    [12000, "🦖 You lifted a fully grown Tyrannosaurus Rex!"],
+    [22000, "🚌 You lifted 2 London double-decker buses!"],
+    [55000, "✈️ You lifted an empty Boeing 737-800 passenger jet!"],
+    [100000, "🚂 You lifted an Orient Express steam locomotive!"]
+  ]
+}
