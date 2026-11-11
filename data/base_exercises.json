@@ -1,31 +1,1279 @@
 {
-  "Barbell Back Squat": { "muscle": "Quads", "type": "weight", "is_db": false, "primary": "Quads", "secondary": "Glutes", "emg_weights": { "Quads": 1.0, "Glutes": 0.6, "Lower Back": 0.4 }, "resistance_profile": "Mid-range" },
-  "Barbell Deadlift": { "muscle": "Posterior Chain", "type": "weight", "is_db": false, "primary": "Hamstrings", "secondary": "Lower Back", "emg_weights": { "Hamstrings": 0.8, "Glutes": 0.8, "Lower Back": 1.0, "Lats": 0.4 }, "resistance_profile": "Lengthened-biased" },
-  "Leg Press": { "muscle": "Quads", "type": "weight", "is_db": false, "primary": "Quads", "secondary": "Glutes", "emg_weights": { "Quads": 1.0, "Glutes": 0.4 }, "resistance_profile": "Mid-range" },
-  "Leg Extension Machine": { "muscle": "Quads", "type": "weight", "is_db": false, "primary": "Quads", "secondary": null, "emg_weights": { "Quads": 1.0 }, "resistance_profile": "Shortened-biased" },
-  "Seated Leg Curl Machine": { "muscle": "Hamstrings", "type": "weight", "is_db": false, "primary": "Hamstrings", "secondary": null, "emg_weights": { "Hamstrings": 1.0 }, "resistance_profile": "Mid-range" },
-  "Romanian Deadlift (RDL)": { "muscle": "Hamstrings", "type": "weight", "is_db": true, "primary": "Hamstrings", "secondary": "Glutes", "emg_weights": { "Hamstrings": 1.0, "Glutes": 0.5 }, "resistance_profile": "Lengthened-biased" },
-  "Flat Dumbbell Chest Press": { "muscle": "Chest", "type": "weight", "is_db": true, "primary": "Chest", "secondary": "Triceps", "emg_weights": { "Chest": 1.0, "Front Delts": 0.4, "Triceps": 0.35 }, "resistance_profile": "Mid-range" },
-  "Incline DB Bench Press": { "muscle": "Upper Chest", "type": "weight", "is_db": true, "primary": "Chest", "secondary": "Front Delts", "emg_weights": { "Chest": 1.0, "Front Delts": 0.6, "Triceps": 0.3 }, "resistance_profile": "Mid-range" },
-  "Cable Chest Flyes": { "muscle": "Chest", "type": "weight", "is_db": false, "primary": "Chest", "secondary": null, "emg_weights": { "Chest": 1.0 }, "resistance_profile": "Shortened-biased" },
-  "Pull-ups (Έλξεις στο Ζυγό)": { "muscle": "Lats", "type": "bodyweight", "is_db": false, "primary": "Lats", "secondary": "Biceps", "emg_weights": { "Lats": 1.0, "Biceps": 0.4 }, "resistance_profile": "Shortened-biased" },
-  "Lat Pulldown (Τροχαλία)": { "muscle": "Lats", "type": "weight", "is_db": false, "primary": "Lats", "secondary": "Biceps", "emg_weights": { "Lats": 1.0, "Biceps": 0.35 }, "resistance_profile": "Mid-range" },
-  "Seated Cable Row": { "muscle": "Upper Back", "type": "weight", "is_db": false, "primary": "Upper Back", "secondary": "Biceps", "emg_weights": { "Upper Back": 1.0, "Lats": 0.5, "Biceps": 0.3 }, "resistance_profile": "Shortened-biased" },
-  "Dumbbell Shoulder Press": { "muscle": "Shoulders", "type": "weight", "is_db": true, "primary": "Front Delts", "secondary": "Triceps", "emg_weights": { "Front Delts": 1.0, "Triceps": 0.4 }, "resistance_profile": "Mid-range" },
-  "Cable Lateral Raises": { "muscle": "Side Delts", "type": "weight", "is_db": false, "primary": "Side Delts", "secondary": null, "emg_weights": { "Side Delts": 1.0 }, "resistance_profile": "Lengthened-biased" },
-  "Lateral Raises (Dumbbells)": { "muscle": "Side Delts", "type": "weight", "is_db": true, "primary": "Side Delts", "secondary": null, "emg_weights": { "Side Delts": 1.0 }, "resistance_profile": "Shortened-biased" },
-  "Cable Face Pulls": { "muscle": "Rear Delts", "type": "weight", "is_db": false, "primary": "Rear Delts", "secondary": "Upper Back", "emg_weights": { "Rear Delts": 1.0, "Upper Back": 0.5 }, "resistance_profile": "Shortened-biased" },
-  "Cable Bicep Curls": { "muscle": "Biceps", "type": "weight", "is_db": false, "primary": "Biceps", "secondary": null, "emg_weights": { "Biceps": 1.0 }, "resistance_profile": "Mid-range" },
-  "Triceps Rope Pushdown": { "muscle": "Triceps", "type": "weight", "is_db": false, "primary": "Triceps", "secondary": null, "emg_weights": { "Triceps": 1.0 }, "resistance_profile": "Shortened-biased" },
-  "Overhead Cable Triceps Extension": { "muscle": "Triceps", "type": "weight", "is_db": false, "primary": "Triceps", "secondary": null, "emg_weights": { "Triceps": 1.0 }, "resistance_profile": "Lengthened-biased" },
-  "Running (Εξωτερικό Τρέξιμο)": { "muscle": "Cardio", "type": "cardio", "primary": "Cardio", "secondary": null, "emg_weights": {}, "resistance_profile": "Cardio" },
-  "Stationary Bike (Ποδήλατο)": { "muscle": "Cardio", "type": "cardio", "primary": "Cardio", "secondary": null, "emg_weights": {}, "resistance_profile": "Cardio" },
-  "SkiErg (HYROX)": { "muscle": "Cardio", "type": "cardio", "primary": "Cardio", "secondary": "Lats", "emg_weights": { "Cardio": 1.0, "Lats": 0.4 }, "resistance_profile": "Cardio" },
-  "Sled Push (HYROX)": { "muscle": "Quads", "type": "weight", "is_db": false, "primary": "Quads", "secondary": "Glutes", "emg_weights": { "Quads": 1.0, "Glutes": 0.7 }, "resistance_profile": "Full-range" },
-  "Sled Pull (HYROX)": { "muscle": "Hamstrings", "type": "weight", "is_db": false, "primary": "Hamstrings", "secondary": "Upper Back", "emg_weights": { "Hamstrings": 1.0, "Upper Back": 0.6 }, "resistance_profile": "Full-range" },
-  "Burpee Broad Jumps (HYROX)": { "muscle": "Full Body", "type": "bodyweight", "primary": "Quads", "secondary": "Cardio", "emg_weights": { "Quads": 0.8, "Cardio": 1.0 }, "resistance_profile": "Explosive" },
-  "RowErg / Κωπηλατικό (HYROX)": { "muscle": "Cardio", "type": "cardio", "primary": "Cardio", "secondary": "Upper Back", "emg_weights": { "Cardio": 1.0, "Upper Back": 0.5 }, "resistance_profile": "Cardio" },
-  "Farmers Carry (HYROX)": { "muscle": "Upper Back", "type": "weight", "is_db": true, "primary": "Upper Back", "secondary": "Abs", "emg_weights": { "Upper Back": 1.0, "Forearms": 1.0, "Abs": 0.6 }, "resistance_profile": "Isometric" },
-  "Sandbag Lunges (HYROX)": { "muscle": "Quads", "type": "weight", "is_db": false, "primary": "Quads", "secondary": "Glutes", "emg_weights": { "Quads": 1.0, "Glutes": 0.8 }, "resistance_profile": "Full-range" },
-  "Wall Balls (HYROX)": { "muscle": "Full Body", "type": "weight", "is_db": false, "primary": "Quads", "secondary": "Front Delts", "emg_weights": { "Quads": 0.8, "Front Delts": 0.7, "Cardio": 0.8 }, "resistance_profile": "Explosive" }
+  "Flat Barbell Bench Press": {
+    "muscle": "Chest",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Chest",
+    "secondary": "Triceps",
+    "emg_weights": { "Chest": 1.0, "Front Delts": 0.5, "Triceps": 0.4 },
+    "resistance_profile": "Mid-range"
+  },
+  "Incline Barbell Bench Press": {
+    "muscle": "Upper Chest",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Chest",
+    "secondary": "Front Delts",
+    "emg_weights": { "Chest": 1.0, "Front Delts": 0.7, "Triceps": 0.35 },
+    "resistance_profile": "Mid-range"
+  },
+  "Decline Barbell Bench Press": {
+    "muscle": "Lower Chest",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Chest",
+    "secondary": "Triceps",
+    "emg_weights": { "Chest": 1.0, "Triceps": 0.4, "Front Delts": 0.2 },
+    "resistance_profile": "Mid-range"
+  },
+  "Flat Dumbbell Chest Press": {
+    "muscle": "Chest",
+    "type": "weight",
+    "is_db": true,
+    "primary": "Chest",
+    "secondary": "Triceps",
+    "emg_weights": { "Chest": 1.0, "Front Delts": 0.4, "Triceps": 0.35 },
+    "resistance_profile": "Mid-range"
+  },
+  "Incline DB Bench Press": {
+    "muscle": "Upper Chest",
+    "type": "weight",
+    "is_db": true,
+    "primary": "Chest",
+    "secondary": "Front Delts",
+    "emg_weights": { "Chest": 1.0, "Front Delts": 0.6, "Triceps": 0.3 },
+    "resistance_profile": "Mid-range"
+  },
+  "Decline Dumbbell Bench Press": {
+    "muscle": "Lower Chest",
+    "type": "weight",
+    "is_db": true,
+    "primary": "Chest",
+    "secondary": "Triceps",
+    "emg_weights": { "Chest": 1.0, "Triceps": 0.35, "Front Delts": 0.2 },
+    "resistance_profile": "Mid-range"
+  },
+  "Chest Press Machine (Μηχάνημα Στήθους)": {
+    "muscle": "Chest",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Chest",
+    "secondary": "Triceps",
+    "emg_weights": { "Chest": 1.0, "Front Delts": 0.35, "Triceps": 0.3 },
+    "resistance_profile": "Mid-range"
+  },
+  "Incline Chest Press Machine": {
+    "muscle": "Upper Chest",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Chest",
+    "secondary": "Front Delts",
+    "emg_weights": { "Chest": 1.0, "Front Delts": 0.6, "Triceps": 0.3 },
+    "resistance_profile": "Mid-range"
+  },
+  "Cable Chest Flyes (Τροχαλία)": {
+    "muscle": "Chest",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Chest",
+    "secondary": null,
+    "emg_weights": { "Chest": 1.0, "Front Delts": 0.25 },
+    "resistance_profile": "Shortened-biased"
+  },
+  "Low-to-High Cable Flyes": {
+    "muscle": "Upper Chest",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Chest",
+    "secondary": "Front Delts",
+    "emg_weights": { "Chest": 1.0, "Front Delts": 0.5 },
+    "resistance_profile": "Shortened-biased"
+  },
+  "High-to-Low Cable Flyes": {
+    "muscle": "Lower Chest",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Chest",
+    "secondary": null,
+    "emg_weights": { "Chest": 1.0, "Front Delts": 0.2 },
+    "resistance_profile": "Shortened-biased"
+  },
+  "Pec Deck Flyes (Butterfly Machine)": {
+    "muscle": "Chest",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Chest",
+    "secondary": null,
+    "emg_weights": { "Chest": 1.0, "Front Delts": 0.2 },
+    "resistance_profile": "Shortened-biased"
+  },
+  "Dumbbell Flyes": {
+    "muscle": "Chest",
+    "type": "weight",
+    "is_db": true,
+    "primary": "Chest",
+    "secondary": null,
+    "emg_weights": { "Chest": 1.0, "Front Delts": 0.3 },
+    "resistance_profile": "Lengthened-biased"
+  },
+  "Incline Dumbbell Flyes": {
+    "muscle": "Upper Chest",
+    "type": "weight",
+    "is_db": true,
+    "primary": "Chest",
+    "secondary": "Front Delts",
+    "emg_weights": { "Chest": 1.0, "Front Delts": 0.4 },
+    "resistance_profile": "Lengthened-biased"
+  },
+  "Push-ups (Κάμψεις)": {
+    "muscle": "Chest",
+    "type": "bodyweight",
+    "is_db": false,
+    "primary": "Chest",
+    "secondary": "Triceps",
+    "emg_weights": { "Chest": 1.0, "Triceps": 0.4, "Front Delts": 0.4, "Abs": 0.3 },
+    "resistance_profile": "Mid-range"
+  },
+  "Chest Dips (Βυθίσεις Στήθους)": {
+    "muscle": "Chest",
+    "type": "bodyweight",
+    "is_db": false,
+    "primary": "Chest",
+    "secondary": "Triceps",
+    "emg_weights": { "Chest": 1.0, "Triceps": 0.6, "Front Delts": 0.5 },
+    "resistance_profile": "Lengthened-biased"
+  },
+  "Smith Machine Bench Press": {
+    "muscle": "Chest",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Chest",
+    "secondary": "Triceps",
+    "emg_weights": { "Chest": 1.0, "Front Delts": 0.45, "Triceps": 0.35 },
+    "resistance_profile": "Mid-range"
+  },
+  "Smith Machine Incline Press": {
+    "muscle": "Upper Chest",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Chest",
+    "secondary": "Front Delts",
+    "emg_weights": { "Chest": 1.0, "Front Delts": 0.65, "Triceps": 0.3 },
+    "resistance_profile": "Mid-range"
+  },
+  {
+  "Crunches": {
+    "muscle": "Abs",
+    "type": "bodyweight",
+    "is_db": false,
+    "primary": "Abs",
+    "secondary": null,
+    "emg_weights": { "Abs": 1.0 },
+    "resistance_profile": "Shortened-biased"
+  },
+  "Ab Crunch Machine (Μηχάνημα Κοιλιακών)": {
+    "muscle": "Abs",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Abs",
+    "secondary": "Core",
+    "emg_weights": { "Abs": 1.0, "Obliques": 0.3 },
+    "resistance_profile": "Mid-range"
+  },
+  "Cable Row Crunches (Cable Crunches)": {
+    "muscle": "Abs",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Abs",
+    "secondary": "Core",
+    "emg_weights": { "Abs": 1.0, "Obliques": 0.4 },
+    "resistance_profile": "Shortened-biased"
+  },
+  "Bent-Knee Reverse Crunches (Ανάποδα Crunches)": {
+    "muscle": "Abs",
+    "type": "bodyweight",
+    "is_db": false,
+    "primary": "Abs",
+    "secondary": "Core",
+    "emg_weights": { "Abs": 1.0, "Hip Flexors": 0.4 },
+    "resistance_profile": "Shortened-biased"
+  },
+  "Leg Raises (Lying)": {
+    "muscle": "Abs",
+    "type": "bodyweight",
+    "is_db": false,
+    "primary": "Abs",
+    "secondary": "Hip Flexors",
+    "emg_weights": { "Abs": 0.9, "Hip Flexors": 0.7 },
+    "resistance_profile": "Lengthened-biased"
+  },
+  "Hanging Knee Raises (Γόνατα στο Ζυγό)": {
+    "muscle": "Abs",
+    "type": "bodyweight",
+    "is_db": false,
+    "primary": "Abs",
+    "secondary": "Core",
+    "emg_weights": { "Abs": 1.0, "Hip Flexors": 0.5 },
+    "resistance_profile": "Shortened-biased"
+  },
+  "Hanging Straight Leg Raises": {
+    "muscle": "Abs",
+    "type": "bodyweight",
+    "is_db": false,
+    "primary": "Abs",
+    "secondary": "Hip Flexors",
+    "emg_weights": { "Abs": 1.0, "Hip Flexors": 0.8, "Forearms": 0.4 },
+    "resistance_profile": "Mid-range"
+  },
+  "Plank (Σανίδα)": {
+    "muscle": "Core",
+    "type": "bodyweight_time",
+    "is_db": false,
+    "primary": "Abs",
+    "secondary": "Core",
+    "emg_weights": { "Abs": 0.8, "Core": 1.0, "Quads": 0.3 },
+    "resistance_profile": "Isometric"
+  },
+  "Side Plank (Πλευρική Σανίδα)": {
+    "muscle": "Core",
+    "type": "bodyweight_time",
+    "is_db": false,
+    "primary": "Obliques",
+    "secondary": "Core",
+    "emg_weights": { "Obliques": 1.0, "Abs": 0.6, "Glutes": 0.4 },
+    "resistance_profile": "Isometric"
+  },
+  "Cable Woodchoppers (Τροχαλία Πλάγιοι)": {
+    "muscle": "Abs",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Obliques",
+    "secondary": "Abs",
+    "emg_weights": { "Obliques": 1.0, "Abs": 0.6 },
+    "resistance_profile": "Full-range"
+  },
+  "Ab Wheel Rollout": {
+    "muscle": "Core",
+    "type": "bodyweight",
+    "is_db": false,
+    "primary": "Abs",
+    "secondary": "Lats",
+    "emg_weights": { "Abs": 1.0, "Lats": 0.5, "Core": 0.9 },
+    "resistance_profile": "Lengthened-biased"
+  },
+  "Bicycle Crunches": {
+    "muscle": "Abs",
+    "type": "bodyweight",
+    "is_db": false,
+    "primary": "Abs",
+    "secondary": "Obliques",
+    "emg_weights": { "Abs": 1.0, "Obliques": 0.8 },
+    "resistance_profile": "Mid-range"
+  },
+  "Decline Sit-ups": {
+    "muscle": "Abs",
+    "type": "bodyweight",
+    "is_db": false,
+    "primary": "Abs",
+    "secondary": "Hip Flexors",
+    "emg_weights": { "Abs": 0.9, "Hip Flexors": 0.7 },
+    "resistance_profile": "Lengthened-biased"
+  },
+  "Russian Twists": {
+    "muscle": "Abs",
+    "type": "bodyweight",
+    "is_db": false,
+    "primary": "Obliques",
+    "secondary": "Abs",
+    "emg_weights": { "Obliques": 1.0, "Abs": 0.7 },
+    "resistance_profile": "Mid-range"
+  },
+  "Dead Bug": {
+    "muscle": "Core",
+    "type": "bodyweight",
+    "is_db": false,
+    "primary": "Abs",
+    "secondary": "Core",
+    "emg_weights": { "Abs": 0.8, "Core": 1.0 },
+    "resistance_profile": "Isometric"
+  },
+  {
+  "Pull-ups (Έλξεις στο Ζυγό)": {
+    "muscle": "Lats",
+    "type": "bodyweight",
+    "is_db": false,
+    "primary": "Lats",
+    "secondary": "Biceps",
+    "emg_weights": { "Lats": 1.0, "Biceps": 0.4, "Upper Back": 0.5 },
+    "resistance_profile": "Shortened-biased"
+  },
+  "Chin-ups (Υπτιάστιες Έλξεις)": {
+    "muscle": "Lats",
+    "type": "bodyweight",
+    "is_db": false,
+    "primary": "Lats",
+    "secondary": "Biceps",
+    "emg_weights": { "Lats": 0.9, "Biceps": 0.7, "Upper Back": 0.4 },
+    "resistance_profile": "Shortened-biased"
+  },
+  "Lat Pulldown (Τροχαλία)": {
+    "muscle": "Lats",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Lats",
+    "secondary": "Biceps",
+    "emg_weights": { "Lats": 1.0, "Biceps": 0.35, "Upper Back": 0.4 },
+    "resistance_profile": "Mid-range"
+  },
+  "Neutral Grip Lat Pulldown": {
+    "muscle": "Lats",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Lats",
+    "secondary": "Biceps",
+    "emg_weights": { "Lats": 1.0, "Biceps": 0.4, "Upper Back": 0.3 },
+    "resistance_profile": "Mid-range"
+  },
+  "Single-Arm Cable Lat Pulldown": {
+    "muscle": "Lats",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Lats",
+    "secondary": null,
+    "emg_weights": { "Lats": 1.0, "Biceps": 0.3 },
+    "resistance_profile": "Lengthened-biased"
+  },
+  "Straight-Arm Cable Pullover (Lat Pushdown)": {
+    "muscle": "Lats",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Lats",
+    "secondary": "Triceps",
+    "emg_weights": { "Lats": 1.0, "Triceps": 0.3, "Chest": 0.2 },
+    "resistance_profile": "Shortened-biased"
+  },
+  "Dumbbell Pullover": {
+    "muscle": "Lats",
+    "type": "weight",
+    "is_db": true,
+    "primary": "Lats",
+    "secondary": "Chest",
+    "emg_weights": { "Lats": 0.8, "Chest": 0.6, "Triceps": 0.3 },
+    "resistance_profile": "Lengthened-biased"
+  },
+  "Seated Cable Row (Κωπηλατική Τροχαλία)": {
+    "muscle": "Upper Back",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Upper Back",
+    "secondary": "Biceps",
+    "emg_weights": { "Upper Back": 1.0, "Lats": 0.5, "Biceps": 0.3 },
+    "resistance_profile": "Shortened-biased"
+  },
+  "Chest-Supported DB Row (30°)": {
+    "muscle": "Upper Back",
+    "type": "weight",
+    "is_db": true,
+    "primary": "Upper Back",
+    "secondary": "Rear Delts",
+    "emg_weights": { "Upper Back": 1.0, "Rear Delts": 0.6, "Biceps": 0.3 },
+    "resistance_profile": "Mid-range"
+  },
+  "Single-Arm DB Row": {
+    "muscle": "Lats",
+    "type": "weight",
+    "is_db": true,
+    "primary": "Lats",
+    "secondary": "Biceps",
+    "emg_weights": { "Lats": 1.0, "Upper Back": 0.5, "Biceps": 0.35 },
+    "resistance_profile": "Mid-range"
+  },
+  "Bent-Over Barbell Row": {
+    "muscle": "Upper Back",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Upper Back",
+    "secondary": "Lower Back",
+    "emg_weights": { "Upper Back": 1.0, "Lats": 0.6, "Lower Back": 0.5, "Biceps": 0.3 },
+    "resistance_profile": "Mid-range"
+  },
+  "Pendlay Row": {
+    "muscle": "Upper Back",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Upper Back",
+    "secondary": "Lats",
+    "emg_weights": { "Upper Back": 1.0, "Lats": 0.7, "Lower Back": 0.4 },
+    "resistance_profile": "Explosive"
+  },
+  "T-Bar Row": {
+    "muscle": "Upper Back",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Upper Back",
+    "secondary": "Lats",
+    "emg_weights": { "Upper Back": 1.0, "Lats": 0.6, "Biceps": 0.35 },
+    "resistance_profile": "Mid-range"
+  },
+  "Machine Lat Pulldown": {
+    "muscle": "Lats",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Lats",
+    "secondary": "Biceps",
+    "emg_weights": { "Lats": 1.0, "Biceps": 0.3 },
+    "resistance_profile": "Mid-range"
+  },
+  "Assisted Pull-up Machine": {
+    "muscle": "Lats",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Lats",
+    "secondary": "Biceps",
+    "emg_weights": { "Lats": 1.0, "Biceps": 0.35 },
+    "resistance_profile": "Mid-range"
+  },
+  "Roman Chair Hyperextensions (Ρωμαϊκή Έδρα)": {
+    "muscle": "Lower Back",
+    "type": "bodyweight",
+    "is_db": false,
+    "primary": "Lower Back",
+    "secondary": "Hamstrings",
+    "emg_weights": { "Lower Back": 1.0, "Hamstrings": 0.7, "Glutes": 0.6 },
+    "resistance_profile": "Shortened-biased"
+  },
+  "Inverted Row (Australian Pull-ups)": {
+    "muscle": "Upper Back",
+    "type": "bodyweight",
+    "is_db": false,
+    "primary": "Upper Back",
+    "secondary": "Biceps",
+    "emg_weights": { "Upper Back": 1.0, "Rear Delts": 0.5, "Biceps": 0.35 },
+    "resistance_profile": "Shortened-biased"
+  },
+  {
+  "Dumbbell Shoulder Press": {
+    "muscle": "Shoulders",
+    "type": "weight",
+    "is_db": true,
+    "primary": "Front Delts",
+    "secondary": "Triceps",
+    "emg_weights": { "Front Delts": 1.0, "Side Delts": 0.4, "Triceps": 0.4 },
+    "resistance_profile": "Mid-range"
+  },
+  "Barbell Overhead Press (OHP)": {
+    "muscle": "Shoulders",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Front Delts",
+    "secondary": "Triceps",
+    "emg_weights": { "Front Delts": 1.0, "Side Delts": 0.35, "Triceps": 0.45, "Core": 0.3 },
+    "resistance_profile": "Mid-range"
+  },
+  "Arnold Press": {
+    "muscle": "Shoulders",
+    "type": "weight",
+    "is_db": true,
+    "primary": "Front Delts",
+    "secondary": "Side Delts",
+    "emg_weights": { "Front Delts": 1.0, "Side Delts": 0.5, "Triceps": 0.35 },
+    "resistance_profile": "Full-range"
+  },
+  "Shoulder Press Machine": {
+    "muscle": "Shoulders",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Front Delts",
+    "secondary": "Triceps",
+    "emg_weights": { "Front Delts": 1.0, "Side Delts": 0.35, "Triceps": 0.35 },
+    "resistance_profile": "Mid-range"
+  },
+  "Smith Machine Shoulder Press": {
+    "muscle": "Shoulders",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Front Delts",
+    "secondary": "Triceps",
+    "emg_weights": { "Front Delts": 1.0, "Side Delts": 0.4, "Triceps": 0.4 },
+    "resistance_profile": "Mid-range"
+  },
+  "Cable Lateral Raises": {
+    "muscle": "Side Delts",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Side Delts",
+    "secondary": null,
+    "emg_weights": { "Side Delts": 1.0, "Traps": 0.2 },
+    "resistance_profile": "Lengthened-biased"
+  },
+  "Lateral Raises (Dumbbells)": {
+    "muscle": "Side Delts",
+    "type": "weight",
+    "is_db": true,
+    "primary": "Side Delts",
+    "secondary": null,
+    "emg_weights": { "Side Delts": 1.0, "Traps": 0.3 },
+    "resistance_profile": "Shortened-biased"
+  },
+  "Machine Lateral Raises": {
+    "muscle": "Side Delts",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Side Delts",
+    "secondary": null,
+    "emg_weights": { "Side Delts": 1.0, "Traps": 0.2 },
+    "resistance_profile": "Mid-range"
+  },
+  "Cable Face Pulls": {
+    "muscle": "Rear Delts",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Rear Delts",
+    "secondary": "Upper Back",
+    "emg_weights": { "Rear Delts": 1.0, "Upper Back": 0.5, "Rotator Cuff": 0.4 },
+    "resistance_profile": "Shortened-biased"
+  },
+  "Reverse Pec Deck (Πίσω Δελτοειδείς)": {
+    "muscle": "Rear Delts",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Rear Delts",
+    "secondary": "Upper Back",
+    "emg_weights": { "Rear Delts": 1.0, "Upper Back": 0.4 },
+    "resistance_profile": "Shortened-biased"
+  },
+  "Bent-Over Dumbbell Rear Delt Flyes": {
+    "muscle": "Rear Delts",
+    "type": "weight",
+    "is_db": true,
+    "primary": "Rear Delts",
+    "secondary": "Upper Back",
+    "emg_weights": { "Rear Delts": 1.0, "Upper Back": 0.5 },
+    "resistance_profile": "Shortened-biased"
+  },
+  "Incline DB Rear Delt Rows": {
+    "muscle": "Rear Delts",
+    "type": "weight",
+    "is_db": true,
+    "primary": "Rear Delts",
+    "secondary": "Upper Back",
+    "emg_weights": { "Rear Delts": 1.0, "Upper Back": 0.6 },
+    "resistance_profile": "Mid-range"
+  },
+  "Upright Barbell Row": {
+    "muscle": "Shoulders",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Side Delts",
+    "secondary": "Traps",
+    "emg_weights": { "Side Delts": 0.9, "Traps": 0.7, "Biceps": 0.3 },
+    "resistance_profile": "Shortened-biased"
+  },
+  "Front Dumbbell Raises": {
+    "muscle": "Front Delts",
+    "type": "weight",
+    "is_db": true,
+    "primary": "Front Delts",
+    "secondary": null,
+    "emg_weights": { "Front Delts": 1.0, "Chest": 0.3 },
+    "resistance_profile": "Shortened-biased"
+  },
+  "Cable Front Raises": {
+    "muscle": "Front Delts",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Front Delts",
+    "secondary": null,
+    "emg_weights": { "Front Delts": 1.0, "Chest": 0.3 },
+    "resistance_profile": "Lengthened-biased"
+  },
+  {
+  "Dumbbell Bicep Curls": {
+    "muscle": "Biceps",
+    "type": "weight",
+    "is_db": true,
+    "primary": "Biceps",
+    "secondary": null,
+    "emg_weights": { "Biceps": 1.0, "Forearms": 0.3 },
+    "resistance_profile": "Mid-range"
+  },
+  "Barbell Bicep Curls": {
+    "muscle": "Biceps",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Biceps",
+    "secondary": null,
+    "emg_weights": { "Biceps": 1.0, "Forearms": 0.35 },
+    "resistance_profile": "Mid-range"
+  },
+  "EZ-Bar Bicep Curls": {
+    "muscle": "Biceps",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Biceps",
+    "secondary": null,
+    "emg_weights": { "Biceps": 1.0, "Forearms": 0.3 },
+    "resistance_profile": "Mid-range"
+  },
+  "Cable Bicep Curls": {
+    "muscle": "Biceps",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Biceps",
+    "secondary": null,
+    "emg_weights": { "Biceps": 1.0, "Forearms": 0.25 },
+    "resistance_profile": "Mid-range"
+  },
+  "Incline Dumbbell Curls": {
+    "muscle": "Biceps",
+    "type": "weight",
+    "is_db": true,
+    "primary": "Biceps",
+    "secondary": null,
+    "emg_weights": { "Biceps": 1.0, "Forearms": 0.2 },
+    "resistance_profile": "Lengthened-biased"
+  },
+  "Bayesian Cable Curls": {
+    "muscle": "Biceps",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Biceps",
+    "secondary": null,
+    "emg_weights": { "Biceps": 1.0, "Forearms": 0.2 },
+    "resistance_profile": "Lengthened-biased"
+  },
+  "Preacher Curls (EZ-Bar / Barbell)": {
+    "muscle": "Biceps",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Biceps",
+    "secondary": null,
+    "emg_weights": { "Biceps": 1.0, "Forearms": 0.3 },
+    "resistance_profile": "Lengthened-biased"
+  },
+  "Dumbbell Preacher Curls": {
+    "muscle": "Biceps",
+    "type": "weight",
+    "is_db": true,
+    "primary": "Biceps",
+    "secondary": null,
+    "emg_weights": { "Biceps": 1.0, "Forearms": 0.25 },
+    "resistance_profile": "Lengthened-biased"
+  },
+  "Spider Curls": {
+    "muscle": "Biceps",
+    "type": "weight",
+    "is_db": true,
+    "primary": "Biceps",
+    "secondary": null,
+    "emg_weights": { "Biceps": 1.0, "Forearms": 0.25 },
+    "resistance_profile": "Shortened-biased"
+  },
+  "Concentration Curls": {
+    "muscle": "Biceps",
+    "type": "weight",
+    "is_db": true,
+    "primary": "Biceps",
+    "secondary": null,
+    "emg_weights": { "Biceps": 1.0, "Forearms": 0.3 },
+    "resistance_profile": "Shortened-biased"
+  },
+  "High Cable Curls (Overhead Cable Curls)": {
+    "muscle": "Biceps",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Biceps",
+    "secondary": null,
+    "emg_weights": { "Biceps": 1.0, "Forearms": 0.2 },
+    "resistance_profile": "Shortened-biased"
+  },
+  "Hammer Curls (Αλτήρες)": {
+    "muscle": "Biceps",
+    "type": "weight",
+    "is_db": true,
+    "primary": "Biceps",
+    "secondary": "Forearms",
+    "emg_weights": { "Biceps": 0.9, "Forearms": 0.7 },
+    "resistance_profile": "Mid-range"
+  },
+  "Cable Hammer Curls (με Σχοινί)": {
+    "muscle": "Biceps",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Biceps",
+    "secondary": "Forearms",
+    "emg_weights": { "Biceps": 0.9, "Forearms": 0.7 },
+    "resistance_profile": "Mid-range"
+  },
+  "Reverse Curls (EZ-Bar / Barbell)": {
+    "muscle": "Biceps",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Forearms",
+    "secondary": "Biceps",
+    "emg_weights": { "Forearms": 1.0, "Biceps": 0.6 },
+    "resistance_profile": "Mid-range"
+  },
+  "Bicep Curl Machine (Μηχάνημα Δικεφάλων)": {
+    "muscle": "Biceps",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Biceps",
+    "secondary": null,
+    "emg_weights": { "Biceps": 1.0, "Forearms": 0.25 },
+    "resistance_profile": "Mid-range"
+  },
+  {
+  "Triceps Rope Pushdown": {
+    "muscle": "Triceps",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Triceps",
+    "secondary": null,
+    "emg_weights": { "Triceps": 1.0 },
+    "resistance_profile": "Shortened-biased"
+  },
+  "Straight Bar Triceps Pushdown": {
+    "muscle": "Triceps",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Triceps",
+    "secondary": null,
+    "emg_weights": { "Triceps": 1.0 },
+    "resistance_profile": "Shortened-biased"
+  },
+  "V-Bar Triceps Pushdown": {
+    "muscle": "Triceps",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Triceps",
+    "secondary": null,
+    "emg_weights": { "Triceps": 1.0 },
+    "resistance_profile": "Shortened-biased"
+  },
+  "Overhead Cable Triceps Extension": {
+    "muscle": "Triceps",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Triceps",
+    "secondary": null,
+    "emg_weights": { "Triceps": 1.0 },
+    "resistance_profile": "Lengthened-biased"
+  },
+  "Single-Arm Cable Triceps Pushdown": {
+    "muscle": "Triceps",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Triceps",
+    "secondary": null,
+    "emg_weights": { "Triceps": 1.0 },
+    "resistance_profile": "Shortened-biased"
+  },
+  "Single-Arm Overhead Cable Triceps Extension": {
+    "muscle": "Triceps",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Triceps",
+    "secondary": null,
+    "emg_weights": { "Triceps": 1.0 },
+    "resistance_profile": "Lengthened-biased"
+  },
+  "Skull Crushers (EZ-Bar / Barbell)": {
+    "muscle": "Triceps",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Triceps",
+    "secondary": null,
+    "emg_weights": { "Triceps": 1.0, "Front Delts": 0.2 },
+    "resistance_profile": "Mid-range"
+  },
+  "Dumbbell Skull Crushers": {
+    "muscle": "Triceps",
+    "type": "weight",
+    "is_db": true,
+    "primary": "Triceps",
+    "secondary": null,
+    "emg_weights": { "Triceps": 1.0 },
+    "resistance_profile": "Mid-range"
+  },
+  "Incline EZ-Bar Skull Crushers": {
+    "muscle": "Triceps",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Triceps",
+    "secondary": null,
+    "emg_weights": { "Triceps": 1.0 },
+    "resistance_profile": "Lengthened-biased"
+  },
+  "Single-Arm Overhead Dumbbell Extension": {
+    "muscle": "Triceps",
+    "type": "weight",
+    "is_db": true,
+    "primary": "Triceps",
+    "secondary": null,
+    "emg_weights": { "Triceps": 1.0 },
+    "resistance_profile": "Lengthened-biased"
+  },
+  "Two-Arm Overhead Dumbbell Extension": {
+    "muscle": "Triceps",
+    "type": "weight",
+    "is_db": true,
+    "primary": "Triceps",
+    "secondary": null,
+    "emg_weights": { "Triceps": 1.0 },
+    "resistance_profile": "Lengthened-biased"
+  },
+  "Close-Grip Barbell Bench Press": {
+    "muscle": "Triceps",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Triceps",
+    "secondary": "Chest",
+    "emg_weights": { "Triceps": 1.0, "Chest": 0.6, "Front Delts": 0.4 },
+    "resistance_profile": "Mid-range"
+  },
+  "Triceps Dips (Βυθίσεις Σε Δίζυγο)": {
+    "muscle": "Triceps",
+    "type": "bodyweight",
+    "is_db": false,
+    "primary": "Triceps",
+    "secondary": "Chest",
+    "emg_weights": { "Triceps": 1.0, "Chest": 0.5, "Front Delts": 0.4 },
+    "resistance_profile": "Lengthened-biased"
+  },
+  "Bench Dips": {
+    "muscle": "Triceps",
+    "type": "bodyweight",
+    "is_db": false,
+    "primary": "Triceps",
+    "secondary": "Chest",
+    "emg_weights": { "Triceps": 1.0, "Front Delts": 0.4, "Chest": 0.3 },
+    "resistance_profile": "Lengthened-biased"
+  },
+  "Assisted Dips Machine": {
+    "muscle": "Triceps",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Triceps",
+    "secondary": "Chest",
+    "emg_weights": { "Triceps": 1.0, "Chest": 0.4, "Front Delts": 0.3 },
+    "resistance_profile": "Mid-range"
+  },
+  "Dumbbell Triceps Kickbacks": {
+    "muscle": "Triceps",
+    "type": "weight",
+    "is_db": true,
+    "primary": "Triceps",
+    "secondary": null,
+    "emg_weights": { "Triceps": 1.0 },
+    "resistance_profile": "Shortened-biased"
+  },
+  "Cable Triceps Kickbacks": {
+    "muscle": "Triceps",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Triceps",
+    "secondary": null,
+    "emg_weights": { "Triceps": 1.0 },
+    "resistance_profile": "Full-range"
+  },
+  "Triceps Extension Machine (Μηχάνημα Τρικεφάλων)": {
+    "muscle": "Triceps",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Triceps",
+    "secondary": null,
+    "emg_weights": { "Triceps": 1.0 },
+    "resistance_profile": "Mid-range"
+  },
+  {
+  "Barbell Back Squat": {
+    "muscle": "Quads",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Quads",
+    "secondary": "Glutes",
+    "emg_weights": { "Quads": 1.0, "Glutes": 0.6, "Lower Back": 0.4 },
+    "resistance_profile": "Mid-range"
+  },
+  "Barbell Front Squat": {
+    "muscle": "Quads",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Quads",
+    "secondary": "Upper Back",
+    "emg_weights": { "Quads": 1.0, "Glutes": 0.5, "Upper Back": 0.4, "Abs": 0.4 },
+    "resistance_profile": "Lengthened-biased"
+  },
+  "Goblet Squat (Dumbbell/Kettlebell)": {
+    "muscle": "Quads",
+    "type": "weight",
+    "is_db": true,
+    "primary": "Quads",
+    "secondary": "Glutes",
+    "emg_weights": { "Quads": 1.0, "Glutes": 0.5, "Abs": 0.3 },
+    "resistance_profile": "Mid-range"
+  },
+  "Leg Press": {
+    "muscle": "Quads",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Quads",
+    "secondary": "Glutes",
+    "emg_weights": { "Quads": 1.0, "Glutes": 0.4 },
+    "resistance_profile": "Mid-range"
+  },
+  "Hack Squat Machine": {
+    "muscle": "Quads",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Quads",
+    "secondary": "Glutes",
+    "emg_weights": { "Quads": 1.0, "Glutes": 0.5 },
+    "resistance_profile": "Lengthened-biased"
+  },
+  "Smith Machine Squat": {
+    "muscle": "Quads",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Quads",
+    "secondary": "Glutes",
+    "emg_weights": { "Quads": 1.0, "Glutes": 0.5 },
+    "resistance_profile": "Mid-range"
+  },
+  "Leg Extension Machine": {
+    "muscle": "Quads",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Quads",
+    "secondary": null,
+    "emg_weights": { "Quads": 1.0 },
+    "resistance_profile": "Shortened-biased"
+  },
+  "Dumbbell Walking Lunges": {
+    "muscle": "Quads",
+    "type": "weight",
+    "is_db": true,
+    "primary": "Quads",
+    "secondary": "Glutes",
+    "emg_weights": { "Quads": 1.0, "Glutes": 0.8, "Hamstrings": 0.4 },
+    "resistance_profile": "Full-range"
+  },
+  "Bulgarian Split Squat (Dumbbells)": {
+    "muscle": "Quads",
+    "type": "weight",
+    "is_db": true,
+    "primary": "Quads",
+    "secondary": "Glutes",
+    "emg_weights": { "Quads": 1.0, "Glutes": 0.8, "Hamstrings": 0.4 },
+    "resistance_profile": "Lengthened-biased"
+  },
+  "Barbell Deadlift": {
+    "muscle": "Posterior Chain",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Hamstrings",
+    "secondary": "Lower Back",
+    "emg_weights": { "Hamstrings": 0.8, "Glutes": 0.8, "Lower Back": 1.0, "Lats": 0.4 },
+    "resistance_profile": "Lengthened-biased"
+  },
+  "Romanian Deadlift (RDL)": {
+    "muscle": "Hamstrings",
+    "type": "weight",
+    "is_db": true,
+    "primary": "Hamstrings",
+    "secondary": "Glutes",
+    "emg_weights": { "Hamstrings": 1.0, "Glutes": 0.7, "Lower Back": 0.5 },
+    "resistance_profile": "Lengthened-biased"
+  },
+  "Barbell RDL": {
+    "muscle": "Hamstrings",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Hamstrings",
+    "secondary": "Glutes",
+    "emg_weights": { "Hamstrings": 1.0, "Glutes": 0.7, "Lower Back": 0.6 },
+    "resistance_profile": "Lengthened-biased"
+  },
+  "Seated Leg Curl Machine": {
+    "muscle": "Hamstrings",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Hamstrings",
+    "secondary": null,
+    "emg_weights": { "Hamstrings": 1.0 },
+    "resistance_profile": "Mid-range"
+  },
+  "Lying Leg Curl Machine": {
+    "muscle": "Hamstrings",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Hamstrings",
+    "secondary": null,
+    "emg_weights": { "Hamstrings": 1.0 },
+    "resistance_profile": "Shortened-biased"
+  },
+  "Barbell Hip Thrust": {
+    "muscle": "Glutes",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Glutes",
+    "secondary": "Hamstrings",
+    "emg_weights": { "Glutes": 1.0, "Hamstrings": 0.5 },
+    "resistance_profile": "Shortened-biased"
+  },
+  "Glute Drive Machine / Hip Thrust Machine": {
+    "muscle": "Glutes",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Glutes",
+    "secondary": "Hamstrings",
+    "emg_weights": { "Glutes": 1.0, "Hamstrings": 0.4 },
+    "resistance_profile": "Shortened-biased"
+  },
+  "Abductor Machine (Απαγωγοί)": {
+    "muscle": "Glutes",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Glutes",
+    "secondary": null,
+    "emg_weights": { "Glutes": 1.0 },
+    "resistance_profile": "Mid-range"
+  },
+  "Adductor Machine (Προσαγωγοί)": {
+    "muscle": "Quads",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Adductors",
+    "secondary": null,
+    "emg_weights": { "Adductors": 1.0 },
+    "resistance_profile": "Mid-range"
+  },
+  "Standing Calf Raise Machine": {
+    "muscle": "Calves",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Calves",
+    "secondary": null,
+    "emg_weights": { "Calves": 1.0 },
+    "resistance_profile": "Lengthened-biased"
+  },
+  "Seated Calf Raise Machine (Γάμπες)": {
+    "muscle": "Calves",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Calves",
+    "secondary": null,
+    "emg_weights": { "Calves": 1.0 },
+    "resistance_profile": "Mid-range"
+  },
+  {
+  "Running (Εξωτερικό Τρέξιμο)": {
+    "muscle": "Cardio",
+    "type": "cardio",
+    "is_db": false,
+    "primary": "Cardio",
+    "secondary": null,
+    "emg_weights": {},
+    "resistance_profile": "Cardio"
+  },
+  "Treadmill (Διάδρομος)": {
+    "muscle": "Cardio",
+    "type": "cardio",
+    "is_db": false,
+    "primary": "Cardio",
+    "secondary": null,
+    "emg_weights": {},
+    "resistance_profile": "Cardio"
+  },
+  "Stationary Bike (Ποδήλατο)": {
+    "muscle": "Cardio",
+    "type": "cardio",
+    "is_db": false,
+    "primary": "Cardio",
+    "secondary": null,
+    "emg_weights": {},
+    "resistance_profile": "Cardio"
+  },
+  "Stairmaster (Σκάλες)": {
+    "muscle": "Cardio",
+    "type": "cardio",
+    "is_db": false,
+    "primary": "Cardio",
+    "secondary": "Quads",
+    "emg_weights": { "Cardio": 1.0, "Quads": 0.4, "Glutes": 0.4 },
+    "resistance_profile": "Cardio"
+  },
+  "Elliptical (Ελλειπτικό)": {
+    "muscle": "Cardio",
+    "type": "cardio",
+    "is_db": false,
+    "primary": "Cardio",
+    "secondary": null,
+    "emg_weights": {},
+    "resistance_profile": "Cardio"
+  },
+  "Jump Rope (Σχοινάκι)": {
+    "muscle": "Cardio",
+    "type": "cardio",
+    "is_db": false,
+    "primary": "Cardio",
+    "secondary": "Calves",
+    "emg_weights": { "Cardio": 1.0, "Calves": 0.5 },
+    "resistance_profile": "Cardio"
+  },
+  "Assault Bike / Air Bike": {
+    "muscle": "Cardio",
+    "type": "cardio",
+    "is_db": false,
+    "primary": "Cardio",
+    "secondary": "Full Body",
+    "emg_weights": { "Cardio": 1.0, "Quads": 0.5, "Shoulders": 0.3 },
+    "resistance_profile": "Cardio"
+  },
+  "SkiErg (HYROX)": {
+    "muscle": "Cardio",
+    "type": "cardio",
+    "is_db": false,
+    "primary": "Cardio",
+    "secondary": "Lats",
+    "emg_weights": { "Cardio": 1.0, "Lats": 0.4, "Triceps": 0.3 },
+    "resistance_profile": "Cardio"
+  },
+  "RowErg / Κωπηλατικό (HYROX)": {
+    "muscle": "Cardio",
+    "type": "cardio",
+    "is_db": false,
+    "primary": "Cardio",
+    "secondary": "Upper Back",
+    "emg_weights": { "Cardio": 1.0, "Upper Back": 0.5, "Quads": 0.4 },
+    "resistance_profile": "Cardio"
+  },
+  "Sled Push (HYROX)": {
+    "muscle": "Quads",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Quads",
+    "secondary": "Glutes",
+    "emg_weights": { "Quads": 1.0, "Glutes": 0.7, "Calves": 0.4 },
+    "resistance_profile": "Full-range"
+  },
+  "Sled Pull (HYROX)": {
+    "muscle": "Hamstrings",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Hamstrings",
+    "secondary": "Upper Back",
+    "emg_weights": { "Hamstrings": 1.0, "Upper Back": 0.6, "Glutes": 0.5 },
+    "resistance_profile": "Full-range"
+  },
+  "Burpee Broad Jumps (HYROX)": {
+    "muscle": "Full Body",
+    "type": "bodyweight",
+    "is_db": false,
+    "primary": "Quads",
+    "secondary": "Cardio",
+    "emg_weights": { "Quads": 0.8, "Cardio": 1.0, "Chest": 0.4 },
+    "resistance_profile": "Explosive"
+  },
+  "Farmers Carry (HYROX)": {
+    "muscle": "Upper Back",
+    "type": "weight",
+    "is_db": true,
+    "primary": "Upper Back",
+    "secondary": "Abs",
+    "emg_weights": { "Upper Back": 1.0, "Forearms": 1.0, "Abs": 0.6 },
+    "resistance_profile": "Isometric"
+  },
+  "Sandbag Lunges (HYROX)": {
+    "muscle": "Quads",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Quads",
+    "secondary": "Glutes",
+    "emg_weights": { "Quads": 1.0, "Glutes": 0.8, "Core": 0.5 },
+    "resistance_profile": "Full-range"
+  },
+  "Wall Balls (HYROX)": {
+    "muscle": "Full Body",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Quads",
+    "secondary": "Front Delts",
+    "emg_weights": { "Quads": 0.8, "Front Delts": 0.7, "Cardio": 0.8 },
+    "resistance_profile": "Explosive"
+  },
+  "Kettlebell Swings": {
+    "muscle": "Posterior Chain",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Glutes",
+    "secondary": "Hamstrings",
+    "emg_weights": { "Glutes": 1.0, "Hamstrings": 0.8, "Lower Back": 0.5, "Cardio": 0.6 },
+    "resistance_profile": "Explosive"
+  },
+  {
+  "Sandbag Chest Carry (HYROX)": {
+    "muscle": "Full Body",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Upper Back",
+    "secondary": "Abs",
+    "emg_weights": { "Upper Back": 0.9, "Abs": 0.8, "Biceps": 0.5, "Quads": 0.4 },
+    "resistance_profile": "Isometric"
+  },
+  "Dumbbell Box Step-ups (HYROX Prep)": {
+    "muscle": "Quads",
+    "type": "weight",
+    "is_db": true,
+    "primary": "Quads",
+    "secondary": "Glutes",
+    "emg_weights": { "Quads": 1.0, "Glutes": 0.8, "Calves": 0.4 },
+    "resistance_profile": "Full-range"
+  },
+  "Devil Press (HYROX / Functional)": {
+    "muscle": "Full Body",
+    "type": "weight",
+    "is_db": true,
+    "primary": "Full Body",
+    "secondary": "Cardio",
+    "emg_weights": { "Chest": 0.7, "Shoulders": 0.8, "Posterior Chain": 0.8, "Cardio": 1.0 },
+    "resistance_profile": "Explosive"
+  },
+  "Thrusters (Barbell / Dumbbell)": {
+    "muscle": "Full Body",
+    "type": "weight",
+    "is_db": true,
+    "primary": "Quads",
+    "secondary": "Front Delts",
+    "emg_weights": { "Quads": 0.9, "Front Delts": 0.8, "Triceps": 0.5, "Cardio": 0.7 },
+    "resistance_profile": "Explosive"
+  },
+  "Backward Sled Drag (HYROX)": {
+    "muscle": "Quads",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Quads",
+    "secondary": "Glutes",
+    "emg_weights": { "Quads": 1.0, "Glutes": 0.5, "Calves": 0.5 },
+    "resistance_profile": "Isometric"
+  },
+  "Single-Arm KB Farmers Carry": {
+    "muscle": "Abs",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Obliques",
+    "secondary": "Upper Back",
+    "emg_weights": { "Obliques": 1.0, "Abs": 0.8, "Forearms": 0.8, "Upper Back": 0.6 },
+    "resistance_profile": "Isometric"
+  },
+  "Medicine Ball Slams": {
+    "muscle": "Full Body",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Abs",
+    "secondary": "Cardio",
+    "emg_weights": { "Abs": 0.9, "Lats": 0.7, "Cardio": 0.8 },
+    "resistance_profile": "Explosive"
+  }
 }
