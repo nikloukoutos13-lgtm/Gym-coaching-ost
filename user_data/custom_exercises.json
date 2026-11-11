@@ -1,1 +1,5 @@
-{}
+{
+  "Preacher curls": { "muscle": "Biceps", "type": "weight", "is_db": false, "primary": "Biceps", "secondary": null },
+  "Cable row crunches": { "muscle": "Abs", "type": "weight", "is_db": false, "primary": "Abs", "secondary": "Core" },
+  "Leg raises": { "muscle": "Abs", "type": "bodyweight", "is_db": false, "primary": "Abs", "secondary": null }
+}
