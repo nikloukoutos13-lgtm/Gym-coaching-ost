@@ -714,7 +714,7 @@ with tab2:
         
         overload_info = calc_progressive_overload(ex_name, active_p.get("history", []), user_data["exercise_database"])
         
-        with st.expander(f"🔹 #{idx+1} {ex_name}", expanded=True):
+ with st.expander(f"🔹 #{idx+1} {ex_name}", expanded=True):
             if overload_info:
                 st.markdown(f"<div class='overload-card'>⚡ <b>{t('Auto Progressive Overload Πρόταση:', 'Auto Progressive Overload Suggestion:')}</b><br>{overload_info['msg']}<br>{t('Στόχος Επόμενης Προπόνησης:', 'Target for next workout:')} <b>{overload_info['w']} kg x {overload_info['r']} reps</b></div>", unsafe_allow_html=True)
                 if st.button(f"⚡ {t('Εφαρμογή Target', 'Apply Overload Target')} ({overload_info['w']}kg)", key=f"ov_btn_{prof_key_id}_{day_selected}_{idx}"):
@@ -723,18 +723,16 @@ with tab2:
                     save_user_data()
                     st.rerun()
 
-col_ex, col_s, col_w, col_r, col_rir, col_del = st.columns([4, 1, 1, 1, 1, 1])
+            col_ex, col_s, col_w, col_r, col_rir, col_del = st.columns([4, 1, 1, 1, 1, 1])
             
             with col_ex:
                 if ex_options:
-                    # 1. Συλλογή όλων των μυϊκών ομάδων από τη βάση
                     all_muscles = ["Όλες οι κατηγορίες"] + sorted(list(set(
                         info.get("muscle", "Άλλο") 
                         for info in user_data["exercise_database"].values() 
                         if info.get("muscle")
                     )))
                     
-                    # 2. Εντοπισμός της τρέχουσας κατηγορίας της άσκησης
                     curr_muscle = ex_info.get("muscle", "Όλες οι κατηγορίες")
                     default_cat_idx = all_muscles.index(curr_muscle) if curr_muscle in all_muscles else 0
                     
@@ -748,7 +746,6 @@ col_ex, col_s, col_w, col_r, col_rir, col_del = st.columns([4, 1, 1, 1, 1, 1])
                             key=f"cat_{prof_key_id}_{day_selected}_{idx}"
                         )
                     
-                    # 3. Φιλτράρισμα ασκήσεων βάσει της επιλεγμένης κατηγορίας
                     if sel_cat == "Όλες οι κατηγορίες":
                         filtered_exs = sorted(list(user_data["exercise_database"].keys()))
                     else:
