@@ -712,9 +712,9 @@ with tab2:
         ex_info = user_data["exercise_database"].get(ex_name, {})
         ex_type = ex_info.get("type", "weight")
         
-        overload_info = calc_progressive_overload(ex_name, active_p.get("history", []), user_data["exercise_database"])
+      overload_info = calc_progressive_overload(ex_name, active_p.get("history", []), user_data["exercise_database"])
         
- with st.expander(f"🔹 #{idx+1} {ex_name}", expanded=True):
+      with st.expander(f"🔹 #{idx+1} {ex_name}", expanded=True):
             if overload_info:
                 st.markdown(f"<div class='overload-card'>⚡ <b>{t('Auto Progressive Overload Πρόταση:', 'Auto Progressive Overload Suggestion:')}</b><br>{overload_info['msg']}<br>{t('Στόχος Επόμενης Προπόνησης:', 'Target for next workout:')} <b>{overload_info['w']} kg x {overload_info['r']} reps</b></div>", unsafe_allow_html=True)
                 if st.button(f"⚡ {t('Εφαρμογή Target', 'Apply Overload Target')} ({overload_info['w']}kg)", key=f"ov_btn_{prof_key_id}_{day_selected}_{idx}"):
