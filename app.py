@@ -7,7 +7,6 @@ from datetime import datetime, timedelta
 import streamlit as st
 import matplotlib.pyplot as plt
 
-# Εισαγωγή του Data Manager Module
 from data_manager import (
     load_all_app_data, 
     save_profile_file, 
@@ -27,7 +26,6 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom Mobile-Friendly CSS
 st.markdown("""
 <style>
     .main { padding: 0rem 1rem; }
@@ -42,7 +40,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ------------------------------------------------------------------------------
-# LANGUAGE SWITCHER HELPER & CONSTANTS
+# LANGUAGE HELPER & DYNAMIC QUIPS
 # ------------------------------------------------------------------------------
 if "lang" not in st.session_state:
     st.session_state["lang"] = "Ελληνικά"
@@ -56,52 +54,31 @@ DAYS_EN = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "
 DAY_MAP_TO_EN = dict(zip(DAYS_EL, DAYS_EN))
 DAY_MAP_TO_EL = dict(zip(DAYS_EN, DAYS_EL))
 
-# Φόρτωση ατακών από το data/quips.json
-quips_data = load_json(os.path.join("data", "quips.json"), {})
-TONNAGE_QUIPS_EL = quips_data.get("tonnage_el", [
-    [100, "🦆 Σήκωσες το βάρος από 40 πάπιες!"],
-    [500, "🎹 Σήκωσες 1 πιάνο με ουρά Konzertflügel!"],
-    [1200, "🚗 Σήκωσες 1 Fiat 500 / Mini Cooper!"],
-    [6000, "🐘 Σήκωσες έναν ενήλικο Αφρικανικό Ελέφαντα!"],
-    [100000, "🚂 Σήκωσες μια ατμομηχανή τρένου Orient Express!"]
-])
-TONNAGE_QUIPS_EN = quips_data.get("tonnage_en", [
-    [100, "🦆 You lifted the weight of 40 ducks!"],
-    [500, "🎹 You lifted 1 Konzertflügel grand piano!"],
-    [1200, "🚗 You lifted 1 Fiat 500 / Mini Cooper!"],
-    [6000, "🐘 You lifted an adult African Elephant!"],
-    [100000, "🚂 You lifted an Orient Express steam locomotive!"]
-])
+QUIPS_DATA = load_json(os.path.join("data", "quips.json"), {})
 
-CARDIO_RUNNING_QUIPS_EL = [
-    (1, "🐢 Πρώτο χιλιόμετρο! Ξεπέρασες τη χελώνα του Αισώπου!"),
-    (5, "🐇 5km! Ξεπέρασες ένα κουνέλι σε πλήρη ταχύτητα!"),
-    (10, "🐎 10km! Τρέχεις με το σθένος και την αντοχή ενός καθαρόαιμου αλόγου!"),
-    (21, "🏅 21km Ημιμαραθώνιος! Είσαι επίσημα μηχανή αντοχής!"),
-    (42, "🏆 42.2km ΜΑΡΑΘΩΝΙΟΣ! Γράφεις ιστορία σαν τον Φειδιππίδη!"),
-    (101, "🛷 Sled Push: Σπρώξατε βάρος μεγαλύτερο από έναν ενήλικο Γορίλα!"),
-    (102, "🐻 Sled Pull: Τραβήξατε το βάρος μιας επιθετικής Πολικής Αρκούδας!"),
-    (103, "🚣 SkiErg / RowErg: Κωπηλατήσατε τη διαδρομή μιας ολόκληρης λίμνης!"),
-    (104, "☄️ Burpee Broad Jumps: Εξερράγης σαν πύραυλος SpaceX σε κάθε άλμα!"),
-    (105, "🧱 Wall Balls: Εκτοξεύσατε τη μπάλα πιο ψηλά κι από τον τοίχο!"),
-    (106, "🎒 Sandbag Lunges: Κουβαλήσατε το βάρος ενός πολεμιστή Spartan Race!"),
-    (107, "🏋️ Farmers Carry: Σφίξατε τη λαβή σας σαν μέγγενη από τιτάνιο!")
-]
+def get_tonnage_quips(tonnage_kg):
+    lang_key = "tonnage_en" if st.session_state.get("lang") == "English" else "tonnage_el"
+    quips = QUIPS_DATA.get(lang_key, [])
+    for limit, text in quips:
+        if tonnage_kg <= limit: return text
+    return quips[-1][1] if quips else ""
 
-CARDIO_RUNNING_QUIPS_EN = [
-    (1, "🐢 First kilometer! Faster than Aesop's tortoise!"),
-    (5, "🐇 5km! Outran a sprinting rabbit!"),
-    (10, "🐎 10km! Running with the stamina of a thoroughbred horse!"),
-    (21, "🏅 21km Half Marathon! You are an endurance machine!"),
-    (42, "🏆 42.2km MARATHON! Making history like Pheidippides!"),
-    (101, "🛷 Sled Push: Pushed heavier than an adult Gorilla!"),
-    (102, "🐻 Sled Pull: Pulled the weight of an aggressive Polar Bear!"),
-    (103, "🚣 SkiErg / RowErg: Rowed across an entire lake!"),
-    (104, "☄️ Burpee Broad Jumps: Explosive like a SpaceX rocket on every jump!"),
-    (105, "🧱 Wall Balls: Launched higher than the wall!"),
-    (106, "🎒 Sandbag Lunges: Carried the load of a Spartan Race warrior!"),
-    (107, "🏋️ Farmers Carry: Titanium grip unlocked!")
-]
+def get_cardio_quip(dist_km, ex_name=""):
+    lang_key = "cardio_en" if st.session_state.get("lang") == "English" else "cardio_el"
+    quips = QUIPS_DATA.get(lang_key, [])
+    if not quips: return ""
+    
+    if "Sled Push" in ex_name and len(quips) > 18: return quips[18][1]
+    if "Sled Pull" in ex_name and len(quips) > 19: return quips[19][1]
+    if ("SkiErg" in ex_name or "RowErg" in ex_name) and len(quips) > 20: return quips[20][1]
+    if "Burpee" in ex_name and len(quips) > 21: return quips[21][1]
+    if "Wall Balls" in ex_name and len(quips) > 22: return quips[22][1]
+    if "Sandbag" in ex_name and len(quips) > 23: return quips[23][1]
+    if "Farmers" in ex_name and len(quips) > 24: return quips[24][1]
+    
+    for limit, text in quips:
+        if dist_km <= limit and limit <= 100: return text
+    return quips[17][1] if len(quips) > 17 else quips[-1][1]
 
 default_nikos_profile = {
     "profile": {
@@ -138,7 +115,7 @@ default_marilena_profile = {
 }
 
 # ------------------------------------------------------------------------------
-# 3. PROFILE MIGRATION & PERSISTENCE (MODULAR DATA MANAGER)
+# 2. PERSISTENCE & USER DATA
 # ------------------------------------------------------------------------------
 def load_user_data():
     if "user_data" not in st.session_state:
@@ -152,7 +129,6 @@ def save_user_data():
         ud = st.session_state["user_data"]
         act_name = ud.get("active_profile", "")
         
-        # 1. Αποθήκευση τοπικά στο user_data/
         if act_name and act_name in ud.get("profiles", {}):
             save_profile_file(act_name, ud["profiles"][act_name])
             
@@ -160,7 +136,6 @@ def save_user_data():
         save_custom_foods_file(ud.get("food_db", {}))
         save_custom_exercises_file(ud.get("exercise_database", {}))
 
-        # 2. GitHub Auto-Sync (αν υπάρχουν secrets)
         if "GITHUB_TOKEN" in st.secrets and "GITHUB_REPO" in st.secrets and act_name:
             try:
                 import re
@@ -192,43 +167,22 @@ active_profile_name = user_data["active_profile"]
 active_p = user_data["profiles"][active_profile_name]
 
 # ------------------------------------------------------------------------------
-# 4. HELPER CALCULATORS & STREAK ENGINE
+# 3. HELPER CALCULATORS & STREAKS
 # ------------------------------------------------------------------------------
 def req_xp_for_level(lvl):
     return int(500 * (lvl ** 1.6))
 
 def get_level_title(lvl):
     titles_el = {
-        1: "Gym Novice (Πρωτάρης)",
-        2: "Iron Enthusiast (Σιδερένιος)",
-        3: "Hypertrophy Apprentice (Μαθητευόμενος)",
-        4: "Bench Press Specialist (Παγκίτης)",
-        5: "Iron Warrior (Πολεμιστής)",
-        6: "Volume Monster (Τέρας Όγκου)",
-        7: "Local Gym Legend (Θρύλος του Gym)",
-        8: "Hypertrophy Master (Master Υπερτροφίας)",
-        9: "Iron God (Θεός του Σιδήρου)",
-        10: "Titan of Muscle (Τιτάνας)"
+        1: "Gym Novice (Πρωτάρης)", 2: "Iron Enthusiast (Σιδερένιος)", 3: "Hypertrophy Apprentice (Μαθητευόμενος)",
+        4: "Bench Press Specialist (Παγκίτης)", 5: "Iron Warrior (Πολεμιστής)", 6: "Volume Monster (Τέρας Όγκου)",
+        7: "Local Gym Legend (Θρύλος του Gym)", 8: "Hypertrophy Master (Master Υπερτροφίας)", 9: "Iron God (Θεός του Σιδήρου)", 10: "Titan of Muscle (Τιτάνας)"
     }
     titles_en = {
-        1: "Gym Novice",
-        2: "Iron Enthusiast",
-        3: "Hypertrophy Apprentice",
-        4: "Bench Press Specialist",
-        5: "Iron Warrior",
-        6: "Volume Monster",
-        7: "Local Gym Legend",
-        8: "Hypertrophy Master",
-        9: "Iron God",
-        10: "Titan of Muscle"
+        1: "Gym Novice", 2: "Iron Enthusiast", 3: "Hypertrophy Apprentice", 4: "Bench Press Specialist",
+        5: "Iron Warrior", 6: "Volume Monster", 7: "Local Gym Legend", 8: "Hypertrophy Master", 9: "Iron God", 10: "Titan of Muscle"
     }
     return t(titles_el.get(lvl, f"Overlord Level {lvl}"), titles_en.get(lvl, f"Overlord Level {lvl}"))
-
-def get_tonnage_quips(tonnage_kg):
-    quips = TONNAGE_QUIPS_EN if st.session_state.get("lang") == "English" else TONNAGE_QUIPS_EL
-    for limit, text in quips:
-        if tonnage_kg <= limit: return text
-    return quips[-1][1] if quips else ""
 
 def calculate_streak(log_dates_strs):
     if not log_dates_strs: return 0, False
@@ -258,19 +212,6 @@ def calculate_streak(log_dates_strs):
         elif d < curr:
             break
     return streak, (sorted_dates[0] == today)
-
-def get_cardio_quip(dist_km, ex_name=""):
-    quips = CARDIO_RUNNING_QUIPS_EN if st.session_state.get("lang") == "English" else CARDIO_RUNNING_QUIPS_EL
-    if "Sled Push" in ex_name: return quips[5][1]
-    if "Sled Pull" in ex_name: return quips[6][1]
-    if "SkiErg" in ex_name or "RowErg" in ex_name: return quips[7][1]
-    if "Burpee" in ex_name: return quips[8][1]
-    if "Wall Balls" in ex_name: return quips[9][1]
-    if "Sandbag" in ex_name: return quips[10][1]
-    
-    for limit, text in quips:
-        if dist_km <= limit and limit <= 100: return text
-    return quips[4][1]
 
 def calc_hr_zone(hr_bpm, age=26):
     max_hr = 211 - (0.64 * age)
@@ -420,7 +361,7 @@ def check_and_unlock_achievements(total_tonnage):
     return unlocked
 
 # ------------------------------------------------------------------------------
-# 5. SIDEBAR: LANGUAGE & PROFILE SWITCHER & STREAKS & BACKUP
+# 4. SIDEBAR MANAGEMENT
 # ------------------------------------------------------------------------------
 with st.sidebar:
     st.subheader(t("🌐 Γλώσσα / Language", "🌐 Language / Γλώσσα"))
@@ -446,7 +387,6 @@ with st.sidebar:
         save_user_data()
         st.rerun()
 
-    # Calculate Daily Streak
     history_dates = [h.get("date", "") for h in active_p.get("history", [])] + [w.get("date", "") for w in active_p.get("weight_log", [])]
     streak_days, logged_today = calculate_streak(history_dates)
     
@@ -489,7 +429,7 @@ with st.sidebar:
             st.error(t("❌ Σφάλμα αρχείου JSON.", "❌ JSON file error."))
 
 # ------------------------------------------------------------------------------
-# 6. APP MAIN UI & TABS
+# 5. MAIN UI & TABS
 # ------------------------------------------------------------------------------
 st.title("🏋️ GYM & HYROX COACHING OS")
 st.caption(f"{t('Ενεργό Προφίλ', 'Active Profile')}: **{active_profile_name}**")
@@ -540,7 +480,6 @@ with tab1:
             active_p["weight_log"] = logs
             active_p["profile"]["weight_kg"] = today_val
             
-            # Streak bonus XP
             active_p["profile"]["xp"] += 15
             save_user_data()
             st.success(t(f"✅ Καταγράφηκε: {today_val} kg για τις {today_str}!", f"✅ Logged: {today_val} kg for {today_str}!"))
@@ -646,9 +585,7 @@ with tab_tracker:
 
     st.markdown("---")
 
-    # MEAL LOGGING
     st.subheader(t("➕ Καταγραφή Γεύματος", "➕ Log Meal"))
-
     c_select, c_qty, c_btn = st.columns([3, 1.5, 1])
     food_db = user_data["food_db"]
 
@@ -682,7 +619,6 @@ with tab_tracker:
             save_user_data()
             st.rerun()
 
-    # CUSTOM FOOD CREATOR
     with st.expander(t("✨ Πρόσθεσε Νέο Τρόφιμο στη Βάση Δεδομένων (Custom Food Creator)", "✨ Add Custom Food to Database")):
         c_n, c_u = st.columns([3, 1])
         new_name = c_n.text_input(t("Όνομα Προϊόντος (π.χ. Tesco High Protein Pudding):", "Food Item Name (e.g., High Protein Yoghurt):"), key="cf_name")
@@ -697,11 +633,7 @@ with tab_tracker:
         if st.button(t("💾 Αποθήκευση στη Βάση", "💾 Save to Database"), key="btn_save_custom_food"):
             if new_name.strip():
                 user_data["food_db"][new_name.strip()] = {
-                    "unit": new_unit,
-                    "cal": new_cal,
-                    "p": new_p,
-                    "c": new_c,
-                    "f": new_f
+                    "unit": new_unit, "cal": new_cal, "p": new_p, "c": new_c, "f": new_f
                 }
                 save_user_data()
                 st.success(t(f"Το '{new_name}' προστέθηκε επιτυχώς στη βάση δεδομένων!", f"'{new_name}' added to food database!"))
@@ -794,10 +726,7 @@ with tab2:
                 item["ex"] = new_ex
                 
             with col_s:
-                item["s"] = st.number_input(
-                    "Sets", value=int(item.get("s", 3)), min_value=1, max_value=20, 
-                    key=f"s_{prof_key_id}_{day_selected}_{idx}"
-                )
+                item["s"] = st.number_input("Sets", value=int(item.get("s", 3)), min_value=1, max_value=20, key=f"s_{prof_key_id}_{day_selected}_{idx}")
             
             with col_w:
                 if ex_type == "cardio":
@@ -954,7 +883,6 @@ with tab2:
                 st.success("🎖️ **UNLOCKED ACHIEVEMENTS:**\n" + "\n".join(unlocked_achs))
 
     st.markdown("---")
-    # CUSTOM EXERCISE BUILDER
     with st.expander(t("✨ Προσθήκη Νέας Άσκησης στη Βάση (Custom Exercise Creator)", "✨ Add Custom Exercise to Database")):
         ce_name = st.text_input(t("Όνομα Άσκησης (π.χ. Bulgarian Split Squat):", "Exercise Name (e.g., Bulgarian Split Squat):"), key="ce_name")
         col_e1, col_e2, col_e3 = st.columns(3)
@@ -1031,14 +959,12 @@ with tab3:
         ax4 = fig.add_subplot(gs[1, 1])
         ax5 = fig.add_subplot(gs[2, :])
         
-        # 1. Tonnage Graph
         dates = [f"{DAY_MAP_TO_EN.get(h.get('day',''), h.get('day','')) if st.session_state.get('lang') == 'English' else h.get('day','')}\n{h.get('date','').split()[0]}" for h in history]
         tonnages = [h.get("tonnage", 0) for h in history]
         ax1.plot(dates, tonnages, marker='o', color='#2b8a3e', linewidth=2)
         ax1.set_title(t("📈 Εξέλιξη Συνολικού Όγκου (Tonnage kg)", "📈 Total Tonnage Progress (kg)"))
         ax1.grid(True, linestyle='--', alpha=0.5)
         
-        # 2. Selected Exercise Progress
         selected_ex = st.selectbox(t("🏋️ Επιλογή Άσκησης για Γράφημα:", "🏋️ Select Exercise for Graph:"), list(user_data["exercise_database"].keys()), key=f"ex_graph_{active_profile_name}")
         ex_dates, ex_vals = [], []
         for h in history:
@@ -1058,7 +984,6 @@ with tab3:
         else:
             ax2.text(0.5, 0.5, f"{t('Δεν υπάρχουν ακόμα δεδομένα για:', 'No data yet for:')}\n{selected_ex}", ha='center', va='center')
             
-        # 3. Muscle Volume Bar Chart
         muscle_volume = {"Quads": 0.0, "Hamstrings": 0.0, "Chest": 0.0, "Lats": 0.0, "Upper Back": 0.0, "Front Delts": 0.0, "Side Delts": 0.0, "Biceps": 0.0, "Triceps": 0.0, "Abs": 0.0}
         for h in history:
             exs = h.get("exercises", {})
@@ -1079,7 +1004,6 @@ with tab3:
         ax3.tick_params(axis='x', rotation=45)
         ax3.legend()
         
-        # 4. Strength Benchmarks
         bw = active_p["profile"]["weight_kg"]
         my_bench = active_p.get("prs", {}).get("Flat Dumbbell Chest Press", bw * 0.7)
         my_legpress = active_p.get("prs", {}).get("Leg Press", bw * 1.5)
@@ -1098,7 +1022,6 @@ with tab3:
         ax4.set_title(t("🥊 Σύγκριση Δύναμης vs Μέσος Όρος", "🥊 Strength Benchmarks vs Novice Avg"))
         ax4.legend()
         
-        # 5. Projected Target Curve vs Real Weight
         w_dates, w_mov_avg, w_proj, _ = calc_projected_vs_real_weight(active_p["profile"], active_p.get("weight_log", []))
         if w_dates:
             ax5.plot(w_dates, w_proj, color='#f59f00', linestyle='--', linewidth=2, label='Projected Target Curve')
