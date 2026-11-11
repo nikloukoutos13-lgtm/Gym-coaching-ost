@@ -718,7 +718,7 @@ with tab2:
 
             col_ex, col_s, col_w, col_r, col_rir, col_del = st.columns([3, 1, 1, 1, 1, 1])
             
-with col_ex:
+            with col_ex:
                 if ex_options:
                     curr_ex_val = ex_name if ex_name in ex_options else ex_options[0]
                     ex_idx = ex_options.index(curr_ex_val)
@@ -781,7 +781,7 @@ with col_ex:
         save_user_data()
         st.rerun()
 
-   c_btn1, c_btn2, c_btn3 = st.columns(3)
+    c_btn1, c_btn2, c_btn3 = st.columns(3)
     with c_btn1:
         if st.button(t("➕ Προσθήκη Extra Άσκησης", "➕ Add Extra Exercise")):
             if ex_options:
@@ -987,15 +987,16 @@ with tab3:
         ax1.set_title(t("📈 Εξέλιξη Συνολικού Όγκου (Tonnage kg)", "📈 Total Tonnage Progress (kg)"))
         ax1.grid(True, linestyle='--', alpha=0.5)
         
-     ex_db_keys = list(user_data["exercise_database"].keys())
+        ex_db_keys = list(user_data["exercise_database"].keys())
         if ex_db_keys:
             selected_ex = st.selectbox(t("🏋️ Επιλογή Άσκησης για Γράφημα:", "🏋️ Select Exercise for Graph:"), ex_db_keys, key=f"ex_graph_{active_profile_name}")
         else:
             selected_ex = None
+            
         ex_dates, ex_vals = [], []
         for h in history:
             exs = h.get("exercises", {})
-            if selected_ex in exs:
+            if selected_ex and selected_ex in exs:
                 ex_dates.append(f"{DAY_MAP_TO_EN.get(h.get('day',''), h.get('day','')) if st.session_state.get('lang') == 'English' else h.get('day','')}\n{h.get('date','').split()[0]}")
                 ex_data = exs[selected_ex]
                 if ex_data.get("type") == "weight":
