@@ -10,7 +10,64 @@
     "xp": 4670,
     "level": 5
   },
-  "daily_logs": [],
+  "daily_logs": [
+    {
+      "name": "Protein puting",
+      "portion": "1.0 τεμάχιο/α",
+      "cal": 161.0,
+      "p": 20.0,
+      "c": 13.4,
+      "f": 3.0
+    },
+    {
+      "name": "Πρωτεϊνη λεμονι",
+      "portion": "1.0 τεμάχιο/α",
+      "cal": 90.0,
+      "p": 20.0,
+      "c": 2.3,
+      "f": 0.0
+    },
+    {
+      "name": "🍫 Nature Valley Extra Protein Bar",
+      "portion": "1.0 τεμάχιο/α",
+      "cal": 198.0,
+      "p": 10.0,
+      "c": 15.0,
+      "f": 11.0
+    },
+    {
+      "name": "🌯 Burrito (Μοσχαρίσιος κιμάς, φασόλια, ρύζι)",
+      "portion": "350g",
+      "cal": 595.0,
+      "p": 29.75,
+      "c": 70.0,
+      "f": 21.0
+    },
+    {
+      "name": "🥩 Tesco Basted Pork",
+      "portion": "200g",
+      "cal": 290.0,
+      "p": 42.0,
+      "c": 2.0,
+      "f": 12.0
+    },
+    {
+      "name": "🍨 Ελληνικό Γιαούρτι 2%",
+      "portion": "100g",
+      "cal": 73.0,
+      "p": 10.0,
+      "c": 3.8,
+      "f": 2.0
+    },
+    {
+      "name": "🍝 Μακαρόνια βρασμένα",
+      "portion": "250g",
+      "cal": 395.0,
+      "p": 14.5,
+      "c": 77.5,
+      "f": 2.25
+    }
+  ],
   "weight_log": [
     {
       "date": "31/10/2026",
@@ -61,14 +118,14 @@
         "rir": 0
       },
       {
-        "ex": "Barbell Back Squat",
+        "ex": "Chest-Supported DB Row (30°)",
         "s": 3,
         "w": 15.0,
         "r": 10,
         "rir": 3
       },
       {
-        "ex": "Barbell Back Squat",
+        "ex": "Roman Chair Hyperextensions (Ρωμαϊκή Έδρα)",
         "s": 3,
         "w": 0.0,
         "r": 20,
@@ -82,14 +139,14 @@
         "rir": 3
       },
       {
-        "ex": "Barbell Back Squat",
+        "ex": "Crunches",
         "s": 2,
         "w": 0.0,
         "r": 20,
         "rir": 1
       },
       {
-        "ex": "Barbell Back Squat",
+        "ex": "Preacher curls",
         "s": 3,
         "w": 25.0,
         "r": 8,
