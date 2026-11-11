@@ -719,7 +719,7 @@ with tab2:
             col_ex, col_s, col_w, col_r, col_rir, col_del = st.columns([3, 1, 1, 1, 1, 1])
             
             with col_ex:
-                curr_ex_val = ex_name if ex_name in ex_options else ex_options[0]
+                curr_ex_val = ex_name if ex_name in ex_options else (ex_options[0] if ex_options else None)
                 new_ex = st.selectbox(
                     t("Άσκηση", "Exercise"), ex_options, 
                     index=ex_options.index(curr_ex_val), 
