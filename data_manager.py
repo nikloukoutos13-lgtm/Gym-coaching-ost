@@ -55,7 +55,9 @@ def migrate_legacy_data():
 
 def load_all_app_data():
     ensure_directories()
-    migrate_legacy_data()
+    
+    # Απενεργοποίηση αυτόματου migration για να μην ξαναγράφει τα παλιά δεδομένα
+    # migrate_legacy_data()
     
     settings = load_json(os.path.join(USER_DATA_DIR, "settings.json"), {"active_profile": ""})
     
@@ -67,7 +69,7 @@ def load_all_app_data():
     custom_foods = load_json(os.path.join(USER_DATA_DIR, "custom_foods.json"), {})
     custom_exercises = load_json(os.path.join(USER_DATA_DIR, "custom_exercises.json"), {})
     
-    # 3. Συγχώνευση (Τα custom υπερισχύουν σε περίπτωσή διπλότυπων)
+    # 3. Συγχώνευση (Τα custom υπερισχύουν σε περίπτωση διπλότυπων)
     merged_foods = {**base_foods, **custom_foods}
     merged_exercises = {**base_exercises, **custom_exercises}
     
@@ -104,8 +106,14 @@ def save_settings_file(active_profile_name):
 
 def save_custom_foods_file(food_db):
     ensure_directories()
-    save_json(os.path.join(USER_DATA_DIR, "custom_foods.json"), food_db)
+    base_foods = load_json(os.path.join(DATA_DIR, "base_foods.json"), {})
+    # Αποθηκεύονται ΜΟΝΟ τα τρόφιμα που ΔΕΝ υπάρχουν στο base_foods ή έχουν τροποποιηθεί
+    only_custom = {k: v for k, v in food_db.items() if k not in base_foods or base_foods[k] != v}
+    save_json(os.path.join(USER_DATA_DIR, "custom_foods.json"), only_custom)
 
 def save_custom_exercises_file(exercise_db):
     ensure_directories()
-    save_json(os.path.join(USER_DATA_DIR, "custom_exercises.json"), exercise_db)
+    base_exercises = load_json(os.path.join(DATA_DIR, "base_exercises.json"), {})
+    # Αποθηκεύονται ΜΟΝΟ οι ασκήσεις που ΔΕΝ υπάρχουν στο base_exercises ή έχουν τροποποιηθεί
+    only_custom = {k: v for k, v in exercise_db.items() if k not in base_exercises or base_exercises[k] != v}
+    save_json(os.path.join(USER_DATA_DIR, "custom_exercises.json"), only_custom)
