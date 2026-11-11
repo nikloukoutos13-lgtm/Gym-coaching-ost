@@ -477,8 +477,8 @@
         "activity_level": 1.55,
         "goal": "Bulking",
         "training_age": "Αρχάριος (0-1 έτος)",
-        "xp": 4065,
-        "level": 4
+        "xp": 4670,
+        "level": 5
       },
       "daily_logs": [],
       "weight_log": [
@@ -713,12 +713,12 @@
         "Chest-Supported DB Row (30°)": 40.0,
         "Triceps Rope Pushdown": 24.8,
         "Preacher curls": 31.7,
-        "Romanian Deadlift (RDL)": 49.5,
+        "Romanian Deadlift (RDL)": 56.6,
         "Incline DB Bench Press": 42.4,
         "Dumbbell Shoulder Press": 33.3,
         "Cable Lateral Raises (Τροχαλία)": 7.1,
-        "Cable Face Pulls": 24.8,
-        "Cable row crunches": 21.2,
+        "Cable Face Pulls": 29.7,
+        "Cable row crunches": 43.9,
         "Leg Extension Machine": 63.7,
         "Seated Leg Curl Machine": 56.6,
         "Seated Cable Row (Κωπηλατική Τροχαλία)": 46.7,
@@ -1191,6 +1191,122 @@
               "total_reps_or_min": 8,
               "type": "weight",
               "muscle": "Biceps",
+              "cal": 0
+            }
+          }
+        },
+        {
+          "date": "11/11/2026 10:04",
+          "day": "Τετάρτη",
+          "tonnage": 5142.0,
+          "cardio_cal": 776.8,
+          "exercises": {
+            "Treadmill (Διάδρομος)": {
+              "sets": 1,
+              "max_1rm": 0,
+              "max_weight": 12.0,
+              "rirs": [
+                0
+              ],
+              "total_reps_or_min": 5,
+              "type": "cardio",
+              "muscle": "Cardio",
+              "cal": 776.8
+            },
+            "Romanian Deadlift (RDL)": {
+              "sets": 3,
+              "max_1rm": 56.6,
+              "max_weight": 20.0,
+              "rirs": [
+                3
+              ],
+              "total_reps_or_min": 12,
+              "type": "weight",
+              "muscle": "Hamstrings",
+              "cal": 0
+            },
+            "Chin-ups (Υπτιάστιες Έλξεις)": {
+              "sets": 3,
+              "max_1rm": 0,
+              "max_weight": 0.0,
+              "rirs": [
+                0
+              ],
+              "total_reps_or_min": 5,
+              "type": "bodyweight",
+              "muscle": "Lats",
+              "cal": 0
+            },
+            "Incline DB Bench Press": {
+              "sets": 3,
+              "max_1rm": 42.4,
+              "max_weight": 15.0,
+              "rirs": [
+                3
+              ],
+              "total_reps_or_min": 12,
+              "type": "weight",
+              "muscle": "Upper Chest",
+              "cal": 0
+            },
+            "Dumbbell Shoulder Press": {
+              "sets": 3,
+              "max_1rm": 31.7,
+              "max_weight": 12.5,
+              "rirs": [
+                2
+              ],
+              "total_reps_or_min": 8,
+              "type": "weight",
+              "muscle": "Shoulders",
+              "cal": 0
+            },
+            "Cable Lateral Raises (Τροχαλία)": {
+              "sets": 3,
+              "max_1rm": 6.7,
+              "max_weight": 5.0,
+              "rirs": [
+                2
+              ],
+              "total_reps_or_min": 10,
+              "type": "weight",
+              "muscle": "Side Delts",
+              "cal": 0
+            },
+            "Cable Face Pulls": {
+              "sets": 3,
+              "max_1rm": 29.7,
+              "max_weight": 21.0,
+              "rirs": [
+                3
+              ],
+              "total_reps_or_min": 12,
+              "type": "weight",
+              "muscle": "Rear Delts",
+              "cal": 0
+            },
+            "Plank": {
+              "sets": 2,
+              "max_1rm": 0,
+              "max_weight": 0.0,
+              "rirs": [
+                1
+              ],
+              "total_reps_or_min": 60,
+              "type": "bodyweight_time",
+              "muscle": "Core",
+              "cal": 0
+            },
+            "Cable row crunches": {
+              "sets": 3,
+              "max_1rm": 43.9,
+              "max_weight": 31.0,
+              "rirs": [
+                1
+              ],
+              "total_reps_or_min": 12,
+              "type": "weight",
+              "muscle": "Abs",
               "cal": 0
             }
           }
