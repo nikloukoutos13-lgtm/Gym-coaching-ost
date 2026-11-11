@@ -58,9 +58,20 @@ def load_all_app_data():
     migrate_legacy_data()
     
     settings = load_json(os.path.join(USER_DATA_DIR, "settings.json"), {"active_profile": ""})
+    
+    # 1. Φόρτωση Στατικών Βάσεων Δεδομένων
+    base_foods = load_json(os.path.join(DATA_DIR, "base_foods.json"), {})
+    base_exercises = load_json(os.path.join(DATA_DIR, "base_exercises.json"), {})
+    
+    # 2. Φόρτωση Δυναμικών / Custom Βάσεων Δεδομένων
     custom_foods = load_json(os.path.join(USER_DATA_DIR, "custom_foods.json"), {})
     custom_exercises = load_json(os.path.join(USER_DATA_DIR, "custom_exercises.json"), {})
     
+    # 3. Συγχώνευση (Τα custom υπερισχύουν σε περίπτωσή διπλότυπων)
+    merged_foods = {**base_foods, **custom_foods}
+    merged_exercises = {**base_exercises, **custom_exercises}
+    
+    # 4. Φόρτωση όλων των Προφίλ από το user_data/profiles/
     profiles = {}
     if os.path.exists(PROFILES_DIR):
         for fname in os.listdir(PROFILES_DIR):
@@ -76,8 +87,8 @@ def load_all_app_data():
 
     return {
         "active_profile": active_p,
-        "food_db": custom_foods,
-        "exercise_database": custom_exercises,
+        "food_db": merged_foods,
+        "exercise_database": merged_exercises,
         "profiles": profiles
     }
 
