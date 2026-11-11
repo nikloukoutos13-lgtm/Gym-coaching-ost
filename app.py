@@ -723,19 +723,54 @@ with tab2:
                     save_user_data()
                     st.rerun()
 
-            col_ex, col_s, col_w, col_r, col_rir, col_del = st.columns([3, 1, 1, 1, 1, 1])
+col_ex, col_s, col_w, col_r, col_rir, col_del = st.columns([4, 1, 1, 1, 1, 1])
             
             with col_ex:
                 if ex_options:
-                    curr_ex_val = ex_name if ex_name in ex_options else ex_options[0]
-                    ex_idx = ex_options.index(curr_ex_val)
-                    new_ex = st.selectbox(
-                        t("Άσκηση", "Exercise"), 
-                        options=ex_options, 
-                        index=ex_idx, 
-                        key=f"ex_{prof_key_id}_{day_selected}_{idx}"
-                    )
-                    item["ex"] = new_ex
+                    # 1. Συλλογή όλων των μυϊκών ομάδων από τη βάση
+                    all_muscles = ["Όλες οι κατηγορίες"] + sorted(list(set(
+                        info.get("muscle", "Άλλο") 
+                        for info in user_data["exercise_database"].values() 
+                        if info.get("muscle")
+                    )))
+                    
+                    # 2. Εντοπισμός της τρέχουσας κατηγορίας της άσκησης
+                    curr_muscle = ex_info.get("muscle", "Όλες οι κατηγορίες")
+                    default_cat_idx = all_muscles.index(curr_muscle) if curr_muscle in all_muscles else 0
+                    
+                    c_cat, c_ex = st.columns(2)
+                    
+                    with c_cat:
+                        sel_cat = st.selectbox(
+                            t("Μυϊκή Ομάδα", "Category"),
+                            options=all_muscles,
+                            index=default_cat_idx,
+                            key=f"cat_{prof_key_id}_{day_selected}_{idx}"
+                        )
+                    
+                    # 3. Φιλτράρισμα ασκήσεων βάσει της επιλεγμένης κατηγορίας
+                    if sel_cat == "Όλες οι κατηγορίες":
+                        filtered_exs = sorted(list(user_data["exercise_database"].keys()))
+                    else:
+                        filtered_exs = sorted([
+                            k for k, v in user_data["exercise_database"].items()
+                            if v.get("muscle") == sel_cat or v.get("primary") == sel_cat
+                        ])
+                    
+                    if not filtered_exs:
+                        filtered_exs = sorted(list(user_data["exercise_database"].keys()))
+                        
+                    curr_ex_val = ex_name if ex_name in filtered_exs else filtered_exs[0]
+                    ex_idx = filtered_exs.index(curr_ex_val)
+                    
+                    with c_ex:
+                        new_ex = st.selectbox(
+                            t("Άσκηση", "Exercise"), 
+                            options=filtered_exs, 
+                            index=ex_idx, 
+                            key=f"ex_{prof_key_id}_{day_selected}_{idx}"
+                        )
+                        item["ex"] = new_ex
                 else:
                     st.warning(t("⚠️ Κενή βάση ασκήσεων", "⚠️ Empty exercise database"))
                     item["ex"] = ex_name
