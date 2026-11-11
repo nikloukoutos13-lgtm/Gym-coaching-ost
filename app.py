@@ -718,14 +718,20 @@ with tab2:
 
             col_ex, col_s, col_w, col_r, col_rir, col_del = st.columns([3, 1, 1, 1, 1, 1])
             
-            with col_ex:
-                curr_ex_val = ex_name if ex_name in ex_options else (ex_options[0] if ex_options else None)
-                new_ex = st.selectbox(
-                    t("Άσκηση", "Exercise"), ex_options, 
-                    index=ex_options.index(curr_ex_val), 
-                    key=f"ex_{prof_key_id}_{day_selected}_{idx}"
-                )
-                item["ex"] = new_ex
+with col_ex:
+                if ex_options:
+                    curr_ex_val = ex_name if ex_name in ex_options else ex_options[0]
+                    ex_idx = ex_options.index(curr_ex_val)
+                    new_ex = st.selectbox(
+                        t("Άσκηση", "Exercise"), 
+                        options=ex_options, 
+                        index=ex_idx, 
+                        key=f"ex_{prof_key_id}_{day_selected}_{idx}"
+                    )
+                    item["ex"] = new_ex
+                else:
+                    st.warning(t("⚠️ Κενή βάση ασκήσεων", "⚠️ Empty exercise database"))
+                    item["ex"] = ex_name
                 
             with col_s:
                 item["s"] = st.number_input("Sets", value=int(item.get("s", 3)), min_value=1, max_value=20, key=f"s_{prof_key_id}_{day_selected}_{idx}")
@@ -775,12 +781,15 @@ with tab2:
         save_user_data()
         st.rerun()
 
-    c_btn1, c_btn2, c_btn3 = st.columns(3)
+   c_btn1, c_btn2, c_btn3 = st.columns(3)
     with c_btn1:
         if st.button(t("➕ Προσθήκη Extra Άσκησης", "➕ Add Extra Exercise")):
-            current_list.append({"ex": ex_options[0], "s": 3, "w": 20.0, "r": 12, "rir": 2})
-            save_user_data()
-            st.rerun()
+            if ex_options:
+                current_list.append({"ex": ex_options[0], "s": 3, "w": 20.0, "r": 12, "rir": 2})
+                save_user_data()
+                st.rerun()
+            else:
+                st.error(t("⚠️ Δεν υπάρχουν διαθέσιμες ασκήσεις στη βάση δεδομένων!", "⚠️ No exercises available in database!"))
 
     with c_btn2:
         if st.button(t("💾 Αποθήκευση Αλλαγών Προγράμματος", "💾 Save Workout Schedule")):
@@ -978,7 +987,11 @@ with tab3:
         ax1.set_title(t("📈 Εξέλιξη Συνολικού Όγκου (Tonnage kg)", "📈 Total Tonnage Progress (kg)"))
         ax1.grid(True, linestyle='--', alpha=0.5)
         
-        selected_ex = st.selectbox(t("🏋️ Επιλογή Άσκησης για Γράφημα:", "🏋️ Select Exercise for Graph:"), list(user_data["exercise_database"].keys()), key=f"ex_graph_{active_profile_name}")
+     ex_db_keys = list(user_data["exercise_database"].keys())
+        if ex_db_keys:
+            selected_ex = st.selectbox(t("🏋️ Επιλογή Άσκησης για Γράφημα:", "🏋️ Select Exercise for Graph:"), ex_db_keys, key=f"ex_graph_{active_profile_name}")
+        else:
+            selected_ex = None
         ex_dates, ex_vals = [], []
         for h in history:
             exs = h.get("exercises", {})
