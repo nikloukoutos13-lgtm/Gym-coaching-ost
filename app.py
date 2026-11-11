@@ -58,17 +58,24 @@ QUIPS_DATA = load_json(os.path.join("data", "quips.json"), {})
 
 def get_smart_workout_quip(ex_summary, total_tonnage, total_cardio_km, total_cardio_mins, user_db):
     """
-    Αναλύει τη συνεδρία και επιλέγει το σχόλιο με βάση το τι κυριάρχησε:
+    Αναλύει τη συνεδρία και επιλέγει τυχαίο σχόλιο με βάση το τι κυριάρχησε:
     1. HYROX / Functional Dominant
     2. Running / Cardio Dominant
     3. Heavy Weightlifting Dominant (Tonnage)
     """
+    import random
+    
     lang_key_t = "tonnage_en" if st.session_state.get("lang") == "English" else "tonnage_el"
     lang_key_c = "cardio_en" if st.session_state.get("lang") == "English" else "cardio_el"
     
     tonnage_quips = QUIPS_DATA.get(lang_key_t, [])
     cardio_quips = QUIPS_DATA.get(lang_key_c, [])
     
+    def pick(val):
+        if isinstance(val, list):
+            return random.choice(val)
+        return val
+
     hyrox_count = 0
     weight_sets = 0
     main_hyrox_ex = ""
@@ -84,25 +91,25 @@ def get_smart_workout_quip(ex_summary, total_tonnage, total_cardio_km, total_car
 
     # 1. Κυριαρχία HYROX / Functional
     if hyrox_count >= 2 or (hyrox_count == 1 and weight_sets < 6):
-        if "Sled Push" in main_hyrox_ex and len(cardio_quips) > 9: return cardio_quips[9][1]
-        if "Sled Pull" in main_hyrox_ex and len(cardio_quips) > 10: return cardio_quips[10][1]
-        if ("SkiErg" in main_hyrox_ex or "RowErg" in main_hyrox_ex) and len(cardio_quips) > 11: return cardio_quips[11][1]
-        if "Burpee" in main_hyrox_ex and len(cardio_quips) > 12: return cardio_quips[12][1]
-        if "Wall Balls" in main_hyrox_ex and len(cardio_quips) > 13: return cardio_quips[13][1]
-        if "Sandbag" in main_hyrox_ex and len(cardio_quips) > 14: return cardio_quips[14][1]
-        if "Farmers" in main_hyrox_ex and len(cardio_quips) > 15: return cardio_quips[15][1]
+        if "Sled Push" in main_hyrox_ex and len(cardio_quips) > 9: return pick(cardio_quips[9][1])
+        if "Sled Pull" in main_hyrox_ex and len(cardio_quips) > 10: return pick(cardio_quips[10][1])
+        if ("SkiErg" in main_hyrox_ex or "RowErg" in main_hyrox_ex) and len(cardio_quips) > 11: return pick(cardio_quips[11][1])
+        if "Burpee" in main_hyrox_ex and len(cardio_quips) > 12: return pick(cardio_quips[12][1])
+        if "Wall Balls" in main_hyrox_ex and len(cardio_quips) > 13: return pick(cardio_quips[13][1])
+        if "Sandbag" in main_hyrox_ex and len(cardio_quips) > 14: return pick(cardio_quips[14][1])
+        if "Farmers" in main_hyrox_ex and len(cardio_quips) > 15: return pick(cardio_quips[15][1])
 
     # 2. Κυριαρχία Cardio / Τρεξίματος
     if total_cardio_km >= 3.0 or (total_cardio_mins >= 20 and total_tonnage < 2000):
         for limit, text in cardio_quips:
-            if total_cardio_km <= limit and limit <= 42: return text
-        return cardio_quips[8][1] if len(cardio_quips) > 8 else ""
+            if total_cardio_km <= limit and limit <= 42: return pick(text)
+        return pick(cardio_quips[8][1]) if len(cardio_quips) > 8 else ""
 
     # 3. Κυριαρχία Βαρών (Tonnage Focus)
     if tonnage_quips:
         for limit, text in tonnage_quips:
-            if total_tonnage <= limit: return text
-        return tonnage_quips[-1][1]
+            if total_tonnage <= limit: return pick(text)
+        return pick(tonnage_quips[-1][1])
         
     return ""
 
