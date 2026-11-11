@@ -1,0 +1,65 @@
+{
+  "Leg Press": {
+    "muscle": "Quads",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Quads",
+    "secondary": "Glutes",
+    "emg_weights": { "Quads": 1.0, "Glutes": 0.4 },
+    "resistance_profile": "Mid-range"
+  },
+  "Leg Extension Machine": {
+    "muscle": "Quads",
+    "type": "weight",
+    "is_db": false,
+    "primary": "Quads",
+    "secondary": null,
+    "emg_weights": { "Quads": 1.0 },
+    "resistance_profile": "Shortened-biased"
+  },
+  "Romanian Deadlift (RDL)": {
+    "muscle": "Hamstrings",
+    "type": "weight",
+    "is_db": true,
+    "primary": "Hamstrings",
+    "secondary": "Glutes",
+    "emg_weights": { "Hamstrings": 1.0, "Glutes": 0.5 },
+    "resistance_profile": "Lengthened-biased"
+  },
+  "Flat Dumbbell Chest Press": {
+    "muscle": "Chest",
+    "type": "weight",
+    "is_db": true,
+    "primary": "Chest",
+    "secondary": "Triceps",
+    "emg_weights": { "Chest": 1.0, "Front Delts": 0.4, "Triceps": 0.35 },
+    "resistance_profile": "Mid-range"
+  },
+  "Incline DB Bench Press": {
+    "muscle": "Upper Chest",
+    "type": "weight",
+    "is_db": true,
+    "primary": "Chest",
+    "secondary": "Front Delts",
+    "emg_weights": { "Chest": 1.0, "Front Delts": 0.6, "Triceps": 0.3 },
+    "resistance_profile": "Mid-range"
+  },
+  "Pull-ups (Έλξεις στο Ζυγό)": {
+    "muscle": "Lats",
+    "type": "bodyweight",
+    "is_db": false,
+    "primary": "Lats",
+    "secondary": "Biceps",
+    "emg_weights": { "Lats": 1.0, "Biceps": 0.4 },
+    "resistance_profile": "Shortened-biased"
+  },
+  "Stationary Bike (Ποδήλατο)": {
+    "muscle": "Cardio",
+    "type": "cardio",
+    "is_db": false,
+    "primary": "Cardio",
+    "secondary": null,
+    "emg_weights": {},
+    "resistance_profile": "Cardio"
+  }
+}
