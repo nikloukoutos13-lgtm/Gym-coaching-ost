@@ -40,7 +40,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ------------------------------------------------------------------------------
-# LANGUAGE HELPER & DYNAMIC QUIPS
+# LANGUAGE HELPER & DYNAMIC SMART QUIPS
 # ------------------------------------------------------------------------------
 if "lang" not in st.session_state:
     st.session_state["lang"] = "Ελληνικά"
@@ -56,63 +56,55 @@ DAY_MAP_TO_EL = dict(zip(DAYS_EN, DAYS_EL))
 
 QUIPS_DATA = load_json(os.path.join("data", "quips.json"), {})
 
-def get_tonnage_quips(tonnage_kg):
-    lang_key = "tonnage_en" if st.session_state.get("lang") == "English" else "tonnage_el"
-    quips = QUIPS_DATA.get(lang_key, [])
-    for limit, text in quips:
-        if tonnage_kg <= limit: return text
-    return quips[-1][1] if quips else ""
-
-def get_cardio_quip(dist_km, ex_name=""):
-    lang_key = "cardio_en" if st.session_state.get("lang") == "English" else "cardio_el"
-    quips = QUIPS_DATA.get(lang_key, [])
-    if not quips: return ""
+def get_smart_workout_quip(ex_summary, total_tonnage, total_cardio_km, total_cardio_mins, user_db):
+    """
+    Αναλύει τη συνεδρία και επιλέγει το σχόλιο με βάση το τι κυριάρχησε:
+    1. HYROX / Functional Dominant
+    2. Running / Cardio Dominant
+    3. Heavy Weightlifting Dominant (Tonnage)
+    """
+    lang_key_t = "tonnage_en" if st.session_state.get("lang") == "English" else "tonnage_el"
+    lang_key_c = "cardio_en" if st.session_state.get("lang") == "English" else "cardio_el"
     
-    if "Sled Push" in ex_name and len(quips) > 18: return quips[18][1]
-    if "Sled Pull" in ex_name and len(quips) > 19: return quips[19][1]
-    if ("SkiErg" in ex_name or "RowErg" in ex_name) and len(quips) > 20: return quips[20][1]
-    if "Burpee" in ex_name and len(quips) > 21: return quips[21][1]
-    if "Wall Balls" in ex_name and len(quips) > 22: return quips[22][1]
-    if "Sandbag" in ex_name and len(quips) > 23: return quips[23][1]
-    if "Farmers" in ex_name and len(quips) > 24: return quips[24][1]
+    tonnage_quips = QUIPS_DATA.get(lang_key_t, [])
+    cardio_quips = QUIPS_DATA.get(lang_key_c, [])
     
-    for limit, text in quips:
-        if dist_km <= limit and limit <= 100: return text
-    return quips[17][1] if len(quips) > 17 else quips[-1][1]
+    hyrox_count = 0
+    weight_sets = 0
+    main_hyrox_ex = ""
+    
+    for ex_name, ex_data in ex_summary.items():
+        if "(HYROX)" in ex_name:
+            hyrox_count += 1
+            main_hyrox_ex = ex_name
+        
+        ex_info = user_db.get(ex_name, {})
+        if ex_info.get("type") == "weight":
+            weight_sets += ex_data.get("sets", 0)
 
-default_nikos_profile = {
-    "profile": {
-        "gender": "Male", "age": 28, "weight_kg": 72.0, "height_cm": 177.0,
-        "activity_level": 1.55, "goal": "Bulking", "training_age": "Novice (0-1 yr)",
-        "xp": 0, "level": 1
-    },
-    "daily_logs": [],
-    "weight_log": [{"date": datetime.now().strftime("%d/%m/%Y"), "weight": 72.0}],
-    "templates": {
-        "Δευτέρα": [
-            {"ex": "Stationary Bike (Ποδήλατο)", "s": 1, "w": 6.0, "r": 5, "rir": 0},
-            {"ex": "Leg Press", "s": 3, "w": 105.0, "r": 12, "rir": 2},
-            {"ex": "Flat Dumbbell Chest Press", "s": 3, "w": 17.5, "r": 12, "rir": 2},
-            {"ex": "Pull-ups (Έλξεις στο Ζυγό)", "s": 3, "w": 0.0, "r": 8, "rir": 2}
-        ],
-        "Τρίτη": [], "Τετάρτη": [], "Πέμπτη": [], "Παρασκευή": [], "Σάββατο": [], "Κυριακή": []
-    },
-    "prs": {}, "achievements": [], "history": []
-}
+    # 1. Κυριαρχία HYROX / Functional
+    if hyrox_count >= 2 or (hyrox_count == 1 and weight_sets < 6):
+        if "Sled Push" in main_hyrox_ex and len(cardio_quips) > 9: return cardio_quips[9][1]
+        if "Sled Pull" in main_hyrox_ex and len(cardio_quips) > 10: return cardio_quips[10][1]
+        if ("SkiErg" in main_hyrox_ex or "RowErg" in main_hyrox_ex) and len(cardio_quips) > 11: return cardio_quips[11][1]
+        if "Burpee" in main_hyrox_ex and len(cardio_quips) > 12: return cardio_quips[12][1]
+        if "Wall Balls" in main_hyrox_ex and len(cardio_quips) > 13: return cardio_quips[13][1]
+        if "Sandbag" in main_hyrox_ex and len(cardio_quips) > 14: return cardio_quips[14][1]
+        if "Farmers" in main_hyrox_ex and len(cardio_quips) > 15: return cardio_quips[15][1]
 
-default_marilena_profile = {
-    "profile": {
-        "gender": "Female", "age": 26, "weight_kg": 60.0, "height_cm": 165.0,
-        "activity_level": 1.725, "goal": "Maintenance", "training_age": "Intermediate (1-3 yrs)",
-        "xp": 0, "level": 1
-    },
-    "daily_logs": [],
-    "weight_log": [{"date": datetime.now().strftime("%d/%m/%Y"), "weight": 60.0}],
-    "templates": {
-        "Δευτέρα": [], "Τρίτη": [], "Τετάρτη": [], "Πέμπτη": [], "Παρασκευή": [], "Σάββατο": [], "Κυριακή": []
-    },
-    "prs": {}, "achievements": [], "history": []
-}
+    # 2. Κυριαρχία Cardio / Τρεξίματος
+    if total_cardio_km >= 3.0 or (total_cardio_mins >= 20 and total_tonnage < 2000):
+        for limit, text in cardio_quips:
+            if total_cardio_km <= limit and limit <= 42: return text
+        return cardio_quips[8][1] if len(cardio_quips) > 8 else ""
+
+    # 3. Κυριαρχία Βαρών (Tonnage Focus)
+    if tonnage_quips:
+        for limit, text in tonnage_quips:
+            if total_tonnage <= limit: return text
+        return tonnage_quips[-1][1]
+        
+    return ""
 
 # ------------------------------------------------------------------------------
 # 2. PERSISTENCE & USER DATA
@@ -164,7 +156,7 @@ def save_user_data():
                 pass
 
 active_profile_name = user_data["active_profile"]
-active_p = user_data["profiles"][active_profile_name]
+active_p = user_data["profiles"].get(active_profile_name, {})
 
 # ------------------------------------------------------------------------------
 # 3. HELPER CALCULATORS & STREAKS
@@ -250,7 +242,7 @@ def calc_progressive_overload(ex_name, history, ex_db):
         return {"w": max_w, "r": reps + 1, "msg": msg}
 
 def calc_macros(prof):
-    p_wt, p_ht, p_age = prof["weight_kg"], prof["height_cm"], prof["age"]
+    p_wt, p_ht, p_age = prof.get("weight_kg", 70.0), prof.get("height_cm", 175.0), prof.get("age", 25)
     is_male = prof.get("gender") in ["Άνδρας", "Male"]
     bmr = (10 * p_wt) + (6.25 * p_ht) - (5 * p_age) + 5 if is_male else (10 * p_wt) + (6.25 * p_ht) - (5 * p_age) - 161
     tdee = bmr * prof.get("activity_level", 1.55)
@@ -402,8 +394,18 @@ with st.sidebar:
         new_prof_type = st.selectbox(t("Τύπος Προγράμματος:", "Program Type:"), ["Gym & Hypertrophy", "HYROX & Running"])
         if st.button(t("Δημιουργία Προφίλ", "Create Profile")):
             if new_prof_name.strip() and new_prof_name.strip() not in user_data["profiles"]:
-                template_to_use = default_marilena_profile if "HYROX" in new_prof_type else default_nikos_profile
-                user_data["profiles"][new_prof_name.strip()] = json.loads(json.dumps(template_to_use))
+                new_template = {
+                    "profile": {
+                        "gender": t("Άνδρας", "Male"), "age": 25, "weight_kg": 70.0, "height_cm": 175.0,
+                        "activity_level": 1.55, "goal": "Cutting" if "HYROX" in new_prof_type else "Bulking",
+                        "training_age": t("Αρχάριος (0-1 έτος)", "Novice (0-1 yr)"), "xp": 0, "level": 1
+                    },
+                    "daily_logs": [],
+                    "weight_log": [{"date": datetime.now().strftime("%d/%m/%Y"), "weight": 70.0}],
+                    "templates": {day: [] for day in DAYS_EL},
+                    "prs": {}, "achievements": [], "history": []
+                }
+                user_data["profiles"][new_prof_name.strip()] = new_template
                 user_data["active_profile"] = new_prof_name.strip()
                 save_user_data()
                 st.success(t(f"Το προφίλ '{new_prof_name}' δημιουργήθηκε!", f"Profile '{new_prof_name}' created successfully!"))
@@ -445,14 +447,14 @@ tab1, tab_tracker, tab2, tab3 = st.tabs([
 # TAB 1: DASHBOARD & BODY WEIGHT
 # ==============================================================================
 with tab1:
-    prof = active_p["profile"]
-    lvl = prof["level"]
+    prof = active_p.get("profile", {})
+    lvl = prof.get("level", 1)
     title = get_level_title(lvl)
     req_xp = req_xp_for_level(lvl)
-    curr_xp = prof["xp"]
+    curr_xp = prof.get("xp", 0)
     
     st.markdown(f"### 🎮 Level {lvl} — {title}")
-    st.progress(min(1.0, curr_xp / req_xp))
+    st.progress(min(1.0, curr_xp / req_xp if req_xp > 0 else 0.0))
     st.caption(f"Progress: {curr_xp} / {req_xp} XP (Stricter Exponential Scaling Active)")
     
     achs = active_p.get("achievements", [])
@@ -465,7 +467,7 @@ with tab1:
     col_w1, col_w2 = st.columns([2, 1])
     with col_w1:
         st.subheader(t("⚖️ Πρωινό Ζύγισμα (Νηστικός)", "⚖️ Morning Weigh-in (Fasted)"))
-        today_val = st.number_input(t("Σημερινό Βάρος (kg):", "Today's Weight (kg):"), value=float(prof["weight_kg"]), step=0.1, key=f"daily_w_in_{active_profile_name}")
+        today_val = st.number_input(t("Σημερινό Βάρος (kg):", "Today's Weight (kg):"), value=float(prof.get("weight_kg", 70.0)), step=0.1, key=f"daily_w_in_{active_profile_name}")
         if st.button(t("⚖️ Καταγραφή Βάρους", "⚖️ Log Weight"), key=f"btn_w_log_{active_profile_name}"):
             today_str = datetime.now().strftime("%d/%m/%Y")
             logs = active_p.get("weight_log", [])
@@ -498,9 +500,9 @@ with tab1:
             g_options = [t("Άνδρας", "Male"), t("Γυναίκα", "Female")]
             g_idx = 0 if prof.get("gender") in ["Άνδρας", "Male"] else 1
             gender = st.selectbox(t("Φύλο", "Gender"), g_options, index=g_idx)
-            age = st.number_input(t("Ηλικία", "Age"), value=int(prof["age"]), step=1)
-            height = st.number_input(t("Ύψος (cm)", "Height (cm)"), value=float(prof["height_cm"]), step=0.5)
-            weight = st.number_input(t("Βάρος (kg)", "Weight (kg)"), value=float(prof["weight_kg"]), step=0.1)
+            age = st.number_input(t("Ηλικία", "Age"), value=int(prof.get("age", 25)), step=1)
+            height = st.number_input(t("Ύψος (cm)", "Height (cm)"), value=float(prof.get("height_cm", 175.0)), step=0.5)
+            weight = st.number_input(t("Βάρος (kg)", "Weight (kg)"), value=float(prof.get("weight_kg", 70.0)), step=0.1)
         with c2:
             goal_opts = [t("Bulking", "Bulking"), t("Cutting", "Cutting"), t("Συντήρηση", "Maintenance")]
             curr_goal = prof.get("goal", "Bulking")
@@ -512,7 +514,8 @@ with tab1:
             t_idx = 0 if "Αρχάριος" in curr_t_age or "Novice" in curr_t_age else (1 if "Ενδιάμεσος" in curr_t_age or "Intermediate" in curr_t_age else 2)
             train_age = st.selectbox(t("Επίπεδο", "Experience Level"), train_opts, index=t_idx)
             
-            act_idx = [1.2, 1.375, 1.55, 1.725].index(prof.get("activity_level", 1.55))
+            act_level_val = prof.get("activity_level", 1.55)
+            act_idx = [1.2, 1.375, 1.55, 1.725].index(act_level_val) if act_level_val in [1.2, 1.375, 1.55, 1.725] else 2
             act_opts = [
                 (t("Καθιστική (1.2)", "Sedentary (1.2)"), 1.2),
                 (t("Ελαφριά (1.375)", "Lightly Active (1.375)"), 1.375),
@@ -549,10 +552,10 @@ with tab_tracker:
     st.title(t("🥗 Daily Nutrition & Protein Tracker", "🥗 Daily Nutrition & Protein Tracker"))
     st.caption(f"{t('Διατροφή για', 'Nutrition for')} **{active_profile_name}**")
 
-    bmr, tdee, target_cal, prot_g, carb_g, fat_g = calc_macros(active_p["profile"])
+    bmr, tdee, target_cal, prot_g, carb_g, fat_g = calc_macros(active_p.get("profile", {}))
 
     totals = {"cal": 0.0, "p": 0.0, "c": 0.0, "f": 0.0}
-    for log in active_p["daily_logs"]:
+    for log in active_p.get("daily_logs", []):
         totals["cal"] += log.get("cal", 0.0)
         totals["p"] += log.get("p", 0.0)
         totals["c"] += log.get("c", 0.0)
@@ -580,7 +583,7 @@ with tab_tracker:
         st.metric(f"{t('Λιπαρά', 'Fats')} ({t('Στόχος', 'Target')}: {fat_g}g)", f"{totals['f']:.1f}g", f"{t('Λείπουν', 'Remaining')} {f_rem:.1f}g")
         st.progress(min(1.0, totals["f"] / fat_g if fat_g > 0 else 0.0))
 
-    if totals["p"] >= prot_g:
+    if totals["p"] >= prot_g and prot_g > 0:
         st.success(t(f"🎉 Συγχαρητήρια! Κάλυψες τον ημερήσιο στόχο πρωτεΐνης ({prot_g}g)!", f"🎉 Congratulations! You reached your daily protein goal ({prot_g}g)!"))
 
     st.markdown("---")
@@ -591,7 +594,7 @@ with tab_tracker:
 
     with c_select:
         selected_name = st.selectbox(t("Επίλεξε Τρόφιμο:", "Select Food Item:"), list(food_db.keys()), key=f"f_select_{active_profile_name}")
-        food_info = food_db[selected_name]
+        food_info = food_db.get(selected_name, {"unit": "100g", "cal": 100, "p": 10, "c": 10, "f": 2})
 
     with c_qty:
         if food_info["unit"] == "100g":
@@ -644,7 +647,7 @@ with tab_tracker:
     st.markdown("---")
     st.subheader(t("📋 Τι κατέγραψες σήμερα:", "📋 Today's Logged Meals:"))
 
-    if active_p["daily_logs"]:
+    if active_p.get("daily_logs"):
         rows_to_del_food = []
         for idx, item in enumerate(active_p["daily_logs"]):
             c_desc, c_del = st.columns([5, 1])
@@ -676,7 +679,6 @@ with tab_tracker:
 with tab2:
     st.subheader(t("🏋️ Καταγραφή Προπόνησης (Πλήρες 7-Ημερο Schedule)", "🏋️ Workout Tracker (7-Day Schedule)"))
     
-    selected_day_idx = 0
     day_options = DAYS_EN if st.session_state.get("lang") == "English" else DAYS_EL
     day_selected_label = st.selectbox(t("📅 Επιλογή Ημέρας:", "📅 Select Day:"), day_options, key=f"day_select_{active_profile_name}")
     
@@ -706,7 +708,7 @@ with tab2:
         overload_info = calc_progressive_overload(ex_name, active_p.get("history", []), user_data["exercise_database"])
         
         with st.expander(f"🔹 #{idx+1} {ex_name}", expanded=True):
-            if overload_info and "NIKOS" in active_profile_name:
+            if overload_info:
                 st.markdown(f"<div class='overload-card'>⚡ <b>{t('Auto Progressive Overload Πρόταση:', 'Auto Progressive Overload Suggestion:')}</b><br>{overload_info['msg']}<br>{t('Στόχος Επόμενης Προπόνησης:', 'Target for next workout:')} <b>{overload_info['w']} kg x {overload_info['r']} reps</b></div>", unsafe_allow_html=True)
                 if st.button(f"⚡ {t('Εφαρμογή Target', 'Apply Overload Target')} ({overload_info['w']}kg)", key=f"ov_btn_{prof_key_id}_{day_selected}_{idx}"):
                     item["w"] = overload_info["w"]
@@ -763,7 +765,7 @@ with tab2:
                 pace_dec = mins / dist
                 pace_m = int(pace_dec)
                 pace_s = int((pace_dec - pace_m) * 60)
-                z_name, z_color = calc_hr_zone(item.get("hr", 145), active_p["profile"]["age"])
+                z_name, z_color = calc_hr_zone(item.get("hr", 145), active_p.get("profile", {}).get("age", 25))
                 
                 st.info(f"🏃 **Pace:** {pace_m}:{pace_s:02d} min/km | **Speed:** {60/pace_dec:.1f} km/h | **HR Zone:** <span style='color:{z_color}; font-weight:bold;'>{z_name}</span>", icon="⚡")
 
@@ -794,11 +796,12 @@ with tab2:
         else:
             total_tonnage = 0
             total_cardio_cal = 0
+            total_cardio_km = 0.0
+            total_cardio_mins = 0
             ex_summary = {}
             pr_alerts = []
             effective_sets = 0
             bonus_pr_xp = 0
-            quip_msg = ""
             
             for item in current_list:
                 ex = item["ex"]
@@ -817,9 +820,10 @@ with tab2:
                 e1rm = 0
                 
                 if ex_type == "cardio":
-                    cardio_cal = calc_cardio_calories(60.0 / (r / max(0.1, w)) if w > 0 else 9.0, r, active_p["profile"]["weight_kg"])
+                    total_cardio_km += w
+                    total_cardio_mins += r
+                    cardio_cal = calc_cardio_calories(60.0 / (r / max(0.1, w)) if w > 0 else 9.0, r, active_p.get("profile", {}).get("weight_kg", 70.0))
                     total_cardio_cal += cardio_cal
-                    quip_msg = get_cardio_quip(w, ex)
                 elif ex_type == "weight":
                     eff_w = w * 2 if is_db else w
                     total_tonnage += s * eff_w * r
@@ -835,6 +839,14 @@ with tab2:
                 if w > ex_summary[ex]["max_weight"]: ex_summary[ex]["max_weight"] = w
                 if e1rm > ex_summary[ex]["max_1rm"]: ex_summary[ex]["max_1rm"] = e1rm
 
+            quip_msg = get_smart_workout_quip(
+                ex_summary=ex_summary, 
+                total_tonnage=total_tonnage, 
+                total_cardio_km=total_cardio_km, 
+                total_cardio_mins=total_cardio_mins,
+                user_db=user_data["exercise_database"]
+            )
+
             if "prs" not in active_p: active_p["prs"] = {}
             for ex_name, ex_data in ex_summary.items():
                 if ex_data["type"] == "weight":
@@ -849,6 +861,7 @@ with tab2:
             unlocked_achs = check_and_unlock_achievements(total_tonnage)
             bonus_ach_xp = len(unlocked_achs) * 200
             
+            if "history" not in active_p: active_p["history"] = []
             active_p["history"].append({
                 "date": datetime.now().strftime("%d/%m/%Y %H:%M"),
                 "day": day_selected,
@@ -872,7 +885,7 @@ with tab2:
             <div class='report-card'>
                 <h3 style='color:#2b8a3e; margin-top:0;'>📊 {t('REPORT ΠΡΟΠΟΝΗΣΗΣ', 'WORKOUT REPORT')} ({DAY_MAP_TO_EN.get(day_selected, day_selected)}) - {active_profile_name}</h3>
                 <p>• <b>{t('Συνολικός Όγκος (Tonnage):', 'Total Tonnage:')}</b> <span style='font-size:20px; color:#2b8a3e;'><b>{total_tonnage:,} kg</b></span></p>
-                <p>• 🎈 <i>{quip_msg if quip_msg else get_tonnage_quips(total_tonnage)}</i></p>
+                <p>• 🎈 <i>{quip_msg}</i></p>
                 <p>• 🎮 <b>XP Earned:</b> +{earned_xp} XP</p>
             </div>
             """, unsafe_allow_html=True)
@@ -1004,7 +1017,7 @@ with tab3:
         ax3.tick_params(axis='x', rotation=45)
         ax3.legend()
         
-        bw = active_p["profile"]["weight_kg"]
+        bw = active_p.get("profile", {}).get("weight_kg", 70.0)
         my_bench = active_p.get("prs", {}).get("Flat Dumbbell Chest Press", bw * 0.7)
         my_legpress = active_p.get("prs", {}).get("Leg Press", bw * 1.5)
         my_lat = active_p.get("prs", {}).get("Lat Pulldown (Τροχαλία)", bw * 0.7)
@@ -1022,7 +1035,7 @@ with tab3:
         ax4.set_title(t("🥊 Σύγκριση Δύναμης vs Μέσος Όρος", "🥊 Strength Benchmarks vs Novice Avg"))
         ax4.legend()
         
-        w_dates, w_mov_avg, w_proj, _ = calc_projected_vs_real_weight(active_p["profile"], active_p.get("weight_log", []))
+        w_dates, w_mov_avg, w_proj, _ = calc_projected_vs_real_weight(active_p.get("profile", {}), active_p.get("weight_log", []))
         if w_dates:
             ax5.plot(w_dates, w_proj, color='#f59f00', linestyle='--', linewidth=2, label='Projected Target Curve')
             ax5.plot(w_dates, w_mov_avg, color='#2b8a3e', marker='o', linewidth=3, label='Real Weight Trend (Moving Avg)')
