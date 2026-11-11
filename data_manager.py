@@ -2,8 +2,10 @@ import os
 import json
 import re
 
-DATA_DIR = "data"
-USER_DATA_DIR = "user_data"
+# Απόλυτη διαδρομή της ρίζας του project (εκεί που βρίσκεται το data_manager.py)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(BASE_DIR, "data")
+USER_DATA_DIR = os.path.join(BASE_DIR, "user_data")
 PROFILES_DIR = os.path.join(USER_DATA_DIR, "profiles")
 
 def ensure_directories():
@@ -20,65 +22,40 @@ def load_json(filepath, default_val):
         try:
             with open(filepath, "r", encoding="utf-8") as f:
                 return json.load(f)
-        except Exception:
-            pass
+        except Exception as e:
+            print(f"Σφάλμα κατά την ανάγνωση του {filepath}: {e}")
     return default_val
 
 def save_json(filepath, data):
+    ensure_directories()
     with open(filepath, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
-
-def migrate_legacy_data():
-    """Αυτόματο σπάσιμο του μονολιθικού gym_data.json σε υπο-αρχεία JSON."""
-    legacy_file = "gym_data.json"
-    if os.path.exists(legacy_file):
-        try:
-            with open(legacy_file, "r", encoding="utf-8") as f:
-                legacy = json.load(f)
-            
-            if "active_profile" in legacy:
-                save_json(os.path.join(USER_DATA_DIR, "settings.json"), {"active_profile": legacy["active_profile"]})
-            if "food_db" in legacy:
-                save_json(os.path.join(USER_DATA_DIR, "custom_foods.json"), legacy["food_db"])
-            if "exercise_database" in legacy:
-                save_json(os.path.join(USER_DATA_DIR, "custom_exercises.json"), legacy["exercise_database"])
-                
-            if "profiles" in legacy and isinstance(legacy["profiles"], dict):
-                for p_name, p_data in legacy["profiles"].items():
-                    p_data["profile_name"] = p_name
-                    fname = f"{sanitize_filename(p_name)}.json"
-                    save_json(os.path.join(PROFILES_DIR, fname), p_data)
-            
-            os.rename(legacy_file, "gym_data.json.bak")
-        except Exception as e:
-            print(f"Migration error: {e}")
 
 def load_all_app_data():
     ensure_directories()
     
-    # Απενεργοποίηση αυτόματου migration για να μην ξαναγράφει τα παλιά δεδομένα
-    # migrate_legacy_data()
-    
+    # 1. Φόρτωση settings
     settings = load_json(os.path.join(USER_DATA_DIR, "settings.json"), {"active_profile": ""})
     
-    # 1. Φόρτωση Στατικών Βάσεων Δεδομένων
+    # 2. Φόρτωση Στατικών Βάσεων Δεδομένων από το data/
     base_foods = load_json(os.path.join(DATA_DIR, "base_foods.json"), {})
     base_exercises = load_json(os.path.join(DATA_DIR, "base_exercises.json"), {})
     
-    # 2. Φόρτωση Δυναμικών / Custom Βάσεων Δεδομένων
+    # 3. Φόρτωση Δυναμικών / Custom Βάσεων Δεδομένων από το user_data/
     custom_foods = load_json(os.path.join(USER_DATA_DIR, "custom_foods.json"), {})
     custom_exercises = load_json(os.path.join(USER_DATA_DIR, "custom_exercises.json"), {})
     
-    # 3. Συγχώνευση (Τα custom υπερισχύουν σε περίπτωση διπλότυπων)
+    # 4. Συγχώνευση (Τα custom υπερισχύουν σε περίπτωση διπλότυπων)
     merged_foods = {**base_foods, **custom_foods}
     merged_exercises = {**base_exercises, **custom_exercises}
     
-    # 4. Φόρτωση όλων των Προφίλ από το user_data/profiles/
+    # 5. Φόρτωση όλων των Προφίλ από το user_data/profiles/
     profiles = {}
     if os.path.exists(PROFILES_DIR):
         for fname in os.listdir(PROFILES_DIR):
             if fname.endswith(".json"):
-                p_data = load_json(os.path.join(PROFILES_DIR, fname), None)
+                p_path = os.path.join(PROFILES_DIR, fname)
+                p_data = load_json(p_path, None)
                 if p_data and isinstance(p_data, dict):
                     p_name = p_data.get("profile_name", fname.replace(".json", ""))
                     profiles[p_name] = p_data
@@ -95,25 +72,19 @@ def load_all_app_data():
     }
 
 def save_profile_file(profile_name, profile_data):
-    ensure_directories()
     profile_data["profile_name"] = profile_name
     fname = f"{sanitize_filename(profile_name)}.json"
     save_json(os.path.join(PROFILES_DIR, fname), profile_data)
 
 def save_settings_file(active_profile_name):
-    ensure_directories()
     save_json(os.path.join(USER_DATA_DIR, "settings.json"), {"active_profile": active_profile_name})
 
 def save_custom_foods_file(food_db):
-    ensure_directories()
     base_foods = load_json(os.path.join(DATA_DIR, "base_foods.json"), {})
-    # Αποθηκεύονται ΜΟΝΟ τα τρόφιμα που ΔΕΝ υπάρχουν στο base_foods ή έχουν τροποποιηθεί
     only_custom = {k: v for k, v in food_db.items() if k not in base_foods or base_foods[k] != v}
     save_json(os.path.join(USER_DATA_DIR, "custom_foods.json"), only_custom)
 
 def save_custom_exercises_file(exercise_db):
-    ensure_directories()
     base_exercises = load_json(os.path.join(DATA_DIR, "base_exercises.json"), {})
-    # Αποθηκεύονται ΜΟΝΟ οι ασκήσεις που ΔΕΝ υπάρχουν στο base_exercises ή έχουν τροποποιηθεί
     only_custom = {k: v for k, v in exercise_db.items() if k not in base_exercises or base_exercises[k] != v}
     save_json(os.path.join(USER_DATA_DIR, "custom_exercises.json"), only_custom)
