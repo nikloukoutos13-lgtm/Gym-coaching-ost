@@ -161,7 +161,6 @@
     "emg_weights": { "Chest": 1.0, "Front Delts": 0.65, "Triceps": 0.3 },
     "resistance_profile": "Mid-range"
   },
-  {
   "Crunches": {
     "muscle": "Abs",
     "type": "bodyweight",
@@ -297,7 +296,6 @@
     "emg_weights": { "Abs": 0.8, "Core": 1.0 },
     "resistance_profile": "Isometric"
   },
-  {
   "Pull-ups (Έλξεις στο Ζυγό)": {
     "muscle": "Lats",
     "type": "bodyweight",
@@ -451,7 +449,6 @@
     "emg_weights": { "Upper Back": 1.0, "Rear Delts": 0.5, "Biceps": 0.35 },
     "resistance_profile": "Shortened-biased"
   },
-  {
   "Dumbbell Shoulder Press": {
     "muscle": "Shoulders",
     "type": "weight",
@@ -587,7 +584,6 @@
     "emg_weights": { "Front Delts": 1.0, "Chest": 0.3 },
     "resistance_profile": "Lengthened-biased"
   },
-  {
   "Dumbbell Bicep Curls": {
     "muscle": "Biceps",
     "type": "weight",
@@ -723,7 +719,6 @@
     "emg_weights": { "Biceps": 1.0, "Forearms": 0.25 },
     "resistance_profile": "Mid-range"
   },
-  {
   "Triceps Rope Pushdown": {
     "muscle": "Triceps",
     "type": "weight",
@@ -886,7 +881,6 @@
     "emg_weights": { "Triceps": 1.0 },
     "resistance_profile": "Mid-range"
   },
-  {
   "Barbell Back Squat": {
     "muscle": "Quads",
     "type": "weight",
@@ -1067,7 +1061,6 @@
     "emg_weights": { "Calves": 1.0 },
     "resistance_profile": "Mid-range"
   },
-  {
   "Running (Εξωτερικό Τρέξιμο)": {
     "muscle": "Cardio",
     "type": "cardio",
@@ -1212,7 +1205,6 @@
     "emg_weights": { "Glutes": 1.0, "Hamstrings": 0.8, "Lower Back": 0.5, "Cardio": 0.6 },
     "resistance_profile": "Explosive"
   },
-  {
   "Sandbag Chest Carry (HYROX)": {
     "muscle": "Full Body",
     "type": "weight",
