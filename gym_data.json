@@ -458,6 +458,13 @@
       "is_db": true,
       "primary": "Side Delts",
       "secondary": null
+    },
+    "Leg raises": {
+      "muscle": "Abs",
+      "type": "bodyweight",
+      "is_db": false,
+      "primary": "Abs",
+      "secondary": null
     }
   },
   "profiles": {
