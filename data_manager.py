@@ -36,24 +36,19 @@ def migrate_legacy_data():
             with open(legacy_file, "r", encoding="utf-8") as f:
                 legacy = json.load(f)
             
-            # 1. Αποθήκευση Active Profile Setting
             if "active_profile" in legacy:
                 save_json(os.path.join(USER_DATA_DIR, "settings.json"), {"active_profile": legacy["active_profile"]})
-            
-            # 2. Αποθήκευση Custom Foods & Exercises
             if "food_db" in legacy:
                 save_json(os.path.join(USER_DATA_DIR, "custom_foods.json"), legacy["food_db"])
             if "exercise_database" in legacy:
                 save_json(os.path.join(USER_DATA_DIR, "custom_exercises.json"), legacy["exercise_database"])
                 
-            # 3. Αποθήκευση Κάθε Προφίλ σε Ξεχωριστό JSON
             if "profiles" in legacy and isinstance(legacy["profiles"], dict):
                 for p_name, p_data in legacy["profiles"].items():
                     p_data["profile_name"] = p_name
                     fname = f"{sanitize_filename(p_name)}.json"
                     save_json(os.path.join(PROFILES_DIR, fname), p_data)
             
-            # 4. Μετονομασία του παλιού αρχείου σε backup
             os.rename(legacy_file, "gym_data.json.bak")
         except Exception as e:
             print(f"Migration error: {e}")
@@ -87,7 +82,6 @@ def load_all_app_data():
     }
 
 def save_profile_file(profile_name, profile_data):
-    """Αποθηκεύει ΜΟΝΟ το JSON του συγκεκριμένου προφίλ."""
     ensure_directories()
     profile_data["profile_name"] = profile_name
     fname = f"{sanitize_filename(profile_name)}.json"
