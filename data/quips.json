@@ -1,70 +1,276 @@
 {
   "tonnage_el": [
-    [100, "🦆 Σήκωσες το βάρος από 40 πάπιες!"],
-    [250, "🦭 Σήκωσες το βάρος από 1 ενήλικη φώκια!"],
-    [500, "🎹 Σήκωσες 1 πιάνο με ουρά Konzertflügel!"],
-    [1200, "🚗 Σήκωσες 1 Fiat 500 / Mini Cooper!"],
-    [2500, "🦏 Σήκωσες έναν αρσενικό Λευκό Ρινόκερο!"],
-    [4000, "🏎️ Σήκωσες 2 μονοθέσια της Formula 1!"],
-    [6000, "🐘 Σήκωσες έναν ενήλικο Αφρικανικό Ελέφαντα!"],
-    [9000, "🦈 Σήκωσες 6 Μεγάλους Λευκούς Καρχαρίες!"],
-    [12000, "🦖 Σήκωσες έναν πλήρως αναπτυγμένο Tyrannosaurus Rex!"],
-    [18000, "⚓ Σήκωσες την κύρια άγκυρα ενός κρουαζιερόπλοιου!"],
-    [22000, "🚌 Σήκωσες 2 διώροφα κόκκινα λεωφορεία του Λονδίνου!"],
-    [35000, "🛩️ Σήκωσες ένα μαχητικό αεροσκάφος F-16!"],
-    [55000, "✈️ Σήκωσες ένα άδειο επιβατικό Boeing 737-800!"],
-    [100000, "🚂 Σήκωσες μια ατμομηχανή τρένου Orient Express!"]
+    [500, [
+      "Χαλαρό ξεκίνημα, οι μύες μόλις ξύπνησαν! 🔥",
+      "Ήπια προπόνηση, καλή για αποθεραπεία και τεχνική! 👍",
+      "Κάθε κιλό μετράει στο δρόμο για την κορυφή. 🏋️‍♂️"
+    ]],
+    [1000, [
+      "1 Τόνος στο σακούλη! Το ζέσταμα ολοκληρώθηκε! 😅",
+      "Σταθερή αρχή, οι μύες ζεστάθηκαν για τα δύσκολα! ⚡",
+      "1,000 kg Tonnage! Καλή βάση για τη συνέχεια! 💪"
+    ]],
+    [2500, [
+      "Σταθερή δουλειά! Το σώμα μπαίνει σε ρυθμό υπερτροφίας. 💪",
+      "2.5 Τόνοι! Ο όγκος δουλειάς αρχίζει και φαίνεται! 💥",
+      "Τίμια προσπάθεια, χτίζεις σωστές βάσεις! 🏗️"
+    ]],
+    [5000, [
+      "5 Τόνοι! Τώρα αρχίζουμε να μιλάμε σοβαρά. ⚡",
+      "Μπήκες στο zone της υπερτροφίας! Δυνατή προπόνηση. 🔥",
+      "5,000 kg μετακινήθηκαν σήμερα. Οι αλτήρες στενάζουν! 🏋️",
+      "5 Τόνοι! Καθαρό μυϊκό ερέθισμα χωρίς εκπτώσεις! 🦾"
+    ]],
+    [7500, [
+      "7.5 Τόνοι! Καθαρή μυϊκή διέγερση, ο όγκος γράφει! 📈",
+      "Δυνατό Tonnage! Το γυμναστήριο σε σέβεται σήμερα. 🦾",
+      "Εξαιρετικό volume! Η ανάρρωση θα χρειαστεί καλό φαγητό. 🍗",
+      "7,500 kg! Οι ίνες σου ζητάνε ενυδάτωση και πρωτεΐνη! 🥤"
+    ]],
+    [10000, [
+      "10 ΤΟΝΟΙ! Επίσημο μέλος στο 10 Ton Club! 🏆",
+      "Δεκατόννος! Σήκωσες ένα ολόκληρο φορτηγό σήμερα! 🚛",
+      "10,000 kg! Η υπερτροφή χτυπάει κόκκινο! 💥",
+      "10 Τόνοι! Ο σίδηρος υποκλίνεται στην αφοσίωσή σου! 👑"
+    ]],
+    [15000, [
+      "15 ΤΟΝΟΙ! Τέρας όγκου, δεν σε σταματάει τίποτα! 👹",
+      "15,000 kg! Μήπως μετακόμισες το γυμναστήριο μόνος σου; 🏋️‍♂️✨",
+      "Απίστευτο volume! Οι μύες σου ζητάνε έλεος και στερεό φαγητό! 🥩",
+      "15 Τόνοι! Η προπόνηση πέρασε σε επίπεδο Pro! 🚀"
+    ]],
+    [20000, [
+      "20 ΤΟΝΟΙ! Επίπεδο Beast Mode: Ξεκλειδώθηκε! 🦍",
+      "20,000 kg Tonnage! Σήκωσες έναν ολόκληρο ελέφαντα! 🐘",
+      "20 Τόνοι! Σε λίγο θα σου ζητάει ενοίκιο το γυμναστήριο! 👑",
+      "20 Τόνοι! Απόλυτη κυριαρχία στα βάρη! 🌋"
+    ]],
+    [25000, [
+      "25 ΤΟΝΟΙ! 🐘 Titan of Tonnage status achieved!",
+      "25,000 kg! Αυτή δεν ήταν προπόνηση, ήταν σεισμός! 🌋",
+      "25 Τόνοι! Θρύλος του Gym, υποκλινόμαστε! 🙇‍♂️",
+      "25 Τόνοι! Εκτός ορίων, η αντοχή σου είναι εξωπραγματική! 🚀"
+    ]],
+    [35000, [
+      "35+ ΤΟΝΟΙ! Αδιανόητο Tonnage! Είσαι εκτός κλίμακας! 🚀",
+      "35,000 kg! Μήπως είσαι ρομπότ; Ποιο είναι το μυστικό σου; 🤖",
+      "35+ Τόνοι! Ο Όλυμπος σου ανήκει, συνέχισε να κυριαρχείς! 🏛️⚡",
+      "35+ Τόνοι! Ιστορική επίδοση στο Tonnage Tracker! 👑"
+    ]]
   ],
   "tonnage_en": [
-    [100, "🦆 You lifted the weight of 40 ducks!"],
-    [250, "🦭 You lifted the weight of 1 adult seal!"],
-    [500, "🎹 You lifted 1 Konzertflügel grand piano!"],
-    [1200, "🚗 You lifted 1 Fiat 500 / Mini Cooper!"],
-    [2500, "🦏 You lifted a male White Rhino!"],
-    [4000, "🏎️ You lifted 2 Formula 1 cars!"],
-    [6000, "🐘 You lifted an adult African Elephant!"],
-    [9000, "🦈 You lifted 6 Great White Sharks!"],
-    [12000, "🦖 You lifted a fully grown Tyrannosaurus Rex!"],
-    [18000, "⚓ You lifted a cruise ship main anchor!"],
-    [22000, "🚌 You lifted 2 London double-decker buses!"],
-    [35000, "🛩️ You lifted an F-16 fighter jet!"],
-    [55000, "✈️ You lifted an empty Boeing 737-800 passenger jet!"],
-    [100000, "🚂 You lifted an Orient Express steam locomotive!"]
+    [500, [
+      "Easy start, muscles are just waking up! 🔥",
+      "Light workout session, great for recovery and form! 👍",
+      "Every single kg counts towards the goal. 🏋️‍♂️"
+    ]],
+    [1000, [
+      "1 Ton in the books! Warmup complete! 😅",
+      "Solid start, muscles primed for the hard work! ⚡",
+      "1,000 kg Tonnage! Great base to build on! 💪"
+    ]],
+    [2500, [
+      "Solid work! Getting into the hypertrophy groove. 💪",
+      "2.5 Tons locked in! Volume is piling up! 💥",
+      "Honest effort, building proper foundations! 🏗️"
+    ]],
+    [5000, [
+      "5 Tons! Now we are talking real business. ⚡",
+      "Hypertrophy zone activated! Great workout session. 🔥",
+      "5,000 kg moved today. The iron respects you! 🏋️",
+      "5 Tons! Pure muscle stimulus without compromises! 🦾"
+    ]],
+    [7500, [
+      "7.5 Tons! Pure muscle stimulus, volume is stacking up! 📈",
+      "Strong Tonnage! You owned the gym floor today. 🦾",
+      "Excellent volume! Time to refuel with high protein. 🍗",
+      "7,500 kg! Muscle fibers calling for hydration & protein! 🥤"
+    ]],
+    [10000, [
+      "10 TONS! Official 10 Ton Club Member! 🏆",
+      "Ten-tonner! You literally lifted a whole truck today! 🚛",
+      "10,000 kg! Muscle growth is off the charts! 💥",
+      "10 Tons! The iron bows to your dedication! 👑"
+    ]],
+    [15000, [
+      "15 TONS! Volume Monster status unlocked! 👹",
+      "15,000 kg! Did you move the entire weight room by yourself? 🏋️‍♂️✨",
+      "Unbelievable total tonnage! Your muscle fibers demand food! 🥩",
+      "15 Tons! Workout level elevated to Pro status! 🚀"
+    ]],
+    [20000, [
+      "20 TONS! Beast Mode Level: Unlocked! 🦍",
+      "20,000 kg Tonnage! You moved an entire elephant today! 🐘",
+      "20 Tons! The gym owner should start paying you rent! 👑",
+      "20 Tons! Absolute domination on the weight floor! 🌋"
+    ]],
+    [25000, [
+      "25 TONS! 🐘 Titan of Tonnage status achieved!",
+      "25,000 kg! That wasn't just a workout, it was an earthquake! 🌋",
+      "25 Tons! Absolute Gym Legend, hats off! 🙇‍♂️",
+      "25 Tons! Beyond limits, your endurance is legendary! 🚀"
+    ]],
+    [35000, [
+      "35+ TONS! Mind-blowing Tonnage! You are off the scale! 🚀",
+      "35,000 kg! Are you part machine? Absolute beast work! 🤖",
+      "35+ Tons! Welcome to Mount Olympus, keep dominating! 🏛️⚡",
+      "35+ Tons! Historic performance logged in Tonnage Tracker! 👑"
+    ]]
   ],
   "cardio_el": [
-    [1, "🐢 Πρώτο χιλιόμετρο! Ξεπέρασες τη χελώνα του Αισώπου!"],
-    [3, "🐕 Έτρεξες όσο ένας δραστήριος σκύλος Golden Retriever στο πάρκο!"],
-    [5, "🐇 5km! Ξεπέρασες ένα κουνέλι σε πλήρη ταχύτητα!"],
-    [8, "🐺 8km! Κάλυψες την ημερήσια περιοδεία μιας αγέλης λύκων!"],
-    [10, "🐎 10km! Τρέχεις με το σθένος και την αντοχή ενός καθαρόαιμου αλόγου!"],
-    [15, "🐆 15km! Σήμερα προσπέρασες έναν γατόπαρδο σε αντοχή!"],
-    [21, "🏅 21km Ημιμαραθώνιος! Είσαι επίσημα μηχανή αντοχής!"],
-    [30, "🐬 Κάλυψες την απόσταση που κολυμπάει ένα δελφίνι στον ωκεανό!"],
-    [42, "🏆 42.2km ΜΑΡΑΘΩΝΙΟΣ! Γράφεις ιστορία σαν τον Φειδιππίδη!"],
-    [101, "🛷 Sled Push: Σπρώξατε βάρος μεγαλύτερο από έναν ενήλικο Γορίλα!"],
-    [102, "🐻 Sled Pull: Τραβήξατε το βάρος μιας επιθετικής Πολικής Αρκούδας!"],
-    [103, "🚣 SkiErg / RowErg: Κωπηλατήσατε τη διαδρομή μιας ολόκληρης λίμνης!"],
-    [104, "☄️ Burpee Broad Jumps: Εξερράγης σαν πύραυλος SpaceX σε κάθε άλμα!"],
-    [105, "🧱 Wall Balls: Εκτοξεύσατε τη μπάλα πιο ψηλά κι από τον τοίχο!"],
-    [106, "🎒 Sandbag Lunges: Κουβαλήσατε το βάρος ενός πολεμιστή Spartan Race!"],
-    [107, "🏋️ Farmers Carry: Σφίξατε τη λαβή σας σαν μέγγενη από τιτάνιο!"]
+    [1, [
+      "Καλή αρχή στο cardio! Το ζέσταμα ολοκληρώθηκε. 🚶‍♂️",
+      "Ήπιο ξεκίνημα, η καρδιά σου σε ευχαριστεί! ❤️",
+      "1 Km ενεργοποίησης! Έτοιμος για δράση. 🏃‍♂️"
+    ]],
+    [3, [
+      "3 Km Cardio! Αερόβια αντοχή σε εξέλιξη. 🏃‍♂️",
+      "Δυνατό αερόβιο session! Κάηκαν οι πρώτες θερμίδες. 🔥",
+      "3 Km στο κοντέρ! Σταθερός ρυθμός και καλή αναπνοή. 🫁"
+    ]],
+    [5, [
+      "5 Km Run! Κλασικό 5άρι, εξαιρετικός ρυθμός! ⏱️",
+      "5 Km στο ενεργητικό σου! Η καρδιοαναπνευστική σου πάει σφαίρα! 🚀",
+      "5 Km! Καθαρό κάψιμο λίπους και αεροβική ενδυνάμωση! 💥"
+    ]],
+    [8, [
+      "8 Km! Μεγάλη απόσταση, πλησιάζεις το διψήφιο! 🏃‍♂️💨",
+      "8 Km Cardio! Εξαιρετική αντοχή και πειθαρχία! 🎯",
+      "8 Km! Η Zone 2 δουλεύει στο βέλτιστο σημείο. 🫁"
+    ]],
+    [10, [
+      "10 Km! Διψήφιος αριθμός χιλιομέτρων, δυνατός δρομέας! 🏅",
+      "10 Km Endurance! Η Zone 2 δουλεύει στο full! 🫁",
+      "10 Km! 10,000 μέτρα ασταμάτητου ρυθμού! 🏆"
+    ]],
+    [15, [
+      "15 Km! Ετοιμάζεσαι για Ημιμαραθώνιο; Τρομερή αντοχή! 🏃‍♀️💨",
+      "15 Km! Τεράστια αερόβια βάση, συνέχισε έτσι! 🎯",
+      "15 Km! Τα πόδια ρολόι, ο ρυθμός σταθερός! ⏱️"
+    ]],
+    [21, [
+      "ΗΜΙΜΑΡΑΘΩΝΙΟΣ (21 Km)! Απίστευτο επίτευγμα! 🥈🏃‍♂️",
+      "21 Km! Τα πόδια σου είναι από ατσάλι! 🦾",
+      "21 Km! Ξεπέρασες τα όριά σου, συγχαρητήρια! 🎉"
+    ]],
+    [42, [
+      "ΜΑΡΑΘΩΝΙΟΣ (42 Km)! ΘΡΥΛΙΚΗ ΕΠΙΔΟΣΗ! 🥇👑",
+      "42 Km! Γράφεις ιστορία! Απόλυτος Legend του τρεξίματος! 🏆",
+      "42 Km! 42,195 μέτρα καθαρής θέλησης! 🌟"
+    ]],
+    [99, [
+      "Ultra Endurance Cardio! Είσαι υπεράνθρωπος! 🦸‍♂️",
+      "Απίστευτα χιλιόμετρα! Το σώμα σου είναι μηχανή! ⚡"
+    ]],
+    [100, [
+      "Cardio Domination! Αερόβιος θρύλος! 🌪️",
+      "Τρομερό αερόβιο volume! 🚀"
+    ]],
+    [101, [
+      "Sled Push Dominance! Τα πόδια σου είναι φωτιά! 🛷🔥",
+      "Sled Push Master! Η δύναμη των τετρακεφάλων σου είναι απίστευτη! 💪"
+    ]],
+    [102, [
+      "Sled Pull Titan! Η πλάτη και τα ισχία δούλεψαν στο 100%! 🚜",
+      "Sled Pull Expert! Τράβηγμα επιπέδου HYROX Pro! 💥"
+    ]],
+    [103, [
+      "SkiErg / RowErg Engine! Πνεύμονες από ατσάλι! ⛷️🚣‍♂️",
+      "Erg Machine Master! Ρυθμός και αντοχή στο κόκκινο! 🫁"
+    ]],
+    [104, [
+      "Burpee Broad Jump Warrior! Εκρηκτικότητα και αντοχή! 🦘🔥",
+      "Burpee Master! Κάθε άλμα σε φέρνει πιο κοντά στη νίκη! 💥"
+    ]],
+    [105, [
+      "Wall Balls Specialist! Ώμοι και πόδια σε πλήρη εξάντληση! 🎯🏀",
+      "Wall Ball Machine! Σταθερό βάθος και ακρίβεια! 💥"
+    ]],
+    [106, [
+      "Sandbag Lunges Legend! Ισορροπία, δύναμη και πυρήνας! 🎒🦵",
+      "Sandbag Master! Κάθε προβολή μετράει διπλά! 🔥"
+    ]],
+    [107, [
+      "Farmers Carry Grip Monster! Λαβή και τραπέζιοι από γρανίτη! 🚜✊",
+      "Farmers Carry Beast! Κράτησες το βάρος σαν πρωταθλητής! 🏆"
+    ]]
   ],
   "cardio_en": [
-    [1, "🐢 First kilometer! Faster than Aesop's tortoise!"],
-    [3, "🐕 Covered the distance of an energetic Golden Retriever!"],
-    [5, "🐇 5km! Outran a sprinting rabbit!"],
-    [8, "🐺 8km! Outpaced a wolf pack's daily range!"],
-    [10, "🐎 10km! Running with the stamina of a thoroughbred horse!"],
-    [15, "🐆 15km! Outlasted a cheetah in endurance today!"],
-    [21, "🏅 21km Half Marathon! You are an endurance machine!"],
-    [30, "🐬 Swam the distance of an oceanic dolphin!"],
-    [42, "🏆 42.2km MARATHON! Making history like Pheidippides!"],
-    [101, "🛷 Sled Push: Pushed heavier than an adult Gorilla!"],
-    [102, "🐻 Sled Pull: Pulled the weight of an aggressive Polar Bear!"],
-    [103, "🚣 SkiErg / RowErg: Rowed across an entire lake!"],
-    [104, "☄️ Burpee Broad Jumps: Explosive like a SpaceX rocket!"],
-    [105, "🧱 Wall Balls: Launched higher than the wall!"],
-    [106, "🎒 Sandbag Lunges: Carried the load of a Spartan Race warrior!"],
-    [107, "🏋️ Farmers Carry: Titanium grip unlocked!"]
+    [1, [
+      "Good start on cardio! Warmup is complete. 🚶‍♂️",
+      "Smooth start, your heart thanks you! ❤️",
+      "1 Km activation! Ready for action. 🏃‍♂️"
+    ]],
+    [3, [
+      "3 Km Cardio! Aerobic endurance in progress. 🏃‍♂️",
+      "Solid aerobic session! Calories burned. 🔥",
+      "3 Km logged! Steady pacing and controlled breathing. 🫁"
+    ]],
+    [5, [
+      "5 Km Run! Classic 5k, excellent pacing! ⏱️",
+      "5 Km done! Cardiovascular fitness is soaring! 🚀",
+      "5 Km! Pure fat burn and conditioning! 💥"
+    ]],
+    [8, [
+      "8 Km! Long distance, getting close to double digits! 🏃‍♂️💨",
+      "8 Km Cardio! Excellent stamina & mental toughness! 🎯",
+      "8 Km! Zone 2 operating at peak sweet spot. 🫁"
+    ]],
+    [10, [
+      "10 Km! Double digit kilometers, strong runner! 🏅",
+      "10 Km Endurance! Zone 2 training at its best! 🫁",
+      "10 Km! 10,000 meters of unstoppable pace! 🏆"
+    ]],
+    [15, [
+      "15 Km! Half Marathon prep? Incredible stamina! 🏃‍♀️💨",
+      "15 Km! Massive aerobic base, keep pushing! 🎯",
+      "15 Km! Legs like clockwork, steady tempo! ⏱️"
+    ]],
+    [21, [
+      "HALF MARATHON (21 Km)! Incredible achievement! 🥈🏃‍♂️",
+      "21 Km! Your legs are made of steel! 🦾",
+      "21 Km! Pushed past your limits, congratulations! 🎉"
+    ]],
+    [42, [
+      "MARATHON (42 Km)! LEGENDARY PERFORMANCE! 🥇👑",
+      "42 Km! Writing history! Absolute Running Legend! 🏆",
+      "42 Km! 42,195 meters of pure willpower! 🌟"
+    ]],
+    [99, [
+      "Ultra Endurance Cardio! You are superhuman! 🦸‍♂️",
+      "Unbelievable mileage! Your body is an absolute engine! ⚡"
+    ]],
+    [100, [
+      "Cardio Domination! Aerobic legend! 🌪️",
+      "Incredible cardio volume! 🚀"
+    ]],
+    [101, [
+      "Sled Push Dominance! Your legs are on fire! 🛷🔥",
+      "Sled Push Master! Quad power is off the charts! 💪"
+    ]],
+    [102, [
+      "Sled Pull Titan! Posterior chain working at 100%! 🚜",
+      "Sled Pull Expert! Pro-level HYROX pull! 💥"
+    ]],
+    [103, [
+      "SkiErg / RowErg Engine! Lungs of steel! ⛷️🚣‍♂️",
+      "Erg Machine Master! Pacing and stamina on point! 🫁"
+    ]],
+    [104, [
+      "Burpee Broad Jump Warrior! Explosive power & endurance! 🦘🔥",
+      "Burpee Master! Every jump brings you closer to victory! 💥"
+    ]],
+    [105, [
+      "Wall Balls Specialist! Shoulders and legs fully taxed! 🎯🏀",
+      "Wall Ball Machine! Consistent depth and target hit! 💥"
+    ]],
+    [106, [
+      "Sandbag Lunges Legend! Balance, core, and leg power! 🎒🦵",
+      "Sandbag Master! Every lunge counts double! 🔥"
+    ]],
+    [107, [
+      "Farmers Carry Grip Monster! Granite grip and traps! 🚜✊",
+      "Farmers Carry Beast! Held those heavy weights like a champion! 🏆"
+    ]]
   ]
 }
