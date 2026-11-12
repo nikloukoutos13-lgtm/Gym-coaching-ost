@@ -193,7 +193,7 @@
         "rir": 2
       },
       {
-        "ex": "Cable Lateral Raises (Τροχαλία)",
+        "ex": "Cable Lateral Raises",
         "s": 3,
         "w": 5.0,
         "r": 10,
@@ -207,11 +207,11 @@
         "rir": 3
       },
       {
-        "ex": "Plank",
-        "s": 2,
+        "ex": "Leg raises",
+        "s": 3,
         "w": 0.0,
-        "r": 60,
-        "rir": 1,
+        "r": 12,
+        "rir": 2,
         "hr": 145
       },
       {
