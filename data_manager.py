@@ -34,20 +34,38 @@ def save_json(filepath, data):
 def load_all_app_data():
     ensure_directories()
     
-    # 1. Φόρτωση settings
     settings = load_json(os.path.join(USER_DATA_DIR, "settings.json"), {"active_profile": ""})
-    
-    # 2. Φόρτωση Στατικών Βάσεων Δεδομένων από το data/
     base_foods = load_json(os.path.join(DATA_DIR, "base_foods.json"), {})
     base_exercises = load_json(os.path.join(DATA_DIR, "base_exercises.json"), {})
+    trivia_db = load_json(os.path.join(DATA_DIR, "trivia_db.json"), {"questions": []})
     
-    # 3. Φόρτωση Δυναμικών / Custom Βάσεων Δεδομένων από το user_data/
     custom_foods = load_json(os.path.join(USER_DATA_DIR, "custom_foods.json"), {})
     custom_exercises = load_json(os.path.join(USER_DATA_DIR, "custom_exercises.json"), {})
     
-    # 4. Συγχώνευση (Τα custom υπερισχύουν σε περίπτωση διπλότυπων)
     merged_foods = {**base_foods, **custom_foods}
     merged_exercises = {**base_exercises, **custom_exercises}
+    
+    profiles = {}
+    if os.path.exists(PROFILES_DIR):
+        for fname in os.listdir(PROFILES_DIR):
+            if fname.endswith(".json"):
+                p_path = os.path.join(PROFILES_DIR, fname)
+                p_data = load_json(p_path, None)
+                if p_data and isinstance(p_data, dict):
+                    p_name = p_data.get("profile_name", fname.replace(".json", ""))
+                    profiles[p_name] = p_data
+
+    active_p = settings.get("active_profile", "")
+    if not active_p or active_p not in profiles:
+        active_p = list(profiles.keys())[0] if profiles else ""
+
+    return {
+        "active_profile": active_p,
+        "food_db": merged_foods,
+        "exercise_database": merged_exercises,
+        "trivia_db": trivia_db,
+        "profiles": profiles
+    }
     
     # 5. Φόρτωση όλων των Προφίλ από το user_data/profiles/
     profiles = {}
