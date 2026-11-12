@@ -359,7 +359,7 @@ def check_and_unlock_achievements(total_tonnage):
     return unlocked
 
 def generate_post_workout_quiz(logged_exercises, exercise_db, trivia_db):
-    """Δημιουργεί είτε δυναμική ερώτηση από τις σημερινές ασκήσεις είτε ερώτηση θεωρίας."""
+    """Δημιουργεί context-aware ερώτηση (Dynamic Session ή Curated Theory Bank)."""
     static_questions = trivia_db.get("questions", [])
     
     valid_session_exs = [
@@ -367,7 +367,7 @@ def generate_post_workout_quiz(logged_exercises, exercise_db, trivia_db):
         if ex in exercise_db and exercise_db[ex].get("primary") not in (None, "Cardio", "Full Body")
     ]
     
-    # 50% πιθανότητα να ρωτήσει για άσκηση που μόλις εκτελέστηκε
+    # 50% πιθανότητα για δυναμική ερώτηση από τις σημερινές ασκήσεις
     if valid_session_exs and (random.random() < 0.5 or not static_questions):
         chosen_ex = random.choice(valid_session_exs)
         ex_info = exercise_db[chosen_ex]
@@ -379,24 +379,68 @@ def generate_post_workout_quiz(logged_exercises, exercise_db, trivia_db):
             "Chest", "Upper Back", "Lats", "Quads", "Hamstrings", "Glutes",
             "Front Delts", "Side Delts", "Rear Delts", "Biceps", "Triceps", "Abs", "Lower Back"
         ]
-        distractors = [m for m in all_muscles if m != primary_m]
-        options = [primary_m] + random.sample(distractors, 3)
-        random.shuffle(options)
         
-        sec_text = f" ενώ συνεργιστικά (secondary) δουλεύει και ο μυς **{secondary_m}**" if secondary_m else ""
-        return {
-            "category": "🎯 Ανάλυση Σημερινής Άσκησης",
-            "q": f"Στη σημερινή προπόνηση εκτέλεσες **{chosen_ex}**. Ποιος είναι ο ΚΥΡΙΟΣ (Primary) μυς-στόχος αυτής της άσκησης;",
-            "options": options,
-            "answer": primary_m,
-            "explanation": f"Η άσκηση **{chosen_ex}** στοχεύει πρωτευόντως τους **{primary_m}**{sec_text}. Το προφίλ αντίστασής της είναι **{res_prof}**."
-        }
+        # Επιλογή τύπου δυναμικής ερώτησης: Primary, Secondary (αν υπάρχει) ή Resistance Profile
+        q_modes = ["primary"]
+        if secondary_m:
+            q_modes.append("secondary")
+        if res_prof in ("Lengthened-biased", "Shortened-biased", "Mid-range"):
+            q_modes.append("profile")
+            
+        mode = random.choice(q_modes)
         
+        if mode == "secondary":
+            distractors = [m for m in all_muscles if m not in (primary_m, secondary_m)]
+            options = [secondary_m] + random.sample(distractors, 3)
+            random.shuffle(options)
+            return {
+                "category": "🎯 Συνεργιστικοί Μύες (Synergists)",
+                "q": f"Στη σημερινή άσκηση **{chosen_ex}**, ποιος μυς λειτουργεί ΔΕΥΤΕΡΕΥΟΝΤΩΣ (Secondary) υποστηρίζοντας τους {primary_m};",
+                "options": options,
+                "answer": secondary_m,
+                "explanation": f"Στην άσκηση **{chosen_ex}**, τον κύριο όγκο αναλαμβάνουν οι **{primary_m}**, ενώ συνεργιστικά συμμετέχουν οι **{secondary_m}**."
+            }
+        elif mode == "profile":
+            profiles = ["Lengthened-biased", "Shortened-biased", "Mid-range", "Isometric"]
+            options = profiles.copy()
+            random.shuffle(options)
+            return {
+                "category": "📐 Εμβιομηχανική & Resistance Profile",
+                "q": f"Ποιο είναι το προφίλ αντίστασης (Resistance Profile) της άσκησης **{chosen_ex}**;",
+                "options": options,
+                "answer": res_prof,
+                "explanation": f"Η άσκηση **{chosen_ex}** έχει προφίλ αντίστασης **{res_prof}**, δείχνοντας σε ποιο σημείο της τροχιάς κορυφώνεται η μηχανική τάση στους **{primary_m}**."
+            }
+        else:
+            distractors = [m for m in all_muscles if m != primary_m]
+            options = [primary_m] + random.sample(distractors, 3)
+            random.shuffle(options)
+            sec_text = f" ενώ συνεργιστικά δουλεύουν οι **{secondary_m}**" if secondary_m else ""
+            return {
+                "category": "🎯 Ανάλυση Σημερινής Άσκησης",
+                "q": f"Στη σημερινή προπόνηση εκτέλεσες **{chosen_ex}**. Ποιος είναι ο ΚΥΡΙΟΣ (Primary) μυς-στόχος αυτής της άσκησης;",
+                "options": options,
+                "answer": primary_m,
+                "explanation": f"Η άσκηση **{chosen_ex}** στοχεύει πρωτευόντως τους **{primary_m}**{sec_text}. Προφίλ αντίστασης: **{res_prof}**."
+            }
+
+    # Static Theory Bank με context-aware προτεραιότητα (HYROX/Running vs Hypertrophy)
     if static_questions:
-        return random.choice(static_questions)
+        is_endurance_session = any(
+            "(HYROX)" in ex or exercise_db.get(ex, {}).get("type") == "cardio"
+            for ex in logged_exercises
+        )
+        target_tags = {"hyrox", "running"} if is_endurance_session else {"hypertrophy", "anatomy", "biomechanics"}
+        matched = [q for q in static_questions if target_tags.intersection(set(q.get("tags", [])))]
+        
+        pool = matched if (matched and random.random() < 0.75) else static_questions
+        chosen_q = dict(random.choice(pool))
+        opts = list(chosen_q["options"])
+        random.shuffle(opts)
+        chosen_q["options"] = opts
+        return chosen_q
         
     return None
-
 # ------------------------------------------------------------------------------
 # 4. SIDEBAR MANAGEMENT
 # ------------------------------------------------------------------------------
