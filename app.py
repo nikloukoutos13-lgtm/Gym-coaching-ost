@@ -64,8 +64,6 @@ def get_smart_workout_quip(ex_summary, total_tonnage, total_cardio_km, total_car
     2. Running / Cardio Dominant
     3. Heavy Weightlifting Dominant (Tonnage)
     """
-    import random
-    
     lang_key_t = "tonnage_en" if st.session_state.get("lang") == "English" else "tonnage_el"
     lang_key_c = "cardio_en" if st.session_state.get("lang") == "English" else "cardio_el"
     
@@ -333,21 +331,32 @@ def calc_projected_vs_real_weight(profile, weight_log):
             
     return real_dates, moving_avgs, projected_weights, status_msg
 
-save_user_data()
-            
-            st.markdown(f"""
-            <div class='report-card'>
-                <h3 style='color:#2b8a3e; margin-top:0;'>📊 {t('REPORT ΠΡΟΠΟΝΗΣΗΣ', 'WORKOUT REPORT')} ({DAY_MAP_TO_EN.get(day_selected, day_selected)}) - {active_profile_name}</h3>
-                <p>• <b>{t('Συνολικός Όγκος (Tonnage):', 'Total Tonnage:')}</b> <span style='font-size:20px; color:#2b8a3e;'><b>{total_tonnage:,} kg</b></span></p>
-                <p>• 🎈 <i>{quip_msg}</i></p>
-                <p>• 🎮 <b>XP Earned:</b> +{earned_xp} XP</p>
-            </div>
-            """, unsafe_allow_html=True)
-            
-            if pr_alerts:
-                st.warning("\n".join(pr_alerts))
-            if unlocked_achs:
-                st.success("🎖️ **UNLOCKED ACHIEVEMENTS:**\n" + "\n".join(unlocked_achs))
+def check_and_unlock_achievements(total_tonnage):
+    unlocked = []
+    current_achs = active_p.get("achievements", [])
+    
+    pr_name = t("🏆 First Blood (Πρώτο PR)", "🏆 First Blood (First PR)")
+    if active_p.get("prs") and pr_name not in current_achs:
+        unlocked.append(t("🏆 First Blood (Έσπασες το πρώτο σου ατομικό ρεκόρ!)", "🏆 First Blood (Broke your first personal record!)"))
+        current_achs.append(pr_name)
+        
+    ton10_name = "🏋️ 10 Ton Club"
+    if total_tonnage >= 10000 and ton10_name not in current_achs:
+        unlocked.append(t("🏋️ 10 Ton Club (Σήκωσες πάνω από 10.000 kg σε μία συνεδρία!)", "🏋️ 10 Ton Club (Lifted over 10,000 kg in a single workout!)"))
+        current_achs.append(ton10_name)
+
+    ton25_name = "🐘 25 Ton Titan"
+    if total_tonnage >= 25000 and ton25_name not in current_achs:
+        unlocked.append(t("🐘 25 Ton Titan (Ξεπέρασες τα 25.000 kg σε μία προπόνηση!)", "🐘 25 Ton Titan (Crossed 25,000 kg in one session!)"))
+        current_achs.append(ton25_name)
+
+    scale_name = "⚖️ Scale Master"
+    if len(active_p.get("weight_log", [])) >= 7 and scale_name not in current_achs:
+        unlocked.append(t("⚖️ Scale Master (Κατέγραψες το βάρος σου για 7+ ημέρες!)", "⚖️ Scale Master (Logged body weight for 7+ days!)"))
+        current_achs.append(scale_name)
+
+    active_p["achievements"] = current_achs
+    return unlocked
 
 def generate_post_workout_quiz(logged_exercises, exercise_db, trivia_db):
     """Δημιουργεί είτε δυναμική ερώτηση από τις σημερινές ασκήσεις είτε ερώτηση θεωρίας."""
@@ -956,7 +965,7 @@ with tab2:
                 st.balloons()
                 st.success(f"🎉 **LEVEL UP! Level {active_p['profile']['level']}!**")
                 
-           save_user_data()
+            save_user_data()
             
             st.markdown(f"""
             <div class='report-card'>
@@ -971,6 +980,7 @@ with tab2:
                 st.warning("\n".join(pr_alerts))
             if unlocked_achs:
                 st.success("🎖️ **UNLOCKED ACHIEVEMENTS:**\n" + "\n".join(unlocked_achs))
+
             # --- ΕΚΚΙΝΗΣΗ POST-WORKOUT QUIZ ---
             logged_ex_names = [row["ex"] for row in current_list]
             st.session_state[f"pw_quiz_{active_profile_name}"] = generate_post_workout_quiz(
