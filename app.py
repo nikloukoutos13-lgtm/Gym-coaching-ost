@@ -1011,91 +1011,464 @@ with tab3:
     if not history:
         st.info(t("💡 Καταγράψτε την πρώτη σας προπόνηση στο Tab 3 για να εμφανιστούν τα αναλυτικά διαγράμματα!", "💡 Log your first workout in Tab 3 to see performance analytics!"))
     else:
-        fig = plt.figure(figsize=(12, 12))
-        gs = fig.add_gridspec(3, 2)
-        
-        ax1 = fig.add_subplot(gs[0, 0])
-        ax2 = fig.add_subplot(gs[0, 1])
-        ax3 = fig.add_subplot(gs[1, 0])
-        ax4 = fig.add_subplot(gs[1, 1])
-        ax5 = fig.add_subplot(gs[2, :])
-        
-        dates = [f"{DAY_MAP_TO_EN.get(h.get('day',''), h.get('day','')) if st.session_state.get('lang') == 'English' else h.get('day','')}\n{h.get('date','').split()[0]}" for h in history]
-        tonnages = [h.get("tonnage", 0) for h in history]
-        ax1.plot(dates, tonnages, marker='o', color='#2b8a3e', linewidth=2)
-        ax1.set_title(t("📈 Εξέλιξη Συνολικού Όγκου (Tonnage kg)", "📈 Total Tonnage Progress (kg)"))
-        ax1.grid(True, linestyle='--', alpha=0.5)
-        
-        ex_db_keys = list(user_data["exercise_database"].keys())
-        if ex_db_keys:
-            selected_ex = st.selectbox(t("🏋️ Επιλογή Άσκησης για Γράφημα:", "🏋️ Select Exercise for Graph:"), ex_db_keys, key=f"ex_graph_{active_profile_name}")
-        else:
-            selected_ex = None
-            
-        ex_dates, ex_vals = [], []
+        # ----------------------------------------------------------------------
+        # 1. CONTROLS: Χρονικό Παράθυρο & Φίλτρο RIR
+        # ----------------------------------------------------------------------
+        c_filt1, c_filt2 = st.columns([2, 1])
+        with c_filt1:
+            period_opts = [
+                t("Τελευταίες 7 ημέρες (7D)", "Last 7 Days (7D)"),
+                t("Τελευταίες 30 ημέρες (30D)", "Last 30 Days (30D)"),
+                t("Όλο το Ιστορικό (All Time)", "All Time History")
+            ]
+            selected_period = st.selectbox(
+                t("📅 Χρονικό Παράθυρο Ανάλυσης:", "📅 Analysis Time Window:"),
+                period_opts,
+                index=0,
+                key=f"analytics_period_{active_profile_name}"
+            )
+        with c_filt2:
+            st.write("")
+            st.write("")
+            only_effective = st.checkbox(
+                t("🎯 Μόνο Effective Sets (RIR ≤ 3)", "🎯 Effective Sets Only (RIR ≤ 3)"),
+                value=True,
+                key=f"analytics_rir_filt_{active_profile_name}"
+            )
+
+        now_dt = datetime.now()
+        filtered_history = []
         for h in history:
-            exs = h.get("exercises", {})
-            if selected_ex and selected_ex in exs:
-                ex_dates.append(f"{DAY_MAP_TO_EN.get(h.get('day',''), h.get('day','')) if st.session_state.get('lang') == 'English' else h.get('day','')}\n{h.get('date','').split()[0]}")
-                ex_data = exs[selected_ex]
-                if ex_data.get("type") == "weight":
-                    ex_vals.append(ex_data.get("max_weight", 0))
+            d_raw = h.get("date", "").split()[0]
+            try:
+                h_dt = datetime.strptime(d_raw, "%d/%m/%Y")
+            except Exception:
+                h_dt = now_dt
+            days_ago = (now_dt - h_dt).days
+            if "7D" in selected_period and days_ago <= 7:
+                filtered_history.append(h)
+            elif "30D" in selected_period and days_ago <= 30:
+                filtered_history.append(h)
+            elif "All Time" in selected_period or "Όλο" in selected_period:
+                filtered_history.append(h)
+
+        if not filtered_history:
+            st.warning(t(
+                "⚠️ Δεν βρέθηκαν προπονήσεις σε αυτό το χρονικό παράθυρο. Επίλεξε 'Τελευταίες 30 ημέρες' ή 'Όλο το Ιστορικό'.",
+                "⚠️ No workouts found in this time window. Select 'Last 30 Days' or 'All Time History'."
+            ))
+        else:
+            # ------------------------------------------------------------------
+            # 2. ΥΠΟΛΟΓΙΣΜΟΣ ΜΕΤΡΙΚΩΝ (EMG Volume, Resistance Profile, Cardio)
+            # ------------------------------------------------------------------
+            tracked_muscles = [
+                "Chest", "Upper Back", "Lats", "Quads", "Hamstrings", "Glutes",
+                "Lower Back", "Front Delts", "Side Delts", "Rear Delts",
+                "Biceps", "Triceps", "Abs", "Core", "Calves", "Traps", "Forearms"
+            ]
+            emg_volume = {m: 0.0 for m in tracked_muscles}
+            profile_breakdown = {
+                m: {"Lengthened": 0.0, "Full-range": 0.0, "Mid-range": 0.0, "Shortened": 0.0}
+                for m in tracked_muscles
+            }
+
+            total_eff_sets = 0
+            total_period_tonnage = 0.0
+            total_period_km = 0.0
+            total_period_cardio_mins = 0
+            lengthened_sets_sum = 0.0
+            total_profiled_sets = 0.0
+
+            if "7D" in selected_period:
+                weeks_divisor = 1.0
+            elif "30D" in selected_period:
+                weeks_divisor = 4.3
+            else:
+                parsed_dates = []
+                for h in filtered_history:
+                    try:
+                        parsed_dates.append(datetime.strptime(h.get("date", "").split()[0], "%d/%m/%Y"))
+                    except Exception:
+                        pass
+                if len(parsed_dates) >= 2:
+                    span_days = max(7, (max(parsed_dates) - min(parsed_dates)).days)
+                    weeks_divisor = max(1.0, span_days / 7.0)
                 else:
-                    ex_vals.append(ex_data.get("total_reps_or_min", 0))
-                    
-        if ex_vals:
-            ax2.plot(ex_dates, ex_vals, marker='s', color='#1971c2', linewidth=2)
-            ax2.set_title(f"📊 {t('Πρόοδος', 'Progress')}: {selected_ex}")
-            ax2.grid(True, linestyle='--', alpha=0.5)
-        else:
-            ax2.text(0.5, 0.5, f"{t('Δεν υπάρχουν ακόμα δεδομένα για:', 'No data yet for:')}\n{selected_ex}", ha='center', va='center')
-            
-        muscle_volume = {"Quads": 0.0, "Hamstrings": 0.0, "Chest": 0.0, "Lats": 0.0, "Upper Back": 0.0, "Front Delts": 0.0, "Side Delts": 0.0, "Biceps": 0.0, "Triceps": 0.0, "Abs": 0.0}
-        for h in history:
-            exs = h.get("exercises", {})
-            for ex_name, ex_data in exs.items():
-                s = ex_data.get("sets", 0)
-                db_info = user_data["exercise_database"].get(ex_name, {})
-                prim = db_info.get("primary", db_info.get("muscle", None))
-                sec = db_info.get("secondary", None)
-                if prim in muscle_volume: muscle_volume[prim] += s * 1.0
-                if sec in muscle_volume: muscle_volume[sec] += s * 0.5
+                    weeks_divisor = 1.0
 
-        muscles = list(muscle_volume.keys())
-        volumes = list(muscle_volume.values())
-        colors = ['#20c997' if v >= 6 else '#ff6b6b' for v in volumes]
-        ax3.bar(muscles, volumes, color=colors)
-        ax3.axhline(y=10, color='#2b8a3e', linestyle='--', label='MAV (10 sets)')
-        ax3.set_title(t("🏋️ Εβδομαδιαίος Όγκος Σετ ανά Μυϊκή Ομάδα", "🏋️ Weekly Direct/Indirect Volume per Muscle"))
-        ax3.tick_params(axis='x', rotation=45)
-        ax3.legend()
-        
-        bw = active_p.get("profile", {}).get("weight_kg", 70.0)
-        my_bench = active_p.get("prs", {}).get("Flat Dumbbell Chest Press", bw * 0.7)
-        my_legpress = active_p.get("prs", {}).get("Leg Press", bw * 1.5)
-        my_lat = active_p.get("prs", {}).get("Lat Pulldown (Τροχαλία)", bw * 0.7)
-        
-        cats = ['Chest Press', 'Leg Press', 'Lat Pulldown']
-        user_scores = [my_bench, my_legpress, my_lat]
-        avg_novice = [bw * 0.8, bw * 1.6, bw * 0.75]
-        
-        x = range(len(cats))
-        width = 0.35
-        ax4.bar([p - width/2 for p in x], avg_novice, width=width, label=t('Μέσος Novice', 'Avg Novice'), color='#adb5bd')
-        ax4.bar([p + width/2 for p in x], user_scores, width=width, label=t('Εσύ (1RM)', 'You (1RM)'), color='#2b8a3e')
-        ax4.set_xticks(x)
-        ax4.set_xticklabels(cats)
-        ax4.set_title(t("🥊 Σύγκριση Δύναμης vs Μέσος Όρος", "🥊 Strength Benchmarks vs Novice Avg"))
-        ax4.legend()
-        
-        w_dates, w_mov_avg, w_proj, _ = calc_projected_vs_real_weight(active_p.get("profile", {}), active_p.get("weight_log", []))
-        if w_dates:
-            ax5.plot(w_dates, w_proj, color='#f59f00', linestyle='--', linewidth=2, label='Projected Target Curve')
-            ax5.plot(w_dates, w_mov_avg, color='#2b8a3e', marker='o', linewidth=3, label='Real Weight Trend (Moving Avg)')
-            ax5.set_title(t("⚖️ Target Curve vs Real Weight Trend", "⚖️ Target Curve vs Real Weight Trend"))
-            ax5.legend()
-            ax5.grid(True, linestyle='--', alpha=0.5)
+            for h in filtered_history:
+                total_period_tonnage += h.get("tonnage", 0.0)
+                exs = h.get("exercises", {})
+                for ex_name, ex_data in exs.items():
+                    s = ex_data.get("sets", 0)
+                    ex_type = ex_data.get("type", "weight")
+                    db_info = user_data["exercise_database"].get(ex_name, {})
 
-        plt.tight_layout()
-        st.pyplot(fig)
-        plt.close(fig)
+                    if ex_type == "cardio":
+                        total_period_km += ex_data.get("max_weight", 0.0)
+                        total_period_cardio_mins += ex_data.get("total_reps_or_min", 0)
+                        continue
+
+                    rirs = ex_data.get("rirs") or [2]
+                    avg_rir = sum(rirs) / len(rirs)
+                    if only_effective and avg_rir > 3.0:
+                        continue
+
+                    total_eff_sets += s
+
+                    raw_rp = db_info.get("resistance_profile", "Mid-range")
+                    if "Lengthened" in raw_rp:
+                        rp_bucket = "Lengthened"
+                    elif "Full-range" in raw_rp:
+                        rp_bucket = "Full-range"
+                    elif "Mid-range" in raw_rp:
+                        rp_bucket = "Mid-range"
+                    else:
+                        rp_bucket = "Shortened"
+
+                    total_profiled_sets += s
+                    if rp_bucket in ["Lengthened", "Full-range"]:
+                        lengthened_sets_sum += s
+
+                    emg_map = db_info.get("emg_weights")
+                    if not isinstance(emg_map, dict) or not emg_map:
+                        emg_map = {}
+                        prim = db_info.get("primary", db_info.get("muscle"))
+                        sec = db_info.get("secondary")
+                        if prim:
+                            emg_map[prim] = 1.0
+                        if sec:
+                            emg_map[sec] = 0.5
+
+                    for m_key, weight_factor in emg_map.items():
+                        if m_key in emg_volume:
+                            weighted_s = s * float(weight_factor)
+                            emg_volume[m_key] += weighted_s
+                            profile_breakdown[m_key][rp_bucket] += weighted_s
+
+            weekly_emg_volume = {m: round(v / weeks_divisor, 1) for m, v in emg_volume.items()}
+            active_muscles = [
+                m for m in tracked_muscles
+                if weekly_emg_volume[m] > 0 or m in ["Chest", "Lats", "Upper Back", "Quads", "Hamstrings", "Glutes", "Side Delts", "Biceps", "Triceps"]
+            ]
+
+            top_muscle = max(weekly_emg_volume, key=weekly_emg_volume.get)
+            top_muscle_val = weekly_emg_volume[top_muscle]
+            stretch_pct = round((lengthened_sets_sum / total_profiled_sets) * 100, 1) if total_profiled_sets > 0 else 0.0
+
+            # ------------------------------------------------------------------
+            # 3. TOP 4 KPI CARDS
+            # ------------------------------------------------------------------
+            k1, k2, k3, k4 = st.columns(4)
+            k1.metric(t("🔥 Effective Sets", "🔥 Effective Sets"), f"{total_eff_sets} sets", f"{len(filtered_history)} {t('προπονήσεις', 'sessions')}")
+            k2.metric(t("🏆 Top Μυϊκή Ομάδα", "🏆 Top Muscle Group"), top_muscle, f"{top_muscle_val} sets/{t('εβδ.', 'wk')}")
+            k3.metric(t("📐 Stretch / Full-Range", "📐 Stretch / Full-Range"), f"{stretch_pct}%", t("Στόχος: >35%", "Target: >35%"))
+            if total_period_tonnage >= 500 or total_period_km == 0:
+                k4.metric(t("🏋️ Συνολικό Tonnage", "🏋️ Total Tonnage"), f"{int(total_period_tonnage):,} kg")
+            else:
+                k4.metric(t("🏃 Απόσταση Cardio", "🏃 Cardio Distance"), f"{total_period_km:.1f} km", f"{total_period_cardio_mins} min")
+
+            st.write("")
+
+            # ------------------------------------------------------------------
+            # 4. SUB-TABS ΓΙΑ ΚΑΘΑΡΗ ΠΡΟΒΟΛΗ ΣΕ DESKTOP & MOBILE
+            # ------------------------------------------------------------------
+            sub_tab1, sub_tab2 = st.tabs([
+                t("💪 Μυϊκός Όγκος & Biomechanics", "💪 Muscle Volume & Biomechanics"),
+                t("📈 Πρόοδος, Βάρος & Cardio/HYROX", "📈 Progress, Weight & Cardio/HYROX")
+            ])
+
+            # ==================================================================
+            # SUB-TAB 1: EMG VOLUME, RESISTANCE PROFILE & BENCHMARKS
+            # ==================================================================
+            with sub_tab1:
+                fig1, (ax_vol, ax_rp) = plt.subplots(2, 1, figsize=(11, 10))
+
+                # --- Γράφημα 1: EMG-Weighted Weekly Volume (MEV / MAV / MRV) ---
+                m_labels = active_muscles[::-1]
+                m_vals = [weekly_emg_volume[m] for m in m_labels]
+                bar_colors = []
+                for v in m_vals:
+                    if v < 6:
+                        bar_colors.append("#fcc419")      # Κάτω από MEV
+                    elif v < 10:
+                        bar_colors.append("#51cf66")      # MEV (6-10)
+                    elif v <= 22:
+                        bar_colors.append("#2b8a3e")      # MAV (10-20 Optimal)
+                    else:
+                        bar_colors.append("#ff6b6b")      # MRV Alert (>22)
+
+                bars = ax_vol.barh(m_labels, m_vals, color=bar_colors, edgecolor="#343a40", alpha=0.9)
+                ax_vol.axvline(x=6, color="#f59f00", linestyle="--", linewidth=1.5, label="MEV (6 sets/wk)")
+                ax_vol.axvline(x=10, color="#2b8a3e", linestyle="-.", linewidth=1.5, label="MAV Start (10 sets/wk)")
+                ax_vol.axvline(x=20, color="#e03131", linestyle=":", linewidth=1.5, label="MRV Limit (20+ sets/wk)")
+                ax_vol.set_title(t("🧬 EMG-Weighted Εβδομαδιαίος Όγκος ανά Μυϊκή Ομάδα (sets/εβδ.)", "🧬 EMG-Weighted Weekly Volume per Muscle (sets/wk)"), fontweight="bold")
+                ax_vol.set_xlabel(t("Σταθμισμένα Σετ / Εβδομάδα", "Weighted Sets / Week"))
+                ax_vol.grid(axis="x", linestyle="--", alpha=0.4)
+                ax_vol.legend(loc="lower right")
+
+                for bar in bars:
+                    w_val = bar.get_width()
+                    if w_val > 0:
+                        ax_vol.text(w_val + 0.3, bar.get_y() + bar.get_height() / 2, f"{w_val:.1f}", va="center", fontsize=9, fontweight="bold")
+
+                # --- Γράφημα 2: Resistance Profile Breakdown (%) ---
+                trained_muscles = [m for m in active_muscles if sum(profile_breakdown[m].values()) > 0][::-1]
+                if trained_muscles:
+                    leng_pcts, full_pcts, mid_pcts, short_pcts = [], [], [], []
+                    missing_stretch_muscles = []
+
+                    for m in trained_muscles:
+                        tot_m = sum(profile_breakdown[m].values())
+                        l_p = (profile_breakdown[m]["Lengthened"] / tot_m) * 100
+                        f_p = (profile_breakdown[m]["Full-range"] / tot_m) * 100
+                        m_p = (profile_breakdown[m]["Mid-range"] / tot_m) * 100
+                        s_p = (profile_breakdown[m]["Shortened"] / tot_m) * 100
+                        leng_pcts.append(l_p)
+                        full_pcts.append(f_p)
+                        mid_pcts.append(m_p)
+                        short_pcts.append(s_p)
+                        if (l_p + f_p) == 0 and tot_m >= 3.0:
+                            missing_stretch_muscles.append(m)
+
+                    ax_rp.barh(trained_muscles, leng_pcts, color="#2b8a3e", label="Lengthened-biased (Stretch)")
+                    ax_rp.barh(trained_muscles, full_pcts, left=leng_pcts, color="#20c997", label="Full-range")
+                    left_mid = [l + f for l, f in zip(leng_pcts, full_pcts)]
+                    ax_rp.barh(trained_muscles, mid_pcts, left=left_mid, color="#339af0", label="Mid-range")
+                    left_short = [lm + md for lm, md in zip(left_mid, mid_pcts)]
+                    ax_rp.barh(trained_muscles, short_pcts, left=left_short, color="#adb5bd", label="Shortened / Isometric")
+
+                    ax_rp.set_xlim(0, 100)
+                    ax_rp.set_title(t("📐 Κατανομή Resistance Profile ανά Μυϊκή Ομάδα (%)", "📐 Resistance Profile Distribution per Muscle (%)"), fontweight="bold")
+                    ax_rp.set_xlabel("%")
+                    ax_rp.legend(loc="lower right", ncol=2, fontsize=8)
+                else:
+                    missing_stretch_muscles = []
+                    ax_rp.text(0.5, 0.5, t("Δεν υπάρχουν δεδομένα Resistance Profile.", "No Resistance Profile data yet."), ha="center", va="center")
+
+                plt.tight_layout()
+                st.pyplot(fig1)
+                plt.close(fig1)
+
+                if missing_stretch_muscles:
+                    st.info(t(
+                        f"💡 **Biomechanics Alert:** Οι μυϊκές ομάδες **{', '.join(missing_stretch_muscles)}** έχουν 0% Lengthened / Full-range ερέθισμα. Πρόσθεσε μια άσκηση σε διάταση (π.χ. Cable Lateral Raises, Overhead Triceps Extension, RDL) για μέγιστη υπερτροφία.",
+                        f"💡 **Biomechanics Alert:** **{', '.join(missing_stretch_muscles)}** have 0% Lengthened / Full-range stimulus. Add a stretch-biased exercise for optimal hypertrophy."
+                    ))
+
+                # --- Dynamic Strength Benchmarks (Push / Pull / Legs) ---
+                bw = active_p.get("profile", {}).get("weight_kg", 70.0)
+                prs = active_p.get("prs", {})
+                best_push = ("Push", 0.0)
+                best_pull = ("Pull", 0.0)
+                best_legs = ("Legs", 0.0)
+
+                for pr_ex, pr_val in prs.items():
+                    db_i = user_data["exercise_database"].get(pr_ex, {})
+                    p_m = db_i.get("primary", db_i.get("muscle", ""))
+                    if p_m in ["Chest", "Upper Chest", "Front Delts", "Shoulders"] and pr_val > best_push[1]:
+                        best_push = (pr_ex[:22], pr_val)
+                    elif p_m in ["Lats", "Upper Back", "Posterior Chain"] and pr_val > best_pull[1]:
+                        best_pull = (pr_ex[:22], pr_val)
+                    elif p_m in ["Quads", "Hamstrings", "Glutes"] and pr_val > best_legs[1]:
+                        best_legs = (pr_ex[:22], pr_val)
+
+                if best_push[1] > 0 or best_pull[1] > 0 or best_legs[1] > 0:
+                    fig_b, ax_b = plt.subplots(figsize=(10, 3.8))
+                    b_cats = [f"Push\n({best_push[0]})", f"Pull\n({best_pull[0]})", f"Legs\n({best_legs[0]})"]
+                    u_scores = [best_push[1], best_pull[1], best_legs[1]]
+                    novice_ref = [round(bw * 0.85, 1), round(bw * 0.80, 1), round(bw * 1.50, 1)]
+                    x_pos = range(len(b_cats))
+                    w_bar = 0.35
+                    ax_b.bar([p - w_bar / 2 for p in x_pos], novice_ref, width=w_bar, label=t("Μέσος Novice (1RM)", "Avg Novice (1RM)"), color="#adb5bd")
+                    ax_b.bar([p + w_bar / 2 for p in x_pos], u_scores, width=w_bar, label=t("Το Καλύτερο PR σου (1RM)", "Your Best PR (1RM)"), color="#2b8a3e")
+                    ax_b.set_xticks(list(x_pos))
+                    ax_b.set_xticklabels(b_cats)
+                    ax_b.set_ylabel("Kg (Est. 1RM)")
+                    ax_b.set_title(t("🥊 Δυναμική Σύγκριση Δύναμης (Best Push / Pull / Legs PR)", "🥊 Dynamic Strength Benchmarks (Best Push / Pull / Legs PR)"), fontweight="bold")
+                    ax_b.legend()
+                    ax_b.grid(axis="y", linestyle="--", alpha=0.4)
+                    plt.tight_layout()
+                    st.pyplot(fig_b)
+                    plt.close(fig_b)
+
+            # ==================================================================
+            # SUB-TAB 2: ΠΡΟΟΔΟΣ 1RM, ΒΑΡΟΣ (SWEET ZONE) & CARDIO / HYROX
+            # ==================================================================
+            with sub_tab2:
+                c_ex1, c_ex2 = st.columns([2, 1])
+                performed_exs = sorted(list({ex_k for h in history for ex_k in h.get("exercises", {}).keys()}))
+                all_db_exs = sorted(list(user_data["exercise_database"].keys()))
+                selectable_exs = performed_exs if performed_exs else all_db_exs
+
+                with c_ex1:
+                    selected_ex = st.selectbox(
+                        t("🏋️ Επιλογή Άσκησης για Ανάλυση Προόδου:", "🏋️ Select Exercise for Progress Analysis:"),
+                        selectable_exs,
+                        key=f"ex_graph_v2_{active_profile_name}"
+                    ) if selectable_exs else None
+                with c_ex2:
+                    st.write("")
+                    st.write("")
+                    show_rir_1rm = st.checkbox(
+                        t("⚡ RIR-Adjusted 1RM", "⚡ RIR-Adjusted 1RM"),
+                        value=True,
+                        key=f"rir_1rm_toggle_{active_profile_name}"
+                    )
+
+                fig2, (ax_ton, ax_prog) = plt.subplots(1, 2, figsize=(12, 4.5))
+
+                # --- Γράφημα 1: Tonnage ή Cardio Distance ανά Συνεδρία ---
+                s_dates = [
+                    f"{DAY_MAP_TO_EN.get(h.get('day',''), h.get('day','')) if st.session_state.get('lang') == 'English' else h.get('day','')}\n{h.get('date','').split()[0]}"
+                    for h in filtered_history
+                ]
+                s_tonnages = [h.get("tonnage", 0) for h in filtered_history]
+                s_kms = [
+                    sum(v.get("max_weight", 0.0) for v in h.get("exercises", {}).values() if v.get("type") == "cardio")
+                    for h in filtered_history
+                ]
+
+                if sum(s_tonnages) > 0:
+                    ax_ton.plot(s_dates, s_tonnages, marker="o", color="#2b8a3e", linewidth=2.5, label="Tonnage (kg)")
+                    ax_ton.set_title(t("📈 Εξέλιξη Όγκου (Tonnage kg)", "📈 Total Tonnage Progress (kg)"), fontweight="bold")
+                    ax_ton.set_ylabel("Kg")
+                else:
+                    ax_ton.plot(s_dates, s_kms, marker="o", color="#1971c2", linewidth=2.5, label="Distance (km)")
+                    ax_ton.set_title(t("🏃 Εξέλιξη Απόστασης Cardio (km)", "🏃 Cardio Distance Progress (km)"), fontweight="bold")
+                    ax_ton.set_ylabel("Km")
+                ax_ton.grid(True, linestyle="--", alpha=0.5)
+                ax_ton.tick_params(axis="x", rotation=30)
+
+                # --- Γράφημα 2: Estimated 1RM & RIR-Adjusted 1RM (ή Cardio Pace) ---
+                ex_dates, base_1rms, adj_1rms, cardio_paces = [], [], [], []
+                is_cardio_sel = user_data["exercise_database"].get(selected_ex, {}).get("type") == "cardio" if selected_ex else False
+
+                for h in history:
+                    exs = h.get("exercises", {})
+                    if selected_ex and selected_ex in exs:
+                        ex_dates.append(f"{h.get('date','').split()[0]}")
+                        ex_d = exs[selected_ex]
+                        if ex_d.get("type") == "weight":
+                            b_1rm = ex_d.get("max_1rm", 0.0)
+                            base_1rms.append(b_1rm)
+                            n_ent = max(1, len(ex_d.get("rirs") or [1]))
+                            avg_r = ex_d.get("total_reps_or_min", 10) / n_ent
+                            avg_rir_ex = sum(ex_d.get("rirs") or [2]) / n_ent
+                            if b_1rm > 0 and avg_r > 0:
+                                eff_w_est = b_1rm / (1.0 + avg_r / 30.0) if avg_r <= 10 else b_1rm * (48.8 + 53.8 * math.exp(-0.075 * avg_r)) / 100.0
+                                adj_1rms.append(calc_1rm(eff_w_est, avg_r + avg_rir_ex))
+                            else:
+                                adj_1rms.append(b_1rm)
+                        elif ex_d.get("type") == "cardio":
+                            dist_v = ex_d.get("max_weight", 0.0)
+                            mins_v = ex_d.get("total_reps_or_min", 0.0)
+                            cardio_paces.append(round(mins_v / dist_v, 2) if dist_v > 0 else 0.0)
+                        else:
+                            base_1rms.append(ex_d.get("total_reps_or_min", 0))
+                            adj_1rms.append(ex_d.get("total_reps_or_min", 0))
+
+                if is_cardio_sel and cardio_paces:
+                    ax_prog.plot(ex_dates, cardio_paces, marker="s", color="#e8590c", linewidth=2.5, label="Pace (min/km)")
+                    ax_prog.invert_yaxis()
+                    ax_prog.set_title(f"🏃 Pace (min/km): {selected_ex}", fontweight="bold")
+                    ax_prog.grid(True, linestyle="--", alpha=0.5)
+                    ax_prog.legend()
+                elif base_1rms:
+                    ax_prog.plot(ex_dates, base_1rms, marker="s", color="#1971c2", linewidth=2.5, label="Est. 1RM (kg)")
+                    if show_rir_1rm and adj_1rms != base_1rms:
+                        ax_prog.plot(ex_dates, adj_1rms, marker="^", linestyle="--", color="#2b8a3e", linewidth=2, label="RIR-Adjusted 1RM (kg)")
+                    ax_prog.set_title(f"📊 {t('Πρόοδος Δύναμης (1RM)', 'Strength Progress (1RM)')}: {selected_ex}", fontweight="bold")
+                    ax_prog.set_ylabel("Kg")
+                    ax_prog.grid(True, linestyle="--", alpha=0.5)
+                    ax_prog.legend()
+                else:
+                    ax_prog.text(0.5, 0.5, f"{t('Δεν υπάρχουν ακόμα δεδομένα για:', 'No data yet for:')}\n{selected_ex}", ha="center", va="center")
+
+                ax_prog.tick_params(axis="x", rotation=30)
+                plt.tight_layout()
+                st.pyplot(fig2)
+                plt.close(fig2)
+
+                # --- Γράφημα 3: Body Weight Trend + Sweet Zone & Hypertrophy Efficiency ---
+                w_dates, w_mov_avg, w_proj, _ = calc_projected_vs_real_weight(active_p.get("profile", {}), active_p.get("weight_log", []))
+                if w_dates:
+                    fig3, ax_w = plt.subplots(figsize=(11, 4))
+                    x_w = list(range(len(w_dates)))
+                    sweet_low = [p - 0.5 for p in w_proj]
+                    sweet_high = [p + 0.5 for p in w_proj]
+
+                    ax_w.fill_between(x_w, sweet_low, sweet_high, color="#51cf66", alpha=0.2, label=t("Sweet Zone (±0.5 kg)", "Sweet Zone (±0.5 kg)"))
+                    ax_w.plot(x_w, w_proj, color="#f59f00", linestyle="--", linewidth=2, label=t("Projected Target Curve", "Projected Target Curve"))
+                    ax_w.plot(x_w, w_mov_avg, color="#2b8a3e", marker="o", linewidth=3, label=t("Real Weight Trend (7d Moving Avg)", "Real Weight Trend (7d Moving Avg)"))
+                    ax_w.set_xticks(x_w)
+                    ax_w.set_xticklabels(w_dates, rotation=30)
+                    ax_w.set_ylabel("Kg")
+                    ax_w.set_title(t("⚖️ Target Curve, Sweet Zone & Real Weight Trend", "⚖️ Target Curve, Sweet Zone & Real Weight Trend"), fontweight="bold")
+                    ax_w.legend()
+                    ax_w.grid(True, linestyle="--", alpha=0.5)
+                    plt.tight_layout()
+                    st.pyplot(fig3)
+                    plt.close(fig3)
+
+                    if len(w_mov_avg) >= 2 and w_mov_avg[0] > 0 and len(history) >= 2:
+                        pct_w_gain = ((w_mov_avg[-1] - w_mov_avg[0]) / w_mov_avg[0]) * 100.0
+                        first_exs = history[0].get("exercises", {})
+                        last_exs = history[-1].get("exercises", {})
+                        common_w_exs = [
+                            k for k in first_exs
+                            if k in last_exs and first_exs[k].get("max_1rm", 0) > 0 and last_exs[k].get("max_1rm", 0) > 0
+                        ]
+                        if common_w_exs and pct_w_gain > 0.2:
+                            pct_1rm_gains = [
+                                ((last_exs[k]["max_1rm"] - first_exs[k]["max_1rm"]) / first_exs[k]["max_1rm"]) * 100.0
+                                for k in common_w_exs
+                            ]
+                            avg_1rm_gain = sum(pct_1rm_gains) / len(pct_1rm_gains)
+                            eff_idx = avg_1rm_gain / pct_w_gain
+                            if eff_idx >= 1.5:
+                                st.success(t(
+                                    f"🟢 **Hypertrophy Efficiency Index: {eff_idx:.2f}** — Καθαρή μυϊκή υπερτροφή! Η δύναμη ανέβηκε +{avg_1rm_gain:.1f}% έναντι +{pct_w_gain:.1f}% σωματικού βάρους.",
+                                    f"🟢 **Hypertrophy Efficiency Index: {eff_idx:.2f}** — High quality muscle gain! Strength rose +{avg_1rm_gain:.1f}% vs +{pct_w_gain:.1f}% body weight."
+                                ))
+                            elif eff_idx >= 0.8:
+                                st.info(t(
+                                    f"🟡 **Hypertrophy Efficiency Index: {eff_idx:.2f}** — Ισορροπημένο Bulking (δύναμη +{avg_1rm_gain:.1f}%, βάρος +{pct_w_gain:.1f}%).",
+                                    f"🟡 **Hypertrophy Efficiency Index: {eff_idx:.2f}** — Optimal bulking ratio (strength +{avg_1rm_gain:.1f}%, weight +{pct_w_gain:.1f}%)."
+                                ))
+                            else:
+                                st.warning(t(
+                                    f"🔴 **Hypertrophy Efficiency Index: {eff_idx:.2f}** — Το βάρος ανεβαίνει ταχύτερα από τη δύναμη (+{pct_w_gain:.1f}% βάρος vs +{avg_1rm_gain:.1f}% 1RM). Έλεγξε το θερμιδικό πλεόνασμα.",
+                                    f"🔴 **Hypertrophy Efficiency Index: {eff_idx:.2f}** — Weight rising faster than strength (+{pct_w_gain:.1f}% weight vs +{avg_1rm_gain:.1f}% 1RM). Consider trimming surplus."
+                                ))
+
+                # --- Γράφημα 4: Cardio HR Zones (όταν υπάρχουν καταγραφές Cardio) ---
+                if total_period_cardio_mins > 0:
+                    zone_mins = {"Zone 1": 0, "Zone 2": 0, "Zone 3": 0, "Zone 4": 0, "Zone 5": 0}
+                    user_age = active_p.get("profile", {}).get("age", 26)
+                    for h in filtered_history:
+                        for ex_k, ex_v in h.get("exercises", {}).items():
+                            if ex_v.get("type") == "cardio":
+                                c_mins = ex_v.get("total_reps_or_min", 0)
+                                c_dist = ex_v.get("max_weight", 0)
+                                est_hr = ex_v.get("avg_hr")
+                                if not est_hr:
+                                    spd = (60.0 / (c_mins / c_dist)) if (c_dist > 0 and c_mins > 0) else 9.0
+                                    est_hr = min(195, int(115 + spd * 4.5))
+                                z_label, _ = calc_hr_zone(est_hr, user_age)
+                                for zk in zone_mins:
+                                    if zk in z_label:
+                                        zone_mins[zk] += c_mins
+                                        break
+
+                    fig4, ax_hr = plt.subplots(figsize=(10, 3.5))
+                    z_keys = list(zone_mins.keys())
+                    z_vals = list(zone_mins.values())
+                    z_colors = ["#339af0", "#51cf66", "#fcc419", "#ff922b", "#ff6b6b"]
+                    ax_hr.bar(z_keys, z_vals, color=z_colors, edgecolor="#343a40")
+                    ax_hr.set_ylabel(t("Λεπτά (Min)", "Minutes (Min)"))
+                    ax_hr.set_title(t("❤️ Κατανομή Χρόνου ανά Heart Rate Zone", "❤️ Time Distribution per Heart Rate Zone"), fontweight="bold")
+                    ax_hr.grid(axis="y", linestyle="--", alpha=0.4)
+                    plt.tight_layout()
+                    st.pyplot(fig4)
+                    plt.close(fig4)
