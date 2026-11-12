@@ -1,6 +1,7 @@
 import os
 import json
 import math
+import random
 import requests
 import base64
 from datetime import datetime, timedelta
@@ -356,8 +357,51 @@ def check_and_unlock_achievements(total_tonnage):
         unlocked.append(t("⚖️ Scale Master (Κατέγραψες το βάρος σου για 7+ ημέρες!)", "⚖️ Scale Master (Logged body weight for 7+ days!)"))
         current_achs.append(scale_name)
 
-    active_p["achievements"] = current_achs
+   active_p["achievements"] = current_achs
     return unlocked
+
+def generate_post_workout_quiz(logged_exercises, exercise_db, trivia_db):
+    """Δημιουργεί είτε δυναμική ερώτηση από τις σημερινές ασκήσεις είτε ερώτηση θεωρίας."""
+    static_questions = trivia_db.get("questions", [])
+    
+    valid_session_exs = [
+        ex for ex in logged_exercises
+        if ex in exercise_db and exercise_db[ex].get("primary") not in (None, "Cardio", "Full Body")
+    ]
+    
+    # 50% πιθανότητα να ρωτήσει για άσκηση που μόλις εκτελέστηκε
+    if valid_session_exs and (random.random() < 0.5 or not static_questions):
+        chosen_ex = random.choice(valid_session_exs)
+        ex_info = exercise_db[chosen_ex]
+        primary_m = ex_info.get("primary")
+        secondary_m = ex_info.get("secondary")
+        res_prof = ex_info.get("resistance_profile", "Mid-range")
+        
+        all_muscles = [
+            "Chest", "Upper Back", "Lats", "Quads", "Hamstrings", "Glutes",
+            "Front Delts", "Side Delts", "Rear Delts", "Biceps", "Triceps", "Abs", "Lower Back"
+        ]
+        distractors = [m for m in all_muscles if m != primary_m]
+        options = [primary_m] + random.sample(distractors, 3)
+        random.shuffle(options)
+        
+        sec_text = f" ενώ συνεργιστικά (secondary) δουλεύει και ο μυς **{secondary_m}**" if secondary_m else ""
+        return {
+            "category": "🎯 Ανάλυση Σημερινής Άσκησης",
+            "q": f"Στη σημερινή προπόνηση εκτέλεσες **{chosen_ex}**. Ποιος είναι ο ΚΥΡΙΟΣ (Primary) μυς-στόχος αυτής της άσκησης;",
+            "options": options,
+            "answer": primary_m,
+            "explanation": f"Η άσκηση **{chosen_ex}** στοχεύει πρωτευόντως τους **{primary_m}**{sec_text}. Το προφίλ αντίστασής της είναι **{res_prof}**."
+        }
+        
+    if static_questions:
+        return random.choice(static_questions)
+        
+    return None
+
+# ------------------------------------------------------------------------------
+# 4. SIDEBAR MANAGEMENT
+# ------------------------------------------------------------------------------
 
 # ------------------------------------------------------------------------------
 # 4. SIDEBAR MANAGEMENT
@@ -938,10 +982,78 @@ with tab2:
             </div>
             """, unsafe_allow_html=True)
             
-            if pr_alerts:
+           if pr_alerts:
                 st.warning("\n".join(pr_alerts))
             if unlocked_achs:
                 st.success("🎖️ **UNLOCKED ACHIEVEMENTS:**\n" + "\n".join(unlocked_achs))
+
+            # --- ΕΚΚΙΝΗΣΗ POST-WORKOUT QUIZ ---
+            logged_ex_names = [row["ex"] for row in current_list]
+            st.session_state[f"pw_quiz_{active_profile_name}"] = generate_post_workout_quiz(
+                logged_ex_names,
+                user_data.get("exercise_database", {}),
+                user_data.get("trivia_db", {})
+            )
+            st.session_state[f"pw_quiz_answered_{active_profile_name}"] = False
+            st.session_state[f"pw_quiz_choice_{active_profile_name}"] = None
+
+    # --- ΕΜΦΑΝΙΣΗ ΚΑΡΤΑΣ QUIZ (ΕΞΩ ΑΠΟ ΤΟ if btn_digest ΓΙΑ ΝΑ ΜΗΝ ΧΑΝΕΤΑΙ ΣΤΟ RERUN) ---
+    quiz_key = f"pw_quiz_{active_profile_name}"
+    ans_key = f"pw_quiz_answered_{active_profile_name}"
+    choice_key = f"pw_quiz_choice_{active_profile_name}"
+
+    if st.session_state.get(quiz_key):
+        quiz = st.session_state[quiz_key]
+        st.divider()
+        st.markdown(f"### 🧠 Post-Workout Fitness & Anatomy Quiz ({quiz.get('category', 'Trivia')})")
+        st.caption(t("Κλείδωσε τη θεωρία πίσω από την προπόνηση και κέρδισε **+25 XP**!", "Lock in the theory behind your workout and earn **+25 XP**!"))
+
+        user_choice = st.radio(
+            quiz["q"],
+            quiz["options"],
+            key=f"pw_quiz_radio_{active_profile_name}",
+            disabled=st.session_state.get(ans_key, False)
+        )
+
+        if not st.session_state.get(ans_key, False):
+            if st.button(t("✅ Υποβολή Απάντησης (+25 XP)", "✅ Submit Answer (+25 XP)"), key=f"pw_quiz_submit_{active_profile_name}"):
+                st.session_state[ans_key] = True
+                st.session_state[choice_key] = user_choice
+
+                if user_choice == quiz["answer"]:
+                    active_p["profile"]["xp"] = active_p["profile"].get("xp", 0) + 25
+                    active_p["profile"]["quizzes_solved"] = active_p["profile"].get("quizzes_solved", 0) + 1
+                    
+                    req_xp = req_xp_for_level(active_p["profile"].get("level", 1))
+                    if active_p["profile"]["xp"] >= req_xp:
+                        active_p["profile"]["level"] += 1
+                    save_user_data()
+                st.rerun()
+        else:
+            chosen = st.session_state.get(choice_key)
+            if chosen == quiz["answer"]:
+                solved_cnt = active_p["profile"].get("quizzes_solved", 1)
+                st.success(t(
+                    f"🎉 **Σωστά! +25 XP!** (Σύνολο λυμένων Quiz: {solved_cnt})",
+                    f"🎉 **Correct! +25 XP!** (Total Quizzes Solved: {solved_cnt})"
+                ))
+            else:
+                st.error(t(
+                    f"❌ **Λάθος!** Η σωστή απάντηση είναι: **{quiz['answer']}**",
+                    f"❌ **Wrong!** The correct answer is: **{quiz['answer']}**"
+                ))
+
+            st.info(f"📚 **{t('Θεωρητική Ανάλυση', 'Theory Breakdown')}:** {quiz.get('explanation', '')}")
+
+            if st.button(t("🔄 Επόμενη Ερώτηση Θεωρίας", "🔄 Next Theory Question"), key=f"pw_quiz_next_{active_profile_name}"):
+                st.session_state[quiz_key] = generate_post_workout_quiz(
+                    [row["ex"] for row in current_list],
+                    user_data.get("exercise_database", {}),
+                    user_data.get("trivia_db", {})
+                )
+                st.session_state[ans_key] = False
+                st.session_state[choice_key] = None
+                st.rerun()
 
     st.markdown("---")
     with st.expander(t("✨ Προσθήκη Νέας Άσκησης στη Βάση (Custom Exercise Creator)", "✨ Add Custom Exercise to Database")):
