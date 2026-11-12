@@ -352,12 +352,12 @@ def check_and_unlock_achievements(total_tonnage):
         unlocked.append(t("🐘 25 Ton Titan (Ξεπέρασες τα 25.000 kg σε μία προπόνηση!)", "🐘 25 Ton Titan (Crossed 25,000 kg in one session!)"))
         current_achs.append(ton25_name)
 
-    scale_name = "⚖️ Scale Master"
+   scale_name = "⚖️ Scale Master"
     if len(active_p.get("weight_log", [])) >= 7 and scale_name not in current_achs:
         unlocked.append(t("⚖️ Scale Master (Κατέγραψες το βάρος σου για 7+ ημέρες!)", "⚖️ Scale Master (Logged body weight for 7+ days!)"))
         current_achs.append(scale_name)
 
-   active_p["achievements"] = current_achs
+    active_p["achievements"] = current_achs
     return unlocked
 
 def generate_post_workout_quiz(logged_exercises, exercise_db, trivia_db):
@@ -398,10 +398,6 @@ def generate_post_workout_quiz(logged_exercises, exercise_db, trivia_db):
         return random.choice(static_questions)
         
     return None
-
-# ------------------------------------------------------------------------------
-# 4. SIDEBAR MANAGEMENT
-# ------------------------------------------------------------------------------
 
 # ------------------------------------------------------------------------------
 # 4. SIDEBAR MANAGEMENT
@@ -973,7 +969,7 @@ with tab2:
                 
             save_user_data()
             
-            st.markdown(f"""
+           st.markdown(f"""
             <div class='report-card'>
                 <h3 style='color:#2b8a3e; margin-top:0;'>📊 {t('REPORT ΠΡΟΠΟΝΗΣΗΣ', 'WORKOUT REPORT')} ({DAY_MAP_TO_EN.get(day_selected, day_selected)}) - {active_profile_name}</h3>
                 <p>• <b>{t('Συνολικός Όγκος (Tonnage):', 'Total Tonnage:')}</b> <span style='font-size:20px; color:#2b8a3e;'><b>{total_tonnage:,} kg</b></span></p>
@@ -982,11 +978,10 @@ with tab2:
             </div>
             """, unsafe_allow_html=True)
             
-           if pr_alerts:
+            if pr_alerts:
                 st.warning("\n".join(pr_alerts))
             if unlocked_achs:
                 st.success("🎖️ **UNLOCKED ACHIEVEMENTS:**\n" + "\n".join(unlocked_achs))
-
             # --- ΕΚΚΙΝΗΣΗ POST-WORKOUT QUIZ ---
             logged_ex_names = [row["ex"] for row in current_list]
             st.session_state[f"pw_quiz_{active_profile_name}"] = generate_post_workout_quiz(
