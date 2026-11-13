@@ -895,7 +895,7 @@ with tab2:
             with col_s:
                 item["s"] = st.number_input("Sets", value=int(item.get("s", 3)), min_value=1, max_value=20, key=f"s_{prof_key_id}_{day_selected}_{idx}")
             
-           with col_w:
+            with col_w:
                 if ex_type == "cardio":
                     item["w"] = st.number_input(t("Απόσταση (Km)", "Distance (Km)"), value=float(item.get("w", 5.0)), step=0.5, key=f"w_{prof_key_id}_{day_selected}_{idx}")
                 elif ex_type == "bodyweight_time":
