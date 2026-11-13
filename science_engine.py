@@ -146,17 +146,27 @@ def evaluate_strength_standards(active_p: dict, exercise_db: dict, standards_dat
         if float(pr_val) > 0:
             best_e1rm[ex_name] = float(pr_val)
 
-    for session in active_p.get("history", []):
+for session in active_p.get("history", []):
         for ex_name, ex_data in session.get("exercises", {}).items():
-            if ex_data.get("type") == "weight":
-                w = float(ex_data.get("max_weight", ex_data.get("w", 0)))
-                # Αν είναι αλτήρες και έχει καταγραφεί βάρος ενός αλτήρα vs ζεύγους, χρησιμοποιούμε το logged βάρος
-                r = int(ex_data.get("reps", ex_data.get("r", 1)))
-                rir = int(ex_data.get("rir", 1))
-                est = calc_e1rm(w, r, rir)
+            ex_t = ex_data.get("type", "weight")
+            if ex_t in ("weight", "bodyweight"):
+                db_meta = exercise_db.get(ex_name, {})
+                raw_w = float(ex_data.get("max_weight", ex_data.get("w", 0)))
+                if ex_t == "bodyweight":
+                    if db_meta.get("primary") in ["Abs", "Core"]:
+                        continue
+                    eff_w = bw + raw_w
+                else:
+                    eff_w = raw_w * 2.0 if db_meta.get("is_db", False) else raw_w
+
+                sets_cnt = max(1, int(ex_data.get("sets", 1)))
+                tot_r = int(ex_data.get("total_reps_or_min", ex_data.get("reps", 1)))
+                r = max(1, int(round(tot_r / sets_cnt)))
+                rirs_list = ex_data.get("rirs") or [1]
+                rir = int(round(sum(rirs_list) / len(rirs_list)))
+                est = calc_e1rm(eff_w, r, rir)
                 if est > best_e1rm.get(ex_name, 0.0):
                     best_e1rm[ex_name] = est
-
     results = []
     for ex_name, mults in multipliers_by_ex.items():
         if ex_name not in best_e1rm:
