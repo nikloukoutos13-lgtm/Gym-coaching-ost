@@ -121,16 +121,16 @@ def analyze_fractional_emg_and_profiles(history: list, exercise_db: dict, standa
         lengthened = profs.get("Lengthened-biased", 0.0)
         shortened = profs.get("Shortened-biased", 0.0)
         if total_m >= 4.0 and lengthened == 0.0 and shortened > 0.0:
-            if lang == "English":
-                biomech_alerts.append(
-                    f"**{muscle}**: {total_m:.1f} sets with zero **Lengthened-biased** exercises "
-                    f"(Shortened/Mid-range only). Add a stretch-loaded movement!"
-                )
-            else:
-                biomech_alerts.append(
-                    f"**{muscle}**: {total_m:.1f} σετ χωρίς καμία **Lengthened-biased** άσκηση "
-                    f"(μόνο Shortened/Mid-range). Πρόσθεσε κίνηση με φόρτιση στη διάταση!"
-                )
+    if lang == "English":
+        biomech_alerts.append(
+            f"**{muscle}**: {total_m:.1f} sets with zero **Lengthened-biased** exercises "
+            f"(Shortened/Mid-range only). Add a stretch-loaded movement!"
+        )
+    else:
+        biomech_alerts.append(
+            f"**{muscle}**: {total_m:.1f} σετ χωρίς καμία **Lengthened-biased** άσκηση "
+            f"(μόνο Shortened/Mid-range). Πρόσθεσε κίνηση με φόρτιση στη διάταση!"
+        )
 
     return fractional_sets, profile_breakdown, biomech_alerts, len(filtered_hist)
 
