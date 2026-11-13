@@ -895,12 +895,14 @@ with tab2:
             with col_s:
                 item["s"] = st.number_input("Sets", value=int(item.get("s", 3)), min_value=1, max_value=20, key=f"s_{prof_key_id}_{day_selected}_{idx}")
             
-            with col_w:
+           with col_w:
                 if ex_type == "cardio":
                     item["w"] = st.number_input(t("Απόσταση (Km)", "Distance (Km)"), value=float(item.get("w", 5.0)), step=0.5, key=f"w_{prof_key_id}_{day_selected}_{idx}")
-                elif "bodyweight" in ex_type:
+                elif ex_type == "bodyweight_time":
                     st.number_input("Kg", value=0.0, disabled=True, key=f"w_{prof_key_id}_{day_selected}_{idx}")
                     item["w"] = 0.0
+                elif ex_type == "bodyweight":
+                    item["w"] = st.number_input("+Extra Kg", value=float(item.get("w", 0.0)), min_value=0.0, step=0.5, key=f"w_{prof_key_id}_{day_selected}_{idx}")
                 else:
                     item["w"] = st.number_input("Kg", value=float(item.get("w", 20.0)), step=0.5, key=f"w_{prof_key_id}_{day_selected}_{idx}")
                     
@@ -987,7 +989,7 @@ with tab2:
                 cardio_cal = 0
                 e1rm = 0
                 
-                if ex_type == "cardio":
+if ex_type == "cardio":
                     total_cardio_km += w
                     total_cardio_mins += r
                     cardio_cal = calc_cardio_calories(60.0 / (r / max(0.1, w)) if w > 0 else 9.0, r, active_p.get("profile", {}).get("weight_kg", 70.0))
@@ -996,6 +998,11 @@ with tab2:
                     eff_w = w * 2 if is_db else w
                     total_tonnage += s * eff_w * r
                     e1rm = calc_1rm(eff_w, r)
+                elif ex_type == "bodyweight":
+                    user_bw = float(active_p.get("profile", {}).get("weight_kg", 70.0))
+                    eff_w = w if ex_info.get("primary") in ["Abs", "Core"] else (user_bw + w)
+                    total_tonnage += s * eff_w * r
+                    e1rm = calc_1rm(eff_w, r) if eff_w > 0 else 0
                     
                 if ex not in ex_summary:
                     ex_summary[ex] = {"sets": 0, "max_1rm": 0, "max_weight": w, "rirs": [], "total_reps_or_min": 0, "type": ex_type, "muscle": muscle, "cal": 0}
@@ -1017,14 +1024,13 @@ with tab2:
 
             if "prs" not in active_p: active_p["prs"] = {}
             for ex_name, ex_data in ex_summary.items():
-                if ex_data["type"] == "weight":
+                if ex_data["type"] in ("weight", "bodyweight") and ex_data["max_1rm"] > 0:
                     c_1rm = ex_data["max_1rm"]
                     p_pr = active_p["prs"].get(ex_name, 0)
                     if c_1rm > p_pr:
                         active_p["prs"][ex_name] = c_1rm
                         pr_alerts.append(f"🏆 **NEW PR!** {ex_name}: {c_1rm} kg (Prev: {p_pr} kg)")
                         bonus_pr_xp += 150
-
             active_p["templates"][day_selected] = current_list
             unlocked_achs = check_and_unlock_achievements(total_tonnage)
             bonus_ach_xp = len(unlocked_achs) * 200
@@ -1408,18 +1414,43 @@ with tab3:
                     else:
                         bar_colors.append("#ff6b6b")
 
-                bars = ax_vol.barh(m_labels, m_vals, color=bar_colors, edgecolor="#343a40", alpha=0.9)
-                ax_vol.axvline(x=6, color="#f59f00", linestyle="--", linewidth=1.5, label="MEV (~6 sets/wk)")
-                ax_vol.axvline(x=10, color="#2b8a3e", linestyle="-.", linewidth=1.5, label="MAV Start (~10 sets/wk)")
-                ax_vol.axvline(x=20, color="#e03131", linestyle=":", linewidth=1.5, label="MRV Limit (~20+ sets/wk)")
-                ax_vol.set_title(t("🧬 Fractional EMG Εβδομαδιαίος Όγκος (sets/εβδ.)", "🧬 Fractional EMG Weekly Volume (sets/wk)"), fontweight="bold")
+               y_pos = list(range(len(m_labels)))
+                for idx_m, m_name in enumerate(m_labels):
+                    lm = landmarks.get(m_name, {"mev": 6, "mav": 14, "mrv": 20})
+                    mev_v = lm.get("mev", 6)
+                    mrv_v = lm.get("mrv", 20)
+                    ax_vol.barh(
+                        idx_m, max(0, mrv_v - mev_v), left=mev_v, height=0.72,
+                        color="#2b8a3e", alpha=0.14, zorder=1,
+                        label="Target Zone (MEV–MRV)" if idx_m == 0 else ""
+                    )
+                    ax_vol.plot(
+                        [mev_v, mev_v], [idx_m - 0.36, idx_m + 0.36],
+                        color="#f59f00", linewidth=2.2, zorder=4,
+                        label="Muscle MEV" if idx_m == 0 else ""
+                    )
+                    ax_vol.plot(
+                        [mrv_v, mrv_v], [idx_m - 0.36, idx_m + 0.36],
+                        color="#e03131", linewidth=2.2, zorder=4,
+                        label="Muscle MRV" if idx_m == 0 else ""
+                    )
+
+                bars = ax_vol.barh(y_pos, m_vals, height=0.52, color=bar_colors, edgecolor="#343a40", alpha=0.92, zorder=3)
+                ax_vol.set_yticks(y_pos)
+                ax_vol.set_yticklabels(m_labels)
+                ax_vol.set_title(t("🧬 Fractional EMG Εβδομαδιαίος Όγκος vs Εξατομικευμένο MEV–MRV", "🧬 Fractional EMG Weekly Volume vs Muscle MEV–MRV"), fontweight="bold")
                 ax_vol.set_xlabel(t("Σταθμισμένα Σετ / Εβδομάδα", "Weighted Sets / Week"))
                 ax_vol.grid(axis="x", linestyle="--", alpha=0.4)
                 ax_vol.legend(loc="lower right")
-                for bar in bars:
+                for idx_b, bar in enumerate(bars):
                     w_val = bar.get_width()
-                    if w_val > 0:
-                        ax_vol.text(w_val + 0.3, bar.get_y() + bar.get_height() / 2, f"{w_val:.1f}", va="center", fontsize=9, fontweight="bold")
+                    lm_b = landmarks.get(m_labels[idx_b], {"mev": 6, "mrv": 20})
+                    lbl_x = max(w_val, lm_b.get("mrv", 20)) + 0.35
+                    ax_vol.text(
+                        lbl_x, bar.get_y() + bar.get_height() / 2,
+                        f"{w_val:.1f}  [{lm_b.get('mev', 6)}–{lm_b.get('mrv', 20)}]",
+                        va="center", fontsize=8.5, fontweight="bold"
+                    )
 
                 # --- 2. Resistance Profile Analyzer (%) ---
                 trained_m = [m for m in m_labels if sum(prof_break.get(m, {}).values()) > 0]
