@@ -15,6 +15,13 @@ def load_coaching_rules():
     return {}
 
 
+def _extract_avg_rir(ex_data: dict, default: int = 2) -> int:
+    rirs_list = ex_data.get("rirs")
+    if isinstance(rirs_list, list) and rirs_list:
+        return int(round(sum(rirs_list) / len(rirs_list)))
+    return int(ex_data.get("rir", default))
+
+
 def calc_double_progression(ex_name: str, current_item: dict, history: list, exercise_db: dict, rules: dict, lang: str = "Ελληνικά"):
     is_en = (lang == "English")
     ex_info = exercise_db.get(ex_name, {})
@@ -35,7 +42,7 @@ def calc_double_progression(ex_name: str, current_item: dict, history: list, exe
     step_kg = float(inc_cfg.get("dumbbell_per_hand", 1.0) if is_db else inc_cfg.get("barbell_machine", 2.5))
 
     last_exec = None
-    for session in reversed(history):
+    for session in reversed(history or []):
         exs = session.get("exercises", {})
         if ex_name in exs:
             last_exec = exs[ex_name]
@@ -53,7 +60,7 @@ def calc_double_progression(ex_name: str, current_item: dict, history: list, exe
     else:
         last_r = int(raw_reps)
 
-    last_rir = int(last_exec.get("rir", 2))
+    last_rir = _extract_avg_rir(last_exec, default=2)
 
     if last_r >= max_r and last_rir >= target_rir:
         new_w = round(last_w + step_kg, 2)
@@ -92,7 +99,7 @@ def calc_weekly_fatigue_and_deload(history: list, exercise_db: dict, rules: dict
     axial_score = 0.0
     total_sets_7d = 0
 
-    for session in history:
+    for session in (history or []):
         raw_date = str(session.get("date", "")).split()[0]
         try:
             dt = datetime.strptime(raw_date, "%d/%m/%Y")
@@ -105,7 +112,7 @@ def calc_weekly_fatigue_and_deload(history: list, exercise_db: dict, rules: dict
             s = float(ex_data.get("sets", 0))
             if s <= 0:
                 continue
-            rir_key = str(int(ex_data.get("rir", 2)))
+            rir_key = str(_extract_avg_rir(ex_data, default=2))
             r_mult = float(rir_mults.get(rir_key, 1.0))
             a_mult = float(axial_map.get(ex_name, 1.0))
 
