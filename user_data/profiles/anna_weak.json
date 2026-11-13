@@ -7,8 +7,8 @@
     "activity_level": 1.55,
     "goal": "Cutting",
     "training_age": "Novice (0-1 yr)",
-    "xp": 0,
-    "level": 1
+    "xp": 1400,
+    "level": 2
   },
   "daily_logs": [],
   "weight_log": [
@@ -199,8 +199,123 @@
     "Σάββατο": [],
     "Κυριακή": []
   },
-  "prs": {},
-  "achievements": [],
-  "history": [],
+  "prs": {
+    "Seated Calf Raise Machine (Γάμπες)": 46.7,
+    "Seated Leg Curl Machine": 37.3,
+    "Seated Cable Row (Κωπηλατική Τροχαλία)": 24.1,
+    "Ab Crunch Machine (Μηχάνημα Κοιλιακών)": 7.1,
+    "Cable Bicep Curls": 21.2,
+    "Overhead Cable Triceps Extension": 20.0,
+    "Leg Press": 63.7
+  },
+  "achievements": [
+    "🏆 First Blood (First PR)"
+  ],
+  "history": [
+    {
+      "date": "13/11/2026 09:33",
+      "day": "Παρασκευή",
+      "tonnage": 4914.0,
+      "cardio_cal": 0,
+      "exercises": {
+        "Seated Calf Raise Machine (Γάμπες)": {
+          "sets": 3,
+          "max_1rm": 46.7,
+          "max_weight": 33.0,
+          "rirs": [
+            0
+          ],
+          "total_reps_or_min": 12,
+          "type": "weight",
+          "muscle": "Calves",
+          "cal": 0
+        },
+        "Seated Leg Curl Machine": {
+          "sets": 3,
+          "max_1rm": 37.3,
+          "max_weight": 32.0,
+          "rirs": [
+            0
+          ],
+          "total_reps_or_min": 5,
+          "type": "weight",
+          "muscle": "Hamstrings",
+          "cal": 0
+        },
+        "Seated Cable Row (Κωπηλατική Τροχαλία)": {
+          "sets": 3,
+          "max_1rm": 24.1,
+          "max_weight": 19.0,
+          "rirs": [
+            0
+          ],
+          "total_reps_or_min": 8,
+          "type": "weight",
+          "muscle": "Upper Back",
+          "cal": 0
+        },
+        "Ab Crunch Machine (Μηχάνημα Κοιλιακών)": {
+          "sets": 3,
+          "max_1rm": 7.1,
+          "max_weight": 5.0,
+          "rirs": [
+            2
+          ],
+          "total_reps_or_min": 12,
+          "type": "weight",
+          "muscle": "Abs",
+          "cal": 0
+        },
+        "Cable Bicep Curls": {
+          "sets": 3,
+          "max_1rm": 21.2,
+          "max_weight": 15.0,
+          "rirs": [
+            2
+          ],
+          "total_reps_or_min": 12,
+          "type": "weight",
+          "muscle": "Biceps",
+          "cal": 0
+        },
+        "Overhead Cable Triceps Extension": {
+          "sets": 3,
+          "max_1rm": 20.0,
+          "max_weight": 15.0,
+          "rirs": [
+            0
+          ],
+          "total_reps_or_min": 10,
+          "type": "weight",
+          "muscle": "Triceps",
+          "cal": 0
+        },
+        "Crunches": {
+          "sets": 2,
+          "max_1rm": 0,
+          "max_weight": 0.0,
+          "rirs": [
+            1
+          ],
+          "total_reps_or_min": 20,
+          "type": "bodyweight",
+          "muscle": "Abs",
+          "cal": 0
+        },
+        "Leg Press": {
+          "sets": 3,
+          "max_1rm": 63.7,
+          "max_weight": 45.0,
+          "rirs": [
+            1
+          ],
+          "total_reps_or_min": 12,
+          "type": "weight",
+          "muscle": "Quads",
+          "cal": 0
+        }
+      }
+    }
+  ],
   "profile_name": "Anna weak"
 }
