@@ -11,32 +11,7 @@
     "level": 5,
     "quizzes_solved": 1
   },
-  "daily_logs": [
-    {
-      "name": "Protein puting",
-      "portion": "1.0 τεμάχιο/α",
-      "cal": 161.0,
-      "p": 20.0,
-      "c": 13.4,
-      "f": 3.0
-    },
-    {
-      "name": "Πρωτεϊνη λεμονι",
-      "portion": "1.0 τεμάχιο/α",
-      "cal": 90.0,
-      "p": 20.0,
-      "c": 2.3,
-      "f": 0.0
-    },
-    {
-      "name": "🍫 Nature Valley Extra Protein Bar",
-      "portion": "1.0 τεμάχιο/α",
-      "cal": 198.0,
-      "p": 10.0,
-      "c": 15.0,
-      "f": 11.0
-    }
-  ],
+  "daily_logs": [],
   "weight_log": [
     {
       "date": "31/10/2026",
@@ -98,7 +73,7 @@
         "rir": 3
       },
       {
-        "ex": "Roman Chair Hyperextensions (Ρωμαϊκή Έδρα)",
+        "ex": "Assault / Echo Bike",
         "s": 3,
         "w": 0.0,
         "r": 20,
@@ -112,7 +87,7 @@
         "rir": 3
       },
       {
-        "ex": "Crunches",
+        "ex": "Assault / Echo Bike",
         "s": 2,
         "w": 0.0,
         "r": 20,
