@@ -16,9 +16,6 @@ def load_coaching_rules():
 
 
 def calc_double_progression(ex_name: str, current_item: dict, history: list, exercise_db: dict, rules: dict, lang: str = "Ελληνικά"):
-    """
-    Επιστημονικός αλγόριθμος Double Progression (GR / EN).
-    """
     is_en = (lang == "English")
     ex_info = exercise_db.get(ex_name, {})
     if ex_info.get("type") != "weight":
@@ -58,7 +55,6 @@ def calc_double_progression(ex_name: str, current_item: dict, history: list, exe
 
     last_rir = int(last_exec.get("rir", 2))
 
-    # Κανόνας 1: Έτοιμος για αύξηση βάρους
     if last_r >= max_r and last_rir >= target_rir:
         new_w = round(last_w + step_kg, 2)
         if is_en:
@@ -69,7 +65,6 @@ def calc_double_progression(ex_name: str, current_item: dict, history: list, exe
             msg = f"Έπιασες {last_w}kg × {last_r} reps με RIR {last_rir} (άνω όριο {max_r} reps). Ανέβασε +{step_kg}kg{db_note} και ξεκίνα ξανά από {min_r} reps!"
         return {"w": new_w, "r": min_r, "msg": msg}
 
-    # Κανόνας 2: Αύξηση επαναλήψεων εντός του εύρους
     if last_r < max_r and last_rir >= 1:
         new_r = last_r + 1
         if is_en:
@@ -78,7 +73,6 @@ def calc_double_progression(ex_name: str, current_item: dict, history: list, exe
             msg = f"Προηγούμενο: {last_w}kg × {last_r} reps (RIR {last_rir}). Κράτα τα ίδια κιλά και στόχευσε +1 rep ({new_r}/{max_r} reps)."
         return {"w": last_w, "r": new_r, "msg": msg}
 
-    # Κανόνας 3: Υψηλή κόπωση (RIR 0) — Εδραίωση
     if is_en:
         msg = f"Last session reached RIR {last_rir} at {last_w}kg × {last_r}. Consolidate this load until you hit it with RIR {target_rir}."
     else:
@@ -87,9 +81,6 @@ def calc_double_progression(ex_name: str, current_item: dict, history: list, exe
 
 
 def calc_weekly_fatigue_and_deload(history: list, exercise_db: dict, rules: dict, lang: str = "Ελληνικά"):
-    """
-    Υπολογίζει το 7-Day Systemic & Axial Fatigue Score (GR / EN).
-    """
     is_en = (lang == "English")
     f_cfg = rules.get("fatigue_model", {})
     rir_mults = f_cfg.get("rir_multipliers", {"0": 1.65, "1": 1.3, "2": 1.0, "3": 0.75, "4": 0.55, "5": 0.4})
@@ -167,7 +158,6 @@ def format_mmss(total_minutes: float) -> str:
 
 
 def calc_hyrox_splits(target_minutes: float, division: str = "Open", rules: dict = None):
-    """Υπολογίζει τα splits για 8x1km Runs, Roxzone και τα 8 stations του HYROX."""
     h_cfg = (rules or {}).get("hyrox_standards", {}).get("divisions", {})
     div_data = h_cfg.get(division, h_cfg.get("Open", {}))
 
@@ -197,9 +187,6 @@ def calc_hyrox_splits(target_minutes: float, division: str = "Open", rules: dict
 
 
 def calc_running_pace_zones(ref_dist_km: float, ref_time_min: float, rules: dict = None, lang: str = "Ελληνικά"):
-    """
-    Υπολογίζει προβλέψεις αποστάσεων μέσω τύπου Riegel και εξάγει τις 5 ζώνες ρυθμού σε min/km (GR / EN).
-    """
     is_en = (lang == "English")
     r_cfg = (rules or {}).get("running_engine", {})
     exp = float(r_cfg.get("riegel_exponent", 1.06))
