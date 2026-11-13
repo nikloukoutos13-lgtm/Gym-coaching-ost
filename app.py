@@ -5,6 +5,7 @@ import random
 import requests
 import base64
 from datetime import datetime, timedelta
+import pandas as pd
 import streamlit as st
 import matplotlib.pyplot as plt
 
@@ -16,6 +17,23 @@ from data_manager import (
     save_custom_exercises_file,
     load_json
 )
+
+from science_engine import (
+    load_strength_standards,
+    analyze_fractional_emg_and_profiles,
+    evaluate_strength_standards
+)
+
+from coaching_engine import (
+    load_coaching_rules,
+    calc_double_progression,
+    calc_weekly_fatigue_and_deload,
+    calc_hyrox_splits,
+    calc_running_pace_zones
+)
+
+STRENGTH_STANDARDS = load_strength_standards()
+COACHING_RULES = load_coaching_rules()
 
 # ------------------------------------------------------------------------------
 # 1. PAGE CONFIG & STYLING
@@ -787,6 +805,26 @@ with tab2:
     ex_options = list(user_data["exercise_database"].keys())
     
     rows_to_delete = []
+
+    # --- SYSTEMIC FATIGUE & 1-CLICK DELOAD ENGINE ---
+    fatigue_info = calc_weekly_fatigue_and_deload(active_p.get("history", []), user_data["exercise_database"], COACHING_RULES)
+    f_col1, f_col2 = st.columns([3, 1])
+    with f_col1:
+        st.markdown(
+            f"<div style='padding:10px 14px; border-left:4px solid {fatigue_info['color']}; background:rgba(255,255,255,0.04); border-radius:6px; margin-bottom:10px;'>"
+            f"<b>🧠 7-Day Fatigue Index:</b> {fatigue_info['score']} pts (Axial/CNS: {fatigue_info['axial_score']} pts | {fatigue_info['sets_7d']} σετ)<br>"
+            f"<span style='color:{fatigue_info['color']}; font-weight:600;'>{fatigue_info['status']}</span>"
+            f"</div>",
+            unsafe_allow_html=True
+        )
+    with f_col2:
+        if st.button("🔋 Deload (-40% Σετ)", key=f"deload_btn_{active_profile_name}_{day_selected}", use_container_width=True):
+            mult = fatigue_info.get("deload_mult", 0.6)
+            for ex_it in current_list:
+                ex_it["s"] = max(1, int(round(ex_it.get("s", 3) * mult)))
+            save_user_data()
+            st.toast("✅ Εφαρμόστηκε Deload (-40% σετ) στο σημερινό πρόγραμμα!")
+            st.rerun()
     
     for idx, item in enumerate(current_list):
         prof_key_id = active_profile_name.replace(" ", "_").replace("(", "").replace(")", "")
@@ -794,7 +832,7 @@ with tab2:
         ex_info = user_data["exercise_database"].get(ex_name, {})
         ex_type = ex_info.get("type", "weight")
         
-        overload_info = calc_progressive_overload(ex_name, active_p.get("history", []), user_data["exercise_database"])
+        overload_info = calc_double_progression(ex_name, item, active_p.get("history", []), user_data["exercise_database"], COACHING_RULES)
         
         with st.expander(f"🔹 #{idx+1} {ex_name}", expanded=True):
             if overload_info:
@@ -1332,115 +1370,93 @@ with tab3:
             # SUB-TAB 1: EMG VOLUME, RESISTANCE PROFILE & BENCHMARKS
             # ==================================================================
             with sub_tab1:
+                days_win = 7 if "7D" in selected_period else (30 if "30D" in selected_period else 0)
+                frac_sets, prof_break, biomech_alerts, _ = analyze_fractional_emg_and_profiles(
+                    history, user_data["exercise_database"], STRENGTH_STANDARDS, days_window=days_win
+                )
+                landmarks = STRENGTH_STANDARDS.get("volume_landmarks", {})
+                norm_div = 1.0 if days_win == 7 else (4.3 if days_win == 30 else weeks_divisor)
+                wk_frac = {m: round(v / norm_div, 1) for m, v in frac_sets.items() if v > 0 or m in landmarks}
+
                 fig1, (ax_vol, ax_rp) = plt.subplots(2, 1, figsize=(11, 10))
 
-                # --- Γράφημα 1: EMG-Weighted Weekly Volume (MEV / MAV / MRV) ---
-                m_labels = active_muscles[::-1]
-                m_vals = [weekly_emg_volume[m] for m in m_labels]
+                # --- 1. Fractional EMG Volume vs MEV / MAV / MRV ---
+                m_labels = list(wk_frac.keys())[::-1]
+                m_vals = [wk_frac[m] for m in m_labels]
                 bar_colors = []
-                for v in m_vals:
-                    if v < 6:
-                        bar_colors.append("#fcc419")      # Κάτω από MEV
-                    elif v < 10:
-                        bar_colors.append("#51cf66")      # MEV (6-10)
-                    elif v <= 22:
-                        bar_colors.append("#2b8a3e")      # MAV (10-20 Optimal)
+                for m, v in zip(m_labels, m_vals):
+                    lm = landmarks.get(m, {"mev": 6, "mav": [10, 20], "mrv": 22})
+                    if v < lm.get("mev", 6):
+                        bar_colors.append("#fcc419")
+                    elif v <= lm.get("mav", [10, 20])[1]:
+                        bar_colors.append("#2b8a3e")
                     else:
-                        bar_colors.append("#ff6b6b")      # MRV Alert (>22)
+                        bar_colors.append("#ff6b6b")
 
                 bars = ax_vol.barh(m_labels, m_vals, color=bar_colors, edgecolor="#343a40", alpha=0.9)
-                ax_vol.axvline(x=6, color="#f59f00", linestyle="--", linewidth=1.5, label="MEV (6 sets/wk)")
-                ax_vol.axvline(x=10, color="#2b8a3e", linestyle="-.", linewidth=1.5, label="MAV Start (10 sets/wk)")
-                ax_vol.axvline(x=20, color="#e03131", linestyle=":", linewidth=1.5, label="MRV Limit (20+ sets/wk)")
-                ax_vol.set_title(t("🧬 EMG-Weighted Εβδομαδιαίος Όγκος ανά Μυϊκή Ομάδα (sets/εβδ.)", "🧬 EMG-Weighted Weekly Volume per Muscle (sets/wk)"), fontweight="bold")
+                ax_vol.axvline(x=6, color="#f59f00", linestyle="--", linewidth=1.5, label="MEV (~6 sets/wk)")
+                ax_vol.axvline(x=10, color="#2b8a3e", linestyle="-.", linewidth=1.5, label="MAV Start (~10 sets/wk)")
+                ax_vol.axvline(x=20, color="#e03131", linestyle=":", linewidth=1.5, label="MRV Limit (~20+ sets/wk)")
+                ax_vol.set_title(t("🧬 Fractional EMG Εβδομαδιαίος Όγκος (sets/εβδ.)", "🧬 Fractional EMG Weekly Volume (sets/wk)"), fontweight="bold")
                 ax_vol.set_xlabel(t("Σταθμισμένα Σετ / Εβδομάδα", "Weighted Sets / Week"))
                 ax_vol.grid(axis="x", linestyle="--", alpha=0.4)
                 ax_vol.legend(loc="lower right")
-
                 for bar in bars:
                     w_val = bar.get_width()
                     if w_val > 0:
                         ax_vol.text(w_val + 0.3, bar.get_y() + bar.get_height() / 2, f"{w_val:.1f}", va="center", fontsize=9, fontweight="bold")
 
-                # --- Γράφημα 2: Resistance Profile Breakdown (%) ---
-                trained_muscles = [m for m in active_muscles if sum(profile_breakdown[m].values()) > 0][::-1]
-                if trained_muscles:
-                    leng_pcts, full_pcts, mid_pcts, short_pcts = [], [], [], []
-                    missing_stretch_muscles = []
+                # --- 2. Resistance Profile Analyzer (%) ---
+                trained_m = [m for m in m_labels if sum(prof_break.get(m, {}).values()) > 0]
+                if trained_m:
+                    leng_p, full_p, mid_p, short_p = [], [], [], []
+                    for m in trained_m:
+                        pb = prof_break[m]
+                        tot_m = max(0.01, sum(pb.values()))
+                        leng_p.append((pb.get("Lengthened-biased", 0.0) / tot_m) * 100)
+                        full_p.append((pb.get("Full-range", 0.0) / tot_m) * 100)
+                        mid_p.append((pb.get("Mid-range", 0.0) / tot_m) * 100)
+                        short_p.append((pb.get("Shortened-biased", 0.0) / tot_m) * 100)
 
-                    for m in trained_muscles:
-                        tot_m = sum(profile_breakdown[m].values())
-                        l_p = (profile_breakdown[m]["Lengthened"] / tot_m) * 100
-                        f_p = (profile_breakdown[m]["Full-range"] / tot_m) * 100
-                        m_p = (profile_breakdown[m]["Mid-range"] / tot_m) * 100
-                        s_p = (profile_breakdown[m]["Shortened"] / tot_m) * 100
-                        leng_pcts.append(l_p)
-                        full_pcts.append(f_p)
-                        mid_pcts.append(m_p)
-                        short_pcts.append(s_p)
-                        if (l_p + f_p) == 0 and tot_m >= 3.0:
-                            missing_stretch_muscles.append(m)
-
-                    ax_rp.barh(trained_muscles, leng_pcts, color="#2b8a3e", label="Lengthened-biased (Stretch)")
-                    ax_rp.barh(trained_muscles, full_pcts, left=leng_pcts, color="#20c997", label="Full-range")
-                    left_mid = [l + f for l, f in zip(leng_pcts, full_pcts)]
-                    ax_rp.barh(trained_muscles, mid_pcts, left=left_mid, color="#339af0", label="Mid-range")
-                    left_short = [lm + md for lm, md in zip(left_mid, mid_pcts)]
-                    ax_rp.barh(trained_muscles, short_pcts, left=left_short, color="#adb5bd", label="Shortened / Isometric")
-
+                    ax_rp.barh(trained_m, leng_p, color="#2b8a3e", label="Lengthened-biased (Stretch)")
+                    ax_rp.barh(trained_m, full_p, left=leng_p, color="#20c997", label="Full-range")
+                    l_mid = [a + b for a, b in zip(leng_p, full_p)]
+                    ax_rp.barh(trained_m, mid_p, left=l_mid, color="#339af0", label="Mid-range")
+                    l_sh = [a + b for a, b in zip(l_mid, mid_p)]
+                    ax_rp.barh(trained_m, short_p, left=l_sh, color="#adb5bd", label="Shortened-biased")
                     ax_rp.set_xlim(0, 100)
-                    ax_rp.set_title(t("📐 Κατανομή Resistance Profile ανά Μυϊκή Ομάδα (%)", "📐 Resistance Profile Distribution per Muscle (%)"), fontweight="bold")
-                    ax_rp.set_xlabel("%")
+                    ax_rp.set_title(t("📐 Resistance Profile Balance ανά Μυϊκή Ομάδα (%)", "📐 Resistance Profile Balance per Muscle (%)"), fontweight="bold")
                     ax_rp.legend(loc="lower right", ncol=2, fontsize=8)
-                else:
-                    missing_stretch_muscles = []
-                    ax_rp.text(0.5, 0.5, t("Δεν υπάρχουν δεδομένα Resistance Profile.", "No Resistance Profile data yet."), ha="center", va="center")
 
                 plt.tight_layout()
                 st.pyplot(fig1)
                 plt.close(fig1)
 
-                if missing_stretch_muscles:
+                for alert in biomech_alerts:
+                    st.info(f"💡 **Stretch-Mediated Hypertrophy Alert:** {alert}")
+
+                # --- 3. Scientific Strength Standards, Relative Strength & DOTS Score ---
+                st.divider()
+                st.markdown(f"#### 🏆 {t('Scientific Strength Standards, Relative Strength & DOTS Score', 'Scientific Strength Standards, Relative Strength & DOTS Score')}")
+                std_results, dots_score, sbd_total = evaluate_strength_standards(active_p, user_data["exercise_database"], STRENGTH_STANDARDS)
+
+                dc1, dc2 = st.columns(2)
+                dc1.metric("🏅 DOTS Score (Relative Strength)", f"{dots_score} pts")
+                dc2.metric("🏋️ Estimated SBD Total", f"{sbd_total} kg")
+
+                if std_results:
+                    for res in std_results:
+                        sc1, sc2 = st.columns([2, 3])
+                        with sc1:
+                            st.markdown(f"**{res['exercise']}** — `{res['e1rm']} kg` ({res['bw_ratio']}× BW)")
+                            st.caption(f"Tier: **{res['current_tier']}** → Next: **{res['next_tier']}** (+{res['kg_to_next']} kg)")
+                        with sc2:
+                            st.progress(res["progress_pct"] / 100.0)
+                else:
                     st.info(t(
-                        f"💡 **Biomechanics Alert:** Οι μυϊκές ομάδες **{', '.join(missing_stretch_muscles)}** έχουν 0% Lengthened / Full-range ερέθισμα. Πρόσθεσε μια άσκηση σε διάταση (π.χ. Cable Lateral Raises, Overhead Triceps Extension, RDL) για μέγιστη υπερτροφία.",
-                        f"💡 **Biomechanics Alert:** **{', '.join(missing_stretch_muscles)}** have 0% Lengthened / Full-range stimulus. Add a stretch-biased exercise for optimal hypertrophy."
+                        "Κατάγραψε σετ σε βασικές ασκήσεις (π.χ. Squat, Bench Press, RDL, Lat Pulldown) για να υπολογιστεί η κατάταξη δύναμης.",
+                        "Log sets in main lifts (e.g., Squat, Bench Press, RDL, Lat Pulldown) to unlock strength benchmarks."
                     ))
-
-                # --- Dynamic Strength Benchmarks (Push / Pull / Legs) ---
-                bw = active_p.get("profile", {}).get("weight_kg", 70.0)
-                prs = active_p.get("prs", {})
-                best_push = ("Push", 0.0)
-                best_pull = ("Pull", 0.0)
-                best_legs = ("Legs", 0.0)
-
-                for pr_ex, pr_val in prs.items():
-                    db_i = user_data["exercise_database"].get(pr_ex, {})
-                    p_m = db_i.get("primary", db_i.get("muscle", ""))
-                    if p_m in ["Chest", "Upper Chest", "Front Delts", "Shoulders"] and pr_val > best_push[1]:
-                        best_push = (pr_ex[:22], pr_val)
-                    elif p_m in ["Lats", "Upper Back", "Posterior Chain"] and pr_val > best_pull[1]:
-                        best_pull = (pr_ex[:22], pr_val)
-                    elif p_m in ["Quads", "Hamstrings", "Glutes"] and pr_val > best_legs[1]:
-                        best_legs = (pr_ex[:22], pr_val)
-
-                if best_push[1] > 0 or best_pull[1] > 0 or best_legs[1] > 0:
-                    fig_b, ax_b = plt.subplots(figsize=(10, 3.8))
-                    b_cats = [f"Push\n({best_push[0]})", f"Pull\n({best_pull[0]})", f"Legs\n({best_legs[0]})"]
-                    u_scores = [best_push[1], best_pull[1], best_legs[1]]
-                    novice_ref = [round(bw * 0.85, 1), round(bw * 0.80, 1), round(bw * 1.50, 1)]
-                    x_pos = range(len(b_cats))
-                    w_bar = 0.35
-                    ax_b.bar([p - w_bar / 2 for p in x_pos], novice_ref, width=w_bar, label=t("Μέσος Novice (1RM)", "Avg Novice (1RM)"), color="#adb5bd")
-                    ax_b.bar([p + w_bar / 2 for p in x_pos], u_scores, width=w_bar, label=t("Το Καλύτερο PR σου (1RM)", "Your Best PR (1RM)"), color="#2b8a3e")
-                    ax_b.set_xticks(list(x_pos))
-                    ax_b.set_xticklabels(b_cats)
-                    ax_b.set_ylabel("Kg (Est. 1RM)")
-                    ax_b.set_title(t("🥊 Δυναμική Σύγκριση Δύναμης (Best Push / Pull / Legs PR)", "🥊 Dynamic Strength Benchmarks (Best Push / Pull / Legs PR)"), fontweight="bold")
-                    ax_b.legend()
-                    ax_b.grid(axis="y", linestyle="--", alpha=0.4)
-                    plt.tight_layout()
-                    st.pyplot(fig_b)
-                    plt.close(fig_b)
 
             # ==================================================================
             # SUB-TAB 2: ΠΡΟΟΔΟΣ 1RM, ΒΑΡΟΣ (SWEET ZONE) & CARDIO / HYROX
@@ -1622,3 +1638,62 @@ with tab3:
                     plt.tight_layout()
                     st.pyplot(fig4)
                     plt.close(fig4)
+
+    # ==========================================================================
+    # HYROX SPLIT PLANNER & RUNNING PACE ENGINE (RIEGEL + ZONE 2 / LT2)
+    # ==========================================================================
+    st.divider()
+    st.subheader(t("🏎️ HYROX Split Planner & Running Pace Engine", "🏎️ HYROX Split Planner & Running Pace Engine"))
+
+    tab_hyrox, tab_run = st.tabs([
+        t("🏁 HYROX Race Split Simulator", "🏁 HYROX Race Split Simulator"),
+        t("🏃 Riegel Predictor & Zone 2 / LT2 Paces", "🏃 Riegel Predictor & Zone 2 / LT2 Paces")
+    ])
+
+    with tab_hyrox:
+        hc1, hc2 = st.columns(2)
+        with hc1:
+            target_hyrox_min = st.number_input(
+                t("Στόχος Τερματισμού HYROX (Λεπτά):", "HYROX Target Finish Time (Minutes):"),
+                min_value=50, max_value=150, value=75, step=1,
+                key=f"hyrox_target_{active_profile_name}"
+            )
+        with hc2:
+            hyrox_div = st.selectbox(
+                t("Κατηγορία Αγώνα:", "Race Division:"),
+                ["Open", "Pro"],
+                key=f"hyrox_div_{active_profile_name}"
+            )
+
+        splits_data = calc_hyrox_splits(target_hyrox_min, hyrox_div, COACHING_RULES)
+        hm1, hm2, hm3 = st.columns(3)
+        hm1.metric("🏃 Target Pace (8 × 1km)", splits_data["per_1km_pace"])
+        hm2.metric("⏱️ Συνολικό Τρέξιμο (8km)", splits_data["total_run_time"])
+        hm3.metric("🔄 Roxzone (Μεταβάσεις)", splits_data["roxzone_total"])
+
+        if splits_data["stations"]:
+            st.dataframe(pd.DataFrame(splits_data["stations"]), use_container_width=True, hide_index=True)
+
+    with tab_run:
+        rc1, rc2 = st.columns(2)
+        with rc1:
+            ref_dist = st.number_input(
+                t("Πρόσφατη Απόσταση Αναφοράς (km):", "Recent Benchmark Distance (km):"),
+                min_value=1.0, max_value=42.2, value=5.0, step=0.5,
+                key=f"run_ref_d_{active_profile_name}"
+            )
+        with rc2:
+            ref_mins = st.number_input(
+                t("Χρόνος Επίδοσης (Λεπτά):", "Benchmark Time (Minutes):"),
+                min_value=3.0, max_value=360.0, value=24.0, step=0.5,
+                key=f"run_ref_t_{active_profile_name}"
+            )
+
+        preds_list, zones_list = calc_running_pace_zones(ref_dist, ref_mins, COACHING_RULES)
+        if preds_list:
+            st.markdown(f"**📈 {t('Προβλέψεις Αγώνων (Riegel Formula)', 'Race Time Predictions (Riegel Formula)')}:**")
+            st.dataframe(pd.DataFrame(preds_list), use_container_width=True, hide_index=True)
+
+        if zones_list:
+            st.markdown(f"**🎯 {t('Εξατομικευμένες Ζώνες Ρυθμού (min/km)', 'Personalized Pace Zones (min/km)')}:**")
+            st.dataframe(pd.DataFrame(zones_list), use_container_width=True, hide_index=True)
