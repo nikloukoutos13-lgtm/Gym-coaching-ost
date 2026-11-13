@@ -1414,7 +1414,7 @@ with tab3:
                     else:
                         bar_colors.append("#ff6b6b")
 
-               y_pos = list(range(len(m_labels)))
+                y_pos = list(range(len(m_labels)))
                 for idx_m, m_name in enumerate(m_labels):
                     lm = landmarks.get(m_name, {"mev": 6, "mav": 14, "mrv": 20})
                     mev_v = lm.get("mev", 6)
