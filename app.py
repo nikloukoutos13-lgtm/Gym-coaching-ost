@@ -1131,10 +1131,10 @@ with tab2:
                 st.session_state[choice_key] = None
                 st.rerun()
 
-    st.markdown("---")
+   st.markdown("---")
     with st.expander(t("✨ Προσθήκη Νέας Άσκησης στη Βάση (Custom Exercise Creator)", "✨ Add Custom Exercise to Database")):
-        ce_name = st.text_input(t("Όνομα Άσκησης (π.χ. Bulgarian Split Squat):", "Exercise Name (e.g., Bulgarian Split Squat):"), key="ce_name")
-        col_e1, col_e2, col_e3 = st.columns(3)
+        ce_name = st.text_input(t("Όνομα Άσκησης (π.χ. Smith Machine Incline Press):", "Exercise Name (e.g., Smith Machine Incline Press):"), key="ce_name")
+        col_e1, col_e2, col_e3, col_e4 = st.columns(4)
         
         with col_e1:
             ce_type_desc = st.selectbox(
@@ -1145,14 +1145,20 @@ with tab2:
         with col_e2:
             ce_primary = st.selectbox(
                 t("Κύρια Μυϊκή Ομάδα:", "Primary Muscle:"),
-                ["Quads", "Hamstrings", "Glutes", "Lower Back", "Chest", "Upper Chest", "Lats", "Upper Back", "Front Delts", "Side Delts", "Rear Delts", "Biceps", "Triceps", "Abs", "Core", "Cardio", "Full Body"],
+                ["Quads", "Hamstrings", "Glutes", "Calves", "Lower Back", "Chest", "Upper Chest", "Lats", "Upper Back", "Traps", "Front Delts", "Side Delts", "Rear Delts", "Biceps", "Triceps", "Forearms", "Abs", "Core", "Cardio", "Full Body"],
                 key="ce_primary"
             )
         with col_e3:
             ce_secondary = st.selectbox(
                 t("Δευτερεύουσα Μυϊκή Ομάδα:", "Secondary Muscle:"),
-                ["None", "Quads", "Hamstrings", "Glutes", "Lower Back", "Chest", "Lats", "Upper Back", "Front Delts", "Side Delts", "Rear Delts", "Biceps", "Triceps", "Abs", "Core", "Cardio"],
+                ["None", "Quads", "Hamstrings", "Glutes", "Calves", "Lower Back", "Chest", "Lats", "Upper Back", "Traps", "Front Delts", "Side Delts", "Rear Delts", "Biceps", "Triceps", "Forearms", "Abs", "Core", "Cardio"],
                 key="ce_secondary"
+            )
+        with col_e4:
+            ce_profile = st.selectbox(
+                t("Resistance Profile:", "Resistance Profile:"),
+                ["Mid-range", "Lengthened-biased", "Shortened-biased", "Full-range", "Explosive", "Isometric", "Cardio"],
+                key="ce_profile"
             )
 
         if st.button(t("💾 Αποθήκευση Άσκησης στη Βάση", "💾 Save Exercise to Database"), key="btn_save_custom_ex"):
@@ -1174,13 +1180,18 @@ with tab2:
                     is_db = False
 
                 sec_val = None if ce_secondary == "None" else ce_secondary
+                emg_map = {} if ex_type == "cardio" else {ce_primary: 1.0}
+                if sec_val and sec_val != "Cardio" and ex_type != "cardio":
+                    emg_map[sec_val] = 0.5
 
                 user_data["exercise_database"][ce_name.strip()] = {
                     "muscle": ce_primary,
                     "type": ex_type,
                     "is_db": is_db,
                     "primary": ce_primary,
-                    "secondary": sec_val
+                    "secondary": sec_val,
+                    "emg_weights": emg_map,
+                    "resistance_profile": "Cardio" if ex_type == "cardio" else ce_profile
                 }
                 save_user_data()
                 st.success(t(f"Η άσκηση '{ce_name.strip()}' προστέθηκε επιτυχώς στη βάση δεδομένων!", f"Exercise '{ce_name.strip()}' added to database!"))
