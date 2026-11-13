@@ -1385,10 +1385,14 @@ with tab3:
                 m_vals = [wk_frac[m] for m in m_labels]
                 bar_colors = []
                 for m, v in zip(m_labels, m_vals):
-                    lm = landmarks.get(m, {"mev": 6, "mav": [10, 20], "mrv": 22})
-                    if v < lm.get("mev", 6):
+                    lm = landmarks.get(m, {"mev": 6, "mav": 14, "mrv": 20})
+                    mev_val = lm.get("mev", 6)
+                    mav_raw = lm.get("mav", 14)
+                    mav_top = mav_raw[-1] if isinstance(mav_raw, (list, tuple)) else mav_raw
+                    mrv_val = lm.get("mrv", mav_top)
+                    if v < mev_val:
                         bar_colors.append("#fcc419")
-                    elif v <= lm.get("mav", [10, 20])[1]:
+                    elif v <= mrv_val:
                         bar_colors.append("#2b8a3e")
                     else:
                         bar_colors.append("#ff6b6b")
