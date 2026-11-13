@@ -75,11 +75,11 @@
   "running_engine": {
     "riegel_exponent": 1.06,
     "pace_zones_vs_lt2": [
-      { "zone": "Zone 1 — Active Recovery", "min_mult": 1.26, "max_mult": 1.38, "desc": "Αποκατάσταση & ροή αίματος" },
-      { "zone": "Zone 2 — Aerobic Base", "min_mult": 1.14, "max_mult": 1.25, "desc": "Μιτοχονδριακή πυκνότητα & καύση λίπους (80% του όγκου)" },
-      { "zone": "Zone 3 — Tempo / Marathon Pace", "min_mult": 1.05, "max_mult": 1.13, "desc": "Αερόβια αντοχή ρυθμού αγώνα" },
-      { "zone": "Zone 4 — LT2 (Lactate Threshold)", "min_mult": 0.98, "max_mult": 1.04, "desc": "Αναερόβιο κατώφλι (ρυθμός ~10K / 60' max)" },
-      { "zone": "Zone 5 — VO2max Intervals", "min_mult": 0.88, "max_mult": 0.97, "desc": "Μέγιστη πρόσληψη οξυγόνου & ταχύτητα" }
+      { "zone": "Zone 1 — Active Recovery", "min_mult": 1.26, "max_mult": 1.38, "desc": "Αποκατάσταση & ροή αίματος", "desc_en": "Active recovery & blood flow" },
+      { "zone": "Zone 2 — Aerobic Base", "min_mult": 1.14, "max_mult": 1.25, "desc": "Μιτοχονδριακή πυκνότητα & καύση λίπους (80% του όγκου)", "desc_en": "Mitochondrial density & fat oxidation (80% of volume)" },
+      { "zone": "Zone 3 — Tempo / Marathon Pace", "min_mult": 1.05, "max_mult": 1.13, "desc": "Αερόβια αντοχή ρυθμού αγώνα", "desc_en": "Aerobic endurance at race tempo" },
+      { "zone": "Zone 4 — LT2 (Lactate Threshold)", "min_mult": 0.98, "max_mult": 1.04, "desc": "Αναερόβιο κατώφλι (ρυθμός ~10K / 60' max)", "desc_en": "Lactate threshold (~10K / 60-min max pace)" },
+      { "zone": "Zone 5 — VO2max Intervals", "min_mult": 0.88, "max_mult": 0.97, "desc": "Μέγιστη πρόσληψη οξυγόνου & ταχύτητα", "desc_en": "Maximal oxygen uptake & top-end speed" }
     ]
   }
 }
