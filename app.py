@@ -989,7 +989,7 @@ with tab2:
                 cardio_cal = 0
                 e1rm = 0
                 
-if ex_type == "cardio":
+     if ex_type == "cardio":
                     total_cardio_km += w
                     total_cardio_mins += r
                     cardio_cal = calc_cardio_calories(60.0 / (r / max(0.1, w)) if w > 0 else 9.0, r, active_p.get("profile", {}).get("weight_kg", 70.0))
