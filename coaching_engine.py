@@ -15,13 +15,11 @@ def load_coaching_rules():
     return {}
 
 
-def calc_double_progression(ex_name: str, current_item: dict, history: list, exercise_db: dict, rules: dict):
+def calc_double_progression(ex_name: str, current_item: dict, history: list, exercise_db: dict, rules: dict, lang: str = "Ελληνικά"):
     """
-    Επιστημονικός αλγόριθμος Double Progression:
-    1. Αν έπιασες το πάνω όριο επαναλήψεων με RIR >= target_rir -> Αύξηση κιλών (+2.5kg ή +1kg DB) & επαναφορά reps στο κάτω όριο.
-    2. Αν είσαι εντός rep range με RIR >= 1 -> Διατήρηση κιλών & +1 επανάληψη.
-    3. Αν ήσουν στο RIR 0 -> Σταθεροποίηση φορτίου μέχρι να βγει με RIR 1-2.
+    Επιστημονικός αλγόριθμος Double Progression (GR / EN).
     """
+    is_en = (lang == "English")
     ex_info = exercise_db.get(ex_name, {})
     if ex_info.get("type") != "weight":
         return None
@@ -39,7 +37,6 @@ def calc_double_progression(ex_name: str, current_item: dict, history: list, exe
     inc_cfg = dp_cfg.get("increments_kg", {})
     step_kg = float(inc_cfg.get("dumbbell_per_hand", 1.0) if is_db else inc_cfg.get("barbell_machine", 2.5))
 
-    # Εύρεση τελευταίας εκτέλεσης της άσκησης στο ιστορικό
     last_exec = None
     for session in reversed(history):
         exs = session.get("exercises", {})
@@ -51,7 +48,6 @@ def calc_double_progression(ex_name: str, current_item: dict, history: list, exe
         return None
 
     last_w = float(last_exec.get("max_weight", current_item.get("w", 0)))
-    # Αν στο history αποθηκεύτηκε συνολικό volume ή reps, υπολογίζουμε μέσο όρο reps ανά σετ
     last_sets = max(1, int(last_exec.get("sets", current_item.get("s", 3))))
     raw_reps = last_exec.get("reps", None)
     if raw_reps is None:
@@ -62,39 +58,39 @@ def calc_double_progression(ex_name: str, current_item: dict, history: list, exe
 
     last_rir = int(last_exec.get("rir", 2))
 
-    # Κανόνας 1: Έτοιμος για αύξηση βάρους (Double Progression Top-Out)
+    # Κανόνας 1: Έτοιμος για αύξηση βάρους
     if last_r >= max_r and last_rir >= target_rir:
         new_w = round(last_w + step_kg, 2)
-        db_note = " (ανά αλτήρα)" if is_db else ""
-        return {
-            "w": new_w,
-            "r": min_r,
-            "msg": f"Έπιασες {last_w}kg × {last_r} reps με RIR {last_rir} (άνω όριο {max_r} reps). Ανέβασε +{step_kg}kg{db_note} και ξεκίνα ξανά από {min_r} reps!"
-        }
+        if is_en:
+            db_note = " (per dumbbell)" if is_db else ""
+            msg = f"You hit {last_w}kg × {last_r} reps at RIR {last_rir} (top of {max_r}-rep range). Increase load by +{step_kg}kg{db_note} and reset to {min_r} reps!"
+        else:
+            db_note = " (ανά αλτήρα)" if is_db else ""
+            msg = f"Έπιασες {last_w}kg × {last_r} reps με RIR {last_rir} (άνω όριο {max_r} reps). Ανέβασε +{step_kg}kg{db_note} και ξεκίνα ξανά από {min_r} reps!"
+        return {"w": new_w, "r": min_r, "msg": msg}
 
     # Κανόνας 2: Αύξηση επαναλήψεων εντός του εύρους
     if last_r < max_r and last_rir >= 1:
         new_r = last_r + 1
-        return {
-            "w": last_w,
-            "r": new_r,
-            "msg": f"Προηγούμενο: {last_w}kg × {last_r} reps (RIR {last_rir}). Κράτα τα ίδια κιλά και στόχευσε +1 rep ({new_r}/{max_r} reps)."
-        }
+        if is_en:
+            msg = f"Previous: {last_w}kg × {last_r} reps (RIR {last_rir}). Keep the same load and aim for +1 rep ({new_r}/{max_r} reps)."
+        else:
+            msg = f"Προηγούμενο: {last_w}kg × {last_r} reps (RIR {last_rir}). Κράτα τα ίδια κιλά και στόχευσε +1 rep ({new_r}/{max_r} reps)."
+        return {"w": last_w, "r": new_r, "msg": msg}
 
     # Κανόνας 3: Υψηλή κόπωση (RIR 0) — Εδραίωση
-    return {
-        "w": last_w,
-        "r": last_r,
-        "msg": f"Στην τελευταία συνεδρία έφτασες RIR {last_rir} στα {last_w}kg × {last_r}. Εδραίωσε το ίδιο φορτίο μέχρι να βγει με RIR {target_rir}."
-    }
+    if is_en:
+        msg = f"Last session reached RIR {last_rir} at {last_w}kg × {last_r}. Consolidate this load until you hit it with RIR {target_rir}."
+    else:
+        msg = f"Στην τελευταία συνεδρία έφτασες RIR {last_rir} στα {last_w}kg × {last_r}. Εδραίωσε το ίδιο φορτίο μέχρι να βγει με RIR {target_rir}."
+    return {"w": last_w, "r": last_r, "msg": msg}
 
 
-def calc_weekly_fatigue_and_deload(history: list, exercise_db: dict, rules: dict):
+def calc_weekly_fatigue_and_deload(history: list, exercise_db: dict, rules: dict, lang: str = "Ελληνικά"):
     """
-    Υπολογίζει το 7-Day Systemic & Axial Fatigue Score βάσει:
-    - RIR proximity-to-failure multiplier (RIR 0 = 1.65x κόπωση)
-    - Axial / CNS load multiplier (Deadlift, Squat, RDL, Sleds)
+    Υπολογίζει το 7-Day Systemic & Axial Fatigue Score (GR / EN).
     """
+    is_en = (lang == "English")
     f_cfg = rules.get("fatigue_model", {})
     rir_mults = f_cfg.get("rir_multipliers", {"0": 1.65, "1": 1.3, "2": 1.0, "3": 0.75, "4": 0.55, "5": 0.4})
     axial_map = f_cfg.get("axial_heavy_exercises", {})
@@ -136,19 +132,19 @@ def calc_weekly_fatigue_and_deload(history: list, exercise_db: dict, rules: dict
     deload_trig = float(thresholds.get("deload_trigger", 100.0))
 
     if weekly_score >= deload_trig:
-        status = "🔴 Κρίσιμη Κόπωση ΚΝΣ — Προτείνεται Deload Week"
+        status = "🔴 Critical CNS Fatigue — Deload Week Recommended" if is_en else "🔴 Κρίσιμη Κόπωση ΚΝΣ — Προτείνεται Deload Week"
         color = "#ff6b6b"
         needs_deload = True
     elif weekly_score >= high_warn:
-        status = "🟠 Υψηλή Συσσώρευση Κόπωσης (Overreaching)"
+        status = "🟠 High Fatigue Accumulation (Overreaching)" if is_en else "🟠 Υψηλή Συσσώρευση Κόπωσης (Overreaching)"
         color = "#ffa94d"
         needs_deload = True
     elif weekly_score >= opt_max * 0.5:
-        status = "🟢 Βέλτιστη Παραγωγική Ζώνη (Productive Overload)"
+        status = "🟢 Optimal Productive Zone (Productive Overload)" if is_en else "🟢 Βέλτιστη Παραγωγική Ζώνη (Productive Overload)"
         color = "#20c997"
         needs_deload = False
     else:
-        status = "🔵 Χαμηλή Κόπωση / Φρέσκο Νευρικό Σύστημα"
+        status = "🔵 Low Fatigue / Fresh Nervous System" if is_en else "🔵 Χαμηλή Κόπωση / Φρέσκο Νευρικό Σύστημα"
         color = "#339af0"
         needs_deload = False
 
@@ -200,11 +196,11 @@ def calc_hyrox_splits(target_minutes: float, division: str = "Open", rules: dict
     }
 
 
-def calc_running_pace_zones(ref_dist_km: float, ref_time_min: float, rules: dict = None):
+def calc_running_pace_zones(ref_dist_km: float, ref_time_min: float, rules: dict = None, lang: str = "Ελληνικά"):
     """
-    Υπολογίζει προβλέψεις αποστάσεων μέσω τύπου Riegel: T2 = T1 * (D2 / D1)^1.06
-    και εξάγει τις 5 ζώνες προπόνησης σε min/km βάσει LT2.
+    Υπολογίζει προβλέψεις αποστάσεων μέσω τύπου Riegel και εξάγει τις 5 ζώνες ρυθμού σε min/km (GR / EN).
     """
+    is_en = (lang == "English")
     r_cfg = (rules or {}).get("running_engine", {})
     exp = float(r_cfg.get("riegel_exponent", 1.06))
     zones_cfg = r_cfg.get("pace_zones_vs_lt2", [])
@@ -212,10 +208,14 @@ def calc_running_pace_zones(ref_dist_km: float, ref_time_min: float, rules: dict
     if ref_dist_km <= 0 or ref_time_min <= 0:
         return [], []
 
-    # Προβλέψεις αποστάσεων Riegel
-    targets = [("5 km", 5.0), ("10 km", 10.0), ("Ημιμαραθώνιος (21.1 km)", 21.0975), ("Μαραθώνιος (42.2 km)", 42.195)]
+    targets = [
+        ("5 km", 5.0),
+        ("10 km", 10.0),
+        ("Half Marathon (21.1 km)" if is_en else "Ημιμαραθώνιος (21.1 km)", 21.0975),
+        ("Marathon (42.2 km)" if is_en else "Μαραθώνιος (42.2 km)", 42.195)
+    ]
     predictions = []
-    lt2_pace_min_km = (ref_time_min * ((10.0 / ref_dist_km) ** exp)) / 10.0  # Εκτίμηση LT2 από 10K pace
+    lt2_pace_min_km = (ref_time_min * ((10.0 / ref_dist_km) ** exp)) / 10.0
 
     for label, d_km in targets:
         pred_min = ref_time_min * ((d_km / ref_dist_km) ** exp)
@@ -224,20 +224,20 @@ def calc_running_pace_zones(ref_dist_km: float, ref_time_min: float, rules: dict
         rem_m = pred_min - (hrs * 60)
         time_str = f"{hrs}h {format_mmss(rem_m)}" if hrs > 0 else format_mmss(pred_min)
         predictions.append({
-            "Απόσταση": label,
-            "Προβλεπόμενος Χρόνος": time_str,
-            "Μέσος Ρυθμός": f"{format_mmss(pace_min)} /km"
+            "Distance" if is_en else "Απόσταση": label,
+            "Predicted Time" if is_en else "Προβλεπόμενος Χρόνος": time_str,
+            "Avg Pace" if is_en else "Μέσος Ρυθμός": f"{format_mmss(pace_min)} /km"
         })
 
-    # Ζώνες ρυθμού (min/km)
     zones = []
     for z in zones_cfg:
         fast_p = lt2_pace_min_km * float(z.get("min_mult", 1.0))
         slow_p = lt2_pace_min_km * float(z.get("max_mult", 1.1))
+        desc_text = z.get("desc_en", z.get("desc", "")) if is_en else z.get("desc", "")
         zones.append({
-            "Ζώνη": z.get("zone", ""),
-            "Ρυθμός (min/km)": f"{format_mmss(fast_p)} – {format_mmss(slow_p)} /km",
-            "Στόχος": z.get("desc", "")
+            "Zone" if is_en else "Ζώνη": z.get("zone", ""),
+            "Pace (min/km)" if is_en else "Ρυθμός (min/km)": f"{format_mmss(fast_p)} – {format_mmss(slow_p)} /km",
+            "Target" if is_en else "Στόχος": desc_text
         })
 
     return predictions, zones
