@@ -7,7 +7,7 @@
     "activity_level": 1.55,
     "goal": "Bulking",
     "training_age": "Αρχάριος (0-1 έτος)",
-    "xp": 4670,
+    "xp": 5270,
     "level": 5
   },
   "daily_logs": [],
@@ -174,7 +174,7 @@
         "w": 6.0,
         "r": 5,
         "rir": 0,
-        "hr": 145
+        "hr": 160
       },
       {
         "ex": "Leg Extension Machine",
@@ -187,8 +187,8 @@
         "ex": "Seated Leg Curl Machine",
         "s": 3,
         "w": 53.0,
-        "r": 8,
-        "rir": 0
+        "r": 9,
+        "rir": 1
       },
       {
         "ex": "Seated Cable Row (Κωπηλατική Τροχαλία)",
@@ -235,9 +235,9 @@
       },
       {
         "ex": "Leg raises",
-        "s": 3,
+        "s": 2,
         "w": 0.0,
-        "r": 12,
+        "r": 10,
         "rir": 2
       }
     ],
@@ -256,12 +256,13 @@
     "Cable Lateral Raises (Τροχαλία)": 7.1,
     "Cable Face Pulls": 29.7,
     "Cable row crunches": 43.9,
-    "Leg Extension Machine": 63.7,
-    "Seated Leg Curl Machine": 56.6,
+    "Leg Extension Machine": 81.3,
+    "Seated Leg Curl Machine": 68.9,
     "Seated Cable Row (Κωπηλατική Τροχαλία)": 46.7,
     "Lateral Raises (Αλτήρες)": 17.0,
     "Cable Bicep Curls": 20.0,
-    "Overhead Cable Triceps Extension": 16.7
+    "Overhead Cable Triceps Extension": 16.7,
+    "Lateral Raises (Dumbbells)": 18.7
   },
   "achievements": [
     "🏆 First Blood (Πρώτο PR)",
@@ -843,6 +844,134 @@
           ],
           "total_reps_or_min": 12,
           "type": "weight",
+          "muscle": "Abs",
+          "cal": 0
+        }
+      }
+    },
+    {
+      "date": "13/11/2026 10:27",
+      "day": "Παρασκευή",
+      "tonnage": 10914.0,
+      "cardio_cal": 391.5,
+      "exercises": {
+        "Stationary Bike (Ποδήλατο)": {
+          "sets": 1,
+          "max_1rm": 0,
+          "max_weight": 6.0,
+          "rirs": [
+            0
+          ],
+          "total_reps_or_min": 5,
+          "type": "cardio",
+          "muscle": "Cardio",
+          "cal": 391.5
+        },
+        "Leg Extension Machine": {
+          "sets": 3,
+          "max_1rm": 81.3,
+          "max_weight": 61.0,
+          "rirs": [
+            1
+          ],
+          "total_reps_or_min": 10,
+          "type": "weight",
+          "muscle": "Quads",
+          "cal": 0
+        },
+        "Seated Leg Curl Machine": {
+          "sets": 3,
+          "max_1rm": 68.9,
+          "max_weight": 53.0,
+          "rirs": [
+            1
+          ],
+          "total_reps_or_min": 9,
+          "type": "weight",
+          "muscle": "Hamstrings",
+          "cal": 0
+        },
+        "Seated Cable Row (Κωπηλατική Τροχαλία)": {
+          "sets": 3,
+          "max_1rm": 46.7,
+          "max_weight": 33.0,
+          "rirs": [
+            4
+          ],
+          "total_reps_or_min": 12,
+          "type": "weight",
+          "muscle": "Upper Back",
+          "cal": 0
+        },
+        "Lateral Raises (Dumbbells)": {
+          "sets": 3,
+          "max_1rm": 18.7,
+          "max_weight": 7.0,
+          "rirs": [
+            2
+          ],
+          "total_reps_or_min": 10,
+          "type": "weight",
+          "muscle": "Side Delts",
+          "cal": 0
+        },
+        "Cable Bicep Curls": {
+          "sets": 3,
+          "max_1rm": 20.0,
+          "max_weight": 15.0,
+          "rirs": [
+            1
+          ],
+          "total_reps_or_min": 10,
+          "type": "weight",
+          "muscle": "Biceps",
+          "cal": 0
+        },
+        "Overhead Cable Triceps Extension": {
+          "sets": 3,
+          "max_1rm": 16.7,
+          "max_weight": 12.5,
+          "rirs": [
+            0
+          ],
+          "total_reps_or_min": 10,
+          "type": "weight",
+          "muscle": "Triceps",
+          "cal": 0
+        },
+        "Crunches": {
+          "sets": 2,
+          "max_1rm": 0,
+          "max_weight": 0.0,
+          "rirs": [
+            1
+          ],
+          "total_reps_or_min": 20,
+          "type": "bodyweight",
+          "muscle": "Abs",
+          "cal": 0
+        },
+        "Leg Press": {
+          "sets": 3,
+          "max_1rm": 205.2,
+          "max_weight": 145.0,
+          "rirs": [
+            0
+          ],
+          "total_reps_or_min": 12,
+          "type": "weight",
+          "muscle": "Quads",
+          "cal": 0
+        },
+        "Leg raises": {
+          "sets": 2,
+          "max_1rm": 0,
+          "max_weight": 0.0,
+          "rirs": [
+            2
+          ],
+          "total_reps_or_min": 10,
+          "type": "bodyweight",
           "muscle": "Abs",
           "cal": 0
         }
