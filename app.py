@@ -412,38 +412,58 @@ def generate_post_workout_quiz(logged_exercises, exercise_db, trivia_db):
             options = [secondary_m] + random.sample(distractors, 3)
             random.shuffle(options)
             return {
-                "category": "🎯 Συνεργιστικοί Μύες (Synergists)",
-                "q": f"Στη σημερινή άσκηση **{chosen_ex}**, ποιος μυς λειτουργεί ΔΕΥΤΕΡΕΥΟΝΤΩΣ (Secondary) υποστηρίζοντας τους {primary_m};",
+                "category": t("🎯 Συνεργιστικοί Μύες (Synergists)", "🎯 Synergist Muscles (Synergists)"),
+                "q": t(
+                    f"Στη σημερινή άσκηση **{chosen_ex}**, ποιος μυς λειτουργεί ΔΕΥΤΕΡΕΥΟΝΤΩΣ (Secondary) υποστηρίζοντας τους {primary_m};",
+                    f"In today's exercise **{chosen_ex}**, which muscle acts SECONDARILY (Synergist) supporting the {primary_m}?"
+                ),
                 "options": options,
                 "answer": secondary_m,
-                "explanation": f"Στην άσκηση **{chosen_ex}**, τον κύριο όγκο αναλαμβάνουν οι **{primary_m}**, ενώ συνεργιστικά συμμετέχουν οι **{secondary_m}**."
+                "explanation": t(
+                    f"Στην άσκηση **{chosen_ex}**, τον κύριο όγκο αναλαμβάνουν οι **{primary_m}**, ενώ συνεργιστικά συμμετέχουν οι **{secondary_m}**.",
+                    f"In **{chosen_ex}**, the primary workload is handled by **{primary_m}**, while **{secondary_m}** assist synergistically."
+                )
             }
         elif mode == "profile":
             profiles = ["Lengthened-biased", "Shortened-biased", "Mid-range", "Isometric"]
             options = profiles.copy()
             random.shuffle(options)
             return {
-                "category": "📐 Εμβιομηχανική & Resistance Profile",
-                "q": f"Ποιο είναι το προφίλ αντίστασης (Resistance Profile) της άσκησης **{chosen_ex}**;",
+                "category": t("📐 Εμβιομηχανική & Resistance Profile", "📐 Biomechanics & Resistance Profile"),
+                "q": t(
+                    f"Ποιο είναι το προφίλ αντίστασης (Resistance Profile) της άσκησης **{chosen_ex}**;",
+                    f"What is the resistance profile of **{chosen_ex}**?"
+                ),
                 "options": options,
                 "answer": res_prof,
-                "explanation": f"Η άσκηση **{chosen_ex}** έχει προφίλ αντίστασης **{res_prof}**, δείχνοντας σε ποιο σημείο της τροχιάς κορυφώνεται η μηχανική τάση στους **{primary_m}**."
+                "explanation": t(
+                    f"Η άσκηση **{chosen_ex}** έχει προφίλ αντίστασης **{res_prof}**, δείχνοντας σε ποιο σημείο της τροχιάς κορυφώνεται η μηχανική τάση στους **{primary_m}**.",
+                    f"**{chosen_ex}** has a **{res_prof}** resistance profile, indicating where mechanical tension peaks on the **{primary_m}**."
+                )
             }
         else:
             distractors = [m for m in all_muscles if m != primary_m]
             options = [primary_m] + random.sample(distractors, 3)
             random.shuffle(options)
-            sec_text = f" ενώ συνεργιστικά δουλεύουν οι **{secondary_m}**" if secondary_m else ""
+            sec_el = f" ενώ συνεργιστικά δουλεύουν οι **{secondary_m}**" if secondary_m else ""
+            sec_en = f" while **{secondary_m}** work synergistically" if secondary_m else ""
             return {
-                "category": "🎯 Ανάλυση Σημερινής Άσκησης",
-                "q": f"Στη σημερινή προπόνηση εκτέλεσες **{chosen_ex}**. Ποιος είναι ο ΚΥΡΙΟΣ (Primary) μυς-στόχος αυτής της άσκησης;",
+                "category": t("🎯 Ανάλυση Σημερινής Άσκησης", "🎯 Today's Exercise Breakdown"),
+                "q": t(
+                    f"Στη σημερινή προπόνηση εκτέλεσες **{chosen_ex}**. Ποιος είναι ο ΚΥΡΙΟΣ (Primary) μυς-στόχος αυτής της άσκησης;",
+                    f"In today's session you performed **{chosen_ex}**. Which is the PRIMARY target muscle of this exercise?"
+                ),
                 "options": options,
                 "answer": primary_m,
-                "explanation": f"Η άσκηση **{chosen_ex}** στοχεύει πρωτευόντως τους **{primary_m}**{sec_text}. Προφίλ αντίστασης: **{res_prof}**."
+                "explanation": t(
+                    f"Η άσκηση **{chosen_ex}** στοχεύει πρωτευόντως τους **{primary_m}**{sec_el}. Προφίλ αντίστασης: **{res_prof}**.",
+                    f"**{chosen_ex}** primarily targets **{primary_m}**{sec_en}. Resistance profile: **{res_prof}**."
+                )
             }
 
     # Static Theory Bank με context-aware προτεραιότητα (HYROX/Running vs Hypertrophy)
     if static_questions:
+        is_en = (st.session_state.get("lang") == "English")
         is_endurance_session = any(
             "(HYROX)" in ex or exercise_db.get(ex, {}).get("type") == "cardio"
             for ex in logged_exercises
@@ -452,11 +472,16 @@ def generate_post_workout_quiz(logged_exercises, exercise_db, trivia_db):
         matched = [q for q in static_questions if target_tags.intersection(set(q.get("tags", [])))]
         
         pool = matched if (matched and random.random() < 0.75) else static_questions
-        chosen_q = dict(random.choice(pool))
-        opts = list(chosen_q["options"])
+        raw_q = dict(random.choice(pool))
+        opts = list(raw_q.get("options_en", raw_q["options"]) if is_en else raw_q["options"])
         random.shuffle(opts)
-        chosen_q["options"] = opts
-        return chosen_q
+        return {
+            "category": raw_q.get("category_en", raw_q.get("category", "Trivia")) if is_en else raw_q.get("category", "Trivia"),
+            "q": raw_q.get("q_en", raw_q["q"]) if is_en else raw_q["q"],
+            "options": opts,
+            "answer": raw_q.get("answer_en", raw_q["answer"]) if is_en else raw_q["answer"],
+            "explanation": raw_q.get("explanation_en", raw_q.get("explanation", "")) if is_en else raw_q.get("explanation", "")
+        }
         
     return None
 # ------------------------------------------------------------------------------
@@ -807,23 +832,24 @@ with tab2:
     rows_to_delete = []
 
     # --- SYSTEMIC FATIGUE & 1-CLICK DELOAD ENGINE ---
-    fatigue_info = calc_weekly_fatigue_and_deload(active_p.get("history", []), user_data["exercise_database"], COACHING_RULES)
+    curr_lang = st.session_state.get("lang", "Ελληνικά")
+    fatigue_info = calc_weekly_fatigue_and_deload(active_p.get("history", []), user_data["exercise_database"], COACHING_RULES, lang=curr_lang)
     f_col1, f_col2 = st.columns([3, 1])
     with f_col1:
         st.markdown(
             f"<div style='padding:10px 14px; border-left:4px solid {fatigue_info['color']}; background:rgba(255,255,255,0.04); border-radius:6px; margin-bottom:10px;'>"
-            f"<b>🧠 7-Day Fatigue Index:</b> {fatigue_info['score']} pts (Axial/CNS: {fatigue_info['axial_score']} pts | {fatigue_info['sets_7d']} σετ)<br>"
+            f"<b>🧠 7-Day Fatigue Index:</b> {fatigue_info['score']} pts (Axial/CNS: {fatigue_info['axial_score']} pts | {fatigue_info['sets_7d']} {t('σετ', 'sets')})<br>"
             f"<span style='color:{fatigue_info['color']}; font-weight:600;'>{fatigue_info['status']}</span>"
             f"</div>",
             unsafe_allow_html=True
         )
     with f_col2:
-        if st.button("🔋 Deload (-40% Σετ)", key=f"deload_btn_{active_profile_name}_{day_selected}", use_container_width=True):
+        if st.button(t("🔋 Deload (-40% Σετ)", "🔋 Deload (-40% Sets)"), key=f"deload_btn_{active_profile_name}_{day_selected}", use_container_width=True):
             mult = fatigue_info.get("deload_mult", 0.6)
             for ex_it in current_list:
                 ex_it["s"] = max(1, int(round(ex_it.get("s", 3) * mult)))
             save_user_data()
-            st.toast("✅ Εφαρμόστηκε Deload (-40% σετ) στο σημερινό πρόγραμμα!")
+            st.toast(t("✅ Εφαρμόστηκε Deload (-40% σετ) στο σημερινό πρόγραμμα!", "✅ Deload (-40% sets) applied to today's workout!"))
             st.rerun()
     
     for idx, item in enumerate(current_list):
@@ -832,7 +858,7 @@ with tab2:
         ex_info = user_data["exercise_database"].get(ex_name, {})
         ex_type = ex_info.get("type", "weight")
         
-        overload_info = calc_double_progression(ex_name, item, active_p.get("history", []), user_data["exercise_database"], COACHING_RULES)
+        overload_info = calc_double_progression(ex_name, item, active_p.get("history", []), user_data["exercise_database"], COACHING_RULES, lang=curr_lang)
         
         with st.expander(f"🔹 #{idx+1} {ex_name}", expanded=True):
             if overload_info:
@@ -845,15 +871,15 @@ with tab2:
 
             col_ex, col_s, col_w, col_r, col_rir, col_del = st.columns([4, 1, 1, 1, 1, 1])
             
-            with col_ex:
-                if ex_options:
-                    all_muscles = ["Όλες οι κατηγορίες"] + sorted(list(set(
-                        info.get("muscle", "Άλλο") 
+            if ex_options:
+                    all_cats_lbl = t("Όλες οι κατηγορίες", "All Categories")
+                    all_muscles = [all_cats_lbl] + sorted(list(set(
+                        info.get("muscle", t("Άλλο", "Other")) 
                         for info in user_data["exercise_database"].values() 
                         if info.get("muscle")
                     )))
                     
-                    curr_muscle = ex_info.get("muscle", "Όλες οι κατηγορίες")
+                    curr_muscle = ex_info.get("muscle", all_cats_lbl)
                     default_cat_idx = all_muscles.index(curr_muscle) if curr_muscle in all_muscles else 0
                     
                     c_cat, c_ex = st.columns(2)
@@ -866,7 +892,7 @@ with tab2:
                             key=f"cat_{prof_key_id}_{day_selected}_{idx}"
                         )
                     
-                    if sel_cat == "Όλες οι κατηγορίες":
+                    if sel_cat == all_cats_lbl:
                         filtered_exs = sorted(list(user_data["exercise_database"].keys()))
                     else:
                         filtered_exs = sorted([
@@ -1389,7 +1415,7 @@ with tab3:
             with sub_tab1:
                 days_win = 7 if "7D" in selected_period else (30 if "30D" in selected_period else 0)
                 frac_sets, prof_break, biomech_alerts, _ = analyze_fractional_emg_and_profiles(
-                    history, user_data["exercise_database"], STRENGTH_STANDARDS, days_window=days_win
+                    history, user_data["exercise_database"], STRENGTH_STANDARDS, days_window=days_win, lang=st.session_state.get("lang", "Ελληνικά")
                 )
                 landmarks = STRENGTH_STANDARDS.get("volume_landmarks", {})
                 norm_div = 1.0 if days_win == 7 else (4.3 if days_win == 30 else weeks_divisor)
@@ -1714,8 +1740,8 @@ with tab3:
         splits_data = calc_hyrox_splits(target_hyrox_min, hyrox_div, COACHING_RULES)
         hm1, hm2, hm3 = st.columns(3)
         hm1.metric("🏃 Target Pace (8 × 1km)", splits_data["per_1km_pace"])
-        hm2.metric("⏱️ Συνολικό Τρέξιμο (8km)", splits_data["total_run_time"])
-        hm3.metric("🔄 Roxzone (Μεταβάσεις)", splits_data["roxzone_total"])
+        hm2.metric(t("⏱️ Συνολικό Τρέξιμο (8km)", "⏱️ Total Running (8km)"), splits_data["total_run_time"])
+        hm3.metric(t("🔄 Roxzone (Μεταβάσεις)", "🔄 Roxzone (Transitions)"), splits_data["roxzone_total"])
 
         if splits_data["stations"]:
             st.dataframe(pd.DataFrame(splits_data["stations"]), use_container_width=True, hide_index=True)
@@ -1735,7 +1761,7 @@ with tab3:
                 key=f"run_ref_t_{active_profile_name}"
             )
 
-        preds_list, zones_list = calc_running_pace_zones(ref_dist, ref_mins, COACHING_RULES)
+        preds_list, zones_list = calc_running_pace_zones(ref_dist, ref_mins, COACHING_RULES, lang=st.session_state.get("lang", "Ελληνικά"))
         if preds_list:
             st.markdown(f"**📈 {t('Προβλέψεις Αγώνων (Riegel Formula)', 'Race Time Predictions (Riegel Formula)')}:**")
             st.dataframe(pd.DataFrame(preds_list), use_container_width=True, hide_index=True)
