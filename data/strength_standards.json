@@ -1,0 +1,63 @@
+{
+  "volume_landmarks": {
+    "Quads":       { "mev": 8,  "mav": 14, "mrv": 20 },
+    "Hamstrings":  { "mev": 6,  "mav": 12, "mrv": 16 },
+    "Glutes":      { "mev": 4,  "mav": 12, "mrv": 18 },
+    "Chest":       { "mev": 8,  "mav": 14, "mrv": 20 },
+    "Lats":        { "mev": 8,  "mav": 14, "mrv": 20 },
+    "Upper Back":  { "mev": 8,  "mav": 14, "mrv": 20 },
+    "Front Delts": { "mev": 0,  "mav": 6,  "mrv": 12 },
+    "Side Delts":  { "mev": 8,  "mav": 16, "mrv": 24 },
+    "Rear Delts":  { "mev": 6,  "mav": 14, "mrv": 20 },
+    "Biceps":      { "mev": 6,  "mav": 14, "mrv": 20 },
+    "Triceps":     { "mev": 6,  "mav": 12, "mrv": 18 },
+    "Calves":      { "mev": 6,  "mav": 12, "mrv": 16 },
+    "Abs":         { "mev": 4,  "mav": 10, "mrv": 16 },
+    "Lower Back":  { "mev": 2,  "mav": 6,  "mrv": 10 }
+  },
+  "dots_coefficients": {
+    "Άνδρας": [-307.75076, 24.0900756, -0.1918759221, 0.0007391293, -0.000001093],
+    "Γυναίκα": [-57.96288, 13.6175032, -0.1126655495, 0.0005158568, -0.0000010706]
+  },
+  "bw_multipliers": {
+    "Άνδρας": {
+      "Barbell Back Squat":               [0.75, 1.15, 1.50, 1.95, 2.40],
+      "Barbell Front Squat":              [0.60, 0.95, 1.25, 1.60, 2.00],
+      "Leg Press":                        [1.20, 1.80, 2.40, 3.10, 3.80],
+      "Hack Squat Machine":               [0.90, 1.35, 1.80, 2.35, 2.90],
+      "Barbell Deadlift":                 [0.90, 1.35, 1.80, 2.30, 2.80],
+      "Barbell RDL":                      [0.70, 1.05, 1.40, 1.80, 2.20],
+      "Romanian Deadlift (RDL)":          [0.55, 0.85, 1.15, 1.50, 1.85],
+      "Barbell Hip Thrust":               [0.80, 1.25, 1.75, 2.30, 2.85],
+      "Flat Barbell Bench Press":         [0.55, 0.85, 1.15, 1.50, 1.85],
+      "Flat Dumbbell Chest Press":        [0.45, 0.70, 0.95, 1.25, 1.55],
+      "Incline DB Bench Press":           [0.40, 0.60, 0.85, 1.10, 1.35],
+      "Barbell Overhead Press (OHP)":     [0.35, 0.55, 0.75, 1.00, 1.25],
+      "Dumbbell Shoulder Press":          [0.30, 0.48, 0.68, 0.90, 1.12],
+      "Lat Pulldown (Τροχαλία)":          [0.50, 0.72, 0.95, 1.20, 1.45],
+      "Seated Cable Row":                 [0.50, 0.72, 0.95, 1.20, 1.45],
+      "Barbell Bicep Curls":              [0.25, 0.38, 0.52, 0.68, 0.85],
+      "Close-Grip Barbell Bench Press":   [0.50, 0.75, 1.05, 1.35, 1.65]
+    },
+    "Γυναίκα": {
+      "Barbell Back Squat":               [0.45, 0.75, 1.05, 1.40, 1.75],
+      "Barbell Front Squat":              [0.35, 0.60, 0.85, 1.15, 1.45],
+      "Leg Press":                        [0.80, 1.25, 1.75, 2.30, 2.90],
+      "Hack Squat Machine":               [0.60, 0.95, 1.30, 1.75, 2.20],
+      "Barbell Deadlift":                 [0.55, 0.90, 1.25, 1.65, 2.05],
+      "Barbell RDL":                      [0.45, 0.70, 1.00, 1.35, 1.70],
+      "Romanian Deadlift (RDL)":          [0.35, 0.58, 0.82, 1.10, 1.40],
+      "Barbell Hip Thrust":               [0.65, 1.10, 1.60, 2.15, 2.75],
+      "Flat Barbell Bench Press":         [0.30, 0.50, 0.72, 0.98, 1.25],
+      "Flat Dumbbell Chest Press":        [0.25, 0.42, 0.60, 0.82, 1.05],
+      "Incline DB Bench Press":           [0.22, 0.36, 0.52, 0.72, 0.92],
+      "Barbell Overhead Press (OHP)":     [0.20, 0.34, 0.48, 0.65, 0.85],
+      "Dumbbell Shoulder Press":          [0.18, 0.30, 0.44, 0.60, 0.78],
+      "Lat Pulldown (Τροχαλία)":          [0.32, 0.48, 0.66, 0.86, 1.08],
+      "Seated Cable Row":                 [0.32, 0.48, 0.66, 0.86, 1.08],
+      "Barbell Bicep Curls":              [0.15, 0.24, 0.34, 0.46, 0.60],
+      "Close-Grip Barbell Bench Press":   [0.28, 0.45, 0.65, 0.88, 1.12]
+    }
+  },
+  "tier_labels": ["Untrained", "Novice", "Intermediate", "Advanced", "Elite"]
+}
