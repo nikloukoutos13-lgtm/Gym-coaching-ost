@@ -1131,7 +1131,7 @@ with tab2:
                 st.session_state[choice_key] = None
                 st.rerun()
 
-   st.markdown("---")
+    st.markdown("---")
     with st.expander(t("✨ Προσθήκη Νέας Άσκησης στη Βάση (Custom Exercise Creator)", "✨ Add Custom Exercise to Database")):
         ce_name = st.text_input(t("Όνομα Άσκησης (π.χ. Smith Machine Incline Press):", "Exercise Name (e.g., Smith Machine Incline Press):"), key="ce_name")
         col_e1, col_e2, col_e3, col_e4 = st.columns(4)
