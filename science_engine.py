@@ -30,8 +30,9 @@ def calc_dots(bodyweight_kg: float, total_kg: float, gender: str = "Άνδρας
     if bodyweight_kg <= 0 or total_kg <= 0:
         return 0.0
     coeffs_map = coeffs_map or {}
+    gender_key = "Γυναίκα" if gender in ["Γυναίκα", "Female"] else "Άνδρας"
     c = coeffs_map.get(
-        gender,
+        gender_key,
         [-307.75076, 24.0900756, -0.1918759221, 0.0007391293, -0.000001093]
     )
     bw = max(40.0, min(210.0, float(bodyweight_kg)))
@@ -43,17 +44,16 @@ def calc_dots(bodyweight_kg: float, total_kg: float, gender: str = "Άνδρας
 
 def _filter_history_by_days(history: list, days_window: int) -> list:
     if not days_window or days_window <= 0:
-        return history
+        return history or []
     cutoff = datetime.now() - timedelta(days=days_window)
     filtered = []
-    for h in history:
+    for h in (history or []):
         raw_date = str(h.get("date", "")).split()[0]
         try:
             dt = datetime.strptime(raw_date, "%d/%m/%Y")
             if dt >= cutoff:
                 filtered.append(h)
         except ValueError:
-            # Αν δεν αναγνωριστεί η ημερομηνία, συμπεριλαμβάνεται ώστε να μη χαθεί δεδομένο
             filtered.append(h)
     return filtered
 
@@ -87,7 +87,6 @@ def analyze_fractional_emg_and_profiles(history: list, exercise_db: dict, standa
 
             emg_map = db_info.get("emg_weights")
             if not emg_map or not isinstance(emg_map, dict):
-                # Fallback για custom ασκήσεις χωρίς emg_weights
                 emg_map = {}
                 prim = db_info.get("primary") or db_info.get("muscle")
                 sec = db_info.get("secondary")
@@ -111,26 +110,24 @@ def analyze_fractional_emg_and_profiles(history: list, exercise_db: dict, standa
                 if res_prof in profile_breakdown[muscle]:
                     profile_breakdown[muscle][res_prof] += weighted_s
 
-    # Στρογγυλοποίηση
     fractional_sets = {k: round(v, 1) for k, v in fractional_sets.items()}
 
-    # Εντοπισμός ελλείψεων σε Lengthened-biased stimulus (Stretch-Mediated Hypertrophy)
     biomech_alerts = []
     for muscle, profs in profile_breakdown.items():
         total_m = fractional_sets.get(muscle, 0.0)
         lengthened = profs.get("Lengthened-biased", 0.0)
         shortened = profs.get("Shortened-biased", 0.0)
         if total_m >= 4.0 and lengthened == 0.0 and shortened > 0.0:
-    if lang == "English":
-        biomech_alerts.append(
-            f"**{muscle}**: {total_m:.1f} sets with zero **Lengthened-biased** exercises "
-            f"(Shortened/Mid-range only). Add a stretch-loaded movement!"
-        )
-    else:
-        biomech_alerts.append(
-            f"**{muscle}**: {total_m:.1f} σετ χωρίς καμία **Lengthened-biased** άσκηση "
-            f"(μόνο Shortened/Mid-range). Πρόσθεσε κίνηση με φόρτιση στη διάταση!"
-        )
+            if lang == "English":
+                biomech_alerts.append(
+                    f"**{muscle}**: {total_m:.1f} sets with zero **Lengthened-biased** exercises "
+                    f"(Shortened/Mid-range only). Add a stretch-loaded movement!"
+                )
+            else:
+                biomech_alerts.append(
+                    f"**{muscle}**: {total_m:.1f} σετ χωρίς καμία **Lengthened-biased** άσκηση "
+                    f"(μόνο Shortened/Mid-range). Πρόσθεσε κίνηση με φόρτιση στη διάταση!"
+                )
 
     return fractional_sets, profile_breakdown, biomech_alerts, len(filtered_hist)
 
@@ -141,18 +138,18 @@ def evaluate_strength_standards(active_p: dict, exercise_db: dict, standards_dat
     καθώς και το συνολικό DOTS Score.
     """
     prof = active_p.get("profile", {})
-    gender = prof.get("gender", "Άνδρας")
+    raw_gender = prof.get("gender", "Άνδρας")
+    gender = "Γυναίκα" if raw_gender in ["Γυναίκα", "Female"] else "Άνδρας"
     bw = float(prof.get("weight_kg", 75.0))
     multipliers_by_ex = standards_data.get("bw_multipliers", {}).get(gender, {})
     tier_labels = standards_data.get("tier_labels", ["Untrained", "Novice", "Intermediate", "Advanced", "Elite"])
 
-    # Βρίσκουμε το καλύτερο e1RM ανά άσκηση από history + prs
     best_e1rm = {}
-    for ex_name, pr_val in active_p.get("prs", {}).items():
+    for ex_name, pr_val in (active_p.get("prs") or {}).items():
         if float(pr_val) > 0:
             best_e1rm[ex_name] = float(pr_val)
 
-for session in active_p.get("history", []):
+    for session in (active_p.get("history") or []):
         for ex_name, ex_data in session.get("exercises", {}).items():
             ex_t = ex_data.get("type", "weight")
             if ex_t in ("weight", "bodyweight"):
@@ -173,6 +170,7 @@ for session in active_p.get("history", []):
                 est = calc_e1rm(eff_w, r, rir)
                 if est > best_e1rm.get(ex_name, 0.0):
                     best_e1rm[ex_name] = est
+
     results = []
     for ex_name, mults in multipliers_by_ex.items():
         if ex_name not in best_e1rm:
@@ -180,7 +178,6 @@ for session in active_p.get("history", []):
         user_1rm = best_e1rm[ex_name]
         bw_ratio = round(user_1rm / bw, 2) if bw > 0 else 0.0
 
-        # Εύρεση τρέχοντος επιπέδου & επόμενου milestone
         current_tier = "Beginner (<Untrained)"
         next_tier = tier_labels[0]
         next_target_kg = round(mults[0] * bw, 1)
@@ -212,7 +209,6 @@ for session in active_p.get("history", []):
             "progress_pct": progress_pct
         })
 
-    # Υπολογισμός DOTS Score (από Squat + Bench + Deadlift ή τα αντίστοιχα βασικά lifts)
     squat_max = max(
         best_e1rm.get("Barbell Back Squat", 0.0),
         best_e1rm.get("Barbell Front Squat", 0.0),
