@@ -20,10 +20,18 @@
       "Barbell Deadlift": 1.50,
       "Barbell Back Squat": 1.35,
       "Barbell Front Squat": 1.30,
+      "Hack Squat Machine": 1.25,
+      "Bulgarian Split Squat": 1.25,
       "Barbell RDL": 1.30,
       "Romanian Deadlift (RDL)": 1.25,
+      "Barbell Bent-Over Row": 1.25,
+      "Barbell Overhead Press (OHP)": 1.20,
       "Sled Push (HYROX)": 1.30,
-      "Sled Pull (HYROX)": 1.25
+      "Sled Pull (HYROX)": 1.25,
+      "Sandbag Lunges (HYROX)": 1.25,
+      "Farmers Carry (HYROX)": 1.20,
+      "Wall Balls (HYROX)": 1.15,
+      "Burpee Broad Jumps (HYROX)": 1.15
     },
     "weekly_thresholds": {
       "optimal_max": 65.0,
