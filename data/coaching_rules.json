@@ -1,0 +1,77 @@
+{
+  "double_progression": {
+    "compound": { "min_reps": 6, "max_reps": 10, "target_rir": 2 },
+    "isolation": { "min_reps": 10, "max_reps": 15, "target_rir": 2 },
+    "increments_kg": {
+      "barbell_machine": 2.5,
+      "dumbbell_per_hand": 1.0
+    }
+  },
+  "fatigue_model": {
+    "rir_multipliers": {
+      "0": 1.65,
+      "1": 1.30,
+      "2": 1.00,
+      "3": 0.75,
+      "4": 0.55,
+      "5": 0.40
+    },
+    "axial_heavy_exercises": {
+      "Barbell Deadlift": 1.50,
+      "Barbell Back Squat": 1.35,
+      "Barbell Front Squat": 1.30,
+      "Barbell RDL": 1.30,
+      "Romanian Deadlift (RDL)": 1.25,
+      "Sled Push (HYROX)": 1.30,
+      "Sled Pull (HYROX)": 1.25
+    },
+    "weekly_thresholds": {
+      "optimal_max": 65.0,
+      "high_warning": 85.0,
+      "deload_trigger": 100.0
+    },
+    "deload_set_multiplier": 0.6
+  },
+  "hyrox_standards": {
+    "divisions": {
+      "Open": {
+        "run_1km_share": 0.51,
+        "roxzone_share": 0.07,
+        "stations": {
+          "1. SkiErg (1000m)": 0.055,
+          "2. Sled Push (50m)": 0.045,
+          "3. Sled Pull (50m)": 0.055,
+          "4. Burpee Broad Jumps (80m)": 0.060,
+          "5. RowErg (1000m)": 0.055,
+          "6. Farmers Carry (200m)": 0.030,
+          "7. Sandbag Lunges (100m)": 0.055,
+          "8. Wall Balls (100 reps)": 0.065
+        }
+      },
+      "Pro": {
+        "run_1km_share": 0.48,
+        "roxzone_share": 0.07,
+        "stations": {
+          "1. SkiErg (1000m)": 0.055,
+          "2. Sled Push (50m - Heavy)": 0.055,
+          "3. Sled Pull (50m - Heavy)": 0.065,
+          "4. Burpee Broad Jumps (80m)": 0.060,
+          "5. RowErg (1000m)": 0.055,
+          "6. Farmers Carry (200m - Heavy)": 0.035,
+          "7. Sandbag Lunges (100m - Heavy)": 0.060,
+          "8. Wall Balls (100 reps - Heavy)": 0.065
+        }
+      }
+    }
+  },
+  "running_engine": {
+    "riegel_exponent": 1.06,
+    "pace_zones_vs_lt2": [
+      { "zone": "Zone 1 — Active Recovery", "min_mult": 1.26, "max_mult": 1.38, "desc": "Αποκατάσταση & ροή αίματος" },
+      { "zone": "Zone 2 — Aerobic Base", "min_mult": 1.14, "max_mult": 1.25, "desc": "Μιτοχονδριακή πυκνότητα & καύση λίπους (80% του όγκου)" },
+      { "zone": "Zone 3 — Tempo / Marathon Pace", "min_mult": 1.05, "max_mult": 1.13, "desc": "Αερόβια αντοχή ρυθμού αγώνα" },
+      { "zone": "Zone 4 — LT2 (Lactate Threshold)", "min_mult": 0.98, "max_mult": 1.04, "desc": "Αναερόβιο κατώφλι (ρυθμός ~10K / 60' max)" },
+      { "zone": "Zone 5 — VO2max Intervals", "min_mult": 0.88, "max_mult": 0.97, "desc": "Μέγιστη πρόσληψη οξυγόνου & ταχύτητα" }
+    ]
+  }
+}
