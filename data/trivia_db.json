@@ -2,393 +2,693 @@
   "questions": [
     {
       "category": "🧬 Επιστήμη Υπερτροφίας (Hypertrophy)",
+      "category_en": "🧬 Hypertrophy Science",
       "tags": ["hypertrophy"],
       "q": "Ποιος είναι ο πρωταρχικός φυσιολογικός μηχανισμός που πυροδοτεί τη μυϊκή υπερτροφία;",
+      "q_en": "What is the primary physiological mechanism that triggers muscle hypertrophy?",
       "options": [
         "Η Μηχανική Τάση (Mechanical Tension) στις μυϊκές ίνες",
         "Η αύξηση των καρδιακών παλμών πάνω από 170 bpm",
         "Το μυϊκό πιάσιμο (DOMS) την επόμενη ημέρα",
         "Η εφίδρωση κατά τη διάρκεια του σετ"
       ],
+      "options_en": [
+        "Mechanical Tension across muscle fibers",
+        "Heart rate exceeding 170 bpm",
+        "Delayed Onset Muscle Soreness (DOMS) the next day",
+        "Sweating volume during a set"
+      ],
       "answer": "Η Μηχανική Τάση (Mechanical Tension) στις μυϊκές ίνες",
-      "explanation": "Οι μηχανοϋποδοχείς (costameres/integrins) ανιχνεύουν την υψηλή μηχανική τάση υπό επιβάρυνση και ενεργοποιούν το μονοπάτι mTOR για πρωτεϊνοσύνθεση. Το DOMS δεν αποτελεί αξιόπιστο δείκτη μυϊκής ανάπτυξης."
+      "answer_en": "Mechanical Tension across muscle fibers",
+      "explanation": "Οι μηχανοϋποδοχείς (costameres/integrins) ανιχνεύουν την υψηλή μηχανική τάση υπό επιβάρυνση και ενεργοποιούν το μονοπάτι mTOR για πρωτεϊνοσύνθεση. Το DOMS δεν αποτελεί αξιόπιστο δείκτη μυϊκής ανάπτυξης.",
+      "explanation_en": "Mechanoreceptors (costameres/integrins) sense high mechanical tension under load and activate the mTOR signaling pathway for muscle protein synthesis. DOMS is not a reliable indicator of muscle growth."
     },
     {
       "category": "🧬 Επιστήμη Υπερτροφίας (Hypertrophy)",
+      "category_en": "🧬 Hypertrophy Science",
       "tags": ["hypertrophy"],
       "q": "Τι σημαίνει ο όρος MAV (Maximum Adaptive Volume) στον προγραμματισμό υπερτροφίας;",
+      "q_en": "What does MAV (Maximum Adaptive Volume) mean in hypertrophy programming?",
       "options": [
         "Το εύρος εβδομαδιαίων σετ όπου επιτυγχάνεται η μέγιστη μυϊκή ανάπτυξη",
         "Το ελάχιστο βάρος που χρειάζεται για προθέρμανση",
         "Ο μέγιστος αριθμός επαναλήψεων σε ένα σετ μέχρι αποτυχίας",
         "Η μέγιστη πρόσληψη οξυγόνου (VO2max)"
       ],
+      "options_en": [
+        "The weekly set range where maximal muscle growth occurs",
+        "The minimum weight required for warming up",
+        "The maximum number of reps in a single set to failure",
+        "Maximal oxygen uptake (VO2max)"
+      ],
       "answer": "Το εύρος εβδομαδιαίων σετ όπου επιτυγχάνεται η μέγιστη μυϊκή ανάπτυξη",
-      "explanation": "Το MAV βρίσκεται ανάμεσα στο MEV (Minimum Effective Volume) και το MRV (Maximum Recoverable Volume) και αποτελεί τη «χρυσή ζώνη» εβδομαδιαίου όγκου για κάθε μυϊκή ομάδα."
+      "answer_en": "The weekly set range where maximal muscle growth occurs",
+      "explanation": "Το MAV βρίσκεται ανάμεσα στο MEV (Minimum Effective Volume) και το MRV (Maximum Recoverable Volume) και αποτελεί τη «χρυσή ζώνη» εβδομαδιαίου όγκου για κάθε μυϊκή ομάδα.",
+      "explanation_en": "MAV sits between MEV (Minimum Effective Volume) and MRV (Maximum Recoverable Volume), representing the sweet-spot weekly volume for each muscle group."
     },
     {
       "category": "🧬 Επιστήμη Υπερτροφίας (Hypertrophy)",
+      "category_en": "🧬 Hypertrophy Science",
       "tags": ["hypertrophy"],
       "q": "Γιατί θεωρούνται «Effective Sets» (αποτελεσματικά σετ) για υπερτροφία όσα εκτελούνται με RIR ≤ 3;",
+      "q_en": "Why are sets performed at RIR ≤ 3 considered 'Effective Sets' for hypertrophy?",
       "options": [
         "Διότι τότε στρατολογούνται πλήρως οι κινητικές μονάδες υψηλού ουδού (Type II ίνες)",
         "Διότι καίνε διπλάσιες θερμίδες από τα σετ με RIR 5",
         "Διότι μειώνουν τα επίπεδα κορτιζόλης κατά 50%",
         "Διότι επιτρέπουν μικρότερα διαλείμματα 15 δευτερολέπτων"
       ],
+      "options_en": [
+        "Because high-threshold motor units (Type II fibers) are fully recruited",
+        "Because they burn twice as many calories as RIR 5 sets",
+        "Because they reduce cortisol levels by 50%",
+        "Because they allow 15-second rest periods"
+      ],
       "answer": "Διότι τότε στρατολογούνται πλήρως οι κινητικές μονάδες υψηλού ουδού (Type II ίνες)",
-      "explanation": "Σύμφωνα με την Αρχή του Μεγέθους (Henneman's Size Principle), οι μεγάλες μυϊκές ίνες τύπου II (που έχουν το μεγαλύτερο δυναμικό υπερτροφίας) ενεργοποιούνται πλήρως μόνο στις τελευταίες ~3–5 επαναλήψεις πριν την αποτυχία."
+      "answer_en": "Because high-threshold motor units (Type II fibers) are fully recruited",
+      "explanation": "Σύμφωνα με την Αρχή του Μεγέθους (Henneman's Size Principle), οι μεγάλες μυϊκές ίνες τύπου II (που έχουν το μεγαλύτερο δυναμικό υπερτροφίας) ενεργοποιούνται πλήρως μόνο στις τελευταίες ~3–5 επαναλήψεις πριν την αποτυχία.",
+      "explanation_en": "According to Henneman's Size Principle, large Type II muscle fibers (with the greatest growth potential) are fully recruited only during the final ~3–5 reps before failure."
     },
     {
       "category": "🧬 Επιστήμη Υπερτροφίας (Hypertrophy)",
+      "category_en": "🧬 Hypertrophy Science",
       "tags": ["hypertrophy"],
       "q": "Πώς λειτουργεί η μέθοδος Double Progression;",
+      "q_en": "How does the Double Progression method work?",
       "options": [
         "Αυξάνεις πρώτα τις επαναλήψεις μέχρι το άνω όριο του εύρους και μετά ανεβάζεις κιλά",
         "Αυξάνεις ταυτόχρονα κιλά και σετ σε κάθε προπόνηση",
         "Κάνεις δύο προπονήσεις την ίδια ημέρα για την ίδια μυϊκή ομάδα",
         "Μειώνεις τα κιλά κατά 50% σε κάθε δεύτερο σετ"
       ],
+      "options_en": [
+        "First increase reps up to the top of the target range, then add load and reset reps",
+        "Increase both load and sets simultaneously every single workout",
+        "Train the same muscle group twice in the same day",
+        "Drop weight by 50% on every second set"
+      ],
       "answer": "Αυξάνεις πρώτα τις επαναλήψεις μέχρι το άνω όριο του εύρους και μετά ανεβάζεις κιλά",
-      "explanation": "Στο Double Progression (π.χ. 3×8–12), κρατάς σταθερό βάρος μέχρι να πιάσεις 12 επαναλήψεις με καλό RIR, και στην επόμενη συνεδρία προσθέτεις +2.5 kg επιστρέφοντας στις ~8 επαναλήψεις."
+      "answer_en": "First increase reps up to the top of the target range, then add load and reset reps",
+      "explanation": "Στο Double Progression (π.χ. 3×8–12), κρατάς σταθερό βάρος μέχρι να πιάσεις 12 επαναλήψεις με καλό RIR, και στην επόμενη συνεδρία προσθέτεις +2.5 kg επιστρέφοντας στις ~8 επαναλήψεις.",
+      "explanation_en": "In Double Progression (e.g., 3×8–12), you hold the load steady until reaching 12 reps at target RIR, then add +2.5 kg and drop back to ~8 reps."
     },
     {
       "category": "🧬 Επιστήμη Υπερτροφίας (Hypertrophy)",
+      "category_en": "🧬 Hypertrophy Science",
       "tags": ["hypertrophy"],
       "q": "Ποιο είναι το βέλτιστο διάλειμμα μεταξύ σετ σε βαριές πολυαρθρικές ασκήσεις (π.χ. Squat, Bench Press) για υπερτροφία;",
+      "q_en": "What is the optimal rest interval between sets on heavy compound lifts (e.g., Squat, Bench Press) for hypertrophy?",
       "options": [
         "2.5 έως 4 λεπτά",
         "30 δευτερόλεπτα",
         "45 έως 60 δευτερόλεπτα",
         "Πάνω από 10 λεπτά"
       ],
+      "options_en": [
+        "2.5 to 4 minutes",
+        "30 seconds",
+        "45 to 60 seconds",
+        "Over 10 minutes"
+      ],
       "answer": "2.5 έως 4 λεπτά",
-      "explanation": "Τα διαλείμματα 2.5–4 λεπτών επιτρέπουν την αναπλήρωση της φωσφοκρεατίνης (ATP-CP) και τη μείωση της κόπωσης του ΚΝΣ, οδηγώντας σε περισσότερες ποιοτικές επαναλήψεις και μεγαλύτερο συνολικό όγκο."
+      "answer_en": "2.5 to 4 minutes",
+      "explanation": "Τα διαλείμματα 2.5–4 λεπτών επιτρέπουν την αναπλήρωση της φωσφοκρεατίνης (ATP-CP) και τη μείωση της κόπωσης του ΚΝΣ, οδηγώντας σε περισσότερες ποιοτικές επαναλήψεις και μεγαλύτερο συνολικό όγκο.",
+      "explanation_en": "Resting 2.5–4 minutes restores phosphocreatine (ATP-CP) and clears CNS fatigue, yielding more high-quality reps and higher total volume."
     },
     {
       "category": "🧬 Επιστήμη Υπερτροφίας (Hypertrophy)",
+      "category_en": "🧬 Hypertrophy Science",
       "tags": ["hypertrophy"],
       "q": "Περίπου πόση πρωτεΐνη (και ~2.5–3g Λευκίνης) ανά γεύμα απαιτείται για μέγιστη ενεργοποίηση της μυϊκής πρωτεϊνοσύνθεσης (MPS);",
+      "q_en": "Approximately how much protein (with ~2.5–3g Leucine) per meal maximizes Muscle Protein Synthesis (MPS)?",
       "options": [
         "25–40g ποιοτικής πρωτεΐνης",
         "5–8g πρωτεΐνης",
         "Πάνω από 120g σε ένα γεύμα",
         "Μόνο 10g αν συνοδεύονται από ζάχαρη"
       ],
+      "options_en": [
+        "25–40g of high-quality protein",
+        "5–8g of protein",
+        "Over 120g in a single meal",
+        "Only 10g if paired with sugar"
+      ],
       "answer": "25–40g ποιοτικής πρωτεΐνης",
-      "explanation": "Η δόση 25–40g πλήρους πρωτεΐνης ξεπερνά το «κατώφλι λευκίνης» (Leucine Threshold), μεγιστοποιώντας την απόκριση mTORC1 για τις επόμενες 3–5 ώρες."
+      "answer_en": "25–40g of high-quality protein",
+      "explanation": "Η δόση 25–40g πλήρους πρωτεΐνης ξεπερνά το «κατώφλι λευκίνης» (Leucine Threshold), μεγιστοποιώντας την απόκριση mTORC1 για τις επόμενες 3–5 ώρες.",
+      "explanation_en": "A 25–40g dose of complete protein surpasses the Leucine Threshold, maximally stimulating mTORC1 for the next 3–5 hours."
     },
     {
       "category": "🧬 Επιστήμη Υπερτροφίας (Hypertrophy)",
+      "category_en": "🧬 Hypertrophy Science",
       "tags": ["hypertrophy"],
       "q": "Τι πετυχαίνουμε με μια εβδομάδα Deload (-40% έως -50% σετ);",
+      "q_en": "What is the purpose of a Deload week (-40% to -50% sets)?",
       "options": [
         "Διαλύουμε τη συσσωρευμένη νευρομυϊκή κόπωση διατηρώντας τις μυϊκές προσαρμογές",
         "Χάνουμε το 20% της μυϊκής μας μάζας",
         "Μηδενίζουμε τον βασικό μεταβολισμό (BMR)",
         "Αυξάνουμε τον κίνδυνο τραυματισμού"
       ],
+      "options_en": [
+        "Dissipate accumulated neuromuscular fatigue while retaining muscle adaptations",
+        "Lose 20% of muscle mass",
+        "Reset Basal Metabolic Rate (BMR) to zero",
+        "Increase injury risk"
+      ],
       "answer": "Διαλύουμε τη συσσωρευμένη νευρομυϊκή κόπωση διατηρώντας τις μυϊκές προσαρμογές",
-      "explanation": "Σύμφωνα με το μοντέλο Fitness-Fatigue, η κόπωση υποχωρεί 3 φορές ταχύτερα από τη φυσική κατάσταση, επιτρέποντας υπεραναπλήρωση (supercompensation) στον επόμενο μεσόκυκλο."
+      "answer_en": "Dissipate accumulated neuromuscular fatigue while retaining muscle adaptations",
+      "explanation": "Σύμφωνα με το μοντέλο Fitness-Fatigue, η κόπωση υποχωρεί 3 φορές ταχύτερα από τη φυσική κατάσταση, επιτρέποντας υπεραναπλήρωση (supercompensation) στον επόμενο μεσόκυκλο.",
+      "explanation_en": "Under the Fitness-Fatigue model, fatigue decays ~3× faster than fitness, enabling supercompensation in the following mesocycle."
     },
     {
       "category": "📐 Εμβιομηχανική (Biomechanics)",
+      "category_en": "📐 Biomechanics",
       "tags": ["biomechanics", "hypertrophy"],
       "q": "Τι σημαίνει «Stretch-Mediated Hypertrophy» (Υπερτροφία μέσω διάτασης);",
+      "q_en": "What does 'Stretch-Mediated Hypertrophy' refer to?",
       "options": [
         "Αυξημένη μυϊκή ανάπτυξη όταν η μέγιστη αντίσταση ασκείται ενώ ο μυς βρίσκεται σε διάταση (Lengthened)",
         "Στατικές διατάσεις 30 λεπτών πριν από κάθε προπόνηση",
         "Εκτέλεση ασκήσεων μόνο στο τελευταίο 20% της σύσπασης",
         "Χρήση αποκλειστικά ελαφριών λάστιχων αντίστασης"
       ],
+      "options_en": [
+        "Enhanced muscle growth when peak resistance occurs while the muscle is stretched (lengthened)",
+        "30 minutes of static stretching before every workout",
+        "Performing reps only in the top 20% peak contraction",
+        "Using light resistance bands exclusively"
+      ],
       "answer": "Αυξημένη μυϊκή ανάπτυξη όταν η μέγιστη αντίσταση ασκείται ενώ ο μυς βρίσκεται σε διάταση (Lengthened)",
-      "explanation": "Η παθητική τάση της πρωτεΐνης τιτίνης (titin) σε επιμηκυμένη θέση προστίθεται στην ενεργητική τάση, ενισχύοντας τη σαρκομερική ανάπτυξη (π.χ. Overhead Triceps Extension, Seated Leg Curl, Incline Curl)."
+      "answer_en": "Enhanced muscle growth when peak resistance occurs while the muscle is stretched (lengthened)",
+      "explanation": "Η παθητική τάση της πρωτεΐνης τιτίνης (titin) σε επιμηκυμένη θέση προστίθεται στην ενεργητική τάση, ενισχύοντας τη σαρκομερική ανάπτυξη (π.χ. Overhead Triceps Extension, Seated Leg Curl, Incline Curl).",
+      "explanation_en": "Passive tension from the giant protein titin in a stretched position adds to active tension, boosting sarcomere hypertrophy (e.g., Overhead Triceps Extension, Seated Leg Curl)."
     },
     {
       "category": "📐 Εμβιομηχανική (Biomechanics)",
+      "category_en": "📐 Biomechanics",
       "tags": ["biomechanics"],
       "q": "Γιατί οι Cable Lateral Raises υπερέχουν εμβιομηχανικά έναντι των Lateral Raises με αλτήρες στην αρχή της κίνησης;",
+      "q_en": "Why are Cable Lateral Raises biomechanically superior to Dumbbell Lateral Raises at the start of the movement?",
       "options": [
         "Η τροχαλία παρέχει μέγιστη ροπή αντίστασης όταν ο δελτοειδής βρίσκεται σε διάταση (κάτω θέση)",
         "Οι αλτήρες δεν ενεργοποιούν καθόλου τον πλάγιο δελτοειδή",
         "Η τροχαλία γυμνάζει κυρίως τους δικεφάλους",
         "Επιτρέπουν διπλάσια κιλά χωρίς τεχνική"
       ],
+      "options_en": [
+        "The cable provides peak resistance torque when the side delt is lengthened at the bottom",
+        "Dumbbells do not activate the lateral deltoid at all",
+        "The cable primarily trains the biceps",
+        "It allows double the weight without proper form"
+      ],
       "answer": "Η τροχαλία παρέχει μέγιστη ροπή αντίστασης όταν ο δελτοειδής βρίσκεται σε διάταση (κάτω θέση)",
-      "explanation": "Με τους αλτήρες, η βαρύτητα δρα κατακόρυφα, οπότε στις 0°–30° απαγωγής ο βραχίονας ροπής είναι σχεδόν μηδενικός. Η τροχαλία ρυθμισμένη στο ύψος του καρπού μεγιστοποιεί την τάση στη διάταση."
+      "answer_en": "The cable provides peak resistance torque when the side delt is lengthened at the bottom",
+      "explanation": "Με τους αλτήρες, η βαρύτητα δρα κατακόρυφα, οπότε στις 0°–30° απαγωγής ο βραχίονας ροπής είναι σχεδόν μηδενικός. Η τροχαλία ρυθμισμένη στο ύψος του καρπού μεγιστοποιεί την τάση στη διάταση.",
+      "explanation_en": "With dumbbells, gravity acts vertically so the moment arm at 0°–30° abduction is near zero. A wrist-height cable maximizes tension in the stretched position."
     },
     {
       "category": "📐 Εμβιομηχανική (Biomechanics)",
+      "category_en": "📐 Biomechanics",
       "tags": ["biomechanics"],
       "q": "Γιατί το Seated Leg Curl υπερτερεί συχνά του Lying Leg Curl για την υπερτροφία των οπίσθιων μηριαίων;",
+      "q_en": "Why does the Seated Leg Curl often outperform the Lying Leg Curl for hamstring hypertrophy?",
       "options": [
         "Η κάμψη του ισχίου σε καθιστή θέση διατείνει περισσότερο τους δίαρθρους οπίσθιους μηριαίους",
         "Σε καθιστή θέση δουλεύουν μόνο οι τετρακέφαλοι",
         "Το Lying Leg Curl γυμνάζει αποκλειστικά τις γάμπες",
         "Επειδή επιτρέπει γρηγορότερη ταχύτητα επαναλήψεων"
       ],
+      "options_en": [
+        "Hip flexion while seated places the biarticular hamstrings in a greater stretch",
+        "Seated position only trains the quadriceps",
+        "Lying Leg Curl exclusively trains the calves",
+        "Because it allows faster repetition speed"
+      ],
       "answer": "Η κάμψη του ισχίου σε καθιστή θέση διατείνει περισσότερο τους δίαρθρους οπίσθιους μηριαίους",
-      "explanation": "Οι 3 από τους 4 οπίσθιους μηριαίους διασχίζουν τόσο το ισχίο όσο και το γόνατο. Η κάμψη του ισχίου στο Seated Leg Curl τους φέρνει σε μεγαλύτερη διάταση, αυξάνοντας τη Stretch-Mediated Hypertrophy."
+      "answer_en": "Hip flexion while seated places the biarticular hamstrings in a greater stretch",
+      "explanation": "Οι 3 από τους 4 οπίσθιους μηριαίους διασχίζουν τόσο το ισχίο όσο και το γόνατο. Η κάμψη του ισχίου στο Seated Leg Curl τους φέρνει σε μεγαλύτερη διάταση, αυξάνοντας τη Stretch-Mediated Hypertrophy.",
+      "explanation_en": "Three of the four hamstring muscles cross both the hip and knee. Hip flexion in the Seated Leg Curl stretches them further, enhancing stretch-mediated hypertrophy."
     },
     {
       "category": "📐 Εμβιομηχανική (Biomechanics)",
+      "category_en": "📐 Biomechanics",
       "tags": ["biomechanics"],
       "q": "Ποια θέση του βραχίονα μεγιστοποιεί τη διάταση της μακράς κεφαλής του τρικεφάλου (Long Head);",
+      "q_en": "Which upper-arm position maximizes stretch on the Long Head of the triceps?",
       "options": [
         "Ανύψωση του βραχίονα πάνω από το κεφάλι (Shoulder Flexion, π.χ. Overhead Extension)",
         "Κολλημένος ο αγκώνας στα πλευρά με υπερέκταση ώμου",
         "Οριζόντια απαγωγή του ώμου στις 90°",
         "Πλήρης κάμψη του καρπού"
       ],
+      "options_en": [
+        "Arm elevated overhead (Shoulder Flexion, e.g., Overhead Extension)",
+        "Elbow pinned to the torso with shoulder hyperextension",
+        "Horizontal shoulder abduction at 90°",
+        "Full wrist flexion"
+      ],
       "answer": "Ανύψωση του βραχίονα πάνω από το κεφάλι (Shoulder Flexion, π.χ. Overhead Extension)",
-      "explanation": "Η μακρά κεφαλή του τρικεφάλου εκφύεται από την ωμοπλάτη (υπογλήνιο φύμα), άρα διατείνεται πλήρως μόνο όταν ο ώμος βρίσκεται σε κάμψη πάνω από το κεφάλι."
+      "answer_en": "Arm elevated overhead (Shoulder Flexion, e.g., Overhead Extension)",
+      "explanation": "Η μακρά κεφαλή του τρικεφάλου εκφύεται από την ωμοπλάτη (υπογλήνιο φύμα), άρα διατείνεται πλήρως μόνο όταν ο ώμος βρίσκεται σε κάμψη πάνω από το κεφάλι.",
+      "explanation_en": "The triceps long head originates on the scapula (infraglenoid tubercle), so it reaches full stretch only when the shoulder is flexed overhead."
     },
     {
       "category": "📐 Εμβιομηχανική (Biomechanics)",
+      "category_en": "📐 Biomechanics",
       "tags": ["biomechanics"],
       "q": "Πώς διαφοροποιείται η κλίση 30° έναντι 45°–60° στον επικλινή πάγκο (Incline Press);",
+      "q_en": "How does a 30° bench angle compare to 45°–60° on the Incline Press?",
       "options": [
         "Στις 30° μεγιστοποιείται η ενεργοποίηση της κλειδικής μοίρας του στήθους χωρίς να κυριαρχεί ο πρόσθιος δελτοειδής",
         "Στις 60° απομονώνεται 100% το κάτω μέρος του στήθους",
         "Δεν υπάρχει καμία διαφορά στην ενεργοποίηση των μυών",
         "Στις 30° δουλεύουν μόνο οι τρικέφαλοι"
       ],
+      "options_en": [
+        "30° maximizes clavicular (upper) chest activation without excessive front delt takeover",
+        "60° isolates 100% of the lower chest",
+        "There is no difference in muscle recruitment",
+        "30° works only the triceps"
+      ],
       "answer": "Στις 30° μεγιστοποιείται η ενεργοποίηση της κλειδικής μοίρας του στήθους χωρίς να κυριαρχεί ο πρόσθιος δελτοειδής",
-      "explanation": "Ηλεκτρομυογραφικές (EMG) μελέτες δείχνουν ότι η κλίση ~30° βελτιστοποιεί το άνω στήθος, ενώ πάνω από 45° η επιβάρυνση μεταφέρεται έντονα στον πρόσθιο δελτοειδή."
+      "answer_en": "30° maximizes clavicular (upper) chest activation without excessive front delt takeover",
+      "explanation": "Ηλεκτρομυογραφικές (EMG) μελέτες δείχνουν ότι η κλίση ~30° βελτιστοποιεί το άνω στήθος, ενώ πάνω από 45° η επιβάρυνση μεταφέρεται έντονα στον πρόσθιο δελτοειδή.",
+      "explanation_en": "EMG research shows a ~30° incline optimizes upper pec activation, whereas angles above 45° shift load heavily toward the anterior deltoid."
     },
     {
       "category": "🦴 Ανατομία (Anatomy)",
+      "category_en": "🦴 Anatomy",
       "tags": ["anatomy"],
       "q": "Ποιος μυς βρίσκεται κάτω από τον δικέφαλο βραχιόνιο, τον ωθεί προς τα έξω αυξάνοντας τον όγκο του βραχίονα και ενεργοποιείται μέγιστα με ουδέτερη λαβή (Hammer Curls);",
+      "q_en": "Which muscle lies underneath the biceps brachii, pushes it outward to add arm thickness, and peaks with a neutral grip (Hammer Curls)?",
       "options": [
         "Ο Βραχιόνιος (Brachialis)",
         "Ο Υπακάνθιος (Infraspinatus)",
         "Ο Πρόσθιος Οδοντωτός (Serratus Anterior)",
         "Ο Υποκλείδιος (Subclavius)"
       ],
+      "options_en": [
+        "Brachialis",
+        "Infraspinatus",
+        "Serratus Anterior",
+        "Subclavius"
+      ],
       "answer": "Ο Βραχιόνιος (Brachialis)",
-      "explanation": "Ο Brachialis καταφύεται στην ωλένη (όχι στην κερκίδα), οπότε δεν επηρεάζεται από τον υπτιασμό/πρηνισμό και παράγει καθαρή κάμψη αγκώνα σε ουδέτερη λαβή."
+      "answer_en": "Brachialis",
+      "explanation": "Ο Brachialis καταφύεται στην ωλένη (όχι στην κερκίδα), οπότε δεν επηρεάζεται από τον υπτιασμό/πρηνισμό και παράγει καθαρή κάμψη αγκώνα σε ουδέτερη λαβή.",
+      "explanation_en": "The brachialis inserts on the ulna rather than the radius, making it unaffected by forearm rotation and a pure elbow flexor in a neutral grip."
     },
     {
       "category": "🦴 Ανατομία (Anatomy)",
+      "category_en": "🦴 Anatomy",
       "tags": ["anatomy"],
       "q": "Ποια είναι η κύρια ανατομική διαφορά ανάμεσα στον Γαστροκνήμιο (Gastrocnemius) και τον Υποκνημίδιο (Soleus);",
+      "q_en": "What is the key anatomical difference between the Gastrocnemius and the Soleus?",
       "options": [
         "Ο Γαστροκνήμιος διασχίζει το γόνατο (άρα απαιτεί τεντωμένο γόνατο), ενώ ο Υποκνημίδιος όχι",
         "Ο Υποκνημίδιος βρίσκεται στο μπροστινό μέρος της κνήμης",
         "Ο Γαστροκνήμιος αποτελείται 100% από βραδείας συστολής ίνες",
         "Ο Υποκνημίδιος ενεργοποιείται μόνο στο τρέξιμο σπριντ"
       ],
+      "options_en": [
+        "Gastrocnemius crosses the knee (requiring a straight knee), while Soleus does not",
+        "Soleus is located on the front of the shin",
+        "Gastrocnemius is 100% slow-twitch fibers",
+        "Soleus activates only during sprint running"
+      ],
       "answer": "Ο Γαστροκνήμιος διασχίζει το γόνατο (άρα απαιτεί τεντωμένο γόνατο), ενώ ο Υποκνημίδιος όχι",
-      "explanation": "Όταν το γόνατο είναι λυγισμένο (Seated Calf Raise), ο γαστροκνήμιος χαλαρώνει μηχανικά (active insufficiency) και τη δουλειά αναλαμβάνει ο υποκνημίδιος."
+      "answer_en": "Gastrocnemius crosses the knee (requiring a straight knee), while Soleus does not",
+      "explanation": "Όταν το γόνατο είναι λυγισμένο (Seated Calf Raise), ο γαστροκνήμιος χαλαρώνει μηχανικά (active insufficiency) και τη δουλειά αναλαμβάνει ο υποκνημίδιος.",
+      "explanation_en": "When the knee is bent (Seated Calf Raise), the gastrocnemius enters active insufficiency and the soleus takes over the workload."
     },
     {
       "category": "🦴 Ανατομία (Anatomy)",
+      "category_en": "🦴 Anatomy",
       "tags": ["anatomy"],
       "q": "Ποια είναι η κύρια λειτουργία του Πλατύ Ραχιαίου (Latissimus Dorsi);",
+      "q_en": "What is the primary joint function of the Latissimus Dorsi?",
       "options": [
         "Προσαγωγή, έκταση και έσω στροφή του βραχιονίου",
         "Έκταση του γόνατος και ραχιαία κάμψη του άκρου ποδός",
         "Απαγωγή του ώμου πάνω από τις 90°",
         "Κάμψη του αγκώνα σε υπτιασμό"
       ],
+      "options_en": [
+        "Adduction, extension, and internal rotation of the humerus",
+        "Knee extension and ankle dorsiflexion",
+        "Shoulder abduction above 90°",
+        "Supinated elbow flexion"
+      ],
       "answer": "Προσαγωγή, έκταση και έσω στροφή του βραχιονίου",
-      "explanation": "Τα Lat Pulldowns στοχεύουν την προσαγωγή στο μετωπιαίο επίπεδο (άνω μοίρα Lats), ενώ τα στενά κωπηλατικά στοχεύουν την έκταση ώμου (κάτω μοίρα Lats)."
+      "answer_en": "Adduction, extension, and internal rotation of the humerus",
+      "explanation": "Τα Lat Pulldowns στοχεύουν την προσαγωγή στο μετωπιαίο επίπεδο (άνω μοίρα Lats), ενώ τα στενά κωπηλατικά στοχεύουν την έκταση ώμου (κάτω μοίρα Lats).",
+      "explanation_en": "Lat Pulldowns target frontal-plane adduction (upper lats), whereas close-grip rows target sagittal shoulder extension (lower lats)."
     },
     {
       "category": "🦴 Ανατομία (Anatomy)",
+      "category_en": "🦴 Anatomy",
       "tags": ["anatomy"],
       "q": "Ποιος μυς από τους 4 του Τετρακεφάλου διασχίζει και την άρθρωση του ισχίου (δίαρθρος μυς);",
+      "q_en": "Which of the four quadriceps muscles also crosses the hip joint (biarticular muscle)?",
       "options": [
         "Ο Ορθός Μηριαίος (Rectus Femoris)",
         "Ο Έξω Πλατύς (Vastus Lateralis)",
         "Ο Έσω Πλατύς (Vastus Medialis)",
         "Ο Μέσος Πλατύς (Vastus Intermedius)"
       ],
+      "options_en": [
+        "Rectus Femoris",
+        "Vastus Lateralis",
+        "Vastus Medialis",
+        "Vastus Intermedius"
+      ],
       "answer": "Ο Ορθός Μηριαίος (Rectus Femoris)",
-      "explanation": "Επειδή ο Rectus Femoris εκφύεται από τη λεκάνη, συμμετέχει και στην κάμψη του ισχίου — γι' αυτό αναπτύσσεται πολύ περισσότερο στα Leg Extensions απ' ό,τι στα Squats."
+      "answer_en": "Rectus Femoris",
+      "explanation": "Επειδή ο Rectus Femoris εκφύεται από τη λεκάνη, συμμετέχει και στην κάμψη του ισχίου — γι' αυτό αναπτύσσεται πολύ περισσότερο στα Leg Extensions απ' ό,τι στα Squats.",
+      "explanation_en": "Because the Rectus Femoris originates on the pelvis, it assists in hip flexion—which is why it grows substantially more from Leg Extensions than Squats alone."
     },
     {
       "category": "🦴 Ανατομία (Anatomy)",
+      "category_en": "🦴 Anatomy",
       "tags": ["anatomy"],
       "q": "Ποιοι μύες αποτελούν το στροφικό πέταλο (Rotator Cuff) του ώμου;",
+      "q_en": "Which four muscles make up the shoulder's Rotator Cuff?",
       "options": [
         "Υπερακάνθιος, Υπακάνθιος, Ελάσσων Στρογγύλος, Υποπλάτιος (SITS)",
         "Μείζων Θωρακικός, Ελάσσων Θωρακικός, Δελτοειδής, Τραπεζοειδής",
         "Δικέφαλος, Τρικέφαλος, Βραχιόνιος, Βραχιονοκερκιδικός",
         "Ρομβοειδείς, Ανελκτήρας Ωμοπλάτης, Πλατύς Ραχιαίος, Οδοντωτός"
       ],
+      "options_en": [
+        "Supraspinatus, Infraspinatus, Teres Minor, Subscapularis (SITS)",
+        "Pectoralis Major, Pectoralis Minor, Deltoid, Trapezius",
+        "Biceps, Triceps, Brachialis, Brachioradialis",
+        "Rhomboids, Levator Scapulae, Latissimus Dorsi, Serratus"
+      ],
       "answer": "Υπερακάνθιος, Υπακάνθιος, Ελάσσων Στρογγύλος, Υποπλάτιος (SITS)",
-      "explanation": "Οι 4 μύες SITS (Supraspinatus, Infraspinatus, Teres Minor, Subscapularis) σταθεροποιούν δυναμικά την κεφαλή του βραχιονίου μέσα στην ωμογλήνη."
+      "answer_en": "Supraspinatus, Infraspinatus, Teres Minor, Subscapularis (SITS)",
+      "explanation": "Οι 4 μύες SITS (Supraspinatus, Infraspinatus, Teres Minor, Subscapularis) σταθεροποιούν δυναμικά την κεφαλή του βραχιονίου μέσα στην ωμογλήνη.",
+      "explanation_en": "The four SITS muscles dynamically center and stabilize the humeral head within the glenoid fossa."
     },
     {
       "category": "🏎️ HYROX & Race Strategy",
+      "category_en": "🏎️ HYROX & Race Strategy",
       "tags": ["hyrox"],
       "q": "Ποια είναι η συνολική απόσταση τρεξίματος σε έναν επίσημο αγώνα HYROX;",
+      "q_en": "What is the total running distance in an official HYROX race?",
       "options": [
         "8 km (8 γύροι × 1.000 m ανάμεσα στους 8 σταθμούς)",
         "5 km (5 γύροι × 1.000 m)",
         "10 km (10 γύροι × 1.000 m)",
         "12 km (8 γύροι × 1.500 m)"
       ],
+      "options_en": [
+        "8 km (8 laps × 1,000 m between the 8 workout stations)",
+        "5 km (5 laps × 1,000 m)",
+        "10 km (10 laps × 1,000 m)",
+        "12 km (8 laps × 1,500 m)"
+      ],
       "answer": "8 km (8 γύροι × 1.000 m ανάμεσα στους 8 σταθμούς)",
-      "explanation": "Κάθε αγώνας HYROX ακολουθεί τη σταθερή δομή: 1 km Run + 1 Workout Station, επαναλαμβανόμενη 8 φορές (8 km συνολικό τρέξιμο)."
+      "answer_en": "8 km (8 laps × 1,000 m between the 8 workout stations)",
+      "explanation": "Κάθε αγώνας HYROX ακολουθεί τη σταθερή δομή: 1 km Run + 1 Workout Station, επαναλαμβανόμενη 8 φορές (8 km συνολικό τρέξιμο).",
+      "explanation_en": "Every HYROX race follows the exact format: 1 km Run + 1 Workout Station repeated 8 times (8 km total running)."
     },
     {
       "category": "🏎️ HYROX & Race Strategy",
+      "category_en": "🏎️ HYROX & Race Strategy",
       "tags": ["hyrox"],
       "q": "Ποιος είναι ο 8ος και τελευταίος σταθμός σε έναν αγώνα HYROX;",
+      "q_en": "What is the 8th and final workout station in a HYROX race?",
       "options": [
         "100 Wall Balls",
         "1.000 m SkiErg",
         "50 m Sled Push",
         "200 m Farmers Carry"
       ],
+      "options_en": [
+        "100 Wall Balls",
+        "1,000 m SkiErg",
+        "50 m Sled Push",
+        "200 m Farmers Carry"
+      ],
       "answer": "100 Wall Balls",
-      "explanation": "Η σειρά των 8 σταθμών HYROX είναι: 1. SkiErg, 2. Sled Push, 3. Sled Pull, 4. Burpee Broad Jumps, 5. RowErg, 6. Farmers Carry, 7. Sandbag Lunges, 8. Wall Balls."
+      "answer_en": "100 Wall Balls",
+      "explanation": "Η σειρά των 8 σταθμών HYROX είναι: 1. SkiErg, 2. Sled Push, 3. Sled Pull, 4. Burpee Broad Jumps, 5. RowErg, 6. Farmers Carry, 7. Sandbag Lunges, 8. Wall Balls.",
+      "explanation_en": "The official HYROX station order is: 1. SkiErg, 2. Sled Push, 3. Sled Pull, 4. Burpee Broad Jumps, 5. RowErg, 6. Farmers Carry, 7. Sandbag Lunges, 8. Wall Balls."
     },
     {
       "category": "🏎️ HYROX & Race Strategy",
+      "category_en": "🏎️ HYROX & Race Strategy",
       "tags": ["hyrox", "running"],
       "q": "Ποιο είναι το μεγαλύτερο τακτικό λάθος στον 1ο γύρο τρεξίματος (1.000 m) του HYROX;",
+      "q_en": "What is the most common pacing mistake during Run 1 (1,000 m) of a HYROX race?",
       "options": [
         "Να ξεκινήσεις 15–20 δευτερόλεπτα/km ταχύτερα από τον ρυθμό-στόχο λόγω αδρεναλίνης",
         "Να κρατήσεις σταθερό ρυθμό κατωφλίου (LT2)",
         "Να αναπνέεις ρυθμικά πριν το SkiErg",
         "Να μπεις στο SkiErg με ελεγχόμενο stroke rate"
       ],
+      "options_en": [
+        "Starting 15–20 sec/km faster than target pace due to adrenaline",
+        "Holding a steady lactate threshold (LT2) pace",
+        "Controlling breathing rhythm before the SkiErg",
+        "Entering the SkiErg at a sustainable stroke rate"
+      ],
       "answer": "Να ξεκινήσεις 15–20 δευτερόλεπτα/km ταχύτερα από τον ρυθμό-στόχο λόγω αδρεναλίνης",
-      "explanation": "Ένα υπερβολικά γρήγορο 1ο χιλιόμετρο εκτοξεύει το γαλακτικό οξύ πριν καν φτάσεις στα βαριά Sleds (σταθμοί 2 & 3), καταστρέφοντας τους επόμενους 6 γύρους."
+      "answer_en": "Starting 15–20 sec/km faster than target pace due to adrenaline",
+      "explanation": "Ένα υπερβολικά γρήγορο 1ο χιλιόμετρο εκτοξεύει το γαλακτικό οξύ πριν καν φτάσεις στα βαριά Sleds (σταθμοί 2 & 3), καταστρέφοντας τους επόμενους 6 γύρους.",
+      "explanation_en": "An overly aggressive Run 1 spikes blood lactate before you even reach the heavy Sleds (Stations 2 & 3), sabotaging the remaining 6 rounds."
     },
     {
       "category": "🏎️ HYROX & Race Strategy",
+      "category_en": "🏎️ HYROX & Race Strategy",
       "tags": ["hyrox"],
       "q": "Τι είναι το «Roxzone» στον αγώνα HYROX;",
+      "q_en": "What is the 'Roxzone' in a HYROX event?",
       "options": [
         "Η ζώνη μετάβασης εισόδου/εξόδου από την πίστα τρεξίματος προς κάθε σταθμό",
         "Η ζώνη αποθεραπείας μετά τον τερματισμό",
         "Το σημείο ανεφοδιασμού ηλεκτρολυτών εκτός σταδίου",
         "Η κατηγορία σκυταλοδρομίας 4 ατόμων"
       ],
+      "options_en": [
+        "The transition zone connecting the running track to each workout station",
+        "The post-finish recovery lounge",
+        "An outdoor electrolyte station",
+        "The 4-person relay division"
+      ],
       "answer": "Η ζώνη μετάβασης εισόδου/εξόδου από την πίστα τρεξίματος προς κάθε σταθμό",
-      "explanation": "Το Roxzone προσμετράται κανονικά στον συνολικό χρόνο τερματισμού (συνήθως 4–7 λεπτά). Ο καθαρός προσανατολισμός χωρίς περιττά περπατήματα γλιτώνει 1–2 λεπτά."
+      "answer_en": "The transition zone connecting the running track to each workout station",
+      "explanation": "Το Roxzone προσμετράται κανονικά στον συνολικό χρόνο τερματισμού (συνήθως 4–7 λεπτά). Ο καθαρός προσανατολισμός χωρίς περιττά περπατήματα γλιτώνει 1–2 λεπτά.",
+      "explanation_en": "Roxzone time counts toward your official finish time (typically 4–7 minutes). Knowing station entrances/exits saves 1–2 minutes effortlessly."
     },
     {
       "category": "🏎️ HYROX & Race Strategy",
+      "category_en": "🏎️ HYROX & Race Strategy",
       "tags": ["hyrox"],
       "q": "Ποια είναι η βέλτιστη τεχνική στο Sled Push (50 m) για εξοικονόμηση ενέργειας;",
+      "q_en": "What is the most energy-efficient technique for the 50 m Sled Push?",
       "options": [
         "Κοντά, γρήγορα βήματα με κλειδωμένους αγκώνες ή ώμους κολλημένους στους στύλους και χαμηλό κέντρο βάρους",
         "Μεγάλα άλματα και λυγισμένα χέρια που πιέζουν σαν πάγκο",
         "Περπάτημα στις μύτες των ποδιών με όρθιο κορμό",
         "Διακοπή κάθε 5 μέτρα για βαθιές ανάσες"
       ],
+      "options_en": [
+        "Short, quick steps with locked arms or shoulders against the poles and a low center of gravity",
+        "Long bounding strides while bench-pressing the poles",
+        "Walking upright on tiptoes",
+        "Stopping every 5 meters for deep breaths"
+      ],
       "answer": "Κοντά, γρήγορα βήματα με κλειδωμένους αγκώνες ή ώμους κολλημένους στους στύλους και χαμηλό κέντρο βάρους",
-      "explanation": "Αν σταματήσει το έλκηθρο, απαιτείται τεράστια δύναμη για να υπερνικηθεί η στατική τριβή. Η συνεχής ορμή με κοντά βήματα κρατά τη δυναμική τριβή χαμηλότερη."
+      "answer_en": "Short, quick steps with locked arms or shoulders against the poles and a low center of gravity",
+      "explanation": "Αν σταματήσει το έλκηθρο, απαιτείται τεράστια δύναμη για να υπερνικηθεί η στατική τριβή. Η συνεχής ορμή με κοντά βήματα κρατά τη δυναμική τριβή χαμηλότερη.",
+      "explanation_en": "Stopping the sled forces you to overcome static friction repeatedly. Continuous momentum with short steps keeps kinetic friction lower."
     },
     {
       "category": "🏎️ HYROX & Race Strategy",
+      "category_en": "🏎️ HYROX & Race Strategy",
       "tags": ["hyrox", "running"],
       "q": "Τι σημαίνει «Compromised Running» στην προετοιμασία HYROX;",
+      "q_en": "What does 'Compromised Running' mean in HYROX training?",
       "options": [
         "Τρέξιμο αμέσως μετά από έντονη μυϊκή κόπωση ποδιών (π.χ. Sled Push ή Wall Balls)",
         "Τρέξιμο με τραυματισμό στον αστράγαλο",
         "Τρέξιμο αποκλειστικά σε κατηφόρα",
         "Τρέξιμο νηστικός το πρωί"
       ],
+      "options_en": [
+        "Running immediately after heavy leg fatigue (e.g., Sled Push or Wall Balls)",
+        "Running with an ankle sprain",
+        "Downhill-only running",
+        "Fasted morning jogging"
+      ],
       "answer": "Τρέξιμο αμέσως μετά από έντονη μυϊκή κόπωση ποδιών (π.χ. Sled Push ή Wall Balls)",
-      "explanation": "Στο HYROX όλα τα 8 χιλιόμετρα τρέχονται με συσσωρευμένο γαλακτικό οξύ από τους σταθμούς. Τα Brick/Compromised runs εκπαιδεύουν το σώμα να απομακρύνει το γαλακτικό ενώ τρέχει."
+      "answer_en": "Running immediately after heavy leg fatigue (e.g., Sled Push or Wall Balls)",
+      "explanation": "Στο HYROX όλα τα 8 χιλιόμετρα τρέχονται με συσσωρευμένο γαλακτικό οξύ από τους σταθμούς. Τα Brick/Compromised runs εκπαιδεύουν το σώμα να απομακρύνει το γαλακτικό ενώ τρέχει.",
+      "explanation_en": "In HYROX, all 8 km are run under heavy lactate load from the stations. Compromised runs train your body to clear lactate while maintaining running economy."
     },
     {
       "category": "🏃 Φυσιολογία Τρεξίματος (Running)",
+      "category_en": "🏃 Running Physiology",
       "tags": ["running"],
       "q": "Ποια είναι η κύρια φυσιολογική προσαρμογή της προπόνησης στη Zone 2 (60–70% HRmax);",
+      "q_en": "What is the primary physiological adaptation of Zone 2 training (60–70% HRmax)?",
       "options": [
         "Αύξηση μιτοχονδριακής πυκνότητας, τριχοειδών αγγείων και οξείδωσης λιπαρών οξέων",
         "Μέγιστη παραγωγή αναερόβιας γλυκόλυσης και γαλακτικού",
         "Υπερτροφία των ινών ταχείας συστολής Type IIx",
         "Μείωση του όγκου παλμού της καρδιάς"
       ],
+      "options_en": [
+        "Increased mitochondrial density, capillarization, and fat oxidation",
+        "Peak anaerobic glycolysis and lactate accumulation",
+        "Hypertrophy of fast-twitch Type IIx fibers",
+        "Reduced cardiac stroke volume"
+      ],
       "answer": "Αύξηση μιτοχονδριακής πυκνότητας, τριχοειδών αγγείων και οξείδωσης λιπαρών οξέων",
-      "explanation": "Η Zone 2 χτίζει τη «μηχανή» αερόβιας παραγωγής ATP χωρίς να επιβαρύνει το ΚΝΣ, επιτρέποντας υψηλό εβδομαδιαίο όγκο (κανόνας 80/20)."
+      "answer_en": "Increased mitochondrial density, capillarization, and fat oxidation",
+      "explanation": "Η Zone 2 χτίζει τη «μηχανή» αερόβιας παραγωγής ATP χωρίς να επιβαρύνει το ΚΝΣ, επιτρέποντας υψηλό εβδομαδιαίο όγκο (κανόνας 80/20).",
+      "explanation_en": "Zone 2 builds your aerobic ATP engine without taxing the CNS, allowing high weekly mileage under the 80/20 polarized model."
     },
     {
       "category": "🏃 Φυσιολογία Τρεξίματος (Running)",
+      "category_en": "🏃 Running Physiology",
       "tags": ["running"],
       "q": "Τι εκφράζει το LT2 (Lactate Threshold 2 / Αναερόβιο Κατώφλι);",
+      "q_en": "What does LT2 (Lactate Threshold 2) represent?",
       "options": [
         "Τη μέγιστη ένταση όπου ο ρυθμός παραγωγής γαλακτικού ισορροπεί με τον ρυθμό απομάκρυνσής του",
         "Τον καρδιακό ρυθμό ηρεμίας το πρωί",
         "Την ταχύτητα μέγιστου σπριντ 100 μέτρων",
         "Το σημείο όπου μηδενίζεται η κατανάλωση οξυγόνου"
       ],
+      "options_en": [
+        "The highest intensity where lactate production balances lactate clearance",
+        "Morning resting heart rate",
+        "100 m all-out sprint velocity",
+        "The point where oxygen consumption stops"
+      ],
       "answer": "Τη μέγιστη ένταση όπου ο ρυθμός παραγωγής γαλακτικού ισορροπεί με τον ρυθμό απομάκρυνσής του",
-      "explanation": "Πάνω από το LT2 (περίπου ο ρυθμός αγώνα 10K ή 60 λεπτών max), το γαλακτικό οξύ και τα ιόντα υδρογόνου συσσωρεύονται εκθετικά οδηγώντας γρήγορα σε κόπωση."
+      "answer_en": "The highest intensity where lactate production balances lactate clearance",
+      "explanation": "Πάνω από το LT2 (περίπου ο ρυθμός αγώνα 10K ή 60 λεπτών max), το γαλακτικό οξύ και τα ιόντα υδρογόνου συσσωρεύονται εκθετικά οδηγώντας γρήγορα σε κόπωση.",
+      "explanation_en": "Above LT2 (roughly 10K race pace or 60-min max effort), blood lactate and hydrogen ions accumulate exponentially, causing rapid fatigue."
     },
     {
       "category": "🏃 Φυσιολογία Τρεξίματος (Running)",
+      "category_en": "🏃 Running Physiology",
       "tags": ["running"],
       "q": "Ποιος είναι ο μαθηματικός τύπος του Riegel για την πρόβλεψη χρόνου αγώνα από μια γνωστή επίδοση;",
+      "q_en": "What is Pete Riegel's race time prediction formula from a known benchmark?",
       "options": [
         "T2 = T1 × (D2 / D1)^1.06",
         "T2 = T1 × (D1 / D2)^2",
         "T2 = T1 + (D2 - D1) × 10",
         "T2 = (T1 × D2) / 100"
       ],
+      "options_en": [
+        "T2 = T1 × (D2 / D1)^1.06",
+        "T2 = T1 × (D1 / D2)^2",
+        "T2 = T1 + (D2 - D1) × 10",
+        "T2 = (T1 × D2) / 100"
+      ],
       "answer": "T2 = T1 × (D2 / D1)^1.06",
-      "explanation": "Ο εκθέτης κόπωσης 1.06 του Pete Riegel προβλέπει πόσο επιβραδύνεται ο ρυθμός καθώς αυξάνεται η απόσταση από D1 σε D2."
+      "answer_en": "T2 = T1 × (D2 / D1)^1.06",
+      "explanation": "Ο εκθέτης κόπωσης 1.06 του Pete Riegel προβλέπει πόσο επιβραδύνεται ο ρυθμός καθώς αυξάνεται η απόσταση από D1 σε D2.",
+      "explanation_en": "Pete Riegel's 1.06 fatigue exponent models the natural slowdown in pace as race distance scales from D1 to D2."
     },
     {
       "category": "🏃 Φυσιολογία Τρεξίματος (Running)",
+      "category_en": "🏃 Running Physiology",
       "tags": ["running"],
       "q": "Πώς επηρεάζει η αύξηση του Cadence (βημάτων/λεπτό) γύρω στα 170–180 spm τη δρομική οικονομία;",
+      "q_en": "How does increasing running cadence toward ~170–180 spm improve running economy?",
       "options": [
         "Μειώνει το overstriding (φρενάρισμα στην προσγείωση) και τις κατακόρυφες δυνάμεις πρόσκρουσης",
         "Αυξάνει τον χρόνο επαφής με το έδαφος κατά 50%",
         "Επιβαρύνει περισσότερο τα γόνατα και τα ισχία",
         "Μειώνει την αξιοποίηση της ελαστικής ενέργειας του αχίλλειου τένοντα"
       ],
+      "options_en": [
+        "Reduces overstriding (braking forces) and vertical impact loading",
+        "Increases ground contact time by 50%",
+        "Places higher stress on knees and hips",
+        "Decreases elastic energy recoil from the Achilles tendon"
+      ],
       "answer": "Μειώνει το overstriding (φρενάρισμα στην προσγείωση) και τις κατακόρυφες δυνάμεις πρόσκρουσης",
-      "explanation": "Ένα ελαφρώς υψηλότερο cadence φέρνει το σημείο προσγείωσης πιο κοντά στο κέντρο μάζας του σώματος, βελτιώνοντας την ελαστική επαναφορά (stretch-shortening cycle)."
+      "answer_en": "Reduces overstriding (braking forces) and vertical impact loading",
+      "explanation": "Ένα ελαφρώς υψηλότερο cadence φέρνει το σημείο προσγείωσης πιο κοντά στο κέντρο μάζας του σώματος, βελτιώνοντας την ελαστική επαναφορά (stretch-shortening cycle).",
+      "explanation_en": "A slightly higher step rate brings foot strike closer to your center of mass, enhancing elastic energy return via the stretch-shortening cycle."
     },
     {
       "category": "🥗 Αθλητική Διατροφή & Ανάρρωση (Nutrition)",
+      "category_en": "🥗 Sports Nutrition & Recovery",
       "tags": ["hypertrophy", "running", "hyrox"],
       "q": "Γιατί ο συνδυασμός υδατανθράκων και πρωτεΐνης μετά από έντονη προπόνηση επιταχύνει την ανάρρωση;",
+      "q_en": "Why does combining carbohydrates and protein post-workout accelerate recovery?",
       "options": [
         "Αναπληρώνει το μυϊκό γλυκογόνο και η ινσουλίνη μειώνει τη μυϊκή πρωτεϊνόλυση",
         "Μπλοκάρει την απορρόφηση των αμινοξέων",
         "Μετατρέπει όλη την πρωτεΐνη σε σωματικό λίπος",
         "Μειώνει την ενυδάτωση των μυϊκών κυττάρων"
       ],
+      "options_en": [
+        "Replenishes muscle glycogen while insulin suppresses muscle protein breakdown",
+        "Blocks amino acid absorption",
+        "Converts all dietary protein into body fat",
+        "Dehydrates muscle cells"
+      ],
       "answer": "Αναπληρώνει το μυϊκό γλυκογόνο και η ινσουλίνη μειώνει τη μυϊκή πρωτεϊνόλυση",
-      "explanation": "Οι υδατάνθρακες επαναφορτίζουν τα αποθέματα γλυκογόνου (κρίσιμο ειδικά για διπλές προπονήσεις ή HYROX), ενώ η ινσουλίνη δρα αντικαταβολικά."
+      "answer_en": "Replenishes muscle glycogen while insulin suppresses muscle protein breakdown",
+      "explanation": "Οι υδατάνθρακες επαναφορτίζουν τα αποθέματα γλυκογόνου (κρίσιμο ειδικά για διπλές προπονήσεις ή HYROX), ενώ η ινσουλίνη δρα αντικαταβολικά.",
+      "explanation_en": "Carbohydrates restore depleted glycogen stores (critical for two-a-days or HYROX), while insulin exerts an anti-catabolic effect."
     },
     {
       "category": "🥗 Αθλητική Διατροφή & Ανάρρωση (Nutrition)",
+      "category_en": "🥗 Sports Nutrition & Recovery",
       "tags": ["hypertrophy", "hyrox"],
       "q": "Πώς δρα η μονοϋδρική κρεατίνη (3–5g ημερησίως) στην απόδοση υψηλής έντασης;",
+      "q_en": "How does Creatine Monohydrate (3–5g daily) enhance high-intensity performance?",
       "options": [
         "Αυξάνει τα αποθέματα φωσφοκρεατίνης (PCr) στους μύες για ταχύτερη ανασύνθεση ATP",
         "Λειτουργεί ως διεγερτικό του ΚΝΣ όπως η καφεΐνη",
         "Προκαλεί κατακράτηση νερού αποκλειστικά κάτω από το δέρμα",
         "Καταστρέφει τα νεφρά σε υγιείς αθλούμενους"
       ],
+      "options_en": [
+        "Increases intramuscular phosphocreatine (PCr) stores for faster ATP resynthesis",
+        "Acts as a central nervous system stimulant like caffeine",
+        "Causes subcutaneous water retention under the skin",
+        "Damages kidneys in healthy athletes"
+      ],
       "answer": "Αυξάνει τα αποθέματα φωσφοκρεατίνης (PCr) στους μύες για ταχύτερη ανασύνθεση ATP",
-      "explanation": "Περισσότερη φωσφοκρεατίνη σημαίνει 1–2 επιπλέον επαναλήψεις σε βαριά σετ, αυξημένη ενδοκυττάρια ενυδάτωση και ταχύτερη αποκατάσταση μεταξύ εκρηκτικών προσπαθειών."
+      "answer_en": "Increases intramuscular phosphocreatine (PCr) stores for faster ATP resynthesis",
+      "explanation": "Περισσότερη φωσφοκρεατίνη σημαίνει 1–2 επιπλέον επαναλήψεις σε βαριά σετ, αυξημένη ενδοκυττάρια ενυδάτωση και ταχύτερη αποκατάσταση μεταξύ εκρηκτικών προσπαθειών.",
+      "explanation_en": "Higher phosphocreatine stores yield 1–2 extra reps on heavy sets, boost intracellular cell hydration, and speed recovery between explosive bouts."
     },
     {
       "category": "🥗 Αθλητική Διατροφή & Ανάρρωση (Nutrition)",
+      "category_en": "🥗 Sports Nutrition & Recovery",
       "tags": ["hypertrophy", "running", "hyrox"],
       "q": "Πόσο μπορεί να μειώσει την αερόβια και μυϊκή απόδοση μια αφυδάτωση μόλις 2% του σωματικού βάρους;",
+      "q_en": "How much can a dehydration level of just 2% body weight impair endurance and muscular performance?",
       "options": [
         "Έως και 10–20% πτώση στην αντοχή, τη συγκέντρωση και την παραγωγή ισχύος",
         "Καμία επίδραση κάτω από 10% αφυδάτωση",
         "Αυξάνει την ταχύτητα τρεξίματος λόγω μικρότερου βάρους",
         "Βελτιώνει τη θερμορύθμιση του σώματος"
       ],
+      "options_en": [
+        "Up to a 10–20% drop in endurance, cognitive focus, and power output",
+        "No measurable effect below 10% dehydration",
+        "Increases running speed due to lower body weight",
+        "Improves thermoregulation"
+      ],
       "answer": "Έως και 10–20% πτώση στην αντοχή, τη συγκέντρωση και την παραγωγή ισχύος",
-      "explanation": "Η μείωση του όγκου πλάσματος αυξάνει τους καρδιακούς παλμούς για τον ίδιο ρυθμό (cardiac drift) και επιταχύνει την υπερθέρμανση και την κόπωση."
+      "answer_en": "Up to a 10–20% drop in endurance, cognitive focus, and power output",
+      "explanation": "Η μείωση του όγκου πλάσματος αυξάνει τους καρδιακούς παλμούς για τον ίδιο ρυθμό (cardiac drift) και επιταχύνει την υπερθέρμανση και την κόπωση.",
+      "explanation_en": "Reduced plasma volume elevates heart rate at a given pace (cardiac drift) and accelerates thermal strain and neuromuscular fatigue."
     }
   ]
 }
