@@ -1418,8 +1418,13 @@ with tab3:
             # ==================================================================
             with sub_tab1:
                 days_win = 7 if "7D" in selected_period else (30 if "30D" in selected_period else 0)
-                frac_sets, prof_break, biomech_alerts, _ = analyze_fractional_emg_and_profiles(
-                    history, user_data["exercise_database"], STRENGTH_STANDARDS, days_window=days_win, lang=st.session_state.get("lang", "Ελληνικά")
+               frac_sets, prof_break, biomech_alerts, _ = analyze_fractional_emg_and_profiles(
+                    history,
+                    user_data["exercise_database"],
+                    STRENGTH_STANDARDS,
+                    days_window=days_win,
+                    lang=st.session_state.get("lang", "Ελληνικά"),
+                    only_effective=only_effective
                 )
                 landmarks = STRENGTH_STANDARDS.get("volume_landmarks", {})
                 norm_div = 1.0 if days_win == 7 else (4.3 if days_win == 30 else weeks_divisor)
@@ -1466,12 +1471,13 @@ with tab3:
                     )
 
                 bars = ax_vol.barh(y_pos, m_vals, height=0.52, color=bar_colors, edgecolor="#343a40", alpha=0.92, zorder=3)
+                ax_vol.set_xlim(0, max(30, max(m_vals + [0]) + 6))
                 ax_vol.set_yticks(y_pos)
                 ax_vol.set_yticklabels(m_labels)
-                ax_vol.set_title(t("🧬 Fractional EMG Εβδομαδιαίος Όγκος vs Εξατομικευμένο MEV–MRV", "🧬 Fractional EMG Weekly Volume vs Muscle MEV–MRV"), fontweight="bold")
+                ax_vol.set_title(t("🧬 Fractional EMG Εβδομαδιαίος Όγκος vs Εξατομικευμένο MEV–MRV", "🧬 Fractional EMG Weekly Volume vs Muscle MEV–MRV"), fontweight="bold", pad=26)
                 ax_vol.set_xlabel(t("Σταθμισμένα Σετ / Εβδομάδα", "Weighted Sets / Week"))
                 ax_vol.grid(axis="x", linestyle="--", alpha=0.4)
-                ax_vol.legend(loc="lower right")
+                ax_vol.legend(loc="upper center", bbox_to_anchor=(0.5, 1.12), ncol=3, frameon=False, fontsize=8.5)
                 for idx_b, bar in enumerate(bars):
                     w_val = bar.get_width()
                     lm_b = landmarks.get(m_labels[idx_b], {"mev": 6, "mrv": 20})
@@ -1501,8 +1507,8 @@ with tab3:
                     l_sh = [a + b for a, b in zip(l_mid, mid_p)]
                     ax_rp.barh(trained_m, short_p, left=l_sh, color="#adb5bd", label="Shortened-biased")
                     ax_rp.set_xlim(0, 100)
-                    ax_rp.set_title(t("📐 Resistance Profile Balance ανά Μυϊκή Ομάδα (%)", "📐 Resistance Profile Balance per Muscle (%)"), fontweight="bold")
-                    ax_rp.legend(loc="lower right", ncol=2, fontsize=8)
+                    ax_rp.set_title(t("📐 Resistance Profile Balance ανά Μυϊκή Ομάδα (%)", "📐 Resistance Profile Balance per Muscle (%)"), fontweight="bold", pad=26)
+                    ax_rp.legend(loc="upper center", bbox_to_anchor=(0.5, 1.12), ncol=2, frameon=False, fontsize=8.5)
 
                 plt.tight_layout()
                 st.pyplot(fig1)
