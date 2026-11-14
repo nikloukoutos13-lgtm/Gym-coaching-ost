@@ -45,6 +45,13 @@
         "hr": 160
       },
       {
+        "ex": "Leg Press",
+        "s": 3,
+        "w": 145.0,
+        "r": 12,
+        "rir": 2
+      },
+      {
         "ex": "Flat Dumbbell Chest Press",
         "s": 3,
         "w": 20.0,
@@ -63,14 +70,15 @@
         "s": 3,
         "w": 15.0,
         "r": 10,
-        "rir": 3
+        "rir": 3,
+        "hr": 145
       },
       {
         "ex": "Assault / Echo Bike",
         "s": 3,
         "w": 0.0,
         "r": 20,
-        "rir": 2,
+        "rir": 3,
         "hr": 145
       },
       {
@@ -78,23 +86,23 @@
         "s": 3,
         "w": 17.5,
         "r": 12,
-        "rir": 3
+        "rir": 3,
+        "hr": 145
       },
       {
         "ex": "Assault / Echo Bike",
         "s": 2,
         "w": 0.0,
         "r": 20,
-        "rir": 1,
+        "rir": 0,
         "hr": 145
       },
       {
-        "ex": "Preacher curls",
+        "ex": "Barbell Back Squat",
         "s": 3,
-        "w": 25.0,
-        "r": 8,
-        "rir": 0,
-        "hr": 145
+        "w": 20.0,
+        "r": 12,
+        "rir": 2
       }
     ],
     "Τρίτη": [],
