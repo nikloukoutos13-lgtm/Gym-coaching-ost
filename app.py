@@ -869,9 +869,7 @@ with tab2:
                     save_user_data()
                     st.rerun()
 
-            # --- ΓΡΑΜΜΗ 1 (ΠΑΝΩ): Μυϊκή Ομάδα | Άσκηση | Διαγραφή (❌) ---
-            c_cat, c_ex, col_del = st.columns([2.2, 3.2, 0.7])
-
+           # --- ΓΡΑΜΜΗ 1 (ΠΑΝΩ): Μυϊκή Ομάδα | Άσκηση ---
             if ex_options:
                 all_cats_lbl = t("Όλες οι κατηγορίες", "All Categories")
                 all_muscles = [all_cats_lbl] + sorted(list(set(
@@ -882,6 +880,8 @@ with tab2:
 
                 curr_muscle = ex_info.get("muscle", all_cats_lbl)
                 default_cat_idx = all_muscles.index(curr_muscle) if curr_muscle in all_muscles else 0
+
+                c_cat, c_ex = st.columns(2)
 
                 with c_cat:
                     sel_cat = st.selectbox(
@@ -914,21 +914,14 @@ with tab2:
                     )
                     item["ex"] = new_ex
             else:
-                with c_ex:
-                    st.warning(t("⚠️ Κενή βάση ασκήσεων", "⚠️ Empty exercise database"))
-                    item["ex"] = ex_name
+                st.warning(t("⚠️ Κενή βάση ασκήσεων", "⚠️ Empty exercise database"))
+                item["ex"] = ex_name
 
-            with col_del:
-                st.write("")
-                st.write("")
-                if st.button("❌", key=f"del_{prof_key_id}_{day_selected}_{idx}"):
-                    rows_to_delete.append(idx)
-
-            # Ενημέρωση ex_info/ex_type σε περίπτωση που μόλις άλλαξες άσκηση
+            # Ενημέρωση ex_info/ex_type σε περίπτωση που άλλαξε η άσκηση
             ex_info = user_data["exercise_database"].get(item["ex"], {})
             ex_type = ex_info.get("type", "weight")
 
-            # --- ΓΡΑΜΜΗ 2 (ΚΑΤΩ): Sets | Kg | Reps | RIR ---
+            # --- ΓΡΑΜΜΗ 2 (ΜΕΣΗ): Sets | Kg | Reps | RIR ---
             col_s, col_w, col_r, col_rir = st.columns(4)
 
             with col_s:
@@ -966,8 +959,12 @@ with tab2:
                 pace_m = int(pace_dec)
                 pace_s = int((pace_dec - pace_m) * 60)
                 z_name, z_color = calc_hr_zone(item.get("hr", 145), active_p.get("profile", {}).get("age", 25))
-                
+
                 st.info(f"🏃 **Pace:** {pace_m}:{pace_s:02d} min/km | **Speed:** {60/pace_dec:.1f} km/h | **HR Zone:** <span style='color:{z_color}; font-weight:bold;'>{z_name}</span>", icon="⚡")
+
+            # --- ΓΡΑΜΜΗ 3 (ΚΑΤΩ-ΚΑΤΩ): Αφαίρεση Άσκησης ---
+            if st.button(t("❌ Αφαίρεση Άσκησης", "❌ Remove Exercise"), key=f"del_{prof_key_id}_{day_selected}_{idx}"):
+                rows_to_delete.append(idx)
 
     if rows_to_delete:
         for i in sorted(rows_to_delete, reverse=True):
