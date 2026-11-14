@@ -1286,7 +1286,6 @@ with tab2:
                     new_ex_entry["cardio_mode"] = ce_cardio_mode
 
                 user_data["exercise_database"][ce_name.strip()] = new_ex_entry
-                }
                 save_user_data()
                 st.success(t(f"Η άσκηση '{ce_name.strip()}' προστέθηκε επιτυχώς στη βάση δεδομένων!", f"Exercise '{ce_name.strip()}' added to database!"))
                 st.rerun()
