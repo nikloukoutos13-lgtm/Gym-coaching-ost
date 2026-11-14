@@ -1418,7 +1418,7 @@ with tab3:
             # ==================================================================
             with sub_tab1:
                 days_win = 7 if "7D" in selected_period else (30 if "30D" in selected_period else 0)
-               frac_sets, prof_break, biomech_alerts, _ = analyze_fractional_emg_and_profiles(
+                frac_sets, prof_break, biomech_alerts, _ = analyze_fractional_emg_and_profiles(
                     history,
                     user_data["exercise_database"],
                     STRENGTH_STANDARDS,
