@@ -1,37 +1,17 @@
 {
-  "Noddles με φυστικοβουτυρο και αυγο": {
-    "unit": "piece",
-    "cal": 600.0,
-    "p": 22.0,
-    "c": 55.0,
-    "f": 30.0
-  },
-  "Κοτομπουκιες τεσκο": {
-    "unit": "piece",
-    "cal": 66.3,
-    "p": 3.4,
-    "c": 5.0,
-    "f": 3.53
-  },
-  "Πρωτεϊνη λεμονι": {
-    "unit": "piece",
-    "cal": 90.0,
-    "p": 20.0,
-    "c": 2.3,
-    "f": 0.0
-  },
-  "Πρωτεϊνη mango": {
-    "unit": "piece",
-    "cal": 114.0,
-    "p": 22.0,
-    "c": 2.7,
-    "f": 1.8
-  },
-  "Protein puting": {
-    "unit": "piece",
-    "cal": 161.0,
-    "p": 20.0,
-    "c": 13.4,
-    "f": 3.0
-  }
+  "🌯 Homemade Beef & Cheddar Burrito (1 piece / 1-8 batch)": { "unit": "piece", "cal": 756, "p": 43.9, "c": 59.3, "f": 36.7 },
+  "🍝 Pesto Pasta with Tesco Basted Pork (1 portion / 1-2 pot)": { "unit": "piece", "cal": 890, "p": 41.6, "c": 93.5, "f": 37.2 },
+  "🍜 Peanut Butter & Spicy Ranch Instant Noodles (1 portion / 1-2 batch)": { "unit": "piece", "cal": 687, "p": 15.0, "c": 58.4, "f": 42.5 },
+  "🥗 Cabbage, Carrot, Feta & Sweetcorn Salad (1 portion / 1-2 bowl)": { "unit": "piece", "cal": 358, "p": 11.0, "c": 23.0, "f": 25.2 },
+  "🍳 Baked Tesco Country Potatoes, Basted Pork, Cheddar & Eggs (1 portion / 1-2 tray)": { "unit": "piece", "cal": 838, "p": 54.5, "c": 43.6, "f": 48.0 },
+  "🍨 Tesco Finest Greek Style Yoghurt (10% Fat)": { "unit": "100g", "cal": 133, "p": 5.5, "c": 4.5, "f": 10.2 },
+  "🍗 Whole Roast Chicken (Mixed Meat & Skin) / Ολόκληρο Κοτόπουλο": { "unit": "100g", "cal": 215, "p": 24.0, "c": 0.0, "f": 13.0 },
+  "🌿 Green Pesto Sauce / Σάλτσα Πέστο": { "unit": "100g", "cal": 465, "p": 5.0, "c": 6.5, "f": 46.0 },
+  "🧀 Mature Cheddar Cheese / Τυρί Τσένταρ": { "unit": "100g", "cal": 416, "p": 25.4, "c": 0.1, "f": 34.9 },
+  "🥄 Hellmann's Real Mayonnaise (1 tbsp 15g)": { "unit": "piece", "cal": 103, "p": 0.2, "c": 0.2, "f": 11.0 },
+  "🍺 Guinness / Beamish Draught (1 Pint 568ml)": { "unit": "piece", "cal": 210, "p": 1.9, "c": 18.2, "f": 0.0 },
+  "Κοτομπουκιες τεσκο": { "unit": "piece", "cal": 66.3, "p": 3.4, "c": 5.0, "f": 3.53 },
+  "Πρωτεϊνη λεμονι": { "unit": "piece", "cal": 90.0, "p": 20.0, "c": 2.3, "f": 0.0 },
+  "Πρωτεϊνη mango": { "unit": "piece", "cal": 114.0, "p": 22.0, "c": 2.7, "f": 1.8 },
+  "Protein puting": { "unit": "piece", "cal": 161.0, "p": 20.0, "c": 13.4, "f": 3.0 }
 }
