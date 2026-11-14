@@ -45,13 +45,6 @@
         "hr": 160
       },
       {
-        "ex": "Leg Press",
-        "s": 3,
-        "w": 145.0,
-        "r": 12,
-        "rir": 2
-      },
-      {
         "ex": "Flat Dumbbell Chest Press",
         "s": 3,
         "w": 20.0,
@@ -77,7 +70,8 @@
         "s": 3,
         "w": 0.0,
         "r": 20,
-        "rir": 2
+        "rir": 2,
+        "hr": 145
       },
       {
         "ex": "Triceps Rope Pushdown",
@@ -91,7 +85,8 @@
         "s": 2,
         "w": 0.0,
         "r": 20,
-        "rir": 1
+        "rir": 1,
+        "hr": 145
       },
       {
         "ex": "Preacher curls",
@@ -196,7 +191,7 @@
         "rir": 1
       },
       {
-        "ex": "Seated Cable Row (Κωπηλατική Τροχαλία)",
+        "ex": "Assault / Echo Bike",
         "s": 3,
         "w": 33.0,
         "r": 12,
@@ -224,7 +219,7 @@
         "rir": 0
       },
       {
-        "ex": "Crunches",
+        "ex": "Assault / Echo Bike",
         "s": 2,
         "w": 0.0,
         "r": 20,
