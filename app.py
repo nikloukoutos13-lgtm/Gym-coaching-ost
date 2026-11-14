@@ -917,50 +917,89 @@ with tab2:
                 st.warning(t("⚠️ Κενή βάση ασκήσεων", "⚠️ Empty exercise database"))
                 item["ex"] = ex_name
 
-            # Ενημέρωση ex_info/ex_type σε περίπτωση που άλλαξε η άσκηση
+           # Ενημέρωση ex_info/ex_type σε περίπτωση που άλλαξε η άσκηση
             ex_info = user_data["exercise_database"].get(item["ex"], {})
             ex_type = ex_info.get("type", "weight")
+            c_mode = ex_info.get("cardio_mode", "run")
 
-            # --- ΓΡΑΜΜΗ 2 (ΜΕΣΗ): Sets | Kg | Reps | RIR ---
+            # --- ΓΡΑΜΜΗ 2 (ΜΕΣΗ): Δυναμικά Πεδία ανά Τύπο / Μηχάνημα ---
             col_s, col_w, col_r, col_rir = st.columns(4)
 
-            with col_s:
-                item["s"] = st.number_input("Sets", value=int(item.get("s", 3)), min_value=1, max_value=20, key=f"s_{prof_key_id}_{day_selected}_{idx}")
+            if ex_type == "cardio":
+                with col_s:
+                    item["s"] = 1
+                    if c_mode == "bike":
+                        item["res_level"] = st.number_input("Resistance (1-7)", value=int(item.get("res_level", 4)), min_value=1, max_value=7, step=1, key=f"res_{prof_key_id}_{day_selected}_{idx}")
+                    elif c_mode == "treadmill":
+                        item["incline"] = st.number_input("Incline (%)", value=float(item.get("incline", 1.0)), min_value=0.0, max_value=15.0, step=0.5, key=f"inc_{prof_key_id}_{day_selected}_{idx}")
+                    elif c_mode == "erg":
+                        item["res_level"] = st.number_input("Damper (1-10)", value=int(item.get("res_level", 6)), min_value=1, max_value=10, step=1, key=f"dmp_{prof_key_id}_{day_selected}_{idx}")
+                    elif c_mode == "airbike":
+                        item["watts"] = st.number_input("Avg Watts", value=int(item.get("watts", 200)), min_value=20, max_value=1500, step=10, key=f"wat_{prof_key_id}_{day_selected}_{idx}")
+                    elif c_mode == "stairs":
+                        item["res_level"] = st.number_input("Level (1-20)", value=int(item.get("res_level", 8)), min_value=1, max_value=20, step=1, key=f"lvl_{prof_key_id}_{day_selected}_{idx}")
+                    else:
+                        item["elev_m"] = st.number_input(t("Υψομ. (m)", "Elev. (m)"), value=int(item.get("elev_m", 0)), min_value=0, max_value=3000, step=10, key=f"elv_{prof_key_id}_{day_selected}_{idx}")
 
-            with col_w:
-                if ex_type == "cardio":
-                    item["w"] = st.number_input(t("Απόσταση (Km)", "Distance (Km)"), value=float(item.get("w", 5.0)), step=0.5, key=f"w_{prof_key_id}_{day_selected}_{idx}")
-                elif ex_type == "bodyweight_time":
-                    st.number_input("Kg", value=0.0, disabled=True, key=f"w_{prof_key_id}_{day_selected}_{idx}")
-                    item["w"] = 0.0
-                elif ex_type == "bodyweight":
-                    item["w"] = st.number_input("+Extra Kg", value=float(item.get("w", 0.0)), min_value=0.0, step=0.5, key=f"w_{prof_key_id}_{day_selected}_{idx}")
-                else:
-                    item["w"] = st.number_input("Kg", value=float(item.get("w", 20.0)), step=0.5, key=f"w_{prof_key_id}_{day_selected}_{idx}")
+                with col_w:
+                    default_dist = 0.0 if c_mode == "bike" else (1.0 if c_mode == "erg" else 5.0)
+                    step_dist = 0.25 if c_mode == "erg" else 0.5
+                    item["w"] = st.number_input(t("Απόσταση (Km)", "Distance (Km)"), value=float(item.get("w", default_dist)), min_value=0.0, step=step_dist, key=f"w_{prof_key_id}_{day_selected}_{idx}")
 
-            with col_r:
-                if ex_type == "bodyweight_time":
-                    item["r"] = st.number_input("Sec", value=int(item.get("r", 60)), step=5, key=f"r_{prof_key_id}_{day_selected}_{idx}")
-                elif ex_type == "cardio":
-                    item["r"] = st.number_input(t("Διάρκεια (Min)", "Duration (Min)"), value=int(item.get("r", 25)), step=1, key=f"r_{prof_key_id}_{day_selected}_{idx}")
-                else:
-                    item["r"] = st.number_input("Reps", value=int(item.get("r", 12)), step=1, key=f"r_{prof_key_id}_{day_selected}_{idx}")
+                with col_r:
+                    default_min = 4.5 if c_mode == "erg" else 25.0
+                    step_min = 0.25 if c_mode == "erg" else 1.0
+                    item["r"] = st.number_input(t("Διάρκεια (Min)", "Duration (Min)"), value=float(item.get("r", default_min)), min_value=0.5, max_value=300.0, step=step_min, key=f"r_{prof_key_id}_{day_selected}_{idx}")
 
-            with col_rir:
-                if ex_type == "cardio":
-                    item["hr"] = st.number_input(t("Μέσοι Παλμοί (HR)", "Avg HR (bpm)"), value=int(item.get("hr", 145)), min_value=60, max_value=220, key=f"hr_{prof_key_id}_{day_selected}_{idx}")
-                else:
+                with col_rir:
+                    item["hr"] = st.number_input(t("Μέσοι Παλμοί (HR)", "Avg HR (bpm)"), value=int(item.get("hr", 145)), min_value=60, max_value=220, step=1, key=f"hr_{prof_key_id}_{day_selected}_{idx}")
+
+                # Live Telemetry Banner ανά μηχάνημα
+                if item.get("r", 0) > 0:
+                    dist = float(item.get("w", 0.0))
+                    mins = float(item.get("r", 0.0))
+                    z_name, _ = calc_hr_zone(item.get("hr", 145), active_p.get("profile", {}).get("age", 25))
+
+                    if c_mode == "bike":
+                        spd_txt = f" | **Speed:** {dist / (mins / 60):.1f} km/h" if dist > 0 else ""
+                        st.info(f"🚴 **Resistance:** Lvl {item.get('res_level', 4)}/7{spd_txt} | **HR Zone:** {z_name}", icon="⚡")
+                    elif c_mode == "airbike":
+                        spd_txt = f" | **Speed:** {dist / (mins / 60):.1f} km/h" if dist > 0 else ""
+                        st.info(f"💨 **Power:** {item.get('watts', 200)} W{spd_txt} | **HR Zone:** {z_name}", icon="⚡")
+                    elif c_mode == "erg" and dist > 0:
+                        split_dec = (mins / dist) * 0.5
+                        sp_m = int(split_dec)
+                        sp_s = int((split_dec - sp_m) * 60)
+                        st.info(f"🚣 **Damper:** {item.get('res_level', 6)}/10 | **Split /500m:** {sp_m}:{sp_s:02d} | **HR Zone:** {z_name}", icon="⚡")
+                    elif c_mode == "stairs":
+                        st.info(f"🪜 **Level:** {item.get('res_level', 8)}/20 | **Duration:** {mins:.0f} min | **HR Zone:** {z_name}", icon="⚡")
+                    elif dist > 0:
+                        pace_dec = mins / dist
+                        pace_m = int(pace_dec)
+                        pace_s = int((pace_dec - pace_m) * 60)
+                        extra_txt = f" | **Incline:** {item.get('incline', 0.0):.1f}%" if c_mode == "treadmill" else (f" | **Elev:** +{item.get('elev_m', 0)}m" if item.get("elev_m", 0) > 0 else "")
+                        st.info(f"🏃 **Pace:** {pace_m}:{pace_s:02d} min/km | **Speed:** {60/pace_dec:.1f} km/h{extra_txt} | **HR Zone:** {z_name}", icon="⚡")
+            else:
+                with col_s:
+                    item["s"] = st.number_input("Sets", value=int(item.get("s", 3)), min_value=1, max_value=20, key=f"s_{prof_key_id}_{day_selected}_{idx}")
+
+                with col_w:
+                    if ex_type == "bodyweight_time":
+                        st.number_input("Kg", value=0.0, disabled=True, key=f"w_{prof_key_id}_{day_selected}_{idx}")
+                        item["w"] = 0.0
+                    elif ex_type == "bodyweight":
+                        item["w"] = st.number_input("+Extra Kg", value=float(item.get("w", 0.0)), min_value=0.0, step=0.5, key=f"w_{prof_key_id}_{day_selected}_{idx}")
+                    else:
+                        item["w"] = st.number_input("Kg", value=float(item.get("w", 20.0)), step=0.5, key=f"w_{prof_key_id}_{day_selected}_{idx}")
+
+                with col_r:
+                    if ex_type == "bodyweight_time":
+                        item["r"] = st.number_input("Sec", value=int(item.get("r", 60)), step=5, key=f"r_{prof_key_id}_{day_selected}_{idx}")
+                    else:
+                        item["r"] = st.number_input("Reps", value=int(item.get("r", 12)), step=1, key=f"r_{prof_key_id}_{day_selected}_{idx}")
+
+                with col_rir:
                     item["rir"] = st.number_input("RIR", value=int(item.get("rir", 2)), min_value=0, max_value=5, key=f"rir_{prof_key_id}_{day_selected}_{idx}")
-
-            if ex_type == "cardio" and item.get("w", 0) > 0 and item.get("r", 0) > 0:
-                dist = item["w"]
-                mins = item["r"]
-                pace_dec = mins / dist
-                pace_m = int(pace_dec)
-                pace_s = int((pace_dec - pace_m) * 60)
-                z_name, z_color = calc_hr_zone(item.get("hr", 145), active_p.get("profile", {}).get("age", 25))
-
-                st.info(f"🏃 **Pace:** {pace_m}:{pace_s:02d} min/km | **Speed:** {60/pace_dec:.1f} km/h | **HR Zone:** <span style='color:{z_color}; font-weight:bold;'>{z_name}</span>", icon="⚡")
 
             # --- ΓΡΑΜΜΗ 3 (ΚΑΤΩ-ΚΑΤΩ): Αφαίρεση Άσκησης ---
             if st.button(t("❌ Αφαίρεση Άσκησης", "❌ Remove Exercise"), key=f"del_{prof_key_id}_{day_selected}_{idx}"):
@@ -1035,7 +1074,12 @@ with tab2:
                     e1rm = calc_1rm(eff_w, r) if eff_w > 0 else 0
                     
                 if ex not in ex_summary:
-                    ex_summary[ex] = {"sets": 0, "max_1rm": 0, "max_weight": w, "rirs": [], "total_reps_or_min": 0, "type": ex_type, "muscle": muscle, "cal": 0}
+                    ex_summary[ex] = {
+                        "sets": 0, "max_1rm": 0, "max_weight": w, "rirs": [],
+                        "total_reps_or_min": 0, "type": ex_type, "muscle": muscle, "cal": 0,
+                        "avg_hr": item.get("hr"), "res_level": item.get("res_level"),
+                        "incline": item.get("incline"), "watts": item.get("watts"), "elev_m": item.get("elev_m")
+                    }
                     
                 ex_summary[ex]["sets"] += s
                 ex_summary[ex]["total_reps_or_min"] += r
@@ -1191,11 +1235,20 @@ with tab2:
                 key="ce_secondary"
             )
         with col_e4:
-            ce_profile = st.selectbox(
-                t("Resistance Profile:", "Resistance Profile:"),
-                ["Mid-range", "Lengthened-biased", "Shortened-biased", "Full-range", "Explosive", "Isometric", "Cardio"],
-                key="ce_profile"
-            )
+            if "Cardio" in ce_type_desc:
+                ce_cardio_mode = st.selectbox(
+                    t("Τύπος Cardio / Μηχάνημα:", "Cardio Machine Mode:"),
+                    ["run", "treadmill", "bike", "airbike", "erg", "stairs"],
+                    key="ce_cardio_mode"
+                )
+                ce_profile = "Cardio"
+            else:
+                ce_cardio_mode = "run"
+                ce_profile = st.selectbox(
+                    t("Resistance Profile:", "Resistance Profile:"),
+                    ["Mid-range", "Lengthened-biased", "Shortened-biased", "Full-range", "Explosive", "Isometric"],
+                    key="ce_profile"
+                )
 
         if st.button(t("💾 Αποθήκευση Άσκησης στη Βάση", "💾 Save Exercise to Database"), key="btn_save_custom_ex"):
             if ce_name.strip():
@@ -1220,7 +1273,7 @@ with tab2:
                 if sec_val and sec_val != "Cardio" and ex_type != "cardio":
                     emg_map[sec_val] = 0.5
 
-                user_data["exercise_database"][ce_name.strip()] = {
+                new_ex_entry = {
                     "muscle": ce_primary,
                     "type": ex_type,
                     "is_db": is_db,
@@ -1228,6 +1281,11 @@ with tab2:
                     "secondary": sec_val,
                     "emg_weights": emg_map,
                     "resistance_profile": "Cardio" if ex_type == "cardio" else ce_profile
+                }
+                if ex_type == "cardio":
+                    new_ex_entry["cardio_mode"] = ce_cardio_mode
+
+                user_data["exercise_database"][ce_name.strip()] = new_ex_entry
                 }
                 save_user_data()
                 st.success(t(f"Η άσκηση '{ce_name.strip()}' προστέθηκε επιτυχώς στη βάση δεδομένων!", f"Exercise '{ce_name.strip()}' added to database!"))
