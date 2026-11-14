@@ -42,7 +42,7 @@ def calc_dots(bodyweight_kg: float, total_kg: float, gender: str = "Άνδρας
     return round((500.0 / denom) * float(total_kg), 1)
 
 
-def _filter_history_by_days(history: list, days_window: int) -> list:
+ _filter_history_by_days(history: list, days_window: int) -> list:
     if not days_window or days_window <= 0:
         return history or []
     cutoff = datetime.now() - timedelta(days=days_window)
@@ -58,13 +58,14 @@ def _filter_history_by_days(history: list, days_window: int) -> list:
     return filtered
 
 
-def analyze_fractional_emg_and_profiles(history: list, exercise_db: dict, standards_data: dict, days_window: int = 7, lang: str = "Ελληνικά"):
-    """
-    Υπολογίζει:
-    1. Fractional EMG Sets ανά μυϊκή ομάδα βάσει των emg_weights του exercise_db.
-    2. Κατανομή Resistance Profile (Lengthened / Mid-range / Shortened / Full-range) ανά μυϊκή ομάδα.
-    3. Προτάσεις βελτιστοποίησης για Stretch-Mediated Hypertrophy & Volume Landmarks.
-    """
+ def analyze_fractional_emg_and_profiles(
+    history: list,
+    exercise_db: dict,
+    standards_data: dict,
+    days_window: int = 7,
+    lang: str = "Ελληνικά",
+    only_effective: bool = True
+):
     filtered_hist = _filter_history_by_days(history, days_window)
     landmarks = standards_data.get("volume_landmarks", {})
 
@@ -83,6 +84,11 @@ def analyze_fractional_emg_and_profiles(history: list, exercise_db: dict, standa
 
             db_info = exercise_db.get(ex_name, {})
             if db_info.get("type") == "cardio":
+                continue
+
+            rirs = ex_data.get("rirs") or [2]
+            avg_rir = sum(rirs) / len(rirs)
+            if only_effective and avg_rir > 3.0:
                 continue
 
             emg_map = db_info.get("emg_weights")
@@ -116,8 +122,9 @@ def analyze_fractional_emg_and_profiles(history: list, exercise_db: dict, standa
     for muscle, profs in profile_breakdown.items():
         total_m = fractional_sets.get(muscle, 0.0)
         lengthened = profs.get("Lengthened-biased", 0.0)
+        full_rng = profs.get("Full-range", 0.0)
         shortened = profs.get("Shortened-biased", 0.0)
-        if total_m >= 4.0 and lengthened == 0.0 and shortened > 0.0:
+        if total_m >= 4.0 and (lengthened + full_rng) == 0.0 and shortened > 0.0:
             if lang == "English":
                 biomech_alerts.append(
                     f"**{muscle}**: {total_m:.1f} sets with zero **Lengthened-biased** exercises "
@@ -133,10 +140,6 @@ def analyze_fractional_emg_and_profiles(history: list, exercise_db: dict, standa
 
 
 def evaluate_strength_standards(active_p: dict, exercise_db: dict, standards_data: dict):
-    """
-    Υπολογίζει RIR-adjusted e1RM, BW ratio, Tier κατάταξη και επόμενο στόχο (+kg),
-    καθώς και το συνολικό DOTS Score.
-    """
     prof = active_p.get("profile", {})
     raw_gender = prof.get("gender", "Άνδρας")
     gender = "Γυναίκα" if raw_gender in ["Γυναίκα", "Female"] else "Άνδρας"
@@ -162,11 +165,11 @@ def evaluate_strength_standards(active_p: dict, exercise_db: dict, standards_dat
                 else:
                     eff_w = raw_w * 2.0 if db_meta.get("is_db", False) else raw_w
 
-                sets_cnt = max(1, int(ex_data.get("sets", 1)))
-                tot_r = int(ex_data.get("total_reps_or_min", ex_data.get("reps", 1)))
-                r = max(1, int(round(tot_r / sets_cnt)))
                 rirs_list = ex_data.get("rirs") or [1]
-                rir = int(round(sum(rirs_list) / len(rirs_list)))
+                entries_cnt = max(1, len(rirs_list))
+                tot_r = int(ex_data.get("total_reps_or_min", ex_data.get("reps", 1)))
+                r = max(1, int(round(tot_r / entries_cnt)))
+                rir = int(round(sum(rirs_list) / entries_cnt))
                 est = calc_e1rm(eff_w, r, rir)
                 if est > best_e1rm.get(ex_name, 0.0):
                     best_e1rm[ex_name] = est
@@ -223,7 +226,7 @@ def evaluate_strength_standards(active_p: dict, exercise_db: dict, standards_dat
     deadlift_max = max(
         best_e1rm.get("Barbell Deadlift", 0.0),
         best_e1rm.get("Barbell RDL", 0.0) * 1.20,
-        best_e1rm.get("Romanian Deadlift (RDL)", 0.0) * 1.30
+        best_e1rm.get("Romanian Deadlift (RDL)", 0.0) * 1.35
     )
     sbd_total = round(squat_max + bench_max + deadlift_max, 1)
     dots_score = calc_dots(bw, sbd_total, gender, standards_data.get("dots_coefficients", {}))
