@@ -73,6 +73,14 @@
         "hr": 145
       },
       {
+        "ex": "Assault / Echo Bike",
+        "s": 1,
+        "w": 1.0,
+        "r": 12,
+        "rir": 2,
+        "hr": 145
+      },
+      {
         "ex": "Barbell Back Squat",
         "s": 3,
         "w": 20.0,
