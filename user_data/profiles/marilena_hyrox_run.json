@@ -81,6 +81,14 @@
         "hr": 145
       },
       {
+        "ex": "SkiErg (HYROX)",
+        "s": 1,
+        "w": 1.5,
+        "r": 14,
+        "rir": 2,
+        "hr": 145
+      },
+      {
         "ex": "Barbell Back Squat",
         "s": 3,
         "w": 20.0,
