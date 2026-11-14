@@ -869,21 +869,20 @@ with tab2:
                     save_user_data()
                     st.rerun()
 
-            col_ex, col_s, col_w, col_r, col_rir, col_del = st.columns([4, 1, 1, 1, 1, 1])
-            
+            # --- ΓΡΑΜΜΗ 1 (ΠΑΝΩ): Μυϊκή Ομάδα | Άσκηση | Διαγραφή (❌) ---
+            c_cat, c_ex, col_del = st.columns([2.2, 3.2, 0.7])
+
             if ex_options:
                 all_cats_lbl = t("Όλες οι κατηγορίες", "All Categories")
                 all_muscles = [all_cats_lbl] + sorted(list(set(
-                    info.get("muscle", t("Άλλο", "Other")) 
-                    for info in user_data["exercise_database"].values() 
+                    info.get("muscle", t("Άλλο", "Other"))
+                    for info in user_data["exercise_database"].values()
                     if info.get("muscle")
                 )))
-                
+
                 curr_muscle = ex_info.get("muscle", all_cats_lbl)
                 default_cat_idx = all_muscles.index(curr_muscle) if curr_muscle in all_muscles else 0
-                
-                c_cat, c_ex = st.columns(2)
-                
+
                 with c_cat:
                     sel_cat = st.selectbox(
                         t("Μυϊκή Ομάδα", "Category"),
@@ -891,7 +890,7 @@ with tab2:
                         index=default_cat_idx,
                         key=f"cat_{prof_key_id}_{day_selected}_{idx}"
                     )
-                
+
                 if sel_cat == all_cats_lbl:
                     filtered_exs = sorted(list(user_data["exercise_database"].keys()))
                 else:
@@ -899,28 +898,42 @@ with tab2:
                         k for k, v in user_data["exercise_database"].items()
                         if v.get("muscle") == sel_cat or v.get("primary") == sel_cat
                     ])
-                
+
                 if not filtered_exs:
                     filtered_exs = sorted(list(user_data["exercise_database"].keys()))
-                    
+
                 curr_ex_val = ex_name if ex_name in filtered_exs else filtered_exs[0]
                 ex_idx = filtered_exs.index(curr_ex_val)
-                
+
                 with c_ex:
                     new_ex = st.selectbox(
-                        t("Άσκηση", "Exercise"), 
-                        options=filtered_exs, 
-                        index=ex_idx, 
+                        t("Άσκηση", "Exercise"),
+                        options=filtered_exs,
+                        index=ex_idx,
                         key=f"ex_{prof_key_id}_{day_selected}_{idx}"
                     )
                     item["ex"] = new_ex
             else:
-                st.warning(t("⚠️ Κενή βάση ασκήσεων", "⚠️ Empty exercise database"))
-                item["ex"] = ex_name
-                
+                with c_ex:
+                    st.warning(t("⚠️ Κενή βάση ασκήσεων", "⚠️ Empty exercise database"))
+                    item["ex"] = ex_name
+
+            with col_del:
+                st.write("")
+                st.write("")
+                if st.button("❌", key=f"del_{prof_key_id}_{day_selected}_{idx}"):
+                    rows_to_delete.append(idx)
+
+            # Ενημέρωση ex_info/ex_type σε περίπτωση που μόλις άλλαξες άσκηση
+            ex_info = user_data["exercise_database"].get(item["ex"], {})
+            ex_type = ex_info.get("type", "weight")
+
+            # --- ΓΡΑΜΜΗ 2 (ΚΑΤΩ): Sets | Kg | Reps | RIR ---
+            col_s, col_w, col_r, col_rir = st.columns(4)
+
             with col_s:
                 item["s"] = st.number_input("Sets", value=int(item.get("s", 3)), min_value=1, max_value=20, key=f"s_{prof_key_id}_{day_selected}_{idx}")
-            
+
             with col_w:
                 if ex_type == "cardio":
                     item["w"] = st.number_input(t("Απόσταση (Km)", "Distance (Km)"), value=float(item.get("w", 5.0)), step=0.5, key=f"w_{prof_key_id}_{day_selected}_{idx}")
@@ -931,7 +944,7 @@ with tab2:
                     item["w"] = st.number_input("+Extra Kg", value=float(item.get("w", 0.0)), min_value=0.0, step=0.5, key=f"w_{prof_key_id}_{day_selected}_{idx}")
                 else:
                     item["w"] = st.number_input("Kg", value=float(item.get("w", 20.0)), step=0.5, key=f"w_{prof_key_id}_{day_selected}_{idx}")
-                    
+
             with col_r:
                 if ex_type == "bodyweight_time":
                     item["r"] = st.number_input("Sec", value=int(item.get("r", 60)), step=5, key=f"r_{prof_key_id}_{day_selected}_{idx}")
@@ -939,18 +952,12 @@ with tab2:
                     item["r"] = st.number_input(t("Διάρκεια (Min)", "Duration (Min)"), value=int(item.get("r", 25)), step=1, key=f"r_{prof_key_id}_{day_selected}_{idx}")
                 else:
                     item["r"] = st.number_input("Reps", value=int(item.get("r", 12)), step=1, key=f"r_{prof_key_id}_{day_selected}_{idx}")
-                    
+
             with col_rir:
                 if ex_type == "cardio":
                     item["hr"] = st.number_input(t("Μέσοι Παλμοί (HR)", "Avg HR (bpm)"), value=int(item.get("hr", 145)), min_value=60, max_value=220, key=f"hr_{prof_key_id}_{day_selected}_{idx}")
                 else:
                     item["rir"] = st.number_input("RIR", value=int(item.get("rir", 2)), min_value=0, max_value=5, key=f"rir_{prof_key_id}_{day_selected}_{idx}")
-                
-            with col_del:
-                st.write("")
-                st.write("")
-                if st.button("❌", key=f"del_{prof_key_id}_{day_selected}_{idx}"):
-                    rows_to_delete.append(idx)
 
             if ex_type == "cardio" and item.get("w", 0) > 0 and item.get("r", 0) > 0:
                 dist = item["w"]
