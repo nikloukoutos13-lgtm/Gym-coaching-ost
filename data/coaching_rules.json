@@ -34,9 +34,9 @@
       "Burpee Broad Jumps (HYROX)": 1.15
     },
     "weekly_thresholds": {
-      "optimal_max": 65.0,
-      "high_warning": 85.0,
-      "deload_trigger": 100.0
+      "optimal_max": 78.0,
+      "high_warning": 95.0,
+      "deload_trigger": 115.0
     },
     "deload_set_multiplier": 0.6
   },
