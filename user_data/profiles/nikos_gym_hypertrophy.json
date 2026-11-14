@@ -39,7 +39,7 @@
       {
         "ex": "Stationary Bike (Ποδήλατο)",
         "s": 1,
-        "w": 3.0,
+        "w": 6.0,
         "r": 5,
         "rir": 0,
         "hr": 160
@@ -59,82 +59,101 @@
         "rir": 2
       },
       {
-        "ex": "Pull-ups (Έλξεις στο Ζυγό)",
-        "s": 3,
-        "w": 0.0,
-        "r": 5,
-        "rir": 0
+        "ex": "Single-Arm Cable Lat Pulldown",
+        "s": 4,
+        "w": 20.0,
+        "r": 10,
+        "rir": 2
       },
       {
         "ex": "Chest-Supported DB Row (30°)",
-        "s": 3,
+        "s": 4,
         "w": 15.0,
         "r": 10,
-        "rir": 3,
-        "hr": 145
+        "rir": 2
       },
       {
-        "ex": "Pec Deck Fly Machine",
+        "ex": "Cable Lateral Raises",
         "s": 3,
-        "w": 0.0,
-        "r": 20,
-        "rir": 3,
-        "hr": 145
-      },
-      {
-        "ex": "Triceps Rope Pushdown",
-        "s": 3,
-        "w": 17.5,
+        "w": 5.0,
         "r": 12,
-        "rir": 3,
-        "hr": 145
+        "rir": 2
       },
       {
-        "ex": "Plank",
-        "s": 2,
-        "w": 0.0,
-        "r": 20,
-        "rir": 0,
-        "hr": 145
-      },
-      {
-        "ex": "Lat Pulldown (Τροχαλία)",
+        "ex": "Preacher curls",
         "s": 3,
-        "w": 37.0,
-        "r": 8,
-        "rir": 0
+        "w": 20.0,
+        "r": 10,
+        "rir": 2
       }
     ],
     "Τρίτη": [],
     "Τετάρτη": [
       {
-        "ex": "Treadmill (Διάδρομος)",
-        "s": 1,
-        "w": 12.0,
-        "r": 5,
-        "rir": 0,
-        "hr": 160
-      },
-      {
         "ex": "Romanian Deadlift (RDL)",
         "s": 3,
         "w": 20.0,
         "r": 12,
-        "rir": 3
-      },
-      {
-        "ex": "Chin-ups (Υπτιάστιες Έλξεις)",
-        "s": 3,
-        "w": 0.0,
-        "r": 5,
-        "rir": 0
+        "rir": 2
       },
       {
         "ex": "Incline DB Bench Press",
         "s": 3,
         "w": 15.0,
         "r": 12,
-        "rir": 3
+        "rir": 2
+      },
+      {
+        "ex": "Single-Arm DB Row",
+        "s": 3,
+        "w": 17.5,
+        "r": 10,
+        "rir": 2
+      },
+      {
+        "ex": "Chest Dips (Βυθίσεις Στήθους)",
+        "s": 3,
+        "w": 0.0,
+        "r": 8,
+        "rir": 2
+      },
+      {
+        "ex": "Overhead Cable Triceps Extension",
+        "s": 3,
+        "w": 12.5,
+        "r": 10,
+        "rir": 2
+      },
+      {
+        "ex": "Cable row crunches",
+        "s": 3,
+        "w": 31.0,
+        "r": 12,
+        "rir": 2
+      }
+    ],
+    "Πέμπτη": [],
+    "Παρασκευή": [
+      {
+        "ex": "Leg Extension Machine",
+        "s": 3,
+        "w": 61.0,
+        "r": 10,
+        "rir": 2
+      },
+      {
+        "ex": "Seated Leg Curl Machine",
+        "s": 3,
+        "w": 53.0,
+        "r": 10,
+        "rir": 2
+      },
+      {
+        "ex": "Chin-ups (Υπτιάστιες Έλξεις)",
+        "s": 3,
+        "w": 0.0,
+        "r": 6,
+        "rir": 2
       },
       {
         "ex": "Dumbbell Shoulder Press",
@@ -144,108 +163,17 @@
         "rir": 2
       },
       {
-        "ex": "Cable Lateral Raises",
-        "s": 3,
-        "w": 5.0,
-        "r": 10,
-        "rir": 2
-      },
-      {
         "ex": "Cable Face Pulls",
-        "s": 3,
+        "s": 4,
         "w": 21.0,
         "r": 12,
-        "rir": 3
-      },
-      {
-        "ex": "Leg raises",
-        "s": 3,
-        "w": 0.0,
-        "r": 12,
-        "rir": 2,
-        "hr": 145
-      },
-      {
-        "ex": "Cable row crunches",
-        "s": 3,
-        "w": 31.0,
-        "r": 12,
-        "rir": 1,
-        "hr": 145
-      }
-    ],
-    "Πέμπτη": [],
-    "Παρασκευή": [
-      {
-        "ex": "Stationary Bike (Ποδήλατο)",
-        "s": 1,
-        "w": 6.0,
-        "r": 5,
-        "rir": 0,
-        "hr": 160
-      },
-      {
-        "ex": "Leg Extension Machine",
-        "s": 3,
-        "w": 61.0,
-        "r": 10,
-        "rir": 1
-      },
-      {
-        "ex": "Seated Leg Curl Machine",
-        "s": 3,
-        "w": 53.0,
-        "r": 9,
-        "rir": 1
-      },
-      {
-        "ex": "Assault / Echo Bike",
-        "s": 3,
-        "w": 33.0,
-        "r": 12,
-        "rir": 4
-      },
-      {
-        "ex": "Lateral Raises (Dumbbells)",
-        "s": 3,
-        "w": 7.0,
-        "r": 10,
         "rir": 2
       },
       {
-        "ex": "Cable Bicep Curls",
-        "s": 3,
-        "w": 15.0,
-        "r": 10,
-        "rir": 1
-      },
-      {
-        "ex": "Overhead Cable Triceps Extension",
-        "s": 3,
-        "w": 12.5,
-        "r": 10,
-        "rir": 0
-      },
-      {
-        "ex": "Assault / Echo Bike",
-        "s": 2,
-        "w": 0.0,
-        "r": 20,
-        "rir": 1
-      },
-      {
-        "ex": "Leg Press",
-        "s": 3,
-        "w": 145.0,
-        "r": 12,
-        "rir": 0,
-        "hr": 145
-      },
-      {
         "ex": "Leg raises",
-        "s": 2,
+        "s": 3,
         "w": 0.0,
-        "r": 10,
+        "r": 12,
         "rir": 2
       }
     ],
