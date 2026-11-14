@@ -42,7 +42,7 @@ def calc_dots(bodyweight_kg: float, total_kg: float, gender: str = "Άνδρας
     return round((500.0 / denom) * float(total_kg), 1)
 
 
- _filter_history_by_days(history: list, days_window: int) -> list:
+def _filter_history_by_days(history: list, days_window: int) -> list:
     if not days_window or days_window <= 0:
         return history or []
     cutoff = datetime.now() - timedelta(days=days_window)
@@ -58,7 +58,7 @@ def calc_dots(bodyweight_kg: float, total_kg: float, gender: str = "Άνδρας
     return filtered
 
 
- def analyze_fractional_emg_and_profiles(
+def analyze_fractional_emg_and_profiles(
     history: list,
     exercise_db: dict,
     standards_data: dict,
