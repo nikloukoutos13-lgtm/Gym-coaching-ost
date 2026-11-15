@@ -11,48 +11,7 @@
     "level": 2,
     "quizzes_solved": 1
   },
-  "daily_logs": [
-    {
-      "name": "🥛 GetPRO / GoPRO Protein Yoghurt (160g)",
-      "portion": "1.0 τεμάχιο/α",
-      "cal": 104.0,
-      "p": 15.0,
-      "c": 7.2,
-      "f": 0.3
-    },
-    {
-      "name": "🍫 Nature Valley Extra Protein Bar",
-      "portion": "1.0 τεμάχιο/α",
-      "cal": 198.0,
-      "p": 10.0,
-      "c": 15.0,
-      "f": 11.0
-    },
-    {
-      "name": "🍨 Ελληνικό Γιαούρτι 2%",
-      "portion": "50g",
-      "cal": 36.5,
-      "p": 5.0,
-      "c": 1.9,
-      "f": 1.0
-    },
-    {
-      "name": "Noddles με φυστικοβουτυρο και αυγο",
-      "portion": "1.0 τεμάχιο/α",
-      "cal": 600.0,
-      "p": 22.0,
-      "c": 55.0,
-      "f": 30.0
-    },
-    {
-      "name": "Κοτομπουκιες τεσκο",
-      "portion": "3.0 τεμάχιο/α",
-      "cal": 198.9,
-      "p": 10.2,
-      "c": 15.0,
-      "f": 10.59
-    }
-  ],
+  "daily_logs": [],
   "weight_log": [
     {
       "date": "31/10/2026",
@@ -69,33 +28,37 @@
         "ex": "RowErg / Κωπηλατικό (HYROX)",
         "s": 1,
         "w": 1.5,
-        "r": 13,
+        "r": 13.0,
         "rir": 0,
-        "hr": 145
+        "hr": 145,
+        "res_level": 6
       },
       {
         "ex": "Assault / Echo Bike",
         "s": 1,
         "w": 1.0,
-        "r": 12,
+        "r": 12.0,
         "rir": 2,
-        "hr": 145
+        "hr": 145,
+        "watts": 200
       },
       {
         "ex": "SkiErg (HYROX)",
         "s": 1,
         "w": 1.5,
-        "r": 14,
+        "r": 14.0,
         "rir": 2,
-        "hr": 145
+        "hr": 145,
+        "res_level": 6
       },
       {
         "ex": "Stationary Bike (Ποδήλατο)",
         "s": 1,
         "w": 3.0,
-        "r": 15,
+        "r": 15.0,
         "rir": 2,
-        "hr": 145
+        "hr": 145,
+        "res_level": 4
       }
     ],
     "Τρίτη": [
