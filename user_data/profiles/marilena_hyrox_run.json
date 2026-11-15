@@ -11,7 +11,16 @@
     "level": 2,
     "quizzes_solved": 1
   },
-  "daily_logs": [],
+  "daily_logs": [
+    {
+      "name": "🌯 Homemade Beef & Cheddar Burrito (1 piece / 1-8 batch)",
+      "portion": "1.0 τεμάχιο/α",
+      "cal": 756.0,
+      "p": 43.9,
+      "c": 59.3,
+      "f": 36.7
+    }
+  ],
   "weight_log": [
     {
       "date": "31/10/2026",
