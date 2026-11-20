@@ -1,0 +1,33 @@
+{
+  "profile": {
+    "gender": "Άνδρας",
+    "age": 25,
+    "weight_kg": 70.0,
+    "height_cm": 175.0,
+    "activity_level": 1.55,
+    "goal": "Bulking",
+    "training_age": "Αρχάριος (0-1 έτος)",
+    "xp": 0,
+    "level": 1
+  },
+  "daily_logs": [],
+  "weight_log": [
+    {
+      "date": "20/11/2026",
+      "weight": 70.0
+    }
+  ],
+  "templates": {
+    "Δευτέρα": [],
+    "Τρίτη": [],
+    "Τετάρτη": [],
+    "Πέμπτη": [],
+    "Παρασκευή": [],
+    "Σάββατο": [],
+    "Κυριακή": []
+  },
+  "prs": {},
+  "achievements": [],
+  "history": [],
+  "profile_name": "Κατερίνα"
+}
