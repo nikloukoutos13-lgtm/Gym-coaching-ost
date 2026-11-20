@@ -1,11 +1,11 @@
 {
   "profile": {
-    "gender": "Άνδρας",
+    "gender": "Γυναίκα",
     "age": 25,
     "weight_kg": 78.5,
-    "height_cm": 175.0,
+    "height_cm": 178.0,
     "activity_level": 1.55,
-    "goal": "Bulking",
+    "goal": "Cutting",
     "training_age": "Αρχάριος (0-1 έτος)",
     "xp": 15,
     "level": 1
