@@ -98,6 +98,13 @@
         "rir": 2
       },
       {
+        "ex": "Dumbbell Shrugs",
+        "s": 4,
+        "w": 16.0,
+        "r": 12,
+        "rir": 2
+      },
+      {
         "ex": "Standing Calf Raises",
         "s": 3,
         "w": 40.0,
@@ -112,10 +119,10 @@
         "rir": 2
       },
       {
-        "ex": "Crunches",
+        "ex": "Plank",
         "s": 2,
         "w": 0.0,
-        "r": 20,
+        "r": 60,
         "rir": 1
       }
     ],
@@ -129,10 +136,10 @@
         "rir": 0
       },
       {
-        "ex": "Lying Leg Curl Machine",
+        "ex": "Barbell Hip Thrust",
         "s": 3,
-        "w": 35.0,
-        "r": 12,
+        "w": 40.0,
+        "r": 10,
         "rir": 2
       },
       {
@@ -172,7 +179,7 @@
       },
       {
         "ex": "Cable Face Pulls",
-        "s": 4,
+        "s": 5,
         "w": 12.5,
         "r": 15,
         "rir": 2
@@ -212,7 +219,7 @@
       },
       {
         "ex": "Seated Leg Curl Machine",
-        "s": 3,
+        "s": 4,
         "w": 40.0,
         "r": 12,
         "rir": 2
@@ -232,15 +239,15 @@
         "rir": 2
       },
       {
-        "ex": "Dumbbell Shrugs",
-        "s": 4,
-        "w": 16.0,
-        "r": 12,
+        "ex": "Preacher Curl Machine",
+        "s": 2,
+        "w": 20.0,
+        "r": 10,
         "rir": 2
       },
       {
         "ex": "Hammer Curls (Dumbbells)",
-        "s": 4,
+        "s": 3,
         "w": 10.0,
         "r": 12,
         "rir": 2
@@ -260,10 +267,10 @@
         "rir": 2
       },
       {
-        "ex": "Cable Crunches",
+        "ex": "Plank",
         "s": 2,
-        "w": 20.0,
-        "r": 15,
+        "w": 0.0,
+        "r": 60,
         "rir": 1
       }
     ],
