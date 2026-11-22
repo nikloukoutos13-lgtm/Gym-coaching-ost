@@ -65,7 +65,7 @@
       {
         "ex": "Bulgarian Split Squat",
         "s": 3,
-        "w": 10.0,
+        "w": 12.0,
         "r": 10,
         "rir": 2
       },
@@ -87,6 +87,13 @@
         "ex": "Chest-Supported DB Row (30°)",
         "s": 4,
         "w": 10.0,
+        "r": 12,
+        "rir": 2
+      },
+      {
+        "ex": "Roman Chair Hyperextensions (Ρωμαϊκή Έδρα)",
+        "s": 3,
+        "w": 0.0,
         "r": 12,
         "rir": 2
       },
@@ -122,10 +129,10 @@
         "rir": 0
       },
       {
-        "ex": "Romanian Deadlift (RDL)",
+        "ex": "Lying Leg Curl Machine",
         "s": 3,
-        "w": 14.0,
-        "r": 10,
+        "w": 35.0,
+        "r": 12,
         "rir": 2
       },
       {
