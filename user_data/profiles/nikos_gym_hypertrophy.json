@@ -7,7 +7,7 @@
     "activity_level": 1.55,
     "goal": "Bulking",
     "training_age": "Αρχάριος (0-1 έτος)",
-    "xp": 5310,
+    "xp": 6525,
     "level": 5,
     "quizzes_solved": 1
   },
@@ -57,19 +57,19 @@
         "s": 3,
         "w": 20.0,
         "r": 10,
-        "rir": 2
+        "rir": 1
       },
       {
         "ex": "Single-Arm Cable Lat Pulldown",
         "s": 4,
-        "w": 20.0,
+        "w": 16.5,
         "r": 12,
         "rir": 2
       },
       {
         "ex": "Chest-Supported DB Row (30°)",
         "s": 4,
-        "w": 15.0,
+        "w": 17.5,
         "r": 12,
         "rir": 2
       },
@@ -85,7 +85,7 @@
         "s": 4,
         "w": 12.5,
         "r": 12,
-        "rir": 2
+        "rir": 4
       },
       {
         "ex": "Standing Calf Raises",
@@ -97,7 +97,7 @@
       {
         "ex": "Triceps Rope Pushdown",
         "s": 3,
-        "w": 15.0,
+        "w": 10.0,
         "r": 12,
         "rir": 2
       },
@@ -262,8 +262,8 @@
   },
   "prs": {
     "Leg Press": 205.2,
-    "Flat Dumbbell Chest Press": 50.7,
-    "Chest-Supported DB Row (30°)": 40.0,
+    "Flat Dumbbell Chest Press": 53.3,
+    "Chest-Supported DB Row (30°)": 49.5,
     "Triceps Rope Pushdown": 24.8,
     "Preacher curls": 31.7,
     "Romanian Deadlift (RDL)": 56.6,
@@ -278,7 +278,12 @@
     "Lateral Raises (Αλτήρες)": 17.0,
     "Cable Bicep Curls": 20.0,
     "Overhead Cable Triceps Extension": 16.7,
-    "Lateral Raises (Dumbbells)": 18.7
+    "Lateral Raises (Dumbbells)": 18.7,
+    "Bulgarian Split Squat": 33.3,
+    "Single-Arm Cable Lat Pulldown": 23.3,
+    "Roman Chair Hyperextensions": 104.4,
+    "Dumbbell Shrugs": 35.4,
+    "Standing Calf Raises": 191.0
   },
   "achievements": [
     "🏆 First Blood (Πρώτο PR)",
@@ -990,6 +995,184 @@
           "type": "bodyweight",
           "muscle": "Abs",
           "cal": 0
+        }
+      }
+    },
+    {
+      "date": "23/11/2026 10:09",
+      "day": "Δευτέρα",
+      "tonnage": 13498.8,
+      "cardio_cal": 167.6,
+      "exercises": {
+        "Stationary Bike (Ποδήλατο)": {
+          "sets": 1,
+          "max_1rm": 0,
+          "max_weight": 2.5,
+          "rirs": [
+            0
+          ],
+          "total_reps_or_min": 5.0,
+          "type": "cardio",
+          "muscle": "Cardio",
+          "cal": 167.6,
+          "avg_hr": 160,
+          "res_level": 7,
+          "incline": null,
+          "watts": null,
+          "elev_m": null
+        },
+        "Bulgarian Split Squat": {
+          "sets": 3,
+          "max_1rm": 33.3,
+          "max_weight": 12.5,
+          "rirs": [
+            2
+          ],
+          "total_reps_or_min": 10,
+          "type": "weight",
+          "muscle": "Quads",
+          "cal": 0,
+          "avg_hr": null,
+          "res_level": null,
+          "incline": null,
+          "watts": null,
+          "elev_m": null
+        },
+        "Flat Dumbbell Chest Press": {
+          "sets": 3,
+          "max_1rm": 53.3,
+          "max_weight": 20.0,
+          "rirs": [
+            1
+          ],
+          "total_reps_or_min": 10,
+          "type": "weight",
+          "muscle": "Chest",
+          "cal": 0,
+          "avg_hr": null,
+          "res_level": null,
+          "incline": null,
+          "watts": null,
+          "elev_m": null
+        },
+        "Single-Arm Cable Lat Pulldown": {
+          "sets": 4,
+          "max_1rm": 23.3,
+          "max_weight": 16.5,
+          "rirs": [
+            2
+          ],
+          "total_reps_or_min": 12,
+          "type": "weight",
+          "muscle": "Lats",
+          "cal": 0,
+          "avg_hr": null,
+          "res_level": null,
+          "incline": null,
+          "watts": null,
+          "elev_m": null
+        },
+        "Chest-Supported DB Row (30°)": {
+          "sets": 4,
+          "max_1rm": 49.5,
+          "max_weight": 17.5,
+          "rirs": [
+            2
+          ],
+          "total_reps_or_min": 12,
+          "type": "weight",
+          "muscle": "Upper Back",
+          "cal": 0,
+          "avg_hr": null,
+          "res_level": null,
+          "incline": null,
+          "watts": null,
+          "elev_m": null
+        },
+        "Roman Chair Hyperextensions": {
+          "sets": 3,
+          "max_1rm": 104.4,
+          "max_weight": 0.0,
+          "rirs": [
+            2
+          ],
+          "total_reps_or_min": 12,
+          "type": "bodyweight",
+          "muscle": "Lower Back",
+          "cal": 0,
+          "avg_hr": null,
+          "res_level": null,
+          "incline": null,
+          "watts": null,
+          "elev_m": null
+        },
+        "Dumbbell Shrugs": {
+          "sets": 4,
+          "max_1rm": 35.4,
+          "max_weight": 12.5,
+          "rirs": [
+            4
+          ],
+          "total_reps_or_min": 12,
+          "type": "weight",
+          "muscle": "Traps",
+          "cal": 0,
+          "avg_hr": null,
+          "res_level": null,
+          "incline": null,
+          "watts": null,
+          "elev_m": null
+        },
+        "Standing Calf Raises": {
+          "sets": 3,
+          "max_1rm": 191.0,
+          "max_weight": 135.0,
+          "rirs": [
+            2
+          ],
+          "total_reps_or_min": 12,
+          "type": "weight",
+          "muscle": "Calves",
+          "cal": 0,
+          "avg_hr": null,
+          "res_level": null,
+          "incline": null,
+          "watts": null,
+          "elev_m": null
+        },
+        "Triceps Rope Pushdown": {
+          "sets": 3,
+          "max_1rm": 14.1,
+          "max_weight": 10.0,
+          "rirs": [
+            2
+          ],
+          "total_reps_or_min": 12,
+          "type": "weight",
+          "muscle": "Triceps",
+          "cal": 0,
+          "avg_hr": null,
+          "res_level": null,
+          "incline": null,
+          "watts": null,
+          "elev_m": null
+        },
+        "Plank": {
+          "sets": 2,
+          "max_1rm": 0,
+          "max_weight": 0.0,
+          "rirs": [
+            1
+          ],
+          "total_reps_or_min": 60,
+          "type": "bodyweight_time",
+          "muscle": "Core",
+          "cal": 0,
+          "avg_hr": null,
+          "res_level": null,
+          "incline": null,
+          "watts": null,
+          "elev_m": null
         }
       }
     }
