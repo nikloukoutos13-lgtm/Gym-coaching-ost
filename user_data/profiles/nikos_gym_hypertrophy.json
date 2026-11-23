@@ -11,24 +11,7 @@
     "level": 5,
     "quizzes_solved": 1
   },
-  "daily_logs": [
-    {
-      "name": "🍗 Chicken Breast (Grilled) / Κοτόπουλο Στήθος",
-      "portion": "300g",
-      "cal": 495.0,
-      "p": 93.0,
-      "c": 0.0,
-      "f": 10.8
-    },
-    {
-      "name": "🍳 Baked Tesco Country Potatoes, Basted Pork, Cheddar & Eggs (1 portion / 1-2 tray)",
-      "portion": "1.0 τεμάχιο/α",
-      "cal": 838.0,
-      "p": 54.5,
-      "c": 43.6,
-      "f": 48.0
-    }
-  ],
+  "daily_logs": [],
   "weight_log": [
     {
       "date": "31/10/2026",
