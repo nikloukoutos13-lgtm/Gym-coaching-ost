@@ -11,7 +11,16 @@
     "level": 5,
     "quizzes_solved": 2
   },
-  "daily_logs": [],
+  "daily_logs": [
+    {
+      "name": "🍚 Cooked Rice / Ρύζι βρασμένο",
+      "portion": "200g",
+      "cal": 260.0,
+      "p": 5.4,
+      "c": 56.0,
+      "f": 0.6
+    }
+  ],
   "weight_log": [
     {
       "date": "31/10/2026",
