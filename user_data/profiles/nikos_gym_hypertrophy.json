@@ -188,8 +188,10 @@
         "ex": "Treadmill (Διάδρομος)",
         "s": 1,
         "w": 12.0,
-        "r": 5,
-        "rir": 0
+        "r": 5.0,
+        "rir": 0,
+        "incline": 1.0,
+        "hr": 145
       },
       {
         "ex": "Barbell Hip Thrust",
@@ -208,12 +210,12 @@
       {
         "ex": "Incline DB Bench Press",
         "s": 3,
-        "w": 12.5,
+        "w": 15.0,
         "r": 10,
         "rir": 2
       },
       {
-        "ex": "Dumbbell Flyes",
+        "ex": "Ab Wheel Rollout",
         "s": 3,
         "w": 8.0,
         "r": 12,
