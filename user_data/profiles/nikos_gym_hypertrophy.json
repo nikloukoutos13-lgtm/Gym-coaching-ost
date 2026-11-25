@@ -211,11 +211,11 @@
         "ex": "Incline DB Bench Press",
         "s": 3,
         "w": 15.0,
-        "r": 10,
-        "rir": 2
+        "r": 12,
+        "rir": 3
       },
       {
-        "ex": "Ab Wheel Rollout",
+        "ex": "Cable Chest Flyes",
         "s": 3,
         "w": 8.0,
         "r": 12,
@@ -246,6 +246,13 @@
         "ex": "Hanging Leg Raises",
         "s": 3,
         "w": 0.0,
+        "r": 12,
+        "rir": 2
+      },
+      {
+        "ex": "Barbell Back Squat",
+        "s": 3,
+        "w": 20.0,
         "r": 12,
         "rir": 2
       }
