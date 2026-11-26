@@ -7,8 +7,8 @@
     "activity_level": 1.55,
     "goal": "Bulking",
     "training_age": "Αρχάριος (0-1 έτος)",
-    "xp": 6550,
-    "level": 5,
+    "xp": 7465,
+    "level": 6,
     "quizzes_solved": 2
   },
   "daily_logs": [
@@ -343,7 +343,7 @@
     "Preacher curls": 31.7,
     "Romanian Deadlift (RDL)": 56.6,
     "Incline DB Bench Press": 42.4,
-    "Dumbbell Shoulder Press": 33.3,
+    "Dumbbell Shoulder Press": 35.4,
     "Cable Lateral Raises (Τροχαλία)": 7.1,
     "Cable Face Pulls": 29.7,
     "Cable row crunches": 43.9,
@@ -358,7 +358,11 @@
     "Single-Arm Cable Lat Pulldown": 23.3,
     "Roman Chair Hyperextensions": 104.4,
     "Dumbbell Shrugs": 35.4,
-    "Standing Calf Raises": 191.0
+    "Standing Calf Raises": 191.0,
+    "Barbell Hip Thrust": 56.6,
+    "Chin-ups (Υπτιάστιες Έλξεις)": 86.1,
+    "Cable Chest Flyes": 13.3,
+    "Cable Lateral Raises": 7.1
   },
   "achievements": [
     "🏆 First Blood (Πρώτο PR)",
@@ -1242,6 +1246,167 @@
           "total_reps_or_min": 60,
           "type": "bodyweight_time",
           "muscle": "Core",
+          "cal": 0,
+          "avg_hr": null,
+          "res_level": null,
+          "incline": null,
+          "watts": null,
+          "elev_m": null
+        }
+      }
+    },
+    {
+      "date": "26/11/2026 21:30",
+      "day": "Τετάρτη",
+      "tonnage": 5757.0,
+      "cardio_cal": 781.0,
+      "exercises": {
+        "Treadmill (Διάδρομος)": {
+          "sets": 1,
+          "max_1rm": 0,
+          "max_weight": 12.0,
+          "rirs": [
+            0
+          ],
+          "total_reps_or_min": 5.0,
+          "type": "cardio",
+          "muscle": "Cardio",
+          "cal": 781.0,
+          "avg_hr": 145,
+          "res_level": null,
+          "incline": 1.0,
+          "watts": null,
+          "elev_m": null
+        },
+        "Barbell Hip Thrust": {
+          "sets": 3,
+          "max_1rm": 56.6,
+          "max_weight": 40.0,
+          "rirs": [
+            2
+          ],
+          "total_reps_or_min": 12,
+          "type": "weight",
+          "muscle": "Glutes",
+          "cal": 0,
+          "avg_hr": null,
+          "res_level": null,
+          "incline": null,
+          "watts": null,
+          "elev_m": null
+        },
+        "Chin-ups (Υπτιάστιες Έλξεις)": {
+          "sets": 3,
+          "max_1rm": 86.1,
+          "max_weight": 0.0,
+          "rirs": [
+            1
+          ],
+          "total_reps_or_min": 5,
+          "type": "bodyweight",
+          "muscle": "Lats",
+          "cal": 0,
+          "avg_hr": null,
+          "res_level": null,
+          "incline": null,
+          "watts": null,
+          "elev_m": null
+        },
+        "Incline DB Bench Press": {
+          "sets": 3,
+          "max_1rm": 42.4,
+          "max_weight": 15.0,
+          "rirs": [
+            3
+          ],
+          "total_reps_or_min": 12,
+          "type": "weight",
+          "muscle": "Upper Chest",
+          "cal": 0,
+          "avg_hr": null,
+          "res_level": null,
+          "incline": null,
+          "watts": null,
+          "elev_m": null
+        },
+        "Cable Chest Flyes": {
+          "sets": 3,
+          "max_1rm": 13.3,
+          "max_weight": 10.0,
+          "rirs": [
+            2
+          ],
+          "total_reps_or_min": 10,
+          "type": "weight",
+          "muscle": "Chest",
+          "cal": 0,
+          "avg_hr": null,
+          "res_level": null,
+          "incline": null,
+          "watts": null,
+          "elev_m": null
+        },
+        "Dumbbell Shoulder Press": {
+          "sets": 3,
+          "max_1rm": 35.4,
+          "max_weight": 12.5,
+          "rirs": [
+            1
+          ],
+          "total_reps_or_min": 12,
+          "type": "weight",
+          "muscle": "Shoulders",
+          "cal": 0,
+          "avg_hr": null,
+          "res_level": null,
+          "incline": null,
+          "watts": null,
+          "elev_m": null
+        },
+        "Cable Lateral Raises": {
+          "sets": 3,
+          "max_1rm": 7.1,
+          "max_weight": 5.0,
+          "rirs": [
+            1
+          ],
+          "total_reps_or_min": 12,
+          "type": "weight",
+          "muscle": "Side Delts",
+          "cal": 0,
+          "avg_hr": null,
+          "res_level": null,
+          "incline": null,
+          "watts": null,
+          "elev_m": null
+        },
+        "Cable Face Pulls": {
+          "sets": 5,
+          "max_1rm": 17.7,
+          "max_weight": 12.5,
+          "rirs": [
+            3
+          ],
+          "total_reps_or_min": 12,
+          "type": "weight",
+          "muscle": "Rear Delts",
+          "cal": 0,
+          "avg_hr": null,
+          "res_level": null,
+          "incline": null,
+          "watts": null,
+          "elev_m": null
+        },
+        "Hanging Leg Raises": {
+          "sets": 2,
+          "max_1rm": 0,
+          "max_weight": 0.0,
+          "rirs": [
+            2
+          ],
+          "total_reps_or_min": 12,
+          "type": "bodyweight",
+          "muscle": "Abs",
           "cal": 0,
           "avg_hr": null,
           "res_level": null,
