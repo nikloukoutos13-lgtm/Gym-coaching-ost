@@ -204,8 +204,8 @@
         "ex": "Chin-ups (Υπτιάστιες Έλξεις)",
         "s": 3,
         "w": 0.0,
-        "r": 8,
-        "rir": 2
+        "r": 5,
+        "rir": 1
       },
       {
         "ex": "Incline DB Bench Press",
@@ -230,21 +230,21 @@
       },
       {
         "ex": "Cable Lateral Raises",
-        "s": 4,
+        "s": 3,
         "w": 5.0,
         "r": 12,
-        "rir": 2
+        "rir": 1
       },
       {
         "ex": "Cable Face Pulls",
         "s": 5,
         "w": 12.5,
-        "r": 15,
-        "rir": 2
+        "r": 12,
+        "rir": 3
       },
       {
         "ex": "Hanging Leg Raises",
-        "s": 3,
+        "s": 2,
         "w": 0.0,
         "r": 12,
         "rir": 2
