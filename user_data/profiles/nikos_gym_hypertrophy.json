@@ -283,8 +283,8 @@
         "ex": "Seated Leg Curl Machine",
         "s": 4,
         "w": 53.0,
-        "r": 12,
-        "rir": 2
+        "r": 10,
+        "rir": 1
       },
       {
         "ex": "Single-Arm DB Row",
@@ -319,13 +319,6 @@
         "s": 3,
         "w": 15.0,
         "r": 12,
-        "rir": 2
-      },
-      {
-        "ex": "Standing Calf Raises",
-        "s": 3,
-        "w": 40.0,
-        "r": 15,
         "rir": 2
       },
       {
