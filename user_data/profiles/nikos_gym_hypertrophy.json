@@ -275,14 +275,14 @@
       {
         "ex": "Leg Extension Machine",
         "s": 3,
-        "w": 45.0,
+        "w": 47.0,
         "r": 12,
-        "rir": 2
+        "rir": 1
       },
       {
         "ex": "Seated Leg Curl Machine",
         "s": 4,
-        "w": 40.0,
+        "w": 53.0,
         "r": 12,
         "rir": 2
       },
