@@ -317,15 +317,15 @@
       {
         "ex": "Overhead Cable Triceps Extension",
         "s": 3,
-        "w": 15.0,
-        "r": 12,
+        "w": 12.5,
+        "r": 10,
         "rir": 2
       },
       {
         "ex": "Cable row crunches",
         "s": 3,
-        "w": 40.0,
-        "r": 15,
+        "w": 35.0,
+        "r": 10,
         "rir": 2
       }
     ],
